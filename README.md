@@ -18,7 +18,7 @@ Hardver > BIOS > Operációs rendszer
 **NE** alkalmazz random, ismeretlen vagy nem dokumentált beállítást, programot vagy scriptet anélkül hogy megértenéd az adott beállítás hatását a biztonságra, adatvédelemre és a teljesítményre.
 
 
-### 1. Physical Setup
+# 1. Physical Setup
 
 ## General
 
