@@ -2,7 +2,8 @@
  
 ## Tartalomjegyzék 
 
-- [Physical Setup](#1-physical-setup)
+- [1. Physical Setup](#1-physical-setup)
+  - [1.1 General](#1.1-general)
 - [Pre Install](#2-pre-install)
 - [Post Install](#3-post-install)
 
@@ -20,7 +21,7 @@ Hardver > BIOS > Operációs rendszer
 
 # 1. Physical Setup
 
-## General
+## 1.1 General
 
 - Lehetőleg minden nagyobb alkatrészcsere után telepítsd újra a Windowst (pl alaplap, cpu, stb). Videókártya az egyik kivétel.
 - Érdemes vezetékes eszközöket használni, mivel a vezetéknélküli eszközök hajlamasok agresszív energiatakarékosságot alkalmazni a hosszabb akkumulátor élettartam érdekében, a túlzott EMI hátrányaival együtt.
