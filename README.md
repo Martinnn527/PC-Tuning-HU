@@ -3,7 +3,7 @@
 ## Tartalomjegyzék 
 
 - [1. Physical Setup](#1-physical-setup)
-  - [1.1 General](#1.1-general)
+  - [1.1 General](#general)
 - [Pre Install](#2-pre-install)
 - [Post Install](#3-post-install)
 
