@@ -2,7 +2,7 @@
  
 ## Tartalomjegyzék 
 
-- [Physical Setup](docs/physical-setup)
+- [Physical Setup](#physical-setup)
 - [Pre Install](#pre-install)
 - [Post Install](#post-install)
 
@@ -18,5 +18,5 @@ Hardver > BIOS > Operációs rendszer
 **NE** alkalmazz random, ismeretlen vagy nem dokumentált beállítást, programot vagy scriptet anélkül hogy megértenéd az adott beállítás hatását a biztonságra, adatvédelemre és a teljesítményre.
 
 
-
+<h1 id="table-of-contents">1. Table of Contents 
 
