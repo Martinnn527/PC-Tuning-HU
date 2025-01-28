@@ -2,7 +2,7 @@
  
 ## Tartalomjegyzék 
 
-- [Physical Setup](#physical-setup)
+- [Physical Setup](docs/physical-setup)
 - [Pre Install](#pre-install)
 - [Post Install](#post-install)
 
