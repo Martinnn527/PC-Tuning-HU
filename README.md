@@ -2,9 +2,9 @@
  
 ## Tartalomjegyzék 
 
-- [Physical Setup](#physical-setup)
-- [Pre Install](#pre-install)
-- [Post Install](#post-install)
+- [Physical Setup](#1-physical-setup)
+- [Pre Install](#2-pre-install)
+- [Post Install](#3-post-install)
 
 
 ## Bemutató
@@ -18,5 +18,21 @@ Hardver > BIOS > Operációs rendszer
 **NE** alkalmazz random, ismeretlen vagy nem dokumentált beállítást, programot vagy scriptet anélkül hogy megértenéd az adott beállítás hatását a biztonságra, adatvédelemre és a teljesítményre.
 
 
-<h1 id="table-of-contents">1. Table of Contents 
+ ### 1. Physical Setup
+
+**General**
+- Lehetőleg minden nagyobb alkatrészcsere után telepítsd újra a Windowst (pl alaplap, cpu, stb). Videókártya az egyik kivétel.
+- Érdemes vezetékes eszközöket használni, mivel a vezetéknélküli eszközök hajlamasok agresszív energiatakarékosságot alkalmazni a hosszabb akkumulátor élettartam érdekében, a túlzott EMI hátrányaival együtt.
+- A CrystalDiskInfo és CrystalDiskMark programmal megtekinthető az SSD állapota. Új meghajtó vásárlásakor ellenőrizd a teljes olvasás/írás értékét hogy megállapítsd, nem e használt.
+- Frissítsd az SSD, NIC, és a többi periféria firmware-ét
+- Kerüld a single-channel, 2-4 stick esetén pedig az eltérő RAMokat. Érdemes nézni az alaplap útmutatóját, hogy dual channel esetén az 1-3, vagy a 2-4 slotot érdemes-e használni. 
+- Használj PCIe portokat amelyek egyenesen a CPU-ba mennek a PCH helyett. Ez jellemzően az M.2 és NVME SSD-kre és a GPU-ra vonatkozik. HWiNFO-ban a PCIe Bus kategóriánál, vagy az alaplapod oldalán lévő manual-ban a PCI részlegnél találod meg a kellő információt.
+- Győződj meg róla, hogy a PCIe Bus kategóriába tartozó PCIe eszközök sebessége megegyezik a maximálisan támogatott értékkel.
+- A nem P-State 0-ra korlátozott GPU-k esetében a kapcsolat sebessége csökkenhet miközben nincs terhelve. Ellenőrizd a GPU-Z programban a beépített rederelési teszt segítségével
+- Ha egynél több beépített Network Controllered van, érdemes azt használni amelyik támogatja az MSI-X-et, mivel ez szükséges az RSS (Receive-Side-Scaling) helyes működéséhez. Ezt a GoInterruptPolicy programban ellenőrizni tudod.
+- Ragaszd le a laza kábelek végét, hogy csökkentsd az alkatrészek zárlatának kockázatát.
+- Kerüld a feleslegesen hosszú kábelek használatát.
+- Gyakran érdemes tisztítani az alkatrészeket és a hűtőbordákat, mivel ha porosak, csökkentik a légáramlást és zárlatot okozhatnak.
+- Győzödj meg róla, hogy nincsen IRQ Sharing a rendszeren. Ellenőrizni tudod: Win+R -> msinfo32, rányomsz a Hardware Resources-re, majd a Conflicts/Sharing-re. A "Memory Address"-t  és az I/O Port-ot figyelm kívül hagyhatod.
+
 
