@@ -20,7 +20,8 @@ Hardver > BIOS > Operációs rendszer
 
  ### 1. Physical Setup
 
-**General**
+## General
+
 - Lehetőleg minden nagyobb alkatrészcsere után telepítsd újra a Windowst (pl alaplap, cpu, stb). Videókártya az egyik kivétel.
 - Érdemes vezetékes eszközöket használni, mivel a vezetéknélküli eszközök hajlamasok agresszív energiatakarékosságot alkalmazni a hosszabb akkumulátor élettartam érdekében, a túlzott EMI hátrányaival együtt.
 - A CrystalDiskInfo és CrystalDiskMark programmal megtekinthető az SSD állapota. Új meghajtó vásárlásakor ellenőrizd a teljes olvasás/írás értékét hogy megállapítsd, nem e használt.
