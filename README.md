@@ -8,8 +8,10 @@
   - [1.3 Perifériák konfigurálása](#13-perifériák-konfigurálása)
   - [1.4 EMI minimalizálása](#14-emi-minimalizálása)
   - [1.5 USB Portok elrendezésének konfigurálása](#15-usb-portok-elrendezésének-konfigurálása)
-- [Pre Install](#2-pre-install)
-- [Post Install](#3-post-install)
+- [2. BIOS](#2-bios) 
+- [3. Stabilitás, hangolás és hőfokok](#3-stabilitás-hangolás-és-hőfokok) 
+- [. Pre Install](#4-pre-install)
+- [. Post Install](#-post-install)
 
 
 ## Bemutató
@@ -89,15 +91,13 @@ Hardver > BIOS > Operációs rendszer
 
 ## 1.3 Perifériák konfigurálása
 
-- A legtöbb modern periféria támogatja az onboard memory profilet. Állítsd be őket mielőtt újratelepítenéd a windowst, hogy ne kelljen a későbbi módosítások érdekében feltelepíteni a sok bloatware-t.
+- A legtöbb modern periféria támogatja az onboard memory profilet. Állítsd be őket mielőtt újratelepítenéd a windowst, hogy ne kelljen a későbbi módosítások érdekében feltelepíteni a sok bloatware-t. Több infó a bloatware és a valós idejű applikáció elkülőnítéséről [dual-boot](https://en.wikipedia.org/wiki/Multi-booting) használatával a következő szekcióban.
 
 - Magasabb DPI csökkenti a latency-t. Használj minimum 3200 dpi-t. Ügyelj arra hogy sensor smoothing ne lépjen életbe magasabb DPI használatakor. A windowsban az egér beállítások közt lejjebb viheted a pointer speedet tetszésed szerint ha a játék raw inputot használ.
 
 - Magasabb polling rate csökkenti a jittert. Az 1000Hz-nél magasabb polling rate hardvertől függően negatívan befolyásolhatja a teljesítményt, ezért ennek megfelőlen kell beállítani. Ez nem akkora probléma a 2023 májusi Windows 11 Raw Input Stack update után ami limitálja a nem előtérben lévő programok polling frekvenciáját 125hz-re.
 
-- Az USB kimenet ~7A-ra van korlátozva, és az RGB felesleges energiát igényel. Fontold meg az RGB kikapcsolását, mivel az effektek/animációk nagy terhet tesznek az MCU-ra, és késleltethetik a többi folyamatot. OpenRGB egy jó választás a világítás módosítására.
-
-- MouseTester segítségével ellenőrizheted, hogy az egyes "poll"-ok tartalmaznak-e adatokat. Ha például az intervallum 1ms-ról (1000Hz) 2ms-ra (500Hz) vagy annál magasabbra ugrik, az problémás, és több minden miatt fordulhat elő, mint pl maga az eszköz, energiaellátás, hardver, operációs rendszer. 
+- Az USB kimenet ~7A-ra van korlátozva, és az RGB felesleges energiát igényel. Fontold meg az RGB kikapcsolását, mivel az effektek/animációk nagy terhet tesznek az MCU-ra, és késleltethetik a többi folyamatot. [OpenRGB](https://openrgb.org/) egy jó választás az RGB módosítására.
 
 - Sűrített levegő segítségével tisztítsd az egér szenzorát.
 
@@ -118,8 +118,84 @@ Hardver > BIOS > Operációs rendszer
 ## 1.5 USB portok elrendezésének konfigurálása
 
 - Használd a kívánt XHCI-controller első néhány portját. Előfordulhat, hogy némelyikük fizikailag nem megállapítható, amit az [USB Device Tree Viewer](https://www.uwe-sieber.de/usbtreeview_e.html) programban megnézhetsz.
-  - A Ryzen-es rendszerek rendelkeznek egy XHCI-vezérlővel, amely közvetlenül a CPU-hoz csatlakozik. Ez HWiNFO-ban a PCIe Bus kategóriában azonosítható.       
+  - A Ryzen-es rendszerek rendelkeznek egy XHCI-vezérlővel, amely közvetlenül a CPU-hoz csatlakozik. Ez [HWiNFO](https://www.hwinfo.com/)-ban a ``PCIe Bus`` kategóriában azonosítható.       
 
 - Ha egynél több XHCI-controller-ed van, akkor az olyan eszközöket, mint például az egér, billentyűzet, és fejhallgató, egy másik controller-re különítheted el, hogy azok ne zavarják a polling konzisztenciáját.
+
+# 2. BIOS
+
+> [!CAUTION] 
+Fontos, hogy a módosított beállítások valóban pozítívan befolyásolják a teljesítményt és jegyezd fel őket valahova hogy a jövőben könnyebben megoldj egy felmerülő problémát. Mielőtt belekezdesz ajánlott hogy állítsd alaphelyzetbe a BIOS-t hogy tiszta lappal indulj ha esetleg valami rosszul volt beállítva.
+
+>[!CAUTION]
+Szintén fontos hogy a BIOS módosítása mindig kockázattal jár, ezért fontos, hogy körültekintően folytasd.
+
+- Ellenőrizd hogy van e frissebb BIOS és hogy van e pozitív változás, mint például stabilabb memória, azonban figyelj oda a fórumokon felvetett problémákra az adott BIOS verzióval kapcsolatban.
+
+  - Frissítés útán győződj meg róla, hogy a Spectre, Meltdown és CPU Microcode státusza rendben van magán az operációs rendszeren. Ha problémába ütköznél akkor lehet, hogy BIOS szinten kell visszaállítanod a CPU Microcode-ot.
+
+  - Ha a CMOS reset nem állítja teljes mértékben vissza alaphelyzetbe a BIOS-t, használd az USB Flashback funkciót.
+
+- Resizable BAR
+
+  - ``Above 4G Encoding`` engedélyezése szükséges a működéséhez
+
+  - Csak RTX 3000 és annál újabb GPU-kon támogatott.
+
+  - Ellenőrizd a Resizable BAR státuszát [GPU-Z](https://www.techpowerup.com/gpuz)-ben.
+
+- Számos alaplap gyártó elrejt sok hasznos beállítást. 
+  - A legegyszerűbb megoldás erre az hogy az UEFI-ben lévő összes látható beállítást konfigurálod majd pedig [SCEWIN](https://github.com/ab3lkaizen/SCEHUB)-ben a maradék rejtett beállítással folytatod.
+
+- Kapcsold ki a [Hyper-Threading/Simultaneous Multithreading](https://en.wikipedia.org/wiki/Hyper-threading) funkciót, mivel a CPU-nkénti több végrehajtó thread használtata növeli a processzor erőforrásainak igénybevételét, és a rendszer nagyobb latencyjének, és jitterének potenciális forrása. Ha elegendő CPU-val rendelkezel a játék futtatásához, mindenféleképpen kapcsold ki. Ez a koncepció alkalmazható az Intel E-coreok esetében is.
+
+- Kapcsold ki a C-States-eket. 
+  
+  - Ellenőrizd [HWiNFO](https://www.hwinfo.com/)-ban
+
+- Kapcsold ki a Virtualization/SVM Mode, Intel VT-d/AMD-Vi beállításokat, mivel ezek a memória hozzáférés késeltetését növelhetik. A Virtualization szintén hatással lehet a BCLK-ra.
+   
+  - Ellenőrizd a Virtualization-t Task Manager-ben.
+
+- Kapcsold ki az összes nem használt eszközt, mint például nem használt NIC-ek, Bluetooth, WiFi, High Definition Audio (ha nem használsz alaplap audio-t), iGPU, SATA és RAM slotok.
+
+- Kapcsold ki a Trusted Platform Module-t. (Windows 11-en pár Anti-Cheat működéséhez szükséges a bekapcsolva hagyása, pl Vanguard, FACEIT).
+
+- Kapcsold ki az összes Power Saving funkciót, mint például: ASPM (Active State Power Management), ALPM (Aggressive Link Power Managemenet), DRAM Power Down, Hibernation, Clock Gating. Keresd a "power management", "power saving" kifejezéseket.
+
+- Kapcsold ki a Secure Boot-ot. (Windows 11-en, a Vanguard, FACEIT, igényli a bekapcsolva hagyását.)
+
+- Kapcsold ki a Fast Startup/Fast Boot/Memory Fast Boot funkciót.
+
+- Kapcsold ki a Spread Spectrumot és győződj meg róla hogy a BCLK frequency kereken 100.000 és nem Auto. [HWiNFO](https://www.hwinfo.com/)/[CPU-Z](https://www.cpuid.com/softwares/cpu-z.html)-ben ellenőrizni tudod.
+
+- PCIe Link Speed-et tedd a lehető legmagasabbra, mint például Gen 3, stb. Sose hagyd Auto-n.
+  
+  - Keresd a ``PCIe Speed``, ``Gen3`` kifejezéseket hogy megtaláld az adott beállítást [SCEWIN](https://github.com/ab3lkaizen/SCEHUB)-ben.
+
+- Ha statikus frekvenciát/feszültséget konfigurálsz a CPU-hoz, kapcsold ki a dynamic frequency funkciókat mint például a Speed shift, speedstep, és állítsd az AVX offsetet 0-ra, vagy tedd ``Disabled``-re. Precision Boost Overdrive (PBO) a Ryzen CPU-k esetében a statikus frekvencia és feszültésg alternatívája (X3D kivétel).
+
+  - Egyes esetekben a fent említett beállítások megakadályozhatják, hogy a processzor a BIOS-ban történő manuális beállítás ellenére is túllépje az alapfrekvenciát. Ennek megfelelően állítsd be, ha ez előfordul, és HWiNFO-ban ellnőrizd az órajeleket.
+
+- Konfiguráld a fan speedeket, állíts be egy statikus, magas RPM-et.
+
+- Kapcsold be a High Precision Event Timer-t. 
+  
+  - Újabb AMD rendszereken nincs hatása ennek a beállításnak.
+
+- Kapcsold ki a Legacy USB Support-ot. Lehetséges hogy be kell kapcsolnod hogy új operációs rendszert telepíts fel vagy hogy hozzáférj a BIOS-hoz.
+
+- Kapcsold ki az XHCI Hand-off-ot.
+
+- Kapcsold ki az Execute Disable Bit/NX Mode-ot. Néhány applikáció (FACEIT, Valorant) igényli a bekapcsolva hagyását.
+
+- Mentsd le a jelenlegi BIOS profilodat hogyha valamilyen oknál fogva alaphelyzetbe kell állítani akkor ne kelljen előről kezdened az egészet.
+
+# 3. Stabilitás, hangolás és hőfokok
+
+
+
+
+
 
 
