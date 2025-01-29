@@ -128,7 +128,7 @@ Hardver > BIOS > Operációs rendszer
 Fontos, hogy a módosított beállítások valóban pozítívan befolyásolják a teljesítményt és jegyezd fel őket valahova hogy a jövőben könnyebben megoldj egy felmerülő problémát. Mielőtt belekezdesz ajánlott hogy állítsd alaphelyzetbe a BIOS-t hogy tiszta lappal indulj ha esetleg valami rosszul volt beállítva.
 
 >[!CAUTION]
-Szintén fontos hogy a BIOS módosítása mindig kockázattal jár, ezért fontos, hogy körültekintően folytasd.
+Szintén fontos hogy a BIOS módosítása mindig kockázattal jár, ezért körültekintően folytasd.
 
 - Ellenőrizd hogy van e frissebb BIOS és hogy van e pozitív változás, mint például stabilabb memória, azonban figyelj oda a fórumokon felvetett problémákra az adott BIOS verzióval kapcsolatban.
 
