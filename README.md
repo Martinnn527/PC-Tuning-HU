@@ -5,7 +5,7 @@
 - [1. Physical Setup](#1-physical-setup)
   - [1.1 General](#11-general)
   - [1.2 Hűtés](#12-hűtés)
-  - [1.3 Perifériák beállítása](#13-perifériák-beállítása)
+  - [1.3 Perifériák beállítása](#13-perifériák-konfigurálása)
   - [1.4 EMI minimalizálása](#14-emi-minimalizálása)
   - [1.5 USB Portok elrendezésének konfigurálása](#15-usb-portok-elrendezésének-konfigurálása)
 - [Pre Install](#2-pre-install)
