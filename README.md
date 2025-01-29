@@ -197,7 +197,7 @@ Szintén fontos hogy a BIOS módosítása mindig kockázattal jár, ezért kör�
 
 
 
-
+ ASD
 
 
 
