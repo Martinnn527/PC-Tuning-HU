@@ -9,6 +9,27 @@
   - [1.4 EMI minimalizálása](#14-emi-minimalizálása)
   - [1.5 USB Portok elrendezésének konfigurálása](#15-usb-portok-elrendezésének-konfigurálása)
 - [2. BIOS](#2-bios) 
+  - [2.1 BIOS frissítések](#21-bios-frissítések)
+  - [2.2 CPU Microcode](#22-cpu-microcode-az-uefi-ben)
+  - [2.3 BIOS Reset](#23-bios-reset)
+  - [2.4 Resizable BAR](#24-resizable-bar)
+  - [2.5 Rejtett beállítások elérése](#25-rejtett-beállítások-elérése)
+  - [2.6 Hyperthreading/SMT](#26-hyperthreadingsmt)
+  - [2.7 Power States](#27-power-states)
+  - [2.8 Virtualization](#28-virtualization)
+  - [2.9 Nem használt eszközök letiltása](#29-nem-használt-eszközök-letiltása)
+  - [2.10 Trusted Platform Module](#210-trusted-platform-module)
+  - [2.11 Secure Boot](#211-secure-boot)
+  - [2.12 Fast Startup, Standby, Hibernation](#212-fast-startup-standby-és-hibernate)
+  - [2.13 Spread Spectrum](#213-spread-spectrum)
+  - [2.14 PCIe Link Speeds](#214-pcie-link-speeds)
+  - [2.15 Statikus CPU frekvencia](#215-statikus-cpu-frekvencia)
+  - [2.16 Ventilátor RPM](#216-ventilátor-rpm)
+  - [2.17 HPET](#217-hpet)
+  - [2.18 Legacy USB Support](#218-legacy-usb-support)
+  - [2.19 XHCI Hand-off](#219-xhci-hand-off)
+  - [2.20 Execute Disable Bit/NX Mode](#220-execute-disable-bitnx-mode)
+  - [2.21 BIOS Profilok és Backup](#221-bios-profil-és-backup)
 - [3. Stabilitás, hangolás és hőfokok](#3-stabilitás-hangolás-és-hőfokok) 
 - [. Pre Install](#4-pre-install)
 - [. Post Install](#-post-install)
@@ -105,7 +126,7 @@ Hardver > BIOS > Operációs rendszer
 
 ## 1.4 EMI minimalizálása
 
-- "EMI", azaz "Elektromágneses interferencia" olyan zavaró jeleket vagy zajt jelent, amelyeket elektromágneses mezők okoznak. Ezek a zavarok általában más elektronikai eszközökből vagy külső forrásokból származnak, és befolyásolhatják az elektronikai berendezések működését. Az EMI problémák gyakran akkor merülnek fel, amikor az elektronikai berendezések közel vannak egymáshoz vagy erős elektromágneses mezők vannak jelen, pl. nagyfeszültségű vezetékek, modemek, vagy vezeték nélküli eszközök.
+"EMI", azaz "Elektromágneses interferencia" olyan zavaró jeleket vagy zajt jelent, amelyeket elektromágneses mezők okoznak. Ezek a zavarok általában más elektronikai eszközökből vagy külső forrásokból származnak, és befolyásolhatják az elektronikai berendezések működését. Az EMI problémák gyakran akkor merülnek fel, amikor az elektronikai berendezések közel vannak egymáshoz vagy erős elektromágneses mezők vannak jelen, pl. nagyfeszültségű vezetékek, modemek, vagy vezeték nélküli eszközök.
 
 - Az ilyen "problémás" eszközöket, például mobiltelefonokat (airplane mode is egy megoldás), routereket stb. tedd messzebb a setuptól.
 
@@ -119,10 +140,11 @@ Hardver > BIOS > Operációs rendszer
 
 ## 1.5 USB portok elrendezésének konfigurálása
 
-- Használd a kívánt XHCI-controller első néhány portját. Előfordulhat, hogy némelyikük fizikailag nem megállapítható, amit az [USB Device Tree Viewer](https://www.uwe-sieber.de/usbtreeview_e.html) programban megnézhetsz.
+Használd a kívánt XHCI-controller első néhány portját. Előfordulhat, hogy némelyikük fizikailag nem megállapítható, amit az [USB Device Tree Viewer](https://www.uwe-sieber.de/usbtreeview_e.html) programban megnézhetsz.
+
   - A Ryzen-es rendszerek rendelkeznek egy XHCI-vezérlővel, amely közvetlenül a CPU-hoz csatlakozik. Ez [HWiNFO](https://www.hwinfo.com/)-ban a ``PCIe Bus`` kategóriában azonosítható.       
 
-- Ha egynél több XHCI-controller-ed van, akkor az olyan eszközöket, mint például az egér, billentyűzet, és fejhallgató, egy másik controller-re különítheted el, hogy azok ne zavarják a polling konzisztenciáját.
+Ha egynél több XHCI-controller-ed van, akkor az olyan eszközöket, mint például az egér, billentyűzet, és fejhallgató, egy másik controller-re különítheted el, hogy azok ne zavarják a polling konzisztenciáját.
 
 # 2. BIOS
 
@@ -132,70 +154,124 @@ Fontos, hogy a módosított beállítások valóban pozítívan befolyásolják 
 >[!CAUTION]
 Szintén fontos hogy a BIOS módosítása mindig kockázattal jár, ezért körültekintően folytasd.
 
-- Ellenőrizd hogy van e frissebb BIOS és hogy van e pozitív változás, mint például stabilabb memória, azonban figyelj oda a fórumokon felvetett problémákra az adott BIOS verzióval kapcsolatban.
+## 2.1 BIOS frissítések
 
-  - Frissítés útán győződj meg róla, hogy a Spectre, Meltdown és CPU Microcode státusza rendben van magán az operációs rendszeren. Ha problémába ütköznél akkor lehet, hogy BIOS szinten kell visszaállítanod a CPU Microcode-ot.
+Ellenőrizd hogy van e frissebb BIOS és hogy van e pozitív változás, mint például stabilabb memória, azonban figyelj oda a fórumokon felvetett problémákra az adott BIOS verzióval kapcsolatban.
 
-  - Ha a CMOS reset nem állítja teljes mértékben vissza alaphelyzetbe a BIOS-t, használd az USB Flashback funkciót.
+## 2.2 CPU Microcode az UEFI-ben
 
-- Resizable BAR
+Frissítés útán győződj meg róla, hogy a Spectre, Meltdown és CPU Microcode státusza rendben van magán az operációs rendszeren. Ha problémába ütköznél akkor lehet, hogy BIOS szinten kell visszaállítanod a CPU Microcode-ot.
 
-  - ``Above 4G Encoding`` engedélyezése szükséges a működéséhez
+## 2.3 BIOS Reset
 
-  - Csak RTX 3000 és annál újabb GPU-kon támogatott.
+Ha a CMOS reset nem állítja teljes mértékben vissza alaphelyzetbe a BIOS-t, használd az USB Flashback funkciót.
 
-  - Ellenőrizd a Resizable BAR státuszát [GPU-Z](https://www.techpowerup.com/gpuz)-ben.
+## 2.4 Resizable BAR
 
-- Számos alaplap gyártó elrejt sok hasznos beállítást. 
+``Above 4G Encoding`` engedélyezése szükséges a működéséhez
+
+Csak RTX 3000 és annál újabb GPU-kon támogatott.
+
+Ellenőrizd a Resizable BAR státuszát [GPU-Z](https://www.techpowerup.com/gpuz)-ben.
+
+## 2.5 Rejtett beállítások elérése
+
+Számos alaplap gyártó elrejt sok hasznos beállítást. 
+
   - A legegyszerűbb megoldás erre az hogy az UEFI-ben lévő összes látható beállítást konfigurálod majd pedig [SCEWIN](https://github.com/ab3lkaizen/SCEHUB)-ben a maradék rejtett beállítással folytatod.
 
-- Kapcsold ki a [Hyper-Threading/Simultaneous Multithreading](https://en.wikipedia.org/wiki/Hyper-threading) funkciót, mivel a CPU-nkénti több végrehajtó thread használtata növeli a processzor erőforrásainak igénybevételét, és a rendszer nagyobb latencyjének, és jitterének potenciális forrása. Ha elegendő CPU-val rendelkezel a játék futtatásához, mindenféleképpen kapcsold ki. Ez a koncepció alkalmazható az Intel E-coreok esetében is.
+## 2.6 Hyperthreading/SMT
 
-- Kapcsold ki a C-States-eket. 
+Kapcsold ki a [Hyper-Threading/Simultaneous Multithreading](https://en.wikipedia.org/wiki/Hyper-threading) funkciót. Ez például renderelés esetén hasznos lehet de mivel a CPU-nkénti több végrehajtó thread használtata növeli a processzor erőforrásainak igénybevételét, jóval nagyobb hőfokokkal és a rendszer nagyobb latencyjének, és jitterének potenciális forrása. Ha elegendő CPU-val rendelkezel a játék futtatásához, mindenféleképpen kapcsold ki. Ez a koncepció alkalmazható az Intel E-coreok esetében is.
+
+## 2.7 Power States
+
+Kapcsold ki a C-States-eket. Keresd a *C1E*, *C6* kifejezéseket. S-States (*S3*, S6*, *Hibernation*).
   
-  - Ellenőrizd [HWiNFO](https://www.hwinfo.com/)-ban
+  - Ellenőrizd a C-State residency-t [HWiNFO](https://www.hwinfo.com/)-ban
+  
+  - Ellenőrizd az S-States-eket ``powercfg /a``-val 
 
-- Kapcsold ki a Virtualization/SVM Mode, Intel VT-d/AMD-Vi beállításokat, mivel ezek a memória hozzáférés késeltetését növelhetik. A Virtualization szintén hatással lehet a BCLK-ra.
+Kapcsold ki az összes Power Saving funkciót, mint például: *ASPM* (Active State Power Management), ALPM (Aggressive Link Power Managemenet), DRAM Power Down, Hibernation, Clock Gating. Keresd a "power management", "power saving" kifejezéseket.  
+
+## 2.8 Virtualization
+Kapcsold ki a Virtualization/SVM Mode, Intel VT-d/AMD-Vi beállításokat, mivel ezek a memória hozzáférés késeltetését növelhetik. A Virtualization szintén hatással lehet a BCLK-ra.
    
   - Ellenőrizd a Virtualization-t Task Manager-ben.
 
-- Kapcsold ki az összes nem használt eszközt, mint például nem használt NIC-ek, Bluetooth, WiFi, High Definition Audio (ha nem használsz alaplap audio-t), iGPU, SATA és RAM slotok.
+## 2.9 Nem használt eszközök letiltása
 
-- Kapcsold ki a Trusted Platform Module-t. (Windows 11-en pár Anti-Cheat működéséhez szükséges a bekapcsolva hagyása, pl Vanguard, FACEIT).
+Kapcsold ki az összes nem használt eszközt, mint például nem használt NIC-ek, Bluetooth, WiFi, High Definition Audio (ha nem használsz alaplap audio-t), iGPU, SATA és RAM slotok.
 
-- Kapcsold ki az összes Power Saving funkciót, mint például: ASPM (Active State Power Management), ALPM (Aggressive Link Power Managemenet), DRAM Power Down, Hibernation, Clock Gating. Keresd a "power management", "power saving" kifejezéseket.
+## 2.10 Trusted Platform Module
 
-- Kapcsold ki a Secure Boot-ot. (Windows 11-en, a Vanguard, FACEIT, igényli a bekapcsolva hagyását.)
+Kapcsold ki a Trusted Platform Module-t (TPM), mert előfordulhat, hogy a rendszer System Management Mode-ba (SMM) kerül a System Management Interruptok (SMI) [1](https://www.youtube.com/watch?v=X72LgcMpM9k&t=2060s) miatt. Ezek olyan nagy prioritású, leállíthatatlan hardveres megszakítások, amelyek azonnal felfüggesztik a CPU összes többi tevékenységét. 
 
-- Kapcsold ki a Fast Startup/Fast Boot/Memory Fast Boot funkciót.
+  - Windows 11-en néhány anti-cheat (Vanguard, FACEIT) működéséhez bekapcsolva kell hagyni.
 
-- Kapcsold ki a Spread Spectrumot és győződj meg róla hogy a BCLK frequency kereken 100.000 és nem Auto. [HWiNFO](https://www.hwinfo.com/)/[CPU-Z](https://www.cpuid.com/softwares/cpu-z.html)-ben ellenőrizni tudod.
+  - Ellenőrizd a TPM állapotát : ``Win+R`` -> ``msinfo32``
 
-- PCIe Link Speed-et tedd a lehető legmagasabbra, mint például Gen 3, stb. Sose hagyd Auto-n.
+## 2.11 Secure Boot
+
+Kapcsold ki a Secure Boot-ot. (Windows 11-en, a Vanguard, FACEIT, igényli a bekapcsolva hagyását.)
+
+  - ``Win+R`` -> ``msinfo32``-ben tudod ellenőrizni az állapotát.
+
+## 2.12 Fast Startup, Standby és Hibernate
+
+Ez leginkább személyes preferencia, tapasztalat és nézőpont kérdése. Vannak, akik nem használják a Fast Startup-ot, Standby-t vagy Hibernation-t, mert ezek néha váratlan problémákat okozhatnak.[Magyarázat](https://www.youtube.com/watch?v=OBGxt8zhbRk) Ehelyett inkább tiszta rendszerindítást részesítenek előnyben, így nem mentik és állítják vissza a kernel és a szoftverek állapotát és korlátozzák a rendszer energiaállapotait S0-ra (működő állapot) és S5-re (alvó állapot).
+A rendszer energiaállapotairól [itt]([Magyarázat](https://www.youtube.com/watch?v=OBGxt8zhbRk)) tudhatsz meg többet. A BIOS-ban ezek az opciók gyakran Fast Startup, Suspend to RAM, S-States (S1, S2, S3, S4, S5), Standby, Memory Fast Boot, Hibernation vagy hasonló néven szerepelnek. Az aktuális S-State állapotokat a következő parancssorral ellenőrizheted: ``CMD``-> ``powercfg /a``
+
+A Windows-on belül is kikapcsolható a Fast Startup és Hibernation funckió ami letörli a ``C:\hiberfil.sys`` fájlt
+
+```cmd
+powercfg /h off
+```
+## 2.13 Spread Spectrum
+
+Kapcsold ki a Spread Spectrumot és győződj meg róla hogy a BCLK frequency kereken 100.000 és nem Auto. [HWiNFO](https://www.hwinfo.com/)/[CPU-Z](https://www.cpuid.com/softwares/cpu-z.html)-ben ellenőrizni tudod.
+
+## 2.14 PCIe Link Speeds
+
+PCIe Link Speed-et tedd a lehető legmagasabbra, mint például Gen 3, stb. Sose hagyd Auto-n.
   
   - Keresd a ``PCIe Speed``, ``Gen3`` kifejezéseket hogy megtaláld az adott beállítást [SCEWIN](https://github.com/ab3lkaizen/SCEHUB)-ben.
 
-- Ha statikus frekvenciát/feszültséget konfigurálsz a CPU-hoz, kapcsold ki a dynamic frequency funkciókat mint például a Speed shift, speedstep, és állítsd az AVX offsetet 0-ra, vagy tedd ``Disabled``-re. Precision Boost Overdrive (PBO) a Ryzen CPU-k esetében a statikus frekvencia és feszültésg alternatívája (X3D kivétel).
+## 2.15 Statikus CPU frekvencia
+
+Ha statikus frekvenciát/feszültséget konfigurálsz a CPU-hoz, kapcsold ki a dynamic frequency funkciókat mint például a Speed shift, speedstep, és állítsd az AVX offsetet 0-ra, vagy tedd ``Disabled``-re. Precision Boost Overdrive (PBO) a Ryzen CPU-k esetében a statikus frekvencia és feszültésg alternatívája (X3D kivétel).
 
   - Egyes esetekben a fent említett beállítások megakadályozhatják, hogy a processzor a BIOS-ban történő manuális beállítás ellenére is túllépje az alapfrekvenciát. Ennek megfelelően állítsd be, ha ez előfordul, és [HWiNFO](https://www.hwinfo.com/)-ban ellnőrizd az órajeleket.
 
-- Konfiguráld a fan speedeket, állíts be egy statikus, magas RPM-et.
+## 2.16 Ventilátor RPM
 
-- Kapcsold be a High Precision Event Timer-t. 
+Konfiguráld a fan speedeket. állíts be egy [fan curve](https://imgur.com/a/ultimate-fan-speed-curve-by-kgtc-iteration-1-fr-en-de-ru-ar-es-hu-kr-sw-etc-https-translate-google-com-2UDYXp0)-öt vagy egy statikus, magas RPM-et.
+
+## 2.17 HPET
+
+Kapcsold be a High Precision Event Timer-t. 
   
   - Újabb AMD rendszereken nincs hatása ennek a beállításnak.
 
-- Kapcsold ki a Legacy USB Support-ot. Lehetséges hogy be kell kapcsolnod hogy új operációs rendszert telepíts fel vagy hogy hozzáférj a BIOS-hoz.
+## 2.18 Legacy USB Support
 
-- Kapcsold ki az XHCI Hand-off-ot.
+Kapcsold ki a Legacy USB Support-ot. Lehetséges hogy be kell kapcsolnod hogy új operációs rendszert telepíts fel vagy hogy hozzáférj a BIOS-hoz.
 
-- Kapcsold ki az Execute Disable Bit/NX Mode-ot. Néhány applikáció (FACEIT, Valorant) igényli a bekapcsolva hagyását.
+## 2.19 XHCI Hand-off
 
-- Mentsd le a jelenlegi BIOS profilodat hogyha valamilyen oknál fogva alaphelyzetbe kell állítani akkor ne kelljen előről kezdened az egészet.
+Kapcsold ki az XHCI Hand-off-ot.
+
+## 2.20 Execute Disable Bit/NX Mode
+
+Kapcsold ki az Execute Disable Bit/NX Mode-ot. Néhány applikáció (FACEIT, Valorant) igényli a bekapcsolva hagyását.
+
+## 2.21 BIOS Profilok és Backup
+
+Mentsd le a jelenlegi BIOS profilodat hogyha valamilyen oknál fogva alaphelyzetbe kell állítani akkor ne kelljen előről kezdened az egészet. A legtöbb alaplapon egy mentett profil betöltése CMOS reset után nem mindig fogja az összes beállítást visszaállítani úgy ahogy volt. Ezért ajánlatos [SCEWIN](https://github.com/ab3lkaizen/SCEHUB)-el exportálni a jelenlegi profilod majd reset után újra exportálni és összehasonlítani a két NVRAM fájlt [Notepad++ Compare Plugin](https://sourceforge.net/projects/npp-compare/)-al vagy [Visual Studio Code](https://code.visualstudio.com/download)-al.
 
 # 3. Stabilitás, hangolás és hőfokok
 
-
+- 
 
 
 
