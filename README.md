@@ -1,4 +1,4 @@
-# PC-Tuning guideline magyarul
+# PC-Tuning guideline
  
 ## Tartalomjegyzék 
 
@@ -186,7 +186,7 @@ Kapcsold ki a [Hyper-Threading/Simultaneous Multithreading](https://en.wikipedia
 
 ## 2.7 Power States
 
-Kapcsold ki a C-States-eket. Keresd a *C1E*, *C6* kifejezéseket. S-States (*S3*, S6*, *Hibernation*).
+Kapcsold ki a C-States-eket. Keresd a *C1E*, *C6* kifejezéseket. S-States (*S3*, *S6*, *Hibernation*).
   
   - Ellenőrizd a C-State residency-t [HWiNFO](https://www.hwinfo.com/)-ban
   
