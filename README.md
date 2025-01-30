@@ -220,7 +220,7 @@ Kapcsold ki a Secure Boot-ot. (Windows 11-en, a Vanguard, FACEIT, igényli a bek
 ## 2.12 Fast Startup, Standby és Hibernate
 
 Ez leginkább személyes preferencia, tapasztalat és nézőpont kérdése. Vannak, akik nem használják a Fast Startup-ot, Standby-t vagy Hibernation-t, mert ezek néha váratlan problémákat okozhatnak ([magyarázat](https://www.youtube.com/watch?v=OBGxt8zhbRk)). Ehelyett inkább tiszta rendszerindítást részesítenek előnyben, így nem mentik és állítják vissza a kernel és a szoftverek állapotát és korlátozzák a rendszer energiaállapotait S0-ra (működő állapot) és S5-re (alvó állapot).
-A rendszer energiaállapotairól [itt]([Magyarázat](https://www.youtube.com/watch?v=OBGxt8zhbRk)) tudhatsz meg többet. A BIOS-ban ezek az opciók gyakran Fast Startup, Suspend to RAM, S-States (S1, S2, S3, S4, S5), Standby, Memory Fast Boot, Hibernation vagy hasonló néven szerepelnek. Az aktuális S-State állapotokat a következő parancssorral ellenőrizheted: ``CMD``-> ``powercfg /a``
+A rendszer energiaállapotairól [itt](https://learn.microsoft.com/en-us/windows/win32/power/system-power-states) tudhatsz meg többet. A BIOS-ban ezek az opciók gyakran Fast Startup, Suspend to RAM, S-States (S1, S2, S3, S4, S5), Standby, Memory Fast Boot, Hibernation vagy hasonló néven szerepelnek. Az aktuális S-State állapotokat a következő parancssorral ellenőrizheted: ``CMD``-> ``powercfg /a``
 
 A Windows-on belül is kikapcsolható a Fast Startup és Hibernation funckió ami letörli a ``C:\hiberfil.sys`` fájlt
 
