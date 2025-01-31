@@ -362,5 +362,3 @@ GPU overclockolásnál előfordulhat hogy számos power limit-et fel kell oldano
 - [OCCT](https://www.ocbase.com)
 
 - [memtest_vulkan](https://github.com/GpuZelenograd/memtest_vulkan)  
-
-asd
