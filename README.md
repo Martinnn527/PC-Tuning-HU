@@ -306,7 +306,7 @@ Ajánlott egy ideiglenes OS-t feltelepíteni amin OC-zol és stressz tesztelsz h
 
 Kerüld a thermal trotthling-et minden áron. Underclock-olj ha a hűtőd nem megfelelő. Egy stabil hőmérsékléten futó alkatrész alacsonyabb frekvenciával sokkal előnyösebb mint egy magasabb frekvencián futó viszont túlmelegedő alkatrész. 
 
-  - Lásd [RAM Overclock Stability and Heat Management | buildzoid](RAM Overclock Stability and Heat Management | buildzoid)
+  - Lásd [RAM Overclock Stability and Heat Management | buildzoid](https://www.youtube.com/watch?v=iCD0ih4qzHw)
 
 ## 3.4 Load-line Calibration
 
