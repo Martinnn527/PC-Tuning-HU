@@ -362,3 +362,35 @@ GPU overclockolásnál előfordulhat hogy számos power limit-et fel kell oldano
 - [OCCT](https://www.ocbase.com)
 
 - [memtest_vulkan](https://github.com/GpuZelenograd/memtest_vulkan)  
+
+# 4. Pre-Install
+
+## 4.1 Milyen Windows verziót használj?
+
+- A Windows régebbi verzióiból hiányzik az anti-cheat támogatás, driver támogatás (legfőképp GPU, NIC) és alkalmazások támogatása. Lásd az alábbi táblázatot.
+
+    |GPU|Minimum Windows Version|
+    |---|---|
+    |NVIDIA 10-es és régebbi szériák|Majdnem az összes Windows verzió támogatja|
+    |NVIDIA 16, 20-as széria|Win7, Win8, Win10 1709+|
+    |NVIDIA 30-as széria|Win7, Win10 1803+|
+    |NVIDIA 40 series|Win10 1803+|
+    |AMD|Lásd a driver oldalát|
+
+- Windows Server nem támogatja a fogyasztói NIC-ek nagy részét. Az [ehhez](https://github.com/loopback-kr/Intel-I219-V-for-Windows-Server) hasonló megoldási lehetőségekre viszont felfigyel az anti-cheat a driver érvénytelen [tanúsítványa](https://learn.microsoft.com/hu-hu/windows-hardware/drivers/dashboard/code-signing-cert-manage) miatt.
+
+- NVIDIA DCH driver-ek Windows 10 1803 és annál feljebb támogatottak.
+
+- Médialejátszás során kizárólag Windows 10 1709-en a Multimedia Class Scheduler Service (MMCS) felemeli a timer resolution-t 0.5ms-re ami korlátozzá a használni kívánt timer resolution beállítását.
+
+- Windows 10 1809+ szükséges a Ray Tracing-hez NVIDIA GPU-kon.
+
+- Windows 10 2004+ szükséges a [Hardware Accelerated GPU Scheduling](https://devblogs.microsoft.com/directx/hardware-accelerated-gpu-scheduling/) használatához ami létfontosságú a DLSS Frame Generation működéséhez [(1)](https://developer.nvidia.com/rtx/streamline/get-started).
+
+- Windows 10 2004-22H2 már nem támogatott a Global Timer Resolution [(1)](https://randomascii.wordpress.com/2020/10/04/windows-timer-resolution-the-great-rule-change/). A Microsoft lehetővé tette hogy Windows Server 2022+ és Windows 11-en vissza lehessen állítani a Global Timer Resolutiont egy registry key segítségével 
+
+- Windows 11-nek van egy frissített scheduler-je Intel 12th Gen és felette lévő CPU-k számára [(1)](https://www.anandtech.com/show/16959/intel-innovation-alder-lake-november-4th/3) azonban ezt replikálni lehet manuális affinity policy-k beállításával bármelyik Windows verzión.
+
+- Windows 11 limitálja a háttérben lévő folyamatok polling rate-jét 125Hz-re [(1)](https://blogs.windows.com/windowsdeveloper/2023/05/26/delivering-delightful-performance-for-more-than-one-billion-users-worldwide/).
+
+- AllowTelemetry-t 0-ra lehet állítani Windows Server verziókon [(1)](https://admx.help/?Category=Windows_10_2016&Policy=Microsoft.Policies.DataCollection::AllowTelemetry).
