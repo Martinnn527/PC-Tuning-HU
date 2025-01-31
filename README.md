@@ -26,11 +26,19 @@
   - [2.15 Statikus CPU frekvencia](#215-statikus-cpu-frekvencia)
   - [2.16 Ventilátor RPM](#216-ventilátor-rpm)
   - [2.17 HPET](#217-hpet)
-  - [2.18 Legacy USB Support](#218-legacy-usb-support)
-  - [2.19 XHCI Hand-off](#219-xhci-hand-off)
-  - [2.20 Execute Disable Bit/NX Mode](#220-execute-disable-bitnx-mode)
-  - [2.21 BIOS Profilok és Backup](#221-bios-profil-és-backup)
-- [3. Stabilitás, hangolás és hőfokok](#3-stabilitás-hangolás-és-hőfokok) 
+  - [2.18 Software Installation](#218-software-telepítési-beállítások)
+  - [2.19 Legacy USB Support](#219-legacy-usb-support-legacy-usb-support)
+  - [2.20 XHCI Hand-off](#220-xhci-hand-off)
+  - [2.21 Execute Disable Bit/NX Mode](#221-execute-disable-bitnx-mode)
+  - [2.22 BIOS Profilok és Backup](#222-bios-profil-és-backup)
+- [3. Stabilitás, hangolás és hőfokok](#3-stabilitás-hangolás-és-hőfokok)
+  - [3.1 Ideiglenes OS](#31-ideiglenes-os)
+  - [3.2 Általános infó](#32-általános-infó)
+  - [3.3 Hőmérsékletkezelés](#33-hőmérsékletkezelés)
+  - [3.4 Load-Line Calibration](#34-load-line-calibration)
+  - [3.5 GPU](#35-gpu)
+  - [3.6 CPU/RAM](#36-cpuram)
+  - [3.7 Stressz-tesztelő eszközök](#37-stressz-tesztelő-eszközök)
 - [. Pre Install](#4-pre-install)
 - [. Post Install](#-post-install)
 
@@ -253,26 +261,104 @@ Kapcsold be a High Precision Event Timer-t.
   
   - Újabb AMD rendszereken nincs hatása ennek a beállításnak.
 
-## 2.18 Legacy USB Support
+## 2.18 Software telepítési beállítások
+
+Ha automatikus software telepítéssel kapcsolatos beállítást találsz (pl. ASUS Armoury Crate, MSI Utility) kapcsold ki
+
+
+## 2.19 Legacy USB Support
 
 Kapcsold ki a Legacy USB Support-ot. Lehetséges hogy be kell kapcsolnod hogy új operációs rendszert telepíts fel vagy hogy hozzáférj a BIOS-hoz.
 
-## 2.19 XHCI Hand-off
+## 2.20 XHCI Hand-off
 
 Kapcsold ki az XHCI Hand-off-ot.
 
-## 2.20 Execute Disable Bit/NX Mode
+## 2.21 Execute Disable Bit/NX Mode
 
 Kapcsold ki az Execute Disable Bit/NX Mode-ot. Néhány applikáció (FACEIT, Valorant) igényli a bekapcsolva hagyását.
 
-## 2.21 BIOS Profilok és Backup
+## 2.22 BIOS Profilok és Backup
 
 Mentsd le a jelenlegi BIOS profilodat hogyha valamilyen oknál fogva alaphelyzetbe kell állítani akkor ne kelljen előről kezdened az egészet. A legtöbb alaplapon egy mentett profil betöltése CMOS reset után nem mindig fogja az összes beállítást visszaállítani úgy ahogy volt. Ezért ajánlatos [SCEWIN](https://github.com/ab3lkaizen/SCEHUB)-el exportálni a jelenlegi profilod majd reset után újra exportálni és összehasonlítani a két NVRAM fájlt [Notepad++ Compare Plugin](https://sourceforge.net/projects/npp-compare/)-al vagy [Visual Studio Code](https://code.visualstudio.com/download)-al.
 
 # 3. Stabilitás, hangolás és hőfokok
 
-- 
+## 3.1 Ideiglenes OS
 
+Ajánlott egy ideiglenes OS-t feltelepíteni amin OC-zol és stressz tesztelsz hogy elkerüld a fő OS-ed meghibásodását. RAM stressz teszt esetén így még több RAM-ot tudsz tesztelni mivel a háttérben futó programok nem használnak felesleges memóriát. A safe mode minimális tesztelési környezetként is szolgálhat de előfordulhat hogy bizonyos szoftverek nem fognak működni.
 
+## 3.2 Általános infó
 
+- Szoftveren belül ellenőrizd a változtatásokat a váratlan eredmények elkerülése érdekében (pl. frekvencia, feszültség, timing-ok)
 
+- Overclock-olás közben minden változtatás előtt mentsd el a BIOS profilod, hogy ne kelljen előről kezdeni ha esetleg reset-elni kell a CMOS-t. Lásd [BIOS Profilok és backup](#222-bios-profilok-és-backup)
+
+- Egyetlen-egy erorr vagy crash is túl sok. Figyeld a WHEA-kat a [HWiNFO](https://www.hwinfo.com/) hibaszámlálójával vagy konfigurálj egy Event Viewer filter-t.
+
+- Figyeld a feszültségeket az esetleges overvolting elkerülése érdekében.
+
+- Számtalan tényező járul hozzá a stabilitáshoz, mint például a hőmérséklet, az energiaellátás, a hardver minősége és még sok más.
+
+- Az Overclock-olás nem feltétlen jár jobb teljesítménnyel az error correction miatt.
+
+## 3.3 Hőmérsékletkezelés
+
+Kerüld a thermal trotthling-et minden áron. Underclock-olj ha a hűtőd nem megfelelő. Egy stabil hőmérsékléten futó alkatrész alacsonyabb frekvenciával sokkal előnyösebb mint egy magasabb frekvencián futó viszont túlmelegedő alkatrész. 
+
+  - Lásd [RAM Overclock Stability and Heat Management | buildzoid](RAM Overclock Stability and Heat Management | buildzoid)
+
+## 3.4 Load-line Calibration
+
+Ez nem egy ajánlás hogy milyen LLC mode-ot használj, inkább csak informatív okokból van itt.
+
+  - [VRM Load-Line Visualized | ElmorLabs](https://elmorlabs.com/2019-09-05/vrm-load-line-visualized/)
+  - [Vdroop setting and it's impact on CPU operation | xDevs](https://xdevs.com/guide/e399ocg/#vdroop)
+  - [Why Vdroop is good for overclocking and taking a look at Gigabyte's Override Vcore mode | buildzoid](https://www.youtube.com/watch?v=zqvNkh4TVw8)
+
+## 3.5 GPU
+
+GPU overclockolásnál előfordulhat hogy számos power limit-et fel kell oldanod.
+
+  - NVIDIA rendszereken kapcsold ki a ``CUDA - Force P2 State``-et [NVIDIA Profile Inspector](https://github.com/Orbmu2k/nvidiaProfileInspector)-ban hogy elkerüld a memory downclock-ot stressz teszt közben.
+  
+  - Lásd [A Slightly Better Way To Overclock and Tweak Your Nvidia GPU | Cancerogeno](https://docs.google.com/document/d/14ma-_Os3rNzio85yBemD-YSpF_1z75mZJz1UdzmW8GE/edit?tab=t.0)
+  - Lásd [LunarPSD/NvidiaOverclocking](https://github.com/LunarPSD/NvidiaOverclocking/blob/main/Nvidia%20Overclocking.md)
+
+## 3.6 CPU/RAM
+
+- Győződj meg róla hogy a CPU a megfelelő frekvencián fut mielőtt belekezdesz abban az esetben ha kikapcsoltad a SpeedStep és SpeedShift-hez hasonló beállításokat ami megakadályozhatja a CPU-t hogy túllépje az alapfrekvenciát.
+
+- Konfiguráld a RAM frekvenciát és timing-okat manuálisan jelentős teljesítménybeli javulásért. [(1)](https://kingfaris.co.uk/blog/intel-ram-oc-impact). Az XMP nem hangol be nagyon sok timing-ot és nem is garantál stabilitást.
+
+   - Lásd [Eden’s DDR4 guide](https://web.archive.org/web/20231211232729/https://cdn.discordapp.com/attachments/328891236918493184/1172922515962724444/DDR4_Guide_V1.2.1.pdf)
+   - Lásd [KoTbelowall/INTEL-DDR4-RAM-OC-GUIDE-by-KoT](https://github.com/KoTbelowall/INTEL-DDR4-RAM-OC-GUIDE-by-KoT)
+   - Lásd [integralfx/MemTestHelper](https://github.com/integralfx/MemTestHelper/blob/oc-guide/DDR4%20OC%20Guide.md)
+
+## 3.7 Stressz-tesztelő eszközök
+
+- StresKit (bootolható)
+
+- Linpack
+
+  - [StresKit](https://github.com/valleyofdoom/StresKit) Linpack-je
+  - [Linpack-Extended](https://github.com/BoringBoredom/Linpack-Extended)
+  - [Linpack Xtreme Bootable](https://www.techpowerup.com/download/linpack-xtreme)
+  
+- [Prime95](https://www.mersenne.org/download)
+
+- [FIRESTARTER](https://github.com/tud-zih-energy/FIRESTARTER)
+
+- [y-cruncher](http://www.numberworld.org/y-cruncher)
+
+- [Memory Testing Software](https://github.com/integralfx/MemTestHelper/blob/oc-guide/DDR4%20OC%20Guide.md#memory-testing-software)
+
+  - [HCI](https://hcidesign.com/memtest)
+  - [MemTest86](https://www.memtest86.com) (bootolható)
+  - [MemTest86+](https://memtest.org) (bootolható)
+
+- [UNIGINE Superposition](https://benchmark.unigine.com/superposition)
+
+- [OCCT](https://www.ocbase.com)
+
+- [memtest_vulkan](https://github.com/GpuZelenograd/memtest_vulkan)  
