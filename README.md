@@ -330,7 +330,7 @@ GPU overclockolásnál előfordulhat hogy számos power limit-et fel kell oldano
 
 - Győződj meg róla hogy a CPU a megfelelő frekvencián fut mielőtt belekezdesz abban az esetben ha kikapcsoltad a SpeedStep és SpeedShift-hez hasonló beállításokat ami megakadályozhatja a CPU-t hogy túllépje az alapfrekvenciát.
 
-- Konfiguráld a RAM frekvenciát és timing-okat manuálisan jelentős teljesítménybeli javulásért. [(1)](https://kingfaris.co.uk/blog/intel-ram-oc-impact). Az XMP nem hangol be nagyon sok timing-ot és nem is garantál stabilitást.
+- Konfiguráld a RAM frekvenciát és timing-okat manuálisan jelentős teljesítménybeli javulásért. ([1])(https://kingfaris.co.uk/blog/intel-ram-oc-impact). Az XMP nem hangol be nagyon sok timing-ot és nem is garantál stabilitást.
 
    - Lásd [Eden’s DDR4 guide](https://web.archive.org/web/20231211232729/https://cdn.discordapp.com/attachments/328891236918493184/1172922515962724444/DDR4_Guide_V1.2.1.pdf)
    - Lásd [KoTbelowall/INTEL-DDR4-RAM-OC-GUIDE-by-KoT](https://github.com/KoTbelowall/INTEL-DDR4-RAM-OC-GUIDE-by-KoT)
@@ -386,12 +386,12 @@ GPU overclockolásnál előfordulhat hogy számos power limit-et fel kell oldano
 
 - Windows 10 1809+ szükséges a Ray Tracing-hez NVIDIA GPU-kon.
 
-- Windows 10 2004+ szükséges a [Hardware Accelerated GPU Scheduling](https://devblogs.microsoft.com/directx/hardware-accelerated-gpu-scheduling/) használatához ami létfontosságú a DLSS Frame Generation működéséhez [(1)](https://developer.nvidia.com/rtx/streamline/get-started).
+- Windows 10 2004+ szükséges a [Hardware Accelerated GPU Scheduling](https://devblogs.microsoft.com/directx/hardware-accelerated-gpu-scheduling/) használatához ami létfontosságú a DLSS Frame Generation működéséhez ([1])(https://developer.nvidia.com/rtx/streamline/get-started).
 
-- Windows 10 2004-22H2 már nem támogatott a Global Timer Resolution [(1)](https://randomascii.wordpress.com/2020/10/04/windows-timer-resolution-the-great-rule-change/). A Microsoft lehetővé tette hogy Windows Server 2022+ és Windows 11-en vissza lehessen állítani a Global Timer Resolutiont egy registry key segítségével 
+- Windows 10 2004-22H2 már nem támogatott a Global Timer Resolution ([1])(https://randomascii.wordpress.com/2020/10/04/windows-timer-resolution-the-great-rule-change/). A Microsoft lehetővé tette hogy Windows Server 2022+ és Windows 11-en vissza lehessen állítani a Global Timer Resolutiont egy registry key segítségével 
 
-- Windows 11-nek van egy frissített scheduler-je Intel 12th Gen és felette lévő CPU-k számára [(1)](https://www.anandtech.com/show/16959/intel-innovation-alder-lake-november-4th/3) azonban ezt replikálni lehet manuális affinity policy-k beállításával bármelyik Windows verzión.
+- Windows 11-nek van egy frissített scheduler-je Intel 12th Gen és felette lévő CPU-k számára ([1])(https://www.anandtech.com/show/16959/intel-innovation-alder-lake-november-4th/3) azonban ezt replikálni lehet manuális affinity policy-k beállításával bármelyik Windows verzión.
 
-- Windows 11 limitálja a háttérben lévő folyamatok polling rate-jét 125Hz-re [(1)](https://blogs.windows.com/windowsdeveloper/2023/05/26/delivering-delightful-performance-for-more-than-one-billion-users-worldwide/).
+- Windows 11 limitálja a háttérben lévő folyamatok polling rate-jét 125Hz-re ([1])(https://blogs.windows.com/windowsdeveloper/2023/05/26/delivering-delightful-performance-for-more-than-one-billion-users-worldwide/).
 
-- AllowTelemetry-t 0-ra lehet állítani Windows Server verziókon [(1)](https://admx.help/?Category=Windows_10_2016&Policy=Microsoft.Policies.DataCollection::AllowTelemetry).
+- AllowTelemetry-t 0-ra lehet állítani Windows Server verziókon ([1])(https://admx.help/?Category=Windows_10_2016&Policy=Microsoft.Policies.DataCollection::AllowTelemetry).
