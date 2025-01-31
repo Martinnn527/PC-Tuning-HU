@@ -370,7 +370,7 @@ GPU overclockolásnál előfordulhat hogy számos power limit-et fel kell oldano
 
 - A Windows régebbi verzióiból hiányzik az anti-cheat támogatás, driver támogatás (legfőképp GPU, NIC) és alkalmazások támogatása. Lásd az alábbi táblázatot.
 
-    |GPU|Minimum Windows Version|
+    |GPU|Minimum Windows Verzió|
     |---|---|
     |NVIDIA 10-es és régebbi szériák|Majdnem az összes Windows verzió támogatja|
     |NVIDIA 16, 20-as széria|Win7, Win8, Win10 1709+|
