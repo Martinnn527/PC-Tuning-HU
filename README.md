@@ -39,7 +39,8 @@
   - [3.5 GPU](#35-gpu)
   - [3.6 CPU/RAM](#36-cpuram)
   - [3.7 Stressz-tesztelő eszközök](#37-stressz-tesztelő-eszközök)
-- [. Pre Install](#4-pre-install)
+- [4. Pre Install](#4-pre-install)
+  [4.1 Windows verzió kiválasztása](#41-milyen-windows-verziót-használj)
 - [. Post Install](#-post-install)
 
 
