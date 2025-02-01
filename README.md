@@ -481,9 +481,9 @@ Távolíts el minden nem kívánt verziót. Használd az alábbi parancsokat hog
 
  - Ajánlott verziók:
 
-  - Professional
+   - Professional
 
-  - Windows Server esetén: Standard (Desktop Experience)
+   - Windows Server esetén: Standard (Desktop Experience)
 
 - Az összes elérhető verzió és a hozzájuk tartozó indexek lekérése
 
