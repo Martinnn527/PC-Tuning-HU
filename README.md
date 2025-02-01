@@ -519,7 +519,7 @@ DISM /Image:"%MOUNT_DIR%" /Enable-Feature /FeatureName:NetFx3 /All /LimitAccess 
 explorer "%MOUNT_DIR%"
 ```
 
-- Ilyenkor érdemes az ethernet driver-t is bemásolni/integrálni.
+Ilyenkor érdemes az ethernet driver-t is bemásolni/integrálni.
 
 ## 4.9 Unmount és Commit
 
