@@ -3,6 +3,11 @@
 - [1. Driver letöltése és feltelepítése](#1-driver-letöltése-és-feltelepítése)
 - [2. HDCP kikapcsolása](#2-hdcp-kikapcsolása)
 - [3. NVIDIA Control Panel konfigurálása](#3-nvidia-control-panel-konfigurálása) 
+    - [3.1 Manage 3D Settings](#31-manage-3d-settings)
+    - [3.2 Change resolution](#32-change-resolution)
+    - [3.3 Adjust Video Color Settings](#33-adjust-video-color-settings)
+    - [3.4 GPU órajel lockolása/P-State 0](#34-gpu-órajel-lockolásap-state-0)
+    - [3.5 NVIDIA Profile Inspector konfigurálása](#35-nvidia-profile-inspector-konfigurálása)
 
 # 1. Driver letöltése és feltelepítése
 
