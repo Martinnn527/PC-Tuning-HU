@@ -458,8 +458,7 @@ Használd a ``certutil -hashfile <file>`` parancsot hogy ellenőrizd az ISO val�
 
 - Csomagold ki az ISO tartalmát egy neked tetsző directory-ba majd pedig add hozzá az ``EXTRACTED_ISO`` változóhoz. 
  
-  - Példa:
-  
+- Példa:
 
   ```bat
   set "EXTRACTED_ISO=C:\en_windows_7_professional_with_sp1_x64_dvd_u_676939"
