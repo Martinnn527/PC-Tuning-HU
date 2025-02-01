@@ -53,7 +53,14 @@
   - [4.11 Átkonvertálás ISO-vá](#4-11-átkonvertálás-iso-vá)
   - [4.12 Telepítés Ventoy használatával](#412-telepítés-ventoy-használatával)
   - [4.13 ISO-ba való bootolás](#413-iso-ba-való-bootolás)
-- [5. Post Install](#-post-install)
+- [5. Post Install](#5-post-install)
+  - [5.1 Unrestricted PowerShell Execution Policy](#51-unrestricted-powershell-execution-policy)
+  - [5.2 Process Mitigations](#52-process-mitigations-windows-10-1709)
+  - [5.3 Registry Script](#53-registry-script)
+  - [5.4 Driverek telepítése](#54-driverek-telepítése)
+  - [5.5 Windows Server konfigurálása](#55-windows-server-konfigurálása)
+  - [5.6 Privacy Options](#56-privacy-options)
+  - [5.7 Search Indexing](#57-search-indexing)
 
 
 ## Bemutató
