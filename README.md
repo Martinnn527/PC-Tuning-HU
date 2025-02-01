@@ -458,7 +458,7 @@ Használd a ``certutil -hashfile <file>`` parancsot hogy ellenőrizd az ISO val�
 
 - Csomagold ki az ISO tartalmát egy neked tetsző directory-ba majd pedig add hozzá az ``EXTRACTED_ISO`` változóhoz. 
  
-  - Példa:
+- Példa:
 
   ```bat
   set "EXTRACTED_ISO=C:\en_windows_7_professional_with_sp1_x64_dvd_u_676939"
@@ -472,9 +472,9 @@ Használd a ``certutil -hashfile <file>`` parancsot hogy ellenőrizd az ISO val�
 
 -  Állítsd be az ``OSCDIMG`` változót az ``oscdimg.exe`` elérési útjára. Ha a Windows ADK-t az alapértelmezett helyre telepítetted nem kell a parancsot átírnod.
 
-  ```bat
-  set "OSCDIMG=C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Deployment Tools\amd64\Oscdimg\oscdimg.exe"
-  ```
+   ```bat
+   set "OSCDIMG=C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Deployment Tools\amd64\Oscdimg\oscdimg.exe"
+   ```
 
 - Készítsd elő a ``MOUNT_DIR`` directory-t a mountolásra.
 
