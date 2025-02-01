@@ -50,7 +50,7 @@
   - [4.8 Szükséges fájlok integrálása](#48-szükséges-fájlok-integrálása)
   - [4.9 Unmount és Commit](#49-unmount-és-commit)
   - [4.10 ISO Compression](#410-iso-compression)
-  - [4.11](#4-11-átkonvertálás-iso-vá)
+  - [4.11 Átkonvertálás ISO-vá](#4-11-átkonvertálás-iso-vá)
   - [4.12 Telepítés Ventoy használatával](#412-telepítés-ventoy-használatával)
   - [4.13 ISO-ba való bootolás](#413-iso-ba-való-bootolás)
 - [5. Post Install](#-post-install)
