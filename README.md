@@ -41,7 +41,19 @@
   - [3.7 Stressz-tesztelő eszközök](#37-stressz-tesztelő-eszközök)
 - [4. Pre Install](#4-pre-install)
   - [4.1 Windows verzió kiválasztása](#41-milyen-windows-verziót-használj)
-- [. Post Install](#-post-install)
+  - [4.2 Szükséges programok letöltése](#42-szükséges-programok-letöltése)
+  - [4.3 Stock ISO letöltése](#43-stock-iso-letöltése)
+  - [4.4 Build Environment előkészítése](#44-build-environment-előkészítése)
+  - [4.5 Nem használt verziók eltávolítása](#45-nem-használt-verziók-eltávolítása)
+  - [4.6 Mountold az ISO-t](#46-mountold-az-iso-t)
+  - [4.7 NET 3.5 bekapcsolása](#47-net-35-bekapcsolása)
+  - [4.8 Szükséges fájlok integrálása](#48-szükséges-fájlok-integrálása)
+  - [4.9 Unmount és Commit](#49-unmount-és-commit)
+  - [4.10 ISO Compression](#410-iso-compression)
+  - [4.11](#4-11-átkonvertálás-iso-vá)
+  - [4.12 Telepítés Ventoy használatával](#412-telepítés-ventoy-használatával)
+  - [4.13 ISO-ba való bootolás](#413-iso-ba-való-bootolás)
+- [5. Post Install](#-post-install)
 
 
 ## Bemutató
@@ -395,3 +407,172 @@ GPU overclockolásnál előfordulhat hogy számos power limit-et fel kell oldano
 - Windows 11 limitálja a háttérben lévő folyamatok polling rate-jét 125Hz-re [(1)](https://blogs.windows.com/windowsdeveloper/2023/05/26/delivering-delightful-performance-for-more-than-one-billion-users-worldwide/).
 
 - AllowTelemetry-t 0-ra lehet állítani Windows Server verziókon [(1)](https://admx.help/?Category=Windows_10_2016&Policy=Microsoft.Policies.DataCollection::AllowTelemetry).
+
+- Windows Home verziók nem támogatják a Group Policy Editor-t ami szükséges lesz a rendszer konfigurálásához.
+
+- Windows Server verziók nem támogatják az Xbox controllereket valamint PS controllerek esetén a DS4 programot.
+
+
+## 4.2 Szükséges programok letöltése
+
+- [7-Zip](https://www.7-zip.org/)
+
+- [Windows ADK](https://learn.microsoft.com/en-us/windows-hardware/get-started/adk-install)
+
+## 4.3 Stock ISO letöltése
+
+Használd a ``certutil -hashfile <file>`` parancsot hogy ellenőrizd az ISO valódiságát/korruptságát. 
+
+- ISO források:
+ 
+  - [os.click](https://os.click/en)
+  - [New Download Links](https://docs.google.com/spreadsheets/d/1zTF5uRJKfZ3ziLxAZHh47kF85ja34_OFB5C5bVSPumk/edit?gid=0#gid=0)
+  - [Adguard File List](https://files.rg-adguard.net/)
+  
+## 4.4 Build Environment előkészítése
+
+- A Windows Defender-ben a Real-Time protection-t kapcsold mivel az lassíthatja a mount és unmount folyamatát, vagy hibát is okozhat.
+
+- Nyisd meg a CMD-t adminként és hagyd nyitva mivel ideiglenes környezeti változókat állítunk be amelyek visszaállnak ha bezárod.
+
+- Futtasd az alábbi parancsot. Ha error-t kapsz, indítsd újra a CMD-t admin jogokkal azonban ha nem ír semmit folytasd.
+
+    ```bat
+    DISM > nul 2>&1 || echo error: administrator privileges required
+    ```
+
+- Csomagold ki az ISO tartalmát egy neked tetsző directory-ba majd pedig add hozzá az ``EXTRACTED_ISO`` változóhoz. 
+ 
+  - Példa:
+
+  ```bat
+  set "EXTRACTED_ISO=C:\en_windows_7_professional_with_sp1_x64_dvd_u_676939"
+  ```
+
+- Állítsd be hova lesz mount-olva az ISO.
+
+  ```bat
+  set "MOUNT_DIR=%temp%\MOUNT_DIR"
+  ```
+
+-  Állítsd be az ``OSCDIMG`` változót az ``oscdimg.exe`` elérési útjára. Ha a Windows ADK-t az alapértelmezett helyre telepítetted nem kell a parancsot átírnod.
+
+  ```bat
+  set "OSCDIMG=C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Deployment Tools\amd64\Oscdimg\oscdimg.exe"
+  ```
+
+- Készítsd elő a ``MOUNT_DIR`` directory-t a mountolásra.
+
+  ```bat
+  > nul 2>&1 (DISM /Unmount-Wim /MountDir:"%MOUNT_DIR%" /Discard & rd /s /q "%MOUNT_DIR%" & mkdir "%MOUNT_DIR%")
+  ```
+
+- Ha a környezeti változok helyesen vannak konfigurálva akkor az alábbi parancsoknak ``true`` értéket kell mutatniuk.
+
+  ```bat
+  if exist "%EXTRACTED_ISO%\sources\install.wim" (echo true) else (echo false)
+  if exist "%MOUNT_DIR%" (echo true) else (echo false)
+  if exist "%OSCDIMG%" (echo true) else (echo false)
+  ```
+
+## 4.5 Nem használt verziók eltávolítása
+
+Távolíts el minden nem kívánt verziót. Használd az alábbi parancsokat hogy megkapd az adott kiadás index-ét majd eltávolítsd azokat. A végére csak a telepíteni kívánt verziónak kell megmaradnia az 1-es indexen. 
+
+ - Ajánlott verziók:
+
+  - Professional
+
+  - Windows Server esetén: Standard (Desktop Experience)
+
+- Az összes elérhető verzió és a hozzájuk tartozó indexek lekérése
+
+  ```bat
+  DISM /Get-WimInfo /WimFile:"%EXTRACTED_ISO%\sources\install.wim"
+  ```
+ 
+- Távolítsd el a verziót index alapján. Cseréld ki az ``<index>``-et az index számmal.
+
+  ```bat
+  DISM /Delete-Image /ImageFile:"%EXTRACTED_ISO%\sources\install.wim" /Index:<index>
+  ```
+
+## 4.6 Mountold az ISO-t
+
+Mountold az ISO-t az alábbi parancssal.
+
+```bat
+DISM /Mount-Wim /WimFile:"%EXTRACTED_ISO%\sources\install.wim" /Index:1 /MountDir:"%MOUNT_DIR%"
+```
+
+## 4.7 NET 3.5 bekapcsolása
+
+```bat
+DISM /Image:"%MOUNT_DIR%" /Enable-Feature /FeatureName:NetFx3 /All /LimitAccess /Source:"%EXTRACTED_ISO%\sources\sxs"
+```
+
+# 4.8 Szükséges fájlok integrálása
+
+[Klónold a repository-t](https://github.com/Martinnn527/PC-Tuning-HU/archive/refs/heads/main.zip) majd a ``bin`` mappát másold be a mountolt directory-ba:
+
+```bat
+explorer "%MOUNT_DIR%"
+```
+
+- Ilyenkor érdemes az ethernet driver-t is bemásolni/integrálni.
+
+## 4.9 Unmount és Commit
+
+Futtasd az alábbi parancsot a módosítások véglegesítéséhez az ISO-n. Ha hibaüzenetet kapsz, ellenőrizd, hogy a directory üres-e az ``explorer "%MOUNT_DIR%"
+`` beírásával. Ha üres, figyelmen kívül hagyhatod a hibaüzenetet, azonban ha nem akkor zárj be minden mappát és próbáld meg a parancsot újrafuttatni.
+
+```bat
+DISM /Unmount-Wim /MountDir:"%MOUNT_DIR%" /Commit && rd /s /q "%MOUNT_DIR%"
+```
+
+# 4.10 ISO Compression
+
+Ennek nincs különösen semmi előnye a méret csökkentésén kívül. Azonban telepítés közben a Windows setup automatikusan végrehajtja ezt a folyamatot ami sok időbe telhet.
+
+```bat
+DISM /Export-Image /SourceImageFile:"%EXTRACTED_ISO%\sources\install.wim" /SourceIndex:1 /DestinationImageFile:"%EXTRACTED_ISO%\sources\install.esd" /Compress:recovery /CheckIntegrity && del /f /q "%EXTRACTED_ISO%\sources\install.wim"
+```
+
+## 4. 11 Átkonvertálás ISO-vá
+
+Használd az alábbi parancsot a kicsomagolt tartalom visszacsomagolásához egyetlen ISO fájlba, amely a ``C:\`` meghajtón fog létrejönni.
+
+```bat
+"%OSCDIMG%" -m -o -u2 -udfver102 -l"Final" -bootdata:2#p0,e,b"%EXTRACTED_ISO%\boot\etfsboot.com"#pEF,e,b"%EXTRACTED_ISO%\efi\microsoft\boot\efisys.bin" "%EXTRACTED_ISO%" "C:\Final.iso"
+```
+
+## 4.12 Telepítés Ventoy használatával
+
+Töltsd le a [Ventoy](https://github.com/ventoy/Ventoy/releases)-t majd indítsd el a ``Ventoy2Disk.exe``-t. Az option menüpontnál válaszd ki a partíciótípust (GPT) és kapcsold ki a secure boot support-ot, majd válaszd ki a pendrive-od és kattints az Install-ra.
+
+  - Lásd [media/identify-bios-mode.png](/media/identify-bios-mode.png)
+
+## 4.13 ISO-ba való bootolás
+
+Ehhez a lépéshez húzd ki az ethernet kábeledet és ne legyél az internethez csatlakozva. Ezáltal elkerülhetjük a Microsoftba való bejelentkezést OOBE közben és a Windows nem fog automatikusan feltelepíteni frissítéseket és drivereket.
+
+- File Explorer-ben másold át a Windows ISO-t a pendrive-ra.
+
+- Ha a Secure Boot bevan kapcsolva, ideiglenesen kapcsold ki a telepítési folyamathoz. Boot-olj be a pendrive-ra BIOS-on belül és válaszd ki a Windows ISO-t. Folytasd a telepítést majd amikor végzett kapcsold be a Secure Boot-ot ha előzőleg bevolt.
+
+- Windows 11 telepítésénél ha elakadsz az ``I don't have internet`` résznél, nyomj egy ``Shift+F10``-et hogy megnyisd a CMD-t, majd írd be hogy ``regedit`` és add hozzá az alábbi registry key-eket.
+
+```
+[HKEY_LOCAL_MACHINE\SYSTEM\Setup\LabConfig]
+"BypassTPMCheck"=dword:00000001
+"BypassRAMCheck"=dword:00000001
+"BypassSecureBootCheck"=dword:00000001
+```
+
+---
+
+Folytasd a [Post-Install](#5-post-install) szekcióval.
+
+
+
+
