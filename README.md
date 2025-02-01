@@ -61,7 +61,22 @@
   - [5.5 Windows Server konfigurálása](#55-windows-server-konfigurálása)
   - [5.6 Privacy Options](#56-privacy-options)
   - [5.7 Search Indexing](#57-search-indexing)
-
+  - [5.8 Idő, nyelv és régió](#58-idő-nyelv-és-régió)
+  - [5.9 Böngésző konfigurálása](#59-böngésző-konfigurálása)
+  - [5.10 Ütemezett feladatok kikapcsolása](#510-ütemezett-feladatok-kikapcsolása)
+  - [5.11 Egyéb beállítások](#511-egyéb-beállítások)
+  - [5.12 Runtime-ok feltelepítése](#512-runtime-ok-feltelepítése)
+  - [5.13 Optional Features](#513-optional-features)
+  - [5.14 Tray Icons](#514-tray-icons)
+  - [5.15 Hibernation](#515-hibernation)
+  - [5.16 Bloatware kezelése](#516-bloatware-kezelése)
+  - [5.17 7-zip](#517-7-zip-letöltése-és-beállítása)
+  - [5.18 GPU Driver](#518-gpu-driver)
+  - [5.19 MSI Afterburner](#519-msi-afterburner)
+  - [5.20 Felbontások és Scaling Mode](#520-felbontások-és-scaling-mode)
+  - [5.21 Open-Shell](#521-open-shell)
+  - [5.22 Spectre, Meltdown és CPU Microcode](#522-spectre-meltdown-és-cpu-microcode)
+  - [5.23 Power Plan](#523-power-plan)
 
 ## Bemutató
 
@@ -641,8 +656,278 @@ C:\bin\disable-process-mitigations.bat
 
 ## 5.7 Search Indexing
 
+Bizonyos könyvtárak a fájlrendszeren indexelve vannak a Windows keresési funkcióihoz, amelyeket a Win+R megnyomása után a ``control srchadmin.dll`` beírásával megtekinthetsz. Az indexelés időszakosan a háttérben fut, és gyakran észrevehető CPU-terhelést okoz, amely a Process Explorer segítségével megfigyelhető, ahogyan az a [Process Explorer]() szekcióban levan írva. Ezért ajánlott a keresési indexelést globálisan letiltani a Windows Search szolgáltatás kikapcsolásával, azonban ez korlátozhatja a keresési funkciókat.
 
+```bat
+reg add "HKLM\SYSTEM\CurrentControlSet\Services\WSearch" /v "Start" /t REG_DWORD /d "4" /f
+```
 
+## 5.8 Idő, nyelv és régió
 
+- ``Win+R`` -> ``intl.cpl`` és  ``timedate.cpl``. Konfiguráld tetszésed szerint.
 
+- ``Win+I -> Time & Language`` 
 
+  - Ha kizárólag egy billentyűzet layout-ot tervezel használni akkor töröld ki az összes többit mivel véletlen megnyomhatod a hotkey-t ami átváltja a layout-ot, ami zavaró lehet.
+
+- Szinkronizáld a rendszer óráját.
+
+## 5.9 Böngésző konfigurálása
+
+- Telepítsd fel az általad kedvelt böngészőt. Lásd: [privacytests.org](https://privacytests.org/)
+
+- Kapcsold ki a hardveres gyorsítást/hardware acceleration-t.
+
+- Kapcsolj ki minden nyomkövetőt.
+
+- Ajánlott kiegészítők:
+
+   - uBlock Origin (Filter list-et állítsd be)
+   - CleanURLs
+   - FastForward
+
+## 5.10 Ütemezett feladatok kikapcsolása
+
+Nyisd meg a PowerShell-t majd másold be az alábbi parancsot.
+
+```powershell
+C:\bin\scripts\disable-scheduled-tasks.ps1
+```
+
+## 5.11 Egyéb beállítások
+
+Nyisd meg a CMD-t és másold be az alábbi parancsokat:
+
+- Állítsd be hogy a jelszó soha ne járjon le. Ezáltal a Windows nem fogja rendszeresen kérni hogy változtasd meg a jelszavad:
+
+```bat
+net accounts /maxpwage:unlimited
+```
+- Tisztítsd ki a WinSxS mappát:
+(Ez eltarthat pár percig) 
+
+```bat
+DISM /Online /Cleanup-Image /StartComponentCleanup /ResetBase
+```
+
+- Tiltsd le a lefoglalt tárhelyet:
+
+```bat
+DISM /Online /Set-ReservedStorageState /State:Disabled
+```
+
+- Ha nincs jelen HDD a rendszeren akkor a Superfetch/Prefetch letiltható:
+
+```bat
+reg add "HKLM\SYSTEM\CurrentControlSet\Services\SysMain" /v "Start" /t REG_DWORD /d "4" /f
+```
+
+- Írd be a következőt Win+R-be: ``sysdm.cpl`` majd állítsd be az alábbiakat:
+
+  ``Advanced -> Performance -> Settings -> Adjust for best performance``
+
+- Tiltsd le a paging file-t hogy elkerüld a szükségtelen I/O-t.
+
+- Kapcsolj ki mindent a Win+I megnyomásával, a **System -> Notifications and actions**-ben 
+    
+## 5.12 Runtime-ok feltelepítése
+
+- [VcRedist](https://github.com/abbodi1406/vcredist)
+
+- [DirectX](https://www.microsoft.com/en-gb/download/details.aspx?id=8109)
+
+## 5.13 Optional Features
+
+``Win+R -> Optional Features`` majd pedig állítsd be úgy ahogy a képen látható.
+
+Ha a Windows Update kivan kapcsolva akkor nagy eséllyel nem fogsz tudni feltelepíteni funkciókat. Helyette DISM-el kell telepítened. Windows Serveren az ``OptionalFeatures`` megfelelője a
+``Server Manager -> Manage -> Remove Roles and Features``
+
+   - [Példa](/media/features-example.png)
+
+## 5.14 Tray Icons
+
+Jobb klikk a tálcára -> ``Taskbar settings -> Select which icons appear on the taskbar`` és kapcsold be az ``Always show all icons in the notifications area`` opciót.
+Ez segít a futó folyamatok kezelésében és átláthatóságában. 
+
+## 5.15 Hibernation
+
+Ahogy a [BIOS](#212-fast-startup-standby-és-hibernate) szekcióban leírtam, a Hibernation-t a Windowson belül is ki lehet kapcsolni. Így a PC egy tiszta shut down-t fog végrehajtani a gép leállításakor a szoftverállapot lemezre mentése helyett. Nyisd meg a CMD-t és másold be az alábbi parancsot.
+
+```bat
+powercfg /h off
+```
+
+## 5.16 Bloatware kezelése
+
+Javasolt a debloat scriptek elkerülése és az olyan komponensek eltávolítása ami nem ténylegesen bloatware, mivel ez az operációs rendszer meghibásodásához vezethet.
+
+  - [AppxPackagesManager](https://github.com/valleyofdoom/AppxPackagesManager) használatával távolítsd el a nem kívánt programokat.
+
+  - Nyisd meg a CMD-t és töröld le a OneDrive-ot az alábbi parancssal.
+
+    ```bat
+    for %a in ("SysWOW64" "System32") do (if exist "%windir%\%~a\OneDriveSetup.exe" ("%windir%\%~a\OneDriveSetup.exe" /uninstall)) && reg delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Desktop\NameSpace\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" /f
+    ```  
+
+  - Chromium Microsoft Edge letiltása (nem letörlése). A böngészőt letiltani kell nem pedig letörölni a WebView Runtime megtartása érdekében.
+        
+    - Nyisd meg a Microsoft Edge-t majd pedig a beállításokban kapcsolj ki bármilyen automatikus start-up beállítást mint pl. a lent felsoroltak
+
+      - ``Startup boost``
+      - ``Continue running background extensions and apps when Microsoft Edge is closed``
+
+    - Töltsd le az [Autoruns](https://learn.microsoft.com/en-us/sysinternals/downloads/autoruns)-t és navigálj az ``Everything`` részhez, majd keress rá az ``Edge`` kifejezésre és pipálj ki mindent ami megjelenik.
+
+    - A böngésző frissítése visszaállít néhány beállítást. Használd az alábbi parancsot hogy ez ne forduljon elő. Ha error-t ír, Task Managerben zárj be minden rejtett Microsoft Edge folyamatot.
+
+    ```bat
+    rd /s /q "C:\Program Files (x86)\Microsoft\EdgeUpdate"
+    ```
+
+   - Töröld ki az összes Edge-hez tartozó shortcut-ot.
+
+   ```bat
+   for /f "delims=" %a in ('where /r C:\ *edge.lnk*') do (del /f /q "%a")
+   ```
+
+- A start menüben távolítsd el az alkalmazások parancsikonjait. Fontos megjegyezni, hogy ezek az alkalmazások valójában nincsenek telepítve--csak akkor települnek ha rájuk kattintasz.
+
+- ``Win+I -> Apps -> Apps & Features -> Optional Features`` és törölj le mindent kivéve a ``Notepad``-et, ``WordPad``-et és ``Windows Media Player``-t. Windows 11-en a ``WMIC`` is maradjon.
+
+- A ``smartscreen.exe`` figyelmen kívül hagyja a registry key-t ami szabályozza hogy fut-e, ezért át kell nevezni az exe-t hogy ne tudjon elindulni. Nyisd meg a CMD-t és másold be az alábbi parancsokat.
+
+```bat
+C:\bin\MinSudo.exe --TrustedInstaller --Privileged
+```
+
+```bat
+taskkill /f /im smartscreen.exe > nul 2>&1 & ren C:\Windows\System32\smartscreen.exe smartscreen.exee
+```
+
+- Használd a Task Manager-t hogy ellenőrizd nem-e fut semmilyen bloatware a háttérben.
+
+## 5.17 7-zip letöltése és beállítása
+
+- [7-zip](https://www.7-zip.org/a/7z2301-x64.exe)
+
+- Nyisd meg a ``C:\Program Files\7-Zip\7zFM.exe-t`` , ``Tools -> Options`` és add hozzá a 7-Zip-et az összes fájl típushoz a ``+`` gombra kattintva. Lehetséges hogy kétszer kell megnyomnod hogy felülírd a már hozzáadott fájl típusokat.
+
+## 5.18 GPU Driver
+
+Lásd [docs/configure-nvidia.md]
+
+## 5.19 MSI Afterburner
+
+- Töltsd le az [MSI Afterburner](https://www.msi.com/Landing/afterburner/graphics-cards)-t és telepítsd fel.
+
+- Állíts be egy magas, statikus fan speed-et mivel a fan curve funkció működéséhez futnia kell a programnak.
+
+- Hogy a rendszer automatikusan betöltse az 1. profilt (például) és utána bezárja a programot, menj be ``shell:startup``-ba -> jobb klikk -> ``Create a Shortcut`` és másold be az következőt:
+
+  ```bat
+  "C:\Program Files (x86)\MSI Afterburner\MSIAfterburner.exe" /Profile1 /Q
+  ```
+
+## 5.20 Felbontások és Scaling Mode
+
+- Keress egy stabil OC-t a monitorodhoz, az NVIDIA control panelben a ˙˙Change resolution -> Customize -> Create Custom Resolution˙˙ fülnél vidd feljebb a refresh rate-t ~3-asával amíg a monitor nem ír egy ``Out of Range`` üzenetet vagy pedig csak szimplán fekete a képernyő. Ha ez történik, csak várj 15 másodpercet és automatikusan visszaáll az előzőleg használt értékekre. Majd pedig egyesével vedd visszább a refresh ratet. Például ha 250 hz-ről ugrottál 253 hz-re és fekete volt a képernyő akkor 252-től indulva menj lejjebb amíg stabil nem lesz. Ezután teszteld [itt](https://www.testufo.com/) hogy nincs e screen tearing.
+
+- Általában két lehetőséged van: Display, vagy GPU scaling. A monitorod natív felbontása nem igényel scalinget ezáltal [identity scaling](https://learn.microsoft.com/en-us/windows/win32/api/wingdi/ne-wingdi-displayconfig_scaling)-et használhatsz. 
+
+- Állíts be egy ``egész`` refresh ratet (a legmagasabbat amit az első pontnál eltudtál érni), például 60,00/240,00, nem 59,94/239,76. Ennek elérése érdekében használd az ``Exact``vagy pedig ``Exact reduced`` timing-ot [CRU](https://www.monitortests.com/forum/Thread-Custom-Resolution-Utility-CRU)-ban mivel a többi egy picit eltérő lehet, például 239.xxx.
+
+- Töröld az összes felbontást és egyéb bloatwaret (audio blocks) az alap felbontásodon kívül.
+ 
+  - [Példa](/media/cru-example.png)  
+
+- Ha NVIDIA GPU-d van, győzödj meg róla hogy a ``Display`` opció a ``Perform scaling on`` beállításnál még mindig elérhető. Ha nem, futtasd a CRU mappájában lévő reset.exe-t hogy visszaállítsd a beállításokat alapra és konfiguráld újra a CRU-t. Minden változtatás után futtasd a restart64.exe-t hogy megtudd mi volt az ami a problémát okozta.
+
+- Ellenőrizd hogy a CRU-ban generált felbontás van-e használatban: ``Win+I:  System ->  Advanced display settings``
+
+## 5.21 Open-Shell
+
+Ezt szükséges feltelepíteni mivel a start-menüvel és a Windows Search-el kapcsolatos szolgáltatások ki lesznek kapcsolva.
+
+- [Open-Shell](https://github.com/Open-Shell/Open-Shell-Menu)
+
+- Csak az ``Open-Shell Menu``-t telepítsd fel.
+
+- ``Settings -> General Behavior -> Check for Windows updates on shutdown`` - Disabled
+
+## 5.22 Spectre, Meltdown és CPU Microcode
+
+A Spectre és Meltdown letiltása egy régóta ismert teljesítményjavító trükk. Azonban az újabb platformok és rendszerarchitektúrák esetén előfordulhat teljesítménycsökkenés ([1](https://www.phoronix.com/review/amd-zen4-spectrev2)). Éppen ezért fontos benchmarkokat végezni, hogy meghatározzuk, hogy a teljesítmény pozitívan, negatívan vagy egyáltalán nem változik. Az állapota az  [InSpectre](https://www.grc.com/inspectre.htm) programmal, illetve a microcode DLL-ek átnevezésével állítható attól függően, hogy van-e microcode verzió eltérés az operációs rendszer és a BIOS között ([1](https://superuser.com/a/895447), [2](https://support.mozilla.org/en-US/kb/microcode-update)). 
+
+<details>
+<summary>Instrukció a DLL-ek átnevezésére</summary>
+
+- Nyisd meg a CMD-t majd pedig másold be a következő parancsot: ``C:\bin\MinSudo.exe --TrustedInstaller --Privileged``. Ezután futtasd az alábbi parancsot.
+
+```
+ren C:\Windows\System32\mcupdate_GenuineIntel.dll mcupdate_GenuineIntel.dlll
+```
+
+```
+ren C:\Windows\System32\mcupdate_AuthenticAMD.dll mcupdate_AuthenticAMD.dlll
+```
+
+</details>
+
+A Meltdown nincs hatással az AMD-s rendszerekre ([1](https://www.theverge.com/2018/1/3/16844630/intel-processor-security-flaw-bug-kernel-windows-linux), [2](https://www.phoronix.com/news/x86-PTI-Initial-Gaming-Tests), [3](https://lkml.org/lkml/2018/1/3/425)) és szükséges pár anti-cheat működéséhez (FACEIT).
+
+## 5.23 Power Plan
+
+- Állítsd be a high performance power plant
+
+```bat
+powercfg /setactive 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c
+```
+
+- Töröld ki a balanced power plant
+
+ ```bat
+ powercfg /delete 381b4222-f694-41f0-9685-ff5bb260df2
+ ```
+
+- Töröld ki a power saver power plant 
+
+```bat
+powercfg /delete a1841308-3541-4fab-bc81-f71556f20b4a
+```
+
+- USB 3 Link Power Management - Off  
+
+```bat
+powercfg /setacvalueindex scheme_current 2a737441-1930-4402-8d77-b2bebba308a3 d4e98f31-5ffe-4ce1-be31-1b38b384c009 0
+```
+
+- USB Selective Suspend - Disabled
+
+```bat
+powercfg /setacvalueindex scheme_current 2a737441-1930-4402-8d77-b2bebba308a3 48e6b7a6-50f5-4782-a5d4-53bb8f07e226 0
+```
+
+- Turn off display after - 0 minutes 
+
+```bat
+powercfg /setacvalueindex scheme_current 7516b95f-f776-4464-8c53-06167f40cc99 3c0bc021-c8a8-4e07-a973-6b14cbcb2b7e 0
+```
+
+- Disable core parking: 
+
+```bat
+powercfg /setacvalueindex scheme_current 54533251-82be-4824-96c1-47b60b740d00 0cc5b647-c1df-4637-891a-dec35c318583 100
+```
+
+- Processor performance time check interval - 5000ms 
+
+```bat
+powercfg /setacvalueindex scheme_current 54533251-82be-4824-96c1-47b60b740d00 4d2b0152-7d5c-498b-88e2-34345392a2c5 5000
+```
+
+- Végül pedig 
+
+```bat
+powercfg /setactive scheme_current
+```
