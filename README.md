@@ -797,7 +797,7 @@ Javasolt a debloat scriptek elkerülése és az olyan komponensek eltávolítás
 
 - A ``smartscreen.exe`` figyelmen kívül hagyja a registry key-t ami szabályozza hogy fut-e, ezért át kell nevezni az exe-t hogy ne tudjon elindulni. Nyisd meg a CMD-t és másold be az alábbi parancsokat.
 
-```bat
+```powershell
 C:\bin\MinSudo.exe --TrustedInstaller --Privileged
 ```
 
