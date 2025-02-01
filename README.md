@@ -558,7 +558,7 @@ Ehhez a lépéshez húzd ki az ethernet kábeledet és ne legyél az internethez
 
 - File Explorer-ben másold át a Windows ISO-t a pendrive-ra.
 
-- Ha a Secure Boot bevan kapcsolva, ideiglenesen kapcsold ki a telepítési folyamathoz. Boot-olj be a pendrive-ra BIOS-on belül és válaszd ki a Windows ISO-t. Folytasd a telepítést majd amikor végzett kapcsold be a Secure Boot-ot ha előzőleg bevolt.
+- Ha a Secure Boot bevan kapcsolva, ideiglenesen kapcsold ki a telepítési folyamathoz. Boot-olj be a pendrive-ra BIOS-on belül és válaszd ki a Windows ISO-t. Folytasd a telepítést majd amikor végzett kapcsold vissza a Secure Boot-ot ha előzőleg bevolt.
 
 - Windows 11 telepítésénél ha elakadsz az ``I don't have internet`` résznél, nyomj egy ``Shift+F10``-et hogy megnyisd a CMD-t, majd írd be hogy ``regedit`` és add hozzá az alábbi registry key-eket.
 
