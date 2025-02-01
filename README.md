@@ -862,13 +862,13 @@ A Spectre és Meltdown letiltása egy régóta ismert teljesítményjavító tr�
 <details>
 <summary>Instrukció a DLL-ek átnevezésére</summary>
 
-- Nyisd meg a CMD-t majd pedig másold be a következő parancsot: ``C:\bin\MinSudo.exe --TrustedInstaller --Privileged``. Ezután futtasd az alábbi parancsot.
+- Nyisd meg a CMD-t majd pedig másold be a következőt: ``C:\bin\MinSudo.exe --TrustedInstaller --Privileged``. Ezután futtasd az alábbi kettő parancsot.
 
-```
+```bat
 ren C:\Windows\System32\mcupdate_GenuineIntel.dll mcupdate_GenuineIntel.dlll
 ```
 
-```
+```bat
 ren C:\Windows\System32\mcupdate_AuthenticAMD.dll mcupdate_AuthenticAMD.dlll
 ```
 
