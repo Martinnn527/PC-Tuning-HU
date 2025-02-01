@@ -66,6 +66,8 @@ Hardver > BIOS > Operációs rendszer
 > [!CAUTION]
 **NE** alkalmazz random, ismeretlen vagy nem dokumentált beállítást, programot vagy scriptet anélkül hogy megértenéd az adott beállítás hatását a biztonságra, adatvédelemre és a teljesítményre.
 
+---
+
 
 # 1. Physical Setup
 
@@ -166,6 +168,8 @@ Használd a kívánt XHCI-controller első néhány portját. Előfordulhat, hog
   - A Ryzen-es rendszerek rendelkeznek egy XHCI-vezérlővel, amely közvetlenül a CPU-hoz csatlakozik. Ez [HWiNFO](https://www.hwinfo.com/)-ban a ``PCIe Bus`` kategóriában azonosítható.       
 
 Ha egynél több XHCI-controller-ed van, akkor az olyan eszközöket, mint például az egér, billentyűzet, és fejhallgató, egy másik controller-re különítheted el, hogy azok ne zavarják a polling konzisztenciáját.
+
+---
 
 # 2. BIOS
 
@@ -295,6 +299,8 @@ Kapcsold ki az Execute Disable Bit/NX Mode-ot. Néhány applikáció (FACEIT, Va
 
 Mentsd le a jelenlegi BIOS profilodat hogyha valamilyen oknál fogva alaphelyzetbe kell állítani akkor ne kelljen előről kezdened az egészet. A legtöbb alaplapon egy mentett profil betöltése CMOS reset után nem mindig fogja az összes beállítást visszaállítani úgy ahogy volt. Ezért ajánlatos [SCEWIN](https://github.com/ab3lkaizen/SCEHUB)-el exportálni a jelenlegi profilod majd reset után újra exportálni és összehasonlítani a két NVRAM fájlt [Notepad++ Compare Plugin](https://sourceforge.net/projects/npp-compare/)-al vagy [Visual Studio Code](https://code.visualstudio.com/download)-al.
 
+---
+
 # 3. Stabilitás, hangolás és hőfokok
 
 ## 3.1 Ideiglenes OS
@@ -375,6 +381,8 @@ GPU overclockolásnál előfordulhat hogy számos power limit-et fel kell oldano
 - [OCCT](https://www.ocbase.com)
 
 - [memtest_vulkan](https://github.com/GpuZelenograd/memtest_vulkan)  
+
+---
 
 # 4. Pre-Install
 
@@ -560,18 +568,73 @@ Ehhez a lépéshez húzd ki az ethernet kábeledet és ne legyél az internethez
 
 - Ha a Secure Boot bevan kapcsolva, ideiglenesen kapcsold ki a telepítési folyamathoz. Boot-olj be a pendrive-ra BIOS-on belül és válaszd ki a Windows ISO-t. Folytasd a telepítést majd amikor végzett kapcsold vissza a Secure Boot-ot ha előzőleg bevolt.
 
-- Windows 11 telepítésénél ha elakadsz az ``I don't have internet`` résznél, nyomj egy ``Shift+F10``-et hogy megnyisd a CMD-t, majd írd be hogy ``regedit`` és add hozzá az alábbi registry key-eket.
+## 4.14 OOBE Setup
 
-```
-[HKEY_LOCAL_MACHINE\SYSTEM\Setup\LabConfig]
-"BypassTPMCheck"=dword:00000001
-"BypassRAMCheck"=dword:00000001
-"BypassSecureBootCheck"=dword:00000001
-```
+- Windows Server telepítése során meg kell adnod egy komplex jelszót amit törölhetsz később.
+
+- Ha Windows 11-et telepítesz nyomj egy ``Shift+F10``-et hogy megnyisd a CMD-t és írd be a következő parancsot: ``oobe\BypassNRO.cmd``. Ezáltal megjelenik a ``continue with limited setup`` opció.
+
+  - Példa [main/media/oobe-windows10+-example.mp4](main/media/oobe-windows10+-example.mp4)
 
 ---
 
-Folytasd a [Post-Install](#5-post-install) szekcióval.
+# 5. Post Install
+
+## 5.1 Unrestricted PowerShell Execution Policy
+
+Ez szükséges a scriptek futtatásához. Nyisd meg a PowerShell-t és másold be az alábbi parancsot.
+
+```powershell
+Set-ExecutionPolicy Unrestricted
+```
+
+## 5.2 Process Mitigations (Windows 10 1709+)
+
+Nyisd meg az ``NSudo.LG.exe``-t, pipáld be az ``Enable All Priviliges`` checkbox-ot és írd be hogy ``cmd``, majd pedig másold be az alábbi parancsot
+
+```bat
+C:\bin\disable-process-mitigations.bat
+```
+
+## 5.3 Registry Script
+
+- Nyisd meg a PowerShell-t adminként majd másold be az alábbi parancsot. Ha error-t kapsz, kapcsold ki a tamper protection-t Windows Defenderben (Windows 10 1909+). Ha így sem jó akkor boot-olj be Safe Mode-ba és futtasd ott a parancsot.
+
+  ```powershell
+  C:\bin\apply-registry.ps1
+  ```
+
+- Győződj meg róla hogy a script egy "succesfully applied" üzenetet ír. 
+
+- Csakis egy újraindítás után csatlakozz az internethez.
+
+## 5.4 Driverek telepítése
+
+- GPU driverek később lesznek feltelepítve.
+
+- Próbáld meg a driver-t INF formában feltelepíteni task manager-en belül mivel az exe-k általában bloatware-t tartalmaznak. Próbáld meg 7-zip-el kicsomgalni az exe fájlt és azon belül megkeresni az INF fájlt.
+
+- NIC (Network Interface Controller) drivert telepítsd fel.
+
+## 5.5 Windows Server konfigurálása
+
+- Server Manager-ben, menj a ``Manage -> Server Manager Properties`` és pipáld be a ``Do not start Server Manager automatically at logon`` opciót.
+
+- ``Win+R -> services.msc``, keresd ki a ``Windows Audio`` és ``Windows Audio Endpoint Builder`` szolgáltatásokat majd pedig a startup type-ot tedd Automatic-ra.
+
+- ``Win+R -> gpedit.msc - >Computer Configuration -> Windows Settings -> Security Settings -> Account Policies -> Password Policy`` és kapcsold ki a ``Password must meet complexity requirements`` opciót.
+
+   - Nyisd meg a CMD-t és írd be hogy ``gpupdate /force`` hogy egyből életbe lépjenek a változások.
+
+- ``Win+R`` -> ``control userpasswords`` -> ``Users`` majd jobb klikk az ``Administrator``profilra, ``Set Password`` -> írd be a jelenlegi jelszavad majd töröld ki és hagyd üresen hogy eltávolítsd.
+
+## 5.6 Privacy Options
+
+``Win+I`` -> ``Privacy`` és kapcsolj ki minden nem használt engedélyt.
+
+## 5.7 Search Indexing
+
+
 
 
 
