@@ -762,6 +762,8 @@ powercfg /h off
 
 Javasolt a debloat scriptek elkerülése és az olyan komponensek eltávolítása ami nem ténylegesen bloatware, mivel ez az operációs rendszer meghibásodásához vezethet.
 
+- Még nem ajánlott letörölni az Xbox Game Bar-t mivel a későbbi lépésekben problémába ütközhetsz ([Játék regisztrálása Game Bar-ban](#5352-játék-regisztálása-game-bar-ban)).
+
   - [AppxPackagesManager](https://github.com/valleyofdoom/AppxPackagesManager) használatával távolítsd el a nem kívánt programokat.
 
   - Nyisd meg a CMD-t és töröld le a OneDrive-ot az alábbi parancssal.
@@ -930,4 +932,190 @@ powercfg /setacvalueindex scheme_current 54533251-82be-4824-96c1-47b60b740d00 4d
 
 ```bat
 powercfg /setactive scheme_current
+```
+
+## 5.24 Memory Management beállítások
+- Nyisd meg a PowerShell-t és másold be az alábbi parancsot hogy megtekintsd a beállításokat
+
+```powershell
+Get-MMAgent
+```
+
+- Használd az alábbi példát hogy kikapcsolj egy adott beállítást. Ha a Superfetch/Prefetch-et bekapcsolva hagytad az [Egyéb](#511-egyéb-beállítások) szekcióban akkor nagy valószínűséggel a Prefetch-el kapcsolatos funkciókra szükséged van.
+
+```powershell
+Disable-MMAgent -MemoryCompression
+```
+
+## 5.25 BCD Store
+
+[DEP (Data Execution Prevention)](https://learn.microsoft.com/en-us/windows/win32/memory/data-execution-prevention) kikapcsolása:
+
+```bat
+bcdedit /set nx AlwaysOff
+```
+
+A [disabledynamictick](https://en.wikipedia.org/wiki/Tickless_kernel) parancs használható a rendszeres timer tick interrupts engedélyezésére.
+
+## 5.26 NIC konfigurálása
+
+- ``Win+R``-be írd be hogy ``ncpa.cpl``. 
+
+- Tilts le minden nem használt adaptert. Jobb klikk a fő adapterre és ``Properties``
+
+- Kapcsold ki az összes funkciót kivéve a ``QoS Packet Scheduler``-t és az ``Internet Protocol Version 4 (TCP/IPv4)``-et.
+
+- Állíts be egy Static IP Address-t. Nyisd meg a CMD-t majd írd be hogy ``ipconfig /all``. Jobb klikk a fő adapteredre, ``Properties``, majd pedig kattints rá az ``Internet Protocol Version 4 (TCP/IPv4)``-re és írd át manuálisan az összes beállítást a CMD-ben kiírtaknak megfelelően.
+
+## 5.27 Audio eszközök beállítása
+
+- Nyisd meg a sound control panel-t: ``Win+R : mmsys.cpl``
+
+- Tiltsd le az összes nem használt Playback és recording eszközt.
+
+- A communications fülnél állítsd be hogy ``Do nothing``
+
+## 5.28 Szolgáltatások és driverek
+
+> [!CAUTION]
+> Mindent figyelmesen olvass el és értelmezz mielőtt hozzákezdesz.
+
+Ez a helyes módja a szolgáltatások kikapcsolásának. Nem kell egyesével kikapcsolni őket, ami alapból nem is lenne visszafordítható, kivéve ha mindent manuálisan visszakapcsolsz, ami egyáltalán nem praktikus. Ezért lesz kettő script létrehozva amivel váltani tudsz az Enabled és Disabled között.
+
+- Töltsd le a [service-list-builder](https://github.com/valleyofdoom/service-list-builder)-t.
+
+- A lista testreszabható a ``C:\bin\minimal-servies.ini`` módosításával. Számos leírás van az adott szolgáltatással kapcsolatban a connfigban. Például ha ethernetet használsz a Wi-Fi-vel kapcsolatos szolgáltatásokra nincsen szükséged. Ha újra szeretnéd generálni a scripteket, előtte mindenképpen futtasd a ``Services-Enable``-t mivel a program a szolgáltatások jelenlegi állapotára támaszkodik a jövőbeli scriptek megépítésére.
+
+- A ``High precision event timer`` eszkösz a device manager-ben IRQ 0-t használ a legtöbb AMD-s rendszeren, ezáltal konfliktusba kerül a ``System Timer`` eszközzel amely szintén IRQ 0-t használ. Az egyetlen mód ennek megoldására az, hogy letiltod a ``System Timer`` szülő eszközét, amely az ``msisadrv`` (Módosítsd a konfigot)
+
+- Használd az alábbi parancsot hogy a Software Protection ne próbáljon elindulni 30 másodpercenként miközben a szolgáltatások kivannak kapcsolva.
+
+```bat
+reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SoftwareProtectionPlatform" /v "InactivityShutdownDelay" /t REG_DWORD /d "4294967295" /f
+```
+
+- Nyisd meg a CMD-t a ``service-list-builder`` mappájában.
+
+- Másold be az alábbi parancsot hogy megépítsd a scripteket.
+
+```bat
+service-list-builder.exe --config C:\bin\minimal-services.ini
+```
+
+- Ha esetleg nem működik, add hozzá a ``--disable-service-warning" paramétert.
+
+- A scriptek a ``build`` mappában lesznek megépülve. NSudo-val az ``Enable All Priviliges`` bepipálásával kell futtatni őket.
+
+## 5.29 Device manager beállítása
+
+- A ``Disk drives`` kategóriánál jobb klikk az SSD-re -> ``Polciies`` -> és pipáld be a ``Turn off Windows write-cache buffer flushing on the device`` opciót.
+
+- A ``Network adapters`` kategóriánál ``Properties -> Advanced`` és kapcsolj ki minden power saving funkciót.
+
+- ``View -> Devices by connection`` és tilts le minden PCIe, SATA, NVMe, XHCI controllert és USB Hub-ot amihez nincs semmi csatlakoztatva. Tilts le minden nem használt eszközt ami ugyanahhoz a PCIe port-hoz van csatlakoztatva mint a GPU
+
+- ``View -> Resources by connection`` és tilts le minden nem szükséges eszközt ami IRQ-t vagy I/O-t használ. 
+
+- Opcionálisan használd a [DeviceCleanup](https://www.majorgeeks.com/mg/getmirror/device_cleanup_tool,1.html) programot hogy eltávolíts rejtett eszközöket.
+
+## 5.30 Device Power Saving
+
+- Nyisd meg a PowerShell-t és másold be az alábbi parancsot hogy kikapcsold az ``Allow the computer to turn off this device to save power`` opciót a device manager-ben minden alkalmaz eszközön.
+
+```powershell
+Get-WmiObject MSPower_DeviceEnable -Namespace root\wmi | ForEach-Object { $_.enable = $false; $_.psbase.put(); }
+```
+
+- Ha kihúzod és visszadugod az eszközt akkor ez a beállítás visszaállhat tehát vagy kerüld el vagy futtasd a parancsot minden alkalommal, vagy pedig használd a [DriverPowerSaving](/bin/DriverPowerSaving.ps1) scriptet. Hogy minden újraindításnál automatikusan fusson húzd be ``shell:startup``-ba és használd a PowerShell paramétert hogy ne notepad-ként fusson.
+
+## 5.31 Fájl rendszer
+
+Nyisd meg a CMD-t és másold be az alábbi parancsokat.
+
+- Tiltsd le a [8.3-as fájlnevek](https://hu.wikipedia.org/wiki/8.3-as_f%C3%A1jln%C3%A9v) készítését FAT és NTFS formátumú meghajtókon
+
+```bat
+fsutil behavior set disable8dot3 1
+```
+
+Tiltsd le a [Last Acces Time Stamp Update](https://www.tenforums.com/tutorials/139015-enable-disable-ntfs-last-access-time-stamp-updates-windows-10-a.html)-et.
+
+## 5.32 Event Trace Sessions (ETS)
+
+- Ezekkel a fájlokkal automatikusan tudsz váltani ETS Enabled és Disabled között aminek a hatását meg tudod nézni itt: ``Win+R -> perfmon -> Data Collector Sets -> Event Trace Session``. Azok a programok amelyek event tracing-re támaszkodnak nem fognak tudni adatot log-olni amíg nem kapcsolod vissza őket, és pont ezért van egy enable és disable fájl. Nyisd meg a CMD-t és másold be a parancsokat hogy megépítsd a két registry fájlt a ``C:\`` meghajtón. NSudo-val kell majd futtatni őket Trusted Installer-ként.
+
+- ets-enable.reg
+```bat
+reg export "HKLM\SYSTEM\CurrentControlSet\Control\WMI\Autologger" "C:\ets-enable.reg"
+```
+- ets-disable.reg
+
+```bat
+>> "C:\ets-disable.reg" echo Windows Registry Editor Version 5.00 && >> "C:\ets-disable.reg" echo. && >> "C:\ets-disable.reg" echo [-HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\WMI\Autologger]
+```
+- Tiltsd le a SleepStudy-t (UserNonPresentSession)
+
+```bat
+for %a in ("SleepStudy" "Kernel-Processor-Power" "UserModePowerService") do (wevtutil sl Microsoft-Windows-%~a/Diagnostic /e:false)
+```
+
+## 5.33 Message Signaled Interrupts
+
+- Az MSI-k gyorsabbak mint a hagyományos signal-based interruptok és az IRQ sharing problémát is megoldhatják
+
+- Töltsd le a [GoInterruptPolicy](https://github.com/spddl/GoInterruptPolicy)-t.
+
+- Kapcsold be az MSI-ket az összes támogatott eszközön. Vedd figyelembe hogy néhány driver fejlesztő alapból kikapcsolva hagyja az MSI-ket, tehát ha újratelepítesz egy drivert utána mindig érdemes ellenőrizni.
+
+## 5.34 XHCI Interrupt Moderation (IMOD)
+
+Windows 7-en az IMOD Interval 1ms, viszont az újabb OS-eken 0.05ms (50us) kivéve ha az adott USB drivernél más van megadva. Ez azt jelenti hogy amiután egy Interrupt generálva lett, az XHCI(USB) controller vár (úgynevezett buffer period) hogy több adat érkezzen mielőtt újabb Interruptot generálna. Ez csökkenti a CPU terhelését de adatvesztéshez vezethet.
+Példa: egy 1000-es polling rate-ű egér minden 1ms-ban küld adatot. Ha csak az egeret mozgatod egy 1ms-os intervallumban akkor nem történik Interrupt Moderation, mivel az interruptok generálási sebessége kisebb vagy egyenlő a meghatározott intervallummal. Azonban játék közben, ahol egyszerre mozgatod az egeret, nyomod a billentyűzetet stb, könnyen meghaladod az 1000 interrupt/másodpercet. Habár ez kevésbé valószínű 0,05 ms-os IMOD intervallum mellett, akkor is előfordulhat.
+
+- Töltsd le az [RWEverything](http://rweverything.com/download/)-et és másold be az alábbi parancsot hogy letiltsd a ``Microsoft Vulnerable Driver Blocklist``-et. 
+
+```bat
+reg add "HKLM\SYSTEM\CurrentControlSet\Control\CI\Config" /v "VulnerableDriverBlocklistEnable" /t REG_DWORD /d "0" /f
+```
+
+- A ``bin`` mappában lévő [XHCI-IMOD-Interval.ps1](/bin/XHCI-IMOD-Interval.ps1) fájlt másold be a C:\-be. Ha az RWEverything-et máshova telepítetted akkor a ps1 fájlban a ``$rwePath = "C:\Program Files\RW-Everything\Rw.exe"`` sort írd át. Csinálj egy shortcut-ot ``shell:startup``-ba. Jobb klikk a fájlra -> ``Properties -> Shortcut`` és a Target helyére másold be az alábbi sort.
+
+```bat
+PowerShell C:\XHCI-IMOD-Interval.ps1
+```
+
+## 5.35 Applikációk konfigurálása
+
+### 5.35.1 FPS Limit
+
+- Ha limitálod az FPS-t akkor a monitorod refresh rate-jének a többszörése korlátozd le. Lásd: [FPS Cap Calculator | BoringBoredom](https://boringboredom.github.io/tools/fpscapcalculator)
+
+- Bizonyosodj meg róla hogy a GPU nincs teljesen kihasználva mivel minél kevesebb a kihasználtsága annál kevesebb a system latency.
+
+- Ha RTSS-el limitálod az FPS-t sokkal smoothabb lesz a játék és konzisztensebb lesz a frame-pacing mivel busy-wait-et használ ami sokkal precízebb mint a passive-wait de cserébe nagyobb latency-vel és CPU overhead-el jár.
+
+### 5.35.2 Játék regisztálása Game Bar-ban
+
+Győződj meg róla hogy a Game Bar felismeri a játékot. Nyisd meg a Game Bar-t ``Win+G`` megnyomásával amikor játékban vagy és kapcsold be a ``Remember this is a game`` opciót. 
+
+### 5.35.3 Presentation Mode
+
+Lásd: https://wiki.special-k.info/en/Presentation_Model
+
+- Ez nem egy ajánlás hogy melyik Presentation Mode-ot használd, inkább csak informatív okból írom le.
+- [PresentMon](https://github.com/GameTechDev/PresentMon)-al ellenőrizd hogy a kívánt Presentation Mode-ot használod-e.
+● Ha ``Hardware: Legacy Flip``-et szeretnél használni, pipáld ki a ``Disable fullscreen optimizations`` négyzetet. Ha nem működik, használd az alábbi parancsokat és indítsd újra a gépet. 
+
+```bat
+reg add "HKCU\SYSTEM\GameConfigStore" /v "GameDVR_DXGIHonorFSEWindowsCompatible" /t REG_DWORD /d "1" /f
+```
+
+```bat
+reg add "HKCU\SYSTEM\GameConfigStore" /v "GameDVR_FSEBehavior" /t REG_DWORD /d "2" /f
+```
+
+- Ha ``Hardware Composed: Independent Flip``-en ragadtál és másik presentation mode-ot szeretnél használni másold be CMD-be a következőt:
+
+```bat
+reg add "HKLM\SOFTWARE\Microsoft\Windows\Dwm" /v "OverlayTestMode" /t REG_DWORD /d "5" /f
 ```
