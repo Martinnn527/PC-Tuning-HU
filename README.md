@@ -92,6 +92,10 @@
     - [5.35.1 FPS Limit](#5351-fps-limit)
     - [5.35.2 Játék regisztrálása Game Bar-ban](#5352-játék-regisztálása-game-bar-ban)
     - [5.35.3 Presentation Mode](#5353-presentation-mode)
+  - [5.36 Interruptok és DPC-k](#536-interruptok-és-dpc-k)
+    - [5.36.1](#5361-gpu-és-directx-graphics-kernel)
+    - [5.36.2](#5362-xhci-és-audio-controller)
+    - [5.36.3](#5363-network-interface-card-nic)   
 ## Bemutató
 
 Ezen útmutató célja a Windows-alapú rendszerek finomhangolása, beleértve a hardver-, operációs rendszer- és szoftverkonfigurációkat. Az útmutatás széleskörű célok elérésére van kialakítva, beleértve a biztonság javítása, azonban általában a competitive játékokban való előny megszerzésére és valós idejű feladatok futtatására van kihegyezve. Hangsúlyt fektet arra hogy a felhasználók saját maguk végezzék el a beállításokat és minimalizálják a scriptek használatát annak érdekében hogy átláthatóbb legyen és kerüljék a nem kívánt módosításokat. A szekciókat sorrendben kell követni mivel az egyes lépések a korábbi lépések befejezésétől függnek, ezért minden szekció számozott.
