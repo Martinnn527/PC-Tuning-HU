@@ -855,7 +855,7 @@ Lásd [docs/configure-nvidia.md](/docs/confiugre-nvidia.md)
 
 - Keress egy stabil OC-t a monitorodhoz, az NVIDIA control panelben a ˙˙Change resolution -> Customize -> Create Custom Resolution˙˙ fülnél vidd feljebb a refresh rate-t ~3-asával amíg a monitor nem ír egy ``Out of Range`` üzenetet vagy pedig csak szimplán fekete a képernyő. Ha ez történik, csak várj 15 másodpercet és automatikusan visszaáll az előzőleg használt értékekre. Majd pedig egyesével vedd visszább a refresh ratet. Például ha 250 hz-ről ugrottál 253 hz-re és fekete volt a képernyő akkor 252-től indulva menj lejjebb amíg stabil nem lesz. Ezután teszteld [itt](https://www.testufo.com/) hogy nincs e screen tearing.
 
-- Általában két lehetőséged van: Display, vagy GPU scaling. A monitorod natív felbontása nem igényel scalinget ezáltal [identity scaling](https://learn.microsoft.com/en-us/windows/win32/api/wingdi/ne-wingdi-displayconfig_scaling)-et használhatsz. 
+- Általában két lehetőséged van: Display, vagy GPU scaling. A monitorod natív felbontása nem igényel scalinget ezáltal identity scaling-et ([1](https://learn.microsoft.com/en-us/windows/win32/api/wingdi/ne-wingdi-displayconfig_scaling)), ([2](/docs/research.md#2-identity-scaling) használhatsz. 
 
 - Állíts be egy ``egész`` refresh ratet (a legmagasabbat amit az első pontnál eltudtál érni), például 60,00/240,00, nem 59,94/239,76. Ennek elérése érdekében használd az ``Exact``vagy pedig ``Exact reduced`` timing-ot [CRU](https://www.monitortests.com/forum/Thread-Custom-Resolution-Utility-CRU)-ban mivel a többi egy picit eltérő lehet, például 239.xxx.
 
@@ -1120,11 +1120,13 @@ Győződj meg róla hogy a Game Bar felismeri a játékot. Nyisd meg a Game Bar-
 
 ### 5.35.3 Presentation Mode
 
-Lásd: https://wiki.special-k.info/en/Presentation_Model
+Lásd: [Presentation Models](https://wiki.special-k.info/en/Presentation_Model)
 
 - Ez nem egy ajánlás hogy melyik Presentation Mode-ot használd, inkább csak informatív okból írom le.
+
 - [PresentMon](https://github.com/GameTechDev/PresentMon)-al ellenőrizd hogy a kívánt Presentation Mode-ot használod-e.
-● Ha ``Hardware: Legacy Flip``-et szeretnél használni, pipáld ki a ``Disable fullscreen optimizations`` négyzetet. Ha nem működik, használd az alábbi parancsokat és indítsd újra a gépet. 
+
+- Ha ``Hardware: Legacy Flip``-et szeretnél használni, pipáld ki a ``Disable fullscreen optimizations`` négyzetet. Ha nem működik, használd az alábbi parancsokat és indítsd újra a gépet. 
 
 ```bat
 reg add "HKCU\SYSTEM\GameConfigStore" /v "GameDVR_DXGIHonorFSEWindowsCompatible" /t REG_DWORD /d "1" /f
@@ -1142,19 +1144,17 @@ reg add "HKLM\SOFTWARE\Microsoft\Windows\Dwm" /v "OverlayTestMode" /t REG_DWORD 
 
 ### 5.35.4 Game Mode
 
-A Game Mode megakadályozza a Windows Update futását valamint bizonyos értesítések megjelenítését ([1](https://support.xbox.com/en-GB/help/games-apps/game-setup-and-play/use-game-mode-gaming-on-pc)). Fontos megjegyezni, hogy a Game Mode befolyásolhatja a folyamatok és thread-ek prioritását, attól függően, hogy a PsPrioritySeparation értéke hogyan van beállítva. Ez levan írva a [Thread Quantums and Scheduling](#thread-quantums-and-scheduling) szekcióban. Érdemes kísérletezni a Game Mode engedélyezésével és letiltásával, hogy meghatározd annak hatását a rendszer teljesítményére.
+A Game Mode megakadályozza a Windows Update futását valamint bizonyos értesítések megjelenítését ([1](https://support.xbox.com/en-GB/help/games-apps/game-setup-and-play/use-game-mode-gaming-on-pc)). Fontos megjegyezni, hogy a Game Mode befolyásolhatja a folyamatok és thread-ek prioritását, attól függően, hogy a PsPrioritySeparation értéke hogyan van beállítva. Érdemes kísérletezni a Game Mode engedélyezésével és letiltásával, hogy meghatározd annak hatását a rendszer teljesítményére.
 
 ### 5.35.5 Media lejátszó
 
 - [mpv](https://mpv.io/)
-
 - [VLC](https://www.videolan.org/)
-
 - [mpc-hc](https://github.com/clsid2/mpc-hc)
 
 ### 5.35.6 QoS Policy
 
-Ez a beállítás lehetővé teszi hogy a megadott applikáció csomagjait előnybe helyezze a többi applikációval szemben.
+Ez a beállítás lehetővé teszi hogy a megadott applikáció csomagjait helyezze előnybe a többi applikációval szemben.
 
 Lásd: [QoS Policy beállítása](/media/dscp-46-qos-policy.png)
 
@@ -1180,8 +1180,26 @@ Ez a két modul nagy számban generál interruptokat ezért érdemes elkülöní
 
 ### 5.36.3 Network Interface Card (NIC)
 
-Támogatnia kell az MSI-X-et ahhoz hogy a Receive-Side-Scaling (RSS) rendesen működjön. Legtöbb esetben az RSS base cpu elég arra hogy áthelyezd a DPC-ket és ISR-eket emiatt nincs szükség GoInterruptPolicy-ra. Azonban ha valamelyiket nem sikerülne áthelyezni, próbáld meg beállítani mindkettőt. Figyelj arra hogy az RSS beállítás szabja meg hogy pontosan hány CPU-n van ütemezve a NIC. Például, ha az RSS base cpu a CPU 2-re van állítva és 4 RSS queue-t használsz akkor a 2/3/4/5-ön lesz ütemezve. [RSS Configuration](https://github.com/Duckleeng/TweakCollection?tab=readme-ov-file#receive-side-scaling-rss-configuration)
+Támogatnia kell az MSI-X-et ahhoz hogy a Receive-Side-Scaling (RSS) rendesen működjön. Legtöbb esetben az RSS base cpu elég arra hogy áthelyezd a DPC-ket és ISR-eket emiatt nincs szükség GoInterruptPolicy-ra. Azonban ha valamelyiket nem sikerülne áthelyezni, próbáld meg beállítani mindkettőt. Figyelj arra hogy az RSS beállítás szabja meg hogy pontosan hány CPU-n van ütemezve a NIC. Például, ha az RSS base cpu a CPU 2-re van állítva és 4 RSS queue-t használsz akkor a 2/3/4/5-ön lesz ütemezve.
+
+  - Lásd [RSS Configuration](https://github.com/Duckleeng/TweakCollection?tab=readme-ov-file#receive-side-scaling-rss-configuration)
 
   - Lásd [Hány RSS Queue-ra van szükséged](/docs/research.md#hány-rss-queue-ra-van-szükséged)
 
-  
+## 5.37 Event Viewer ellenőrzése
+
+Ez a lépés nem kötelező, azonban segíthet a megmagyarázhatatlan FPS drop-ok és többi probléma azonosításában. Ellenőrizd hogy nincs e teli hibaüzenettel az Event Viewer. ``Win+R`` -> ``eventvwr.msc``. 
+
+  - Futtasd az ``ets-enable.reg`` fájlt mivel ez szükséges az event log működéséhez.
+
+## 5.38 CPU Idle States
+
+Ez kényszeríti a C-State 0-t. Érdemes játék előtt kikapcsolni, majd játék után bekapcsolni az idle statet, mivel az magasabb hőfokokkal (A CPU hőmérsékletének nem lenne szabad elérni a thermal throttling pontot, mivel a hűtéssel már foglalkoztál a [BIOS](#12-hűtés) részlegnél) és energiafogyasztással jár. Kerüld az idle kikapcsolását ha a Hyper-Threading/Simultaneous Multithreading bevan kapcsolva, vagy pedig ha valamilyenféle frequency boosting feature-t használsz, mint például AMD-n a PBO, Turbo Boost vagy hasonló. 
+
+   - [Idle Enable](/bin/enable_idle.bat)
+   - [Idle Disable](/bin/disable_idle.bat)
+
+## 5.39 Timer Resolution
+
+
+
