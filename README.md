@@ -1229,6 +1229,7 @@ A nagyobb felbontás nagyobb Sleep pontosságot eredményez, de bizonyos esetekb
 
   - ``5000 = 0.5ms``, ``5250 = 0.525ms`` stb.
 
+
   ```bat
   C:\SetTimerResolution.exe --resolution 5000 --no-console
   ```
