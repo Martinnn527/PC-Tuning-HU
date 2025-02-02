@@ -99,6 +99,7 @@
   - [5.37 Event Viewer ellenőrzése](#537-event-viewer-ellenőrzése)
   - [5.38 CPU Idle States](#538-cpu-idle-states)
   - [5.39 Timer Resolution](#539-timer-resolution)  
+    - [5.39.1 Maga a Timer Resolution beállítása](#5391-maga-a-timer-resolution-beállítása)
 ## Bemutató
 
 Ezen útmutató célja a Windows-alapú rendszerek finomhangolása, beleértve a hardver-, operációs rendszer- és szoftverkonfigurációkat. Az útmutatás széleskörű célok elérésére van kialakítva, beleértve a biztonság javítása, azonban általában a competitive játékokban való előny megszerzésére és valós idejű feladatok futtatására van kihegyezve. Hangsúlyt fektet arra hogy a felhasználók saját maguk végezzék el a beállításokat és minimalizálják a scriptek használatát annak érdekében hogy átláthatóbb legyen és kerüljék a nem kívánt módosításokat. A szekciókat sorrendben kell követni mivel az egyes lépések a korábbi lépések befejezésétől függnek, ezért minden szekció számozott.
@@ -1219,5 +1220,17 @@ A timer resolution megvalósítása a Windows 10 2004+-ben úgy változott, hogy
 Ez lehetővé teszi a felbontás növelését egy külön folyamat során, ami viszont azt eredményezi, hogy a kívánt alkalmazás, például egy játék nagyobb pontosságot kap. Azonban, mint korábban említettük, a folyamatonkénti mód csökkenti a CPU-overhead-et, ami a globális viselkedés visszaállítása esetén már nem áll fenn, és a háttérfolyamatok is szükségtelenül gyakran kiszolgálásra kerülnek. Az RTSS egy alternatív módszer a framerate korlátozására, és hybrid-waiting-et használ, ami nagyobb pontosságot eredményez, miközben megszűnik a GlobalTimerResolution visszaállításának szükségessége.
 
 A nagyobb felbontás nagyobb Sleep pontosságot eredményez, de bizonyos esetekben a maximálisan támogatott 0,5 ms felbontás pont hogy kisebb pontosságot biztosít, mint a valamivel alacsonyabb, például 0,507 ms. Ezért célszerű a [MeasureSleep](https://github.com/valleyofdoom/TimerResolution) programban meghatározni, hogy melyik felbontással a legkisebb a Sleep(1) (delta), miközben a [SetTimerResolution](https://github.com/valleyofdoom/TimerResolution/releases) programmal különböző felbontásokat állítunk be. Ezt terhelés alatt kell elvégezni, mivel az idle benchmarkok félrevezetőek lehetnek. A folyamat automatizálására a [micro-adjust-benchmark.ps1](/bin/micro-adjust-benchmark.ps1) szkript használható.
+
+### 5.39.1 Maga a Timer Resolution beállítása
+
+- Töltsd le a [SetTimerResolution](https://github.com/valleyofdoom/TimerResolution/releases)-t a ``C:\`` meghajtóba. majd pedig menje be ``shell:startup``-ba -> Jobb klikk -> Create a shortcut és keresd ki az exe-t.
+
+- Használd az alábbi példát és add hozzá a shortcut-hoz a paramétereket.
+
+  - ``5000 = 0.5ms``, ``5250 = 0.525ms`` stb.
+
+  ```bat
+  C:\SetTimerResolution.exe --resolution 5000 --no-console
+  ```
 
 
