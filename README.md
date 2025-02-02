@@ -77,7 +77,21 @@
   - [5.21 Open-Shell](#521-open-shell)
   - [5.22 Spectre, Meltdown és CPU Microcode](#522-spectre-meltdown-és-cpu-microcode)
   - [5.23 Power Plan](#523-power-plan)
-
+  - [5.24 Memory Management beállítások](#524-memory-management-beállítások)
+  - [5.25 BCD Store](#525-bcd-store)
+  - [5.26 NIC konfigurálása](#526-nic-konfigurálása)
+  - [5.27 Audio eszközök beállítása](#527-audio-eszközök-beállítása)
+  - [5.28 Szolgáltatások és driverek](#528-szolgáltatások-és-driverek)
+  - [5.29 Device Manager beállítása](#529-device-manager-beállítása)
+  - [5.30 Device Power Saving](#530-device-power-saving)
+  - [5.31 Fájl rendszer](#531-fájl-rendszer)
+  - [5.32 Event Trace Session](#532-event-trace-sessions-ets)
+  - [5.33 Message Signaled Interrupts](#533-message-signaled-interrupts)
+  - [5.34 XHCI Interrupt Moderation](#534-xhci-interrupt-moderation-imod)
+  - [5.35 Applikációk konfigurálása](#535-applikációk-konfigurálása)
+    - [5.35.1 FPS Limit](#5351-fps-limit)
+    - [5.35.2 Játék regisztrálása Game Bar-ban](#5352-játék-regisztálása-game-bar-ban)
+    - [5.35.3 Presentation Mode](#5353-presentation-mode)
 ## Bemutató
 
 Ezen útmutató célja a Windows-alapú rendszerek finomhangolása, beleértve a hardver-, operációs rendszer- és szoftverkonfigurációkat. Az útmutatás széleskörű célok elérésére van kialakítva, beleértve a biztonság javítása, azonban általában a competitive játékokban való előny megszerzésére és valós idejű feladatok futtatására van kihegyezve. Hangsúlyt fektet arra hogy a felhasználók saját maguk végezzék el a beállításokat és minimalizálják a scriptek használatát annak érdekében hogy átláthatóbb legyen és kerüljék a nem kívánt módosításokat. A szekciókat sorrendben kell követni mivel az egyes lépések a korábbi lépések befejezésétől függnek, ezért minden szekció számozott.
