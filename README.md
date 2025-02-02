@@ -201,7 +201,9 @@ Hardver > BIOS > Operációs rendszer
 
 Használd a kívánt XHCI-controller első néhány portját. Előfordulhat, hogy némelyikük fizikailag nem megállapítható, amit az [USB Device Tree Viewer](https://www.uwe-sieber.de/usbtreeview_e.html) programban megnézhetsz.
 
-  - A Ryzen-es rendszerek rendelkeznek egy XHCI-vezérlővel, amely közvetlenül a CPU-hoz csatlakozik. Ez [HWiNFO](https://www.hwinfo.com/)-ban a ``PCIe Bus`` kategóriában azonosítható.       
+  - A Ryzen-es rendszerek rendelkeznek egy XHCI-vezérlővel, amely közvetlenül a CPU-hoz csatlakozik. Ez [HWiNFO](https://www.hwinfo.com/)-ban a ``PCIe Bus`` kategóriában azonosítható. 
+
+     - [Példa](/media/ryzen-xhci-controller.png)      
 
 Ha egynél több XHCI-controller-ed van, akkor az olyan eszközöket, mint például az egér, billentyűzet, és fejhallgató, egy másik controller-re különítheted el, hogy azok ne zavarják a polling konzisztenciáját.
 
@@ -1000,7 +1002,7 @@ Ez a helyes módja a szolgáltatások kikapcsolásának. Nem kell egyesével kik
 
 - A lista testreszabható a ``C:\bin\minimal-servies.ini`` módosításával. Számos leírás van az adott szolgáltatással kapcsolatban a connfigban. Például ha ethernetet használsz a Wi-Fi-vel kapcsolatos szolgáltatásokra nincsen szükséged. Ha újra szeretnéd generálni a scripteket, előtte mindenképpen futtasd a ``Services-Enable``-t mivel a program a szolgáltatások jelenlegi állapotára támaszkodik a jövőbeli scriptek megépítésére.
 
-- A ``High precision event timer`` eszkösz a device manager-ben IRQ 0-t használ a legtöbb AMD-s rendszeren, ezáltal konfliktusba kerül a ``System Timer`` eszközzel amely szintén IRQ 0-t használ. Az egyetlen mód ennek megoldására az, hogy letiltod a ``System Timer`` szülő eszközét, amely az ``msisadrv`` (Módosítsd a konfigot)
+- A ``High precision event timer`` eszkösz a device manager-ben IRQ 0-t használ a legtöbb AMD-s rendszeren, ezáltal konfliktusba kerül a ``System Timer`` eszközzel amely szintén IRQ 0-t használ. Az egyetlen mód ennek megoldására az, hogy letiltod a ``System Timer`` szülő eszközét, amely az ``msisadrv`` (Módosítsd a konfigot).
 
 - Használd az alábbi parancsot hogy a Software Protection ne próbáljon elindulni 30 másodpercenként miközben a szolgáltatások kivannak kapcsolva.
 
@@ -1133,3 +1135,49 @@ reg add "HKCU\SYSTEM\GameConfigStore" /v "GameDVR_FSEBehavior" /t REG_DWORD /d "
 ```bat
 reg add "HKLM\SOFTWARE\Microsoft\Windows\Dwm" /v "OverlayTestMode" /t REG_DWORD /d "5" /f
 ```
+
+### 5.35.4 Game Mode
+
+A Game Mode megakadályozza a Windows Update futását valamint bizonyos értesítések megjelenítését ([1](https://support.xbox.com/en-GB/help/games-apps/game-setup-and-play/use-game-mode-gaming-on-pc)). Fontos megjegyezni, hogy a Game Mode befolyásolhatja a folyamatok és thread-ek prioritását, attól függően, hogy a PsPrioritySeparation értéke hogyan van beállítva. Ez levan írva a [Thread Quantums and Scheduling](#thread-quantums-and-scheduling) szekcióban. Érdemes kísérletezni a Game Mode engedélyezésével és letiltásával, hogy meghatározd annak hatását a rendszer teljesítményére.
+
+### 5.35.5 Media lejátszó
+
+- [mpv](https://mpv.io/)
+
+- [VLC](https://www.videolan.org/)
+
+- [mpc-hc](https://github.com/clsid2/mpc-hc)
+
+### 5.35.6 QoS Policy
+
+Ez a beállítás lehetővé teszi hogy a megadott applikáció csomagjait előnybe helyezze a többi applikációval szemben.
+
+Lásd: [QoS Policy beállítása](/media/dscp-46-qos-policy.png)
+
+Csak akkor műkodik hogyha a routered támogatja a Quality of Service beállítást. Ezt vagy a router oldalán, vagy pedig egy külon [applikációban](https://www.microsoft.com/en-us/download/details.aspx?id=4865) tudod ellenőrizni. [New Capture](/media/network-monitor-new-capture.png), nyisd meg a játékot, amelyre DSCP-értéket állítottál be, és reprodukálj egy olyan helyzetet, amelyben csomagok küldésére és fogadására kerül sor. Nyomj egy F5-öt hogy elkezdd a logolást, 30 mp után pedig egy F7-et. A bal oldali ablakban kattints a játék nevére, majd kattints egy packet headerre. Bővítsd a packet info-t a frame deatils alatt, és végül bővítsd az Ipv4 alkategóriát. Ekkor láthatóvá válik az egyes folyamatok aktuális DSCP-értéke. ``"DifferentiatedServices Field: DSCP: 46, ECN: 0"``
+
+## 5.36 Interruptok és DPC-k
+
+A Windows CPU 0-án ütemez számos interruptot és DPC-t ami elég terhelő lehet egyetlen-egy CPU számára. Ezért affinity-ket kell beállítani és elkülöníteni/eloszlatni a drivereket.
+
+  - Használd a ``bin`` mappában lévő [xperf-dpcisr.bat](/bin/xperf-dpcisr.bat) scriptet hogy megfigyeld mely CPU-kon futnak a kernel-mode driverek. Nem tudod kezelni az affinity-ket anélkül, hogy tudnád mi fut melyik CPU-n.
+
+  - Ellenőrizd hogy egy ISR-hez tartozó DPC ugyanazon a CPU-n kerül-e feldolgozásra. ([példa](/media/isr-dpc-same-core.png))
+
+  - Használd a [GoInterruptPolicy](https://github.com/spddl/GoInterruptPolicy) programot az affinity-k beállítására. Az adott eszközt úgy azonosíthatod, hogy összehasonlítod a ``Location``-t Device Managerben a ``Properties -> General`` résznél.
+
+### 5.36.1 GPU és DirectX Graphics Kernel
+
+Használhatod az [AutoGpuAffinity](https://github.com/valleyofdoom/AutoGpuAffinity)-t hogy benchmarkold az összes CPU-t. Ez segíthet eldönteni melyik CPU-n kerüljön feldolgozásra a GPU.
+
+### 5.36.2 XHCI és Audio controller
+
+Ez a két modul nagy számban generál interruptokat ezért érdemes elkülöníteni a kettőt ha nem USB audio-t használsz.
+
+### 5.36.3 Network Interface Card (NIC)
+
+Támogatnia kell az MSI-X-et ahhoz hogy a Receive-Side-Scaling (RSS) rendesen működjön. Legtöbb esetben az RSS base cpu elég arra hogy áthelyezd a DPC-ket és ISR-eket emiatt nincs szükség GoInterruptPolicy-ra. Azonban ha valamelyiket nem sikerülne áthelyezni, próbáld meg beállítani mindkettőt. Figyelj arra hogy az RSS beállítás szabja meg hogy pontosan hány CPU-n van ütemezve a NIC. Például, ha az RSS base cpu a CPU 2-re van állítva és 4 RSS queue-t használsz akkor a 2/3/4/5-ön lesz ütemezve. [RSS Configuration](https://github.com/Duckleeng/TweakCollection?tab=readme-ov-file#receive-side-scaling-rss-configuration)
+
+  - Lásd [Hány RSS Queue-ra van szükséged](/docs/research.md#hány-rss-queue-ra-van-szükséged)
+
+  
