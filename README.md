@@ -797,9 +797,9 @@ Javasolt a debloat scriptek elkerülése és az olyan komponensek eltávolítás
 
     - A böngésző frissítése visszaállít néhány beállítást. Használd az alábbi parancsot hogy ez ne forduljon elő. Ha error-t ír, Task Managerben zárj be minden rejtett Microsoft Edge folyamatot.
 
-    ```bat
-    rd /s /q "C:\Program Files (x86)\Microsoft\EdgeUpdate"
-    ```
+     ```bat
+     rd /s /q "C:\Program Files (x86)\Microsoft\EdgeUpdate"
+     ```
 
    - Töröld ki az összes Edge-hez tartozó shortcut-ot.
 
