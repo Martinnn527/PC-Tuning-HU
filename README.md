@@ -786,9 +786,9 @@ Javasolt a debloat scriptek elkerülése és az olyan komponensek eltávolítás
     for %a in ("SysWOW64" "System32") do (if exist "%windir%\%~a\OneDriveSetup.exe" ("%windir%\%~a\OneDriveSetup.exe" /uninstall)) && reg delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Desktop\NameSpace\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" /f
     ```  
 
-  - Chromium Microsoft Edge letiltása (nem letörlése). A böngészőt letiltani kell nem pedig letörölni a WebView Runtime megtartása érdekében.
+- Chromium Microsoft Edge letiltása (nem letörlése). A böngészőt letiltani kell nem pedig letörölni a WebView Runtime megtartása érdekében.
         
-    - Nyisd meg a Microsoft Edge-t majd pedig a beállításokban kapcsolj ki bármilyen automatikus start-up beállítást mint pl. a lent felsoroltak
+  - Nyisd meg a Microsoft Edge-t majd pedig a beállításokban kapcsolj ki bármilyen automatikus start-up beállítást mint pl. a lent felsoroltak
 
       - ``Startup boost``
       - ``Continue running background extensions and apps when Microsoft Edge is closed``
