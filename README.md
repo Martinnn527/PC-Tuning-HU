@@ -92,6 +92,10 @@
     - [5.35.1 FPS Limit](#5351-fps-limit)
     - [5.35.2 Játék regisztrálása Game Bar-ban](#5352-játék-regisztálása-game-bar-ban)
     - [5.35.3 Presentation Mode](#5353-presentation-mode)
+    - [5.35.4 Game Mode](#5354-game-mode)
+    - [5.35.5](#5355-media-lejátszó)
+    - [5.35.6 QoS Policy](#5356-qos-policy)
+    - [5.35.7](#5357-discord)
   - [5.36 Interruptok és DPC-k](#536-interruptok-és-dpc-k)
     - [5.36.1](#5361-gpu-és-directx-graphics-kernel)
     - [5.36.2](#5362-xhci-és-audio-controller)
@@ -100,6 +104,9 @@
   - [5.38 CPU Idle States](#538-cpu-idle-states)
   - [5.39 Timer Resolution](#539-timer-resolution)  
     - [5.39.1 Maga a Timer Resolution beállítása](#5391-maga-a-timer-resolution-beállítása)
+  - [5.40 Paging File](#540-paging-file)
+  - [5.41 Cleanup és karbantartás](#541-cleanup-és-karbantartás)
+  
 ## Bemutató
 
 Ezen útmutató célja a Windows-alapú rendszerek finomhangolása, beleértve a hardver-, operációs rendszer- és szoftverkonfigurációkat. Az útmutatás széleskörű célok elérésére van kialakítva, beleértve a biztonság javítása, azonban általában a competitive játékokban való előny megszerzésére és valós idejű feladatok futtatására van kihegyezve. Hangsúlyt fektet arra hogy a felhasználók saját maguk végezzék el a beállításokat és minimalizálják a scriptek használatát annak érdekében hogy átláthatóbb legyen és kerüljék a nem kívánt módosításokat. A szekciókat sorrendben kell követni mivel az egyes lépések a korábbi lépések befejezésétől függnek, ezért minden szekció számozott.
@@ -1164,7 +1171,7 @@ Lásd: [QoS Policy beállítása](/media/dscp-46-qos-policy.png)
 
 Csak akkor műkodik hogyha a routered támogatja a Quality of Service beállítást. Ezt vagy a router oldalán, vagy pedig egy külon [applikációban](https://www.microsoft.com/en-us/download/details.aspx?id=4865) tudod ellenőrizni. [New Capture](/media/network-monitor-new-capture.png), nyisd meg a játékot, amelyre DSCP-értéket állítottál be, és reprodukálj egy olyan helyzetet, amelyben csomagok küldésére és fogadására kerül sor. Nyomj egy F5-öt hogy elkezdd a logolást, 30 mp után pedig egy F7-et. A bal oldali ablakban kattints a játék nevére, majd kattints egy packet headerre. Bővítsd a packet info-t a frame deatils alatt, és végül bővítsd az Ipv4 alkategóriát. Ekkor láthatóvá válik az egyes folyamatok aktuális DSCP-értéke. ``"DifferentiatedServices Field: DSCP: 46, ECN: 0"``
 
-### 5.36.7 Discord
+### 5.35.7 Discord
 
 Opcionálisan használj [DiscordFixer](https://github.com/HerXayah/Discord-Fixer)-t. 
 
@@ -1244,7 +1251,7 @@ C:\SetTimerResolution.exe --resolution 5000 --no-console
 
 Legtöbb esetben ajánlott bekapcsolva hagyni, ami az alap beállítás. Van egy érv, hogy jobb, ha kikapcsolod abban az esetben ha elég RAM-al rendelkezel a játékhoz mivel csökkenti az I/O overhead-et és a rendszermemória gyorsabb mint a disk, azonban FPS drop-okat eredményezhet akkor is ha a memória kihasználtsága közel sem éri el a 100%-ot.
 
-## Cleanup és karbantartás
+## 5.41 Cleanup és karbantartás
 
 - Használj programokat mint a [BulkCrapUninstaller](https://github.com/Klocman/Bulk-Crap-Uninstaller) mivel a control panel-ban történő uninstall során sok fájl letörlése kimaradhat.
 
