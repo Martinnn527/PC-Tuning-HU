@@ -1175,7 +1175,7 @@ Csak akkor műkodik hogyha a routered támogatja a Quality of Service beállít�
 
 Opcionálisan használj [DiscordFixer](https://github.com/HerXayah/Discord-Fixer)-t. 
 
-  - Lásd [/research.md/discord-fixer])
+  - Lásd [/research.md/discord-fixer](/docs/research.md#3-discordfixer)
 
 ## 5.36 Interruptok és DPC-k
 
