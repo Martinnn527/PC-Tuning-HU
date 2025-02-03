@@ -489,6 +489,8 @@ Használd a ``certutil -hashfile <file>`` parancsot hogy ellenőrizd az ISO val�
   - [os.click](https://os.click/en)
   - [New Download Links](https://docs.google.com/spreadsheets/d/1zTF5uRJKfZ3ziLxAZHh47kF85ja34_OFB5C5bVSPumk/edit?gid=0#gid=0)
   - [Adguard File List](https://files.rg-adguard.net/)
+  - [Server 2022](https://info.microsoft.com/ww-landing-windows-server-2022.html) - Akármit beírhatsz a sorokba, el fogja fogadni.
+
   
 ## 4.4 Build Environment előkészítése
 
