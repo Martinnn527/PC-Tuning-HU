@@ -93,9 +93,9 @@
     - [5.35.2 Játék regisztrálása Game Bar-ban](#5352-játék-regisztálása-game-bar-ban)
     - [5.35.3 Presentation Mode](#5353-presentation-mode)
     - [5.35.4 Game Mode](#5354-game-mode)
-    - [5.35.5](#5355-media-lejátszó)
+    - [5.35.5 Média lejátszó](#5355-media-lejátszó)
     - [5.35.6 QoS Policy](#5356-qos-policy)
-    - [5.35.7](#5357-discord)
+    - [5.35.7 Discord](#5357-discord)
   - [5.36 Interruptok és DPC-k](#536-interruptok-és-dpc-k)
     - [5.36.1](#5361-gpu-és-directx-graphics-kernel)
     - [5.36.2](#5362-xhci-és-audio-controller)
@@ -106,7 +106,7 @@
     - [5.39.1 Maga a Timer Resolution beállítása](#5391-maga-a-timer-resolution-beállítása)
   - [5.40 Paging File](#540-paging-file)
   - [5.41 Cleanup és karbantartás](#541-cleanup-és-karbantartás)
-  
+
 ## Bemutató
 
 Ezen útmutató célja a Windows-alapú rendszerek finomhangolása, beleértve a hardver-, operációs rendszer- és szoftverkonfigurációkat. Az útmutatás széleskörű célok elérésére van kialakítva, beleértve a biztonság javítása, azonban általában a competitive játékokban való előny megszerzésére és valós idejű feladatok futtatására van kihegyezve. Hangsúlyt fektet arra hogy a felhasználók saját maguk végezzék el a beállításokat és minimalizálják a scriptek használatát annak érdekében hogy átláthatóbb legyen és kerüljék a nem kívánt módosításokat. A szekciókat sorrendben kell követni mivel az egyes lépések a korábbi lépések befejezésétől függnek, ezért minden szekció számozott.
