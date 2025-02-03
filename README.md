@@ -1164,6 +1164,12 @@ Lásd: [QoS Policy beállítása](/media/dscp-46-qos-policy.png)
 
 Csak akkor műkodik hogyha a routered támogatja a Quality of Service beállítást. Ezt vagy a router oldalán, vagy pedig egy külon [applikációban](https://www.microsoft.com/en-us/download/details.aspx?id=4865) tudod ellenőrizni. [New Capture](/media/network-monitor-new-capture.png), nyisd meg a játékot, amelyre DSCP-értéket állítottál be, és reprodukálj egy olyan helyzetet, amelyben csomagok küldésére és fogadására kerül sor. Nyomj egy F5-öt hogy elkezdd a logolást, 30 mp után pedig egy F7-et. A bal oldali ablakban kattints a játék nevére, majd kattints egy packet headerre. Bővítsd a packet info-t a frame deatils alatt, és végül bővítsd az Ipv4 alkategóriát. Ekkor láthatóvá válik az egyes folyamatok aktuális DSCP-értéke. ``"DifferentiatedServices Field: DSCP: 46, ECN: 0"``
 
+### 5.36.7 Discord
+
+Opcionálisan használj [DiscordFixer](https://github.com/HerXayah/Discord-Fixer)-t. 
+
+  - Lásd [/research.md/discord-fixer])
+
 ## 5.36 Interruptok és DPC-k
 
 A Windows CPU 0-án ütemez számos interruptot és DPC-t ami elég terhelő lehet egyetlen-egy CPU számára. Ezért affinity-ket kell beállítani és elkülöníteni/eloszlatni a drivereket.
@@ -1205,19 +1211,19 @@ Ez kényszeríti a C-State 0-t. Érdemes játék előtt kikapcsolni, majd játé
 
 ## 5.39 Timer Resolution
 
-A clock interrupt frequency az a sebesség, amellyel a rendszer hardveres órája interruptokat generál, amelyek lehetővé teszik az scheduler számára különböző feladatok elvégzését. A legtöbb rendszeren alapértelmezés szerint a minimális frekvencia 64 Hz, ami azt jelenti, hogy 15,625 ms-onként generálódik egy clock interrupt. Az alacsonyabb frekvencia a kevesebb interruptoknak köszönhetően kisebb CPU-overhead-et és energiafogyasztást eredményez, de csökkenti a timing pontosságot és potenciálisan kevésbé responsive-abb multi-taskingot eredményez. A maximális frekvencia 2kHz, ami azt jelenti, hogy 0,5ms-enként generálódik egy clock-interrupt. A magasabb frekvencia nagyobb időzítési pontosságot és potenciálisan nagyobb multitasking-reakciókészséget eredményez, de növeli a CPU overheadet és az energiafogyasztást. A minimális, az aktuális és a maximális felbontás a [ClockRes](https://learn.microsoft.com/en-us/sysinternals/downloads/clockres)-ben tekinthető meg.
+A clock interrupt frequency az a sebesség, amellyel a rendszer hardveres órája interruptokat generál, amelyek lehetővé teszik a scheduler számára különböző feladatok elvégzését. A legtöbb rendszeren alapértelmezés szerint a minimális frekvencia 64 Hz, ami azt jelenti, hogy 15,625 ms-onként generálódik egy clock interrupt. Az alacsonyabb frekvencia a kevesebb interruptoknak köszönhetően kisebb CPU-overhead-et és energiafogyasztást eredményez, de csökkenti a timing pontosságot és potenciálisan kevésbé responsive-abb multi-taskingot eredményez. A maximális frekvencia 2kHz, ami azt jelenti, hogy 0,5ms-enként generálódik egy clock-interrupt. A magasabb frekvencia nagyobb időzítési pontosságot és potenciálisan nagyobb multitasking-reakciókészséget eredményez, de növeli a CPU overheadet és az energiafogyasztást. A minimális, az aktuális és a maximális felbontás a [ClockRes](https://learn.microsoft.com/en-us/sysinternals/downloads/clockres)-ben tekinthető meg.
 
 
 Az alapértelmezett 15,625ms-os felbontásnál nagyobb pontosságot igénylő alkalmazások képesek megemelni az órajel interrupt frekvenciát olyan funkciókkal, mint a [timeBeginPeriod](https://learn.microsoft.com/en-us/windows/win32/api/timeapi/nf-timeapi-timebeginperiod) és az [NtSetTimerResolution](http://undocumented.ntinternals.net/index.html?page=UserMode%2FUndocumented%20Functions%2FTime%2FNtSetTimerResolution.html), amelyekben, ezek a forgatókönyvek jellemzően multimédiás lejátszásból, játékból, VoIP-tevékenységből és másból állnak, ami látható egy energy trace futtatásával. A Sleep-el kapcsolatos funkciókra támaszkodó funkciók pontosságát az események ütemezésében közvetlenül befolyásolja az clock interruptok gyakorisága [(1)](https://randomascii.wordpress.com/wp-content/uploads/2020/10/image-5.png). A [Sleep](https://learn.microsoft.com/en-us/windows/win32/api/synchapi/nf-synchapi-sleep) példáján keresztül a Sleep(n) funkciónak valójában n milliszekundumot kell aludnia, és nem n plusz/mínusz egy tetszőleges értékig, különben váratlan és következetlen event pacing-et eredményez ami nem ideális az olyan funkciók számára mint a sleep-based FPS limiterek. Megjegyzendő, hogy ez csak egy példa és sok valós idejű alkalmazás nem támaszkodik kifejezetten a Sleep funkcióra az event-pacing-hez. Egy tipikus érték, amelyre a játékfejlesztők a felbontást látszólag emelik, az 1ms, ami azt jelenti, hogy az alkalmazás az eventek ütemét 1ms-os felbontáson belül tudja tartani. Nagyon ritka esetekben előfordul, hogy a fejlesztők egyáltalán nem emelik meg a felbontást, miközben az alkalmazásuk az event-pacing pontossága miatt erre támaszkodik, de ez nem gyakori, és csak néhány ismeretlen programra, például kevésbé ismert játékokra vonatkozhat.
 
-A timer resolution megvalósítása a Windows 10 2004+-ben úgy változott, hogy a hívó folyamat felbontásának emelése nem befolyásolja a rendszert globális szinten, vagyis az A folyamat 1 ms-ra emelése nem befolyásolja a B folyamatot az alapértelmezett 15,625 ms-os felbontásnál, ellentétben a korábbiakkal. Ez önmagában nagyszerű változás, mert csökkenti az overhead-et, mivel más folyamatok, például a tétlen háttérfolyamatok nem kapnak gyakran kiszolgálást a scheduler-től, és a hívó folyamat szükség szerint nagyobb pontosságot kap. Azonban ez korlátokat eredményez, ha nagyobb felbontást, például 0,5ms-ot szeretnénk kihasználni. Tekintettel arra, hogy a játékok nem nyílt forráskódúak a kód módosításához, valamint a DLL-injection-t vagy binary patching-et megakadályozza az anticheat, az egyetlen másik lehetőség hogy globálisan állítod be, amely az alábbi registry directory-ban alkalmazható Windows Server és Windows 11+ rendszereken.
+A timer resolution megvalósítása a Windows 10 2004+-ben úgy változott, hogy a hívó folyamat felbontásának emelése nem befolyásolja a rendszert globális szinten, vagyis az A folyamat 1 ms-ra emelése nem befolyásolja a B folyamatot az alapértelmezett 15,625 ms-os felbontásnál, ellentétben a korábbiakkal. Ez önmagában nagyszerű változás, mert csökkenti az overhead-et, mivel más folyamatok, például a tétlen háttérfolyamatok nem kapnak gyakran kiszolgálást a scheduler-től, és a hívó folyamat szükség szerint nagyobb pontosságot kap. Azonban ez korlátokat eredményez, ha nagyobb felbontást, például 0,5ms-ot szeretnénk kihasználni. Tekintettel arra, hogy a játékok nem nyílt forráskódúak a kód módosításához, valamint a DLL-injection-t vagy binary patching-et megakadályozza az anticheat, az egyetlen lehetőség az, hogy globálisan állítod be, amely az alábbi registry directory-ban alkalmazható Windows Server és Windows 11+ rendszereken.
 
 ```bat
 [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\kernel]
 "GlobalTimerResolutionRequests"=dword:00000001
 ```
 
-Ez lehetővé teszi a felbontás növelését egy külön folyamat során, ami viszont azt eredményezi, hogy a kívánt alkalmazás, például egy játék nagyobb pontosságot kap. Azonban, mint korábban említettük, a folyamatonkénti mód csökkenti a CPU-overhead-et, ami a globális viselkedés visszaállítása esetén már nem áll fenn, és a háttérfolyamatok is szükségtelenül gyakran kiszolgálásra kerülnek. Az RTSS egy alternatív módszer a framerate korlátozására, és hybrid-waiting-et használ, ami nagyobb pontosságot eredményez, miközben megszűnik a GlobalTimerResolution visszaállításának szükségessége.
+Ez lehetővé teszi a felbontás növelését egy külön folyamat során, ami azt eredményezi, hogy a kívánt alkalmazás, például egy játék nagyobb pontosságot kap. Azonban, mint korábban említettük, a folyamatonkénti mód csökkenti a CPU-overhead-et, ami a globális beállítás visszaállítása esetén már nem áll fenn, és a háttérfolyamatok is szükségtelenül gyakran kiszolgálásra kerülnek. Az RTSS egy alternatív módszer a framerate korlátozására, és hybrid-waiting-et használ, ami nagyobb pontosságot eredményez, miközben megszűnik a GlobalTimerResolution visszaállításának szükségessége.
 
 A nagyobb felbontás nagyobb Sleep pontosságot eredményez, de bizonyos esetekben a maximálisan támogatott 0,5 ms felbontás pont hogy kisebb pontosságot biztosít, mint a valamivel alacsonyabb, például 0,507 ms. Ezért célszerű a [MeasureSleep](https://github.com/valleyofdoom/TimerResolution) programban meghatározni, hogy melyik felbontással a legkisebb a Sleep(1) (delta), miközben a [SetTimerResolution](https://github.com/valleyofdoom/TimerResolution/releases) programmal különböző felbontásokat állítunk be. Ezt terhelés alatt kell elvégezni, mivel az idle benchmarkok félrevezetőek lehetnek. A folyamat automatizálására a [micro-adjust-benchmark.ps1](/bin/micro-adjust-benchmark.ps1) szkript használható.
 
@@ -1234,4 +1240,45 @@ A nagyobb felbontás nagyobb Sleep pontosságot eredményez, de bizonyos esetekb
 C:\SetTimerResolution.exe --resolution 5000 --no-console
 ```
 
+## 5.40 Paging File
+
+Legtöbb esetben ajánlott bekapcsolva hagyni, ami az alap beállítás. Van egy érv, hogy jobb, ha kikapcsolod abban az esetben ha elég RAM-al rendelkezel a játékhoz mivel csökkenti az I/O overhead-et és a rendszermemória gyorsabb mint a disk, azonban FPS drop-okat eredményezhet akkor is ha a memória kihasználtsága közel sem éri el a 100%-ot.
+
+## Cleanup és karbantartás
+
+- Használj programokat mint a [BulkCrapUninstaller](https://github.com/Klocman/Bulk-Crap-Uninstaller) mivel a control panel-ban történő uninstall során sok fájl letörlése kimaradhat.
+
+- Használj [Autoruns](https://learn.microsoft.com/en-us/sysinternals/downloads/autoruns)-t hogy letiltsd a nem kívánt programok automatikus futtatását. Ellenőrizd gyakran, főleg egy program feltelepítése után.
+
+- Disk Cleanup
+
+  - Nyisd meg a CMD-t és másold be az alábbi parancsot, pipálj be mindent kivéve a ``DirectX Shader Cache``-t és ``OK``.
+
+    ```bat
+    cleanmgr /sageset:0
+    ```  
+
+  - Futtasd magát a cleanup-ot
+
+    ```bat
+    cleanmgr /sagerun:0
+    ```
+
+- Helyek ahol érdemes ellenőrizni a nem kívánt fájlokat
+
+  - ``C:\``
+  - ``C:\Windows\Prefetch`` - prefetch fájlok (ennek a mappának üresnek kell lennie a ha a superfetch kivan kapcsolva)
+  - ``C:\Windows\SoftwareDistribution`` - Windows Update cache
+  - ``C:\Windows\Temp``- ideiglenes fájlok
+  - ``"%userprofile%"``
+  - ``"%userprofile%\AppData\Local\Temp"`` - ideiglenes fájlok
+  - Felhasználói directory-k (Downloads, Documents, stb.)
+
+- Opcionálisan tisztítsd a WinSxS mappát az alábbi parancssal. Ez egy hosszabb folyamat lehet.
+
+  ```bat
+  DISM /Online /Cleanup-Image /StartComponentCleanup /ResetBase
+  ```
+
+- Opcionálisan töröld ki a System Restore Point-okat. ``Win+R -> sysdm.cpl``. Ajánlott teljesen kikapcsolni.
 

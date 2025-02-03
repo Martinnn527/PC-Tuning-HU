@@ -113,3 +113,15 @@ Scaling Mode: 1
         <td>Identity (1)</td>
     </tr>
 </table>
+
+## 3. DiscordFixer
+
+A Discord a hotkey-ek (Mute, Deafen, stb) használatához abban az esetben is leköveti az egér mozgását (raw_input thread) amikor nincs előtérben a Discord ezáltal jóval több értelmetlen context switching-et és cycles-t eredményez ([1](/media/discordfixer-research-example.png)). A DiscordFixer automatikusan leállítja a raw_input thread host folyamatát azonban a hotkey funkciók nem lesznek elérhetők és az én esetemben nem ismeri fel a Discord az éppen futó játékot. 
+
+[Töltsd le](https://github.com/HerXayah/Discord-Fixer/releases) majd keresd meg azt a Discord mappát ahol a Discord Stable/PTB/Canary (A mappa ahol az ``Update.exe`` található) és másold be oda az exe-t.
+
+<img src="/media/discordfixer-usage-example.png" width="500">
+
+Indítsd el a Discord-ot a DiscordFixer.exe-n keresztül.
+
+Ha azt szeretnéd hogy automatikusan DiscordFixer-en keresztül induljon el minden gép indításnál, csinálj egy shortcut-ot ``shell:startup``-ba.
