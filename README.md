@@ -1071,9 +1071,13 @@ fsutil behavior set disable8dot3 1
 
 Tiltsd le a [Last Acces Time Stamp Update](https://www.tenforums.com/tutorials/139015-enable-disable-ntfs-last-access-time-stamp-updates-windows-10-a.html)-et.
 
+```bat
+fsutil behavior set disablelastaccess 1
+```
+
 ## 5.32 Event Trace Sessions (ETS)
 
-- Ezekkel a fájlokkal automatikusan tudsz váltani ETS Enabled és Disabled között aminek a hatását meg tudod nézni itt: ``Win+R -> perfmon -> Data Collector Sets -> Event Trace Session``. Azok a programok amelyek event tracing-re támaszkodnak nem fognak tudni adatot log-olni amíg nem kapcsolod vissza őket, és pont ezért van egy enable és disable fájl. Nyisd meg a CMD-t és másold be a parancsokat hogy megépítsd a két registry fájlt a ``C:\`` meghajtón. NSudo-val kell majd futtatni őket Trusted Installer-ként.
+- Ezekkel a fájlokkal automatikusan tudsz váltani ETS Enabled és Disabled között aminek a hatását meg tudod nézni itt: ``Win+R -> perfmon -> Data Collector Sets -> Event Trace Session``. Azok a programok amelyek event tracing-re támaszkodnak nem fognak tudni adatot log-olni (pl. Event Viewer) amíg nem kapcsolod vissza őket, és pont ezért van egy enable és disable fájl. Nyisd meg a CMD-t és másold be a parancsokat hogy megépítsd a két registry fájlt a ``C:\`` meghajtón. NSudo-val kell majd futtatni őket Trusted Installer-ként.
 
 - ets-enable.reg
 ```bat
