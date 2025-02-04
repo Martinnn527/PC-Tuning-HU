@@ -155,7 +155,7 @@ Hardver > BIOS > Operációs rendszer
 
 - Győződj meg róla, hogy a PCIe Bus kategóriába tartozó PCIe eszközök sebessége megegyezik a maximálisan támogatott értékkel, mint például ``x16 3.0``.
 
-  - [Példa](/assets/hwinfo-pcie-width-speed.png)
+  - [Példa](/media/hwinfo-pcie-width-speed.png)
 
 - A nem P-State 0-ra korlátozott GPU-k esetében a kapcsolat sebessége csökkenhet miközben nincs terhelve. 
   
