@@ -129,7 +129,6 @@ Hardver > BIOS > Operációs rendszer
 - [Mouse Tester](https://github.com/valleyofdoom/MouseTester) - Egér teljesítményének mérése (pl. polling interval)
 - [NVIDIA Reflex Analyzer](https://www.nvidia.com/en-gb/geforce/news/reflex-latency-analyzer-360hz-g-sync-monitors/) - End-to-end latency
 - [Frame-Time-Analysis](https://boringboredom.github.io/Frame-Time-Analysis/) - CSV adatok elemzése amit a fenti programok log-oltak
-- 
 
 ---
 
