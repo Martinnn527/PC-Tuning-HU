@@ -1261,7 +1261,7 @@ Legtöbb esetben ajánlott bekapcsolva hagyni, ami az alap beállítás. Van egy
 
 - Használj programokat mint a [BulkCrapUninstaller](https://github.com/Klocman/Bulk-Crap-Uninstaller) mivel a control panel-ban történő uninstall során sok fájl letörlése kimaradhat.
 
-- Használj [Autoruns](https://learn.microsoft.com/en-us/sysinternals/downloads/autoruns)-t hogy letiltsd a nem kívánt programok automatikus futtatását. Ellenőrizd gyakran, főleg egy program feltelepítése után.
+- Használj [Autoruns](https://learn.microsoft.com/en-us/sysinternals/downloads/autoruns)-t hogy letiltsd a nem kívánt programok automatikus futtatását. Ellenőrizd gyakran, főleg egy program feltelepítése után. 
 
 - Disk Cleanup
 
