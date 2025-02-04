@@ -8,6 +8,7 @@
     - [3.3 Adjust Video Color Settings](#33-adjust-video-color-settings)
     - [3.4 GPU órajel lockolása/P-State 0](#34-gpu-órajel-lockolásap-state-0)
     - [3.5 NVIDIA Profile Inspector konfigurálása](#35-nvidia-profile-inspector-konfigurálása)
+    - [3.6 NVIDIA Display Container LS Script](#36-nvidia-display-container-ls-script)
 
 # 1. Driver letöltése és feltelepítése
 
@@ -104,5 +105,8 @@ reg add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08
 
    - [cuda-force-p2-state-analysis.png](/media/cuda-force-p2-state-analysis.png)
 
-   
+## 3.6 NVIDIA Display Container LS Script
+
+Ha kikapcsoltad az ``NVDisplay.ContainerLocalSystem`` szolgáltatást a [Szolgáltatások és driverek](#528-szolgáltatások-és-driverek) szekcióban és NVIDIA Control Panel-ban átállítottad a színeket, akkor használd [ezt](/bin/nvcontainer.ps1) a scriptet hogy minden indításnál automatikusan elinduljon és bezáródjon az ``NVDisplay.ContainerLocalSystem``.
+
 
