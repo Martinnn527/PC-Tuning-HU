@@ -2,8 +2,9 @@
  
 ---
 
-## Tartalomjegyzék 
+## Tartalomjegyzék
 
+- [0. Benchmarkolás](#0-benchmarkolás)
 - [1. Physical Setup](#1-physical-setup)
   - [1.1 General](#11-general)
   - [1.2 Hűtés](#12-hűtés)
@@ -118,6 +119,17 @@ Hardver > BIOS > Operációs rendszer
 
 > [!CAUTION]
 **NE** alkalmazz random, ismeretlen vagy nem dokumentált beállítást, programot vagy scriptet anélkül hogy megértenéd az adott beállítás hatását a biztonságra, adatvédelemre és a teljesítményre.
+
+# 0. Benchmarkolás
+
+- [FrameView](https://www.nvidia.com/en-gb/geforce/technologies/frameview/) - [PC Latency](https://images.nvidia.com/content/images/article/system-latency-optimization-guide/nvidia-latency-optimization-guide-pc-latency.png)
+- [Frame Latency Meter](https://github.com/GPUOpen-Tools/frame_latency_meter)
+- [PresentMon](https://github.com/BoringBoredom/Frame-Time-Analysis/raw/main/presentmon/presentmon.zip) - Lásd a teljes listát [itt](https://github.com/GameTechDev/PresentMon/blob/main/README-CaptureApplication.md#metric-definitions)
+- [Windows Performance Toolkit](https://learn.microsoft.com/en-us/windows-hardware/test/wpt/) - ISR/DPC végrehajtási idők ellenőrzése [xperf](/bin/xperf-dpcisr.bat)-el
+- [Mouse Tester](https://github.com/valleyofdoom/MouseTester) - Egér teljesítményének mérése (pl. polling interval)
+- [NVIDIA Reflex Analyzer](https://www.nvidia.com/en-gb/geforce/news/reflex-latency-analyzer-360hz-g-sync-monitors/) - End-to-end latency
+- [Frame-Time-Analysis](https://boringboredom.github.io/Frame-Time-Analysis/) - CSV adatok elemzése amit a fenti programok log-oltak
+- 
 
 ---
 
