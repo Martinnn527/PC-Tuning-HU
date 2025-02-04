@@ -1,5 +1,7 @@
-# PC-Tuning guideline
+# PC-Tuning 
  
+---
+
 ## Tartalomjegyzék 
 
 - [1. Physical Setup](#1-physical-setup)
