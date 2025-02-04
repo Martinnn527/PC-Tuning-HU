@@ -107,6 +107,6 @@ reg add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08
 
 ## 3.6 NVIDIA Display Container LS Script
 
-Ha kikapcsoltad az ``NVDisplay.ContainerLocalSystem`` szolgáltatást a [Szolgáltatások és driverek](#528-szolgáltatások-és-driverek) szekcióban és NVIDIA Control Panel-ban átállítottad a színeket, akkor használd [ezt](/bin/nvcontainer.ps1) a scriptet hogy minden indításnál automatikusan elinduljon és bezáródjon az ``NVDisplay.ContainerLocalSystem``.
+Ha kikapcsoltad az ``NVDisplay.ContainerLocalSystem`` szolgáltatást a [Szolgáltatások és driverek](#528-szolgáltatások-és-driverek) szekcióban és NVIDIA Control Panel-ban átállítottad a színeket, akkor használd az [nvcontainer.ps1](/bin/nvcontainer.ps1) scriptet hogy minden indításnál automatikusan elinduljon és bezáródjon az ``NVDisplay.ContainerLocalSystem``.
 
 
