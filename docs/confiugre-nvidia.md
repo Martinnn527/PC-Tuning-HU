@@ -61,7 +61,15 @@ reg add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08
 
 ## 3.1 Manage 3D Settings
 
+- Anisotropic Filtering - Off
+
+- Antialiasing - Mode - Off
+
+- Antialiasing - Gamma Correction - Off
+
 - Low Latency Mode - On
+
+- Monitor Technology - G-SYNC vagy Fixed Refresh Rate
 
 - Power management mode - Prefer maximum performance
 
