@@ -1245,7 +1245,7 @@ A változtatások után ellenőrizd [xperf](/bin/xperf-dpcisr.bat)-el hogy műk�
 
 </details>
 
-  - Lásd [Hány RSS Queue-ra van szükséged](/docs/research.md#hány-rss-queue-ra-van-szükséged)
+- Lásd [Hány RSS Queue-ra van szükséged](/docs/research.md#hány-rss-queue-ra-van-szükséged)
 
 ## 5.37 Event Viewer ellenőrzése
 
