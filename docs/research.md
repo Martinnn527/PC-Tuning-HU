@@ -6,11 +6,11 @@
 
 Az RSS egy olyan hálózati technológia, amely lehetővé teszi a hálózati interruptok/DPC-k hatékony elosztását több CPU között. Az, hogy mekkora RSS Queue-t kell használni, illetve mennyire van szükség, a tipikus hálózati terheléstől függ. Server környezetekben a nagy mennyiségű RSS-Queue-k használata előnyös, mivel a processing delay csökken, és biztosítja, hogy egyetlen CPU-t sem terheli nagymértékben. Ugyanez a koncepció alkalmazható egy gaming gépre is, azonban a hálózati terhelés jelentősen különbözik, így az összehasonlítás érvénytelen, ezért úgy döntöttem, hogy elvégzek néhány kísérletet, hogy ésszerű következtetést vonjak le.
 
-Két gépen szimuláltam a Valorant hálózati forgalmát iperf-ben (~300kb/s receive deathmatch-ben), és figyeltem a hálózati eszköz aktivitását xperf-ben. Vegyük figyelembe, hogy az ``RssBaseProcessor`` 0-ra van állítva, így elméletileg a CPU 0 és CPU 1 kellene, hogy kezelje a DPC-ket/ISR-eket a NIC számára, mivel 2 RSS Queue van beállítva.
+Valorant deathmatch közben (~300kb/s receive), figyeltem a hálózati eszköz aktivitását xperf-ben. Vegyük figyelembe, hogy az ``RssBaseProcessor`` 0-ra van állítva, így elméletileg a CPU 0 és CPU 1 kellene, hogy kezelje a DPC-ket/ISR-eket a NIC számára, mivel 2 RSS Queue van beállítva.
 
 <img src="/media/300kbps-ndis-xperf-report.png" width="500">
 
-Észrevehető hogy a 2 RSS Queue beállítás ellenére is, legfőképp a CPU 1 kezeli az interruptokat ami valószínűleg a kevés network traffic miatt van. Ezért ugyanazokkal a beállításokkal, most 1Gpbs network trafick-al újrateszteltem. 
+Észrevehető hogy a 2 RSS Queue beállítás ellenére is, legfőképp a CPU 1 kezeli az interruptokat ami valószínűleg a kevés network traffic miatt van. Ezért ugyanazokkal a beállításokkal, most 1Gpbs network traffick-al újrateszteltem. 
 
 <img src="/media/1gbps-ndis-xperf-report.png" width="500">
 
@@ -20,7 +20,7 @@ Ahogy várható volt, ebben a helyzetben a CPU 0 és CPU 1 is használatban van.
 
 ## 2. Identity Scaling
 
-Identity scaling, vagy `real no scaling` az a beállítás amit a [SetDisplayConfig](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-setdisplayconfig) használ amikor az asztal és a monitor felbontása azonos. 
+Identity scaling, vagy `Real no scaling` az a beállítás amit a [SetDisplayConfig](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-setdisplayconfig) használ amikor az asztal és a monitor felbontása azonos. 
 
 A GPU control panelban lévő scaling mode beállítás egy bizonyos registry key-t változtat ([1](https://learn.microsoft.com/en-us/windows/win32/api/wingdi/ne-wingdi-displayconfig_scaling)).
 Az alábbi sorok megmutatják hogy a GPU control panel-ban lévő beállítások melyik registry key-re válaszolnak.
