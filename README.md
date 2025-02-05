@@ -1238,7 +1238,7 @@ Támogatnia kell az MSI-X-et ahhoz hogy az ISR azon a CPU-n fusson amelyik végr
 
  - Intel NIC-eken állítsd a policy-t ``IrqPolicySpreadMessagesAcrossAllProcessors``-ra, Realtek-en pedig ``IrqPolicySpecifiedProcessors``-ra, majd állíts be egy olyan affinity-t amely megfelel a registry-ben konfigurált beállításoknak (pl. ha ``*RSSBaseProcNumber`` "4", és a ``*NumRssQueues`` "2", akkor válaszd ki az 4, 5 CPU-t).
 
- > [!IMPORTANT]
+ >
  > Néhány Realtek NIC-en nem funkcionál megfelelően az RSS hogyha több mint 1 RSS Queue van beállítva. A Hyperthreading/SMT kikapcsolása megoldhatja ezt a problémát.
 
 A változtatások után ellenőrizd [xperf](/bin/xperf-dpcisr.bat)-el hogy működik e a kívánt konfiguráció.
