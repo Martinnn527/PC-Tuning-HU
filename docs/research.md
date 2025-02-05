@@ -44,7 +44,7 @@ typedef enum {
 
 Ahogy látható, nincs olyan beállítás a GPU control panel-ban ami a ``DISPLAYCONFIG_SCALING_IDENTITY"-nek felel meg. Következésképpen az emberek ahhoz folyamodtak, hogy a Scaling értéket manuálisan 1-re változtatják a registry editorban, és azt állították,, hogy érzékelik a különbséget, de ez valóban identity scaling-re állítja a Scaling módot? Egyáltalán működik-e az érték megváltoztatása, ha a natív felbontást használják? Nem az identity scaling mód van használatban automatikusan ha a natív felbontást használod? Milyen egyéb tényezők határozzák meg a scaling modeot? Végülis a Microsoft azt állítja, hogy ez a registry key csak  egy kérelem arra, hogy milyen scaling mód legyen használatban, ezért nem feltétlenül jelenti azt, hogy valójában ez is lesz használatban. 
 
-Az összes fenti kérdés megválaszolható a [QueryDisplayConfig](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-querydisplayconfig) lekérésével. Töltsd le a[QueryDisplayScaling](https://github.com/valleyofdoom/QueryDisplayScaling) programot. Nyisd meg a CMD-t abban a directory-ban ahol található az exe majd pedig írd be hogy ``QueryDisplayScaling.exe``.
+Az összes fenti kérdés megválaszolható a [QueryDisplayConfig](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-querydisplayconfig) lekérésével. Töltsd le a [QueryDisplayScaling](https://github.com/valleyofdoom/QueryDisplayScaling) programot. Nyisd meg a CMD-t abban a directory-ban ahol található az exe majd pedig írd be hogy ``QueryDisplayScaling.exe``.
 
 ```
 PS C:\> .\QueryDisplayScaling.exe
