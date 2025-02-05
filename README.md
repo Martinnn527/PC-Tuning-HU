@@ -1222,20 +1222,21 @@ Ez a két modul nagy számban generál interruptokat ezért érdemes elkülöní
 
 Támogatnia kell az MSI-X-et ahhoz hogy az ISR azon a CPU-n fusson amelyik végrehajtja a DPC-ket. Figyelj arra hogy az RSS beállítás szabja meg hogy pontosan hány CPU-n van ütemezve a NIC. Például, ha az RSSBaseCpu a CPU 2-re van állítva és 4 RSS Queue-t használsz akkor a 2/3/4/5-ön lesz ütemezve.
 
-  - Lásd <details> <summary>RSS beállítása</summary>
+  - <details> 
+  <summary>RSS beállítása</summary>
 
-- Navigálj a következő registry key-hez: ``HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Class\{4d36e972-e325-11ce-bfc1-08002be10318}\0000``, használd a te driveredhez tartozó [Driver Key](/media/find-driver-key-example.png)-t.
+  - Navigálj a következő registry key-hez: ``HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Class\{4d36e972-e325-11ce-bfc1-08002be10318}\0000``, használd a te driveredhez tartozó [Driver Key](/media/find-driver-key-example.png)-t.
 
-- Add hozzá/írd át a következő értékeket:
+  - Add hozzá/írd át a következő értékeket:
 
-  - ``*RSS`` - "1" = Enable RSS - "0" = Disable RSS
-  - ``*RSSBaseProcNumber`` - A te általad használni kívánt base CPU
-  - ``*NumRssQueues`` - RSS Queue-k száma
-  - ``*MaxRssProcessors`` - Állítsd ugyanarra mint a ``*NumRssQueues`` (Csak Intel NIC)
+    - ``*RSS`` - "1" = Enable RSS - "0" = Disable RSS
+    - ``*RSSBaseProcNumber`` - A te általad használni kívánt base CPU
+    - ``*NumRssQueues`` - RSS Queue-k száma
+    - ``*MaxRssProcessors`` - Állítsd ugyanarra mint a ``*NumRssQueues`` (Csak Intel NIC)
 
-- Állítsd be GoInterruptPolicy-ban az MSI Limit-et ugyanannyira vagy többre mint a ``*NumRssQueues``. 
+ - Állítsd be GoInterruptPolicy-ban az MSI Limit-et ugyanannyira vagy többre mint a ``*NumRssQueues``. 
 
-- Intel NIC-eken állítsd a policy-t ``IrqPolicySpreadMessagesAcrossAllProcessors``-ra, Realtek-en pedig ``IrqPolicySpecifiedProcessors``-ra, majd állíts be egy olyan affinity-t amely megfelel a registry-ben konfigurált beállításoknak (pl. ha ``*RSSBaseProcNumber`` "4", és a ``*NumRssQueues`` "2", akkor válaszd ki az 4, 5 CPU-t).
+ - Intel NIC-eken állítsd a policy-t ``IrqPolicySpreadMessagesAcrossAllProcessors``-ra, Realtek-en pedig ``IrqPolicySpecifiedProcessors``-ra, majd állíts be egy olyan affinity-t amely megfelel a registry-ben konfigurált beállításoknak (pl. ha ``*RSSBaseProcNumber`` "4", és a ``*NumRssQueues`` "2", akkor válaszd ki az 4, 5 CPU-t).
 
 </details>
 
