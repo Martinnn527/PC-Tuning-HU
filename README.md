@@ -73,7 +73,7 @@
   - [5.14 Tray Icons](#514-tray-icons)
   - [5.15 Hibernation](#515-hibernation)
   - [5.16 Bloatware kezelése](#516-bloatware-kezelése)
-  - [5.17 7-zip](#517-7-zip-letöltése-és-beállítása)
+  - [5.17 7-Zip](#517-7-zip-letöltése-és-beállítása)
   - [5.18 GPU Driver](#518-gpu-driver)
   - [5.19 MSI Afterburner](#519-msi-afterburner)
   - [5.20 Felbontások és Scaling Mode](#520-felbontások-és-scaling-mode)
@@ -855,7 +855,7 @@ taskkill /f /im smartscreen.exe > nul 2>&1 & ren C:\Windows\System32\smartscreen
 
 - Használd a Task Manager-t hogy ellenőrizd nem-e fut semmilyen bloatware a háttérben.
 
-## 5.17 7-zip letöltése és beállítása
+## 5.17 7-Zip letöltése és beállítása
 
 - [7-zip](https://www.7-zip.org/a/7z2301-x64.exe)
 
@@ -1002,6 +1002,10 @@ bcdedit /set nx AlwaysOff
 ```
 
 A [disabledynamictick](https://en.wikipedia.org/wiki/Tickless_kernel) parancs használható a rendszeres timer tick interrupts engedélyezésére.
+
+```bat
+bcdedit /set disabledynamictick yes
+```
 
 ## 5.26 NIC konfigurálása
 
@@ -1204,7 +1208,7 @@ A Windows CPU 0-án ütemez számos interruptot és DPC-t ami elég terhelő leh
 
   - Ellenőrizd hogy egy ISR-hez tartozó DPC ugyanazon a CPU-n kerül-e feldolgozásra. ([példa](/media/isr-dpc-same-core.png))
 
-  - Használd a [GoInterruptPolicy](https://github.com/spddl/GoInterruptPolicy) programot az affinity-k beállítására. Az adott eszközt úgy azonosíthatod, hogy összehasonlítod a ``Location``-t Device Managerben a ``Properties -> General`` résznél.
+  - Használd a [GoInterruptPolicy](https://github.com/spddl/GoInterruptPolicy) programot az affinity-k beállítására. Az adott eszközt úgy azonosíthatod, hogy összehasonlítod a ``Location``-t Device Managerben a ``Properties -> General`` résznél a GoInterruptPolicy-ban lévő ``Location Info``-val.
 
 ### 5.36.1 GPU és DirectX Graphics Kernel
 
@@ -1216,9 +1220,30 @@ Ez a két modul nagy számban generál interruptokat ezért érdemes elkülöní
 
 ### 5.36.3 Network Interface Card (NIC)
 
-Támogatnia kell az MSI-X-et ahhoz hogy a Receive-Side-Scaling (RSS) rendesen működjön. Legtöbb esetben az RSS base cpu elég arra hogy áthelyezd a DPC-ket és ISR-eket emiatt nincs szükség GoInterruptPolicy-ra. Azonban ha valamelyiket nem sikerülne áthelyezni, próbáld meg beállítani mindkettőt. Figyelj arra hogy az RSS beállítás szabja meg hogy pontosan hány CPU-n van ütemezve a NIC. Például, ha az RSS base cpu a CPU 2-re van állítva és 4 RSS queue-t használsz akkor a 2/3/4/5-ön lesz ütemezve.
+Támogatnia kell az MSI-X-et ahhoz hogy az ISR azon a CPU-n fusson amelyik végrehajtja a DPC-ket. Figyelj arra hogy az RSS beállítás szabja meg hogy pontosan hány CPU-n van ütemezve a NIC. Például, ha az RSSBaseCpu a CPU 2-re van állítva és 4 RSS Queue-t használsz akkor a 2/3/4/5-ön lesz ütemezve.
 
-  - Lásd [RSS Configuration](https://github.com/Duckleeng/TweakCollection?tab=readme-ov-file#receive-side-scaling-rss-configuration)
+  - Lásd <details>
+<summary>RSS beállítása</summary>
+
+- Navigálj a következő registry key-hez: ``HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Class\{4d36e972-e325-11ce-bfc1-08002be10318}\0000``, használd a te driveredhez tartozó [Driver Key](/media/find-driver-key-example.png)-t.
+
+- Add hozzá/írd át a következő értékeket:
+
+  - ``*RSS`` - "1" = Enable RSS - "0" = Disable RSS
+  - ``*RSSBaseProcNumber`` - A te általad használni kívánt base CPU
+  - ``*NumRssQueues`` - RSS Queue-k száma
+  - ``*MaxRssProcessors`` - Állítsd ugyanarra mint a ``*NumRssQueues`` (Csak Intel NIC)
+
+- Állítsd be GoInterruptPolicy-ban az MSI Limit-et ugyanannyira vagy többre mint a ``*NumRssQueues``. 
+
+- Intel NIC-eken állítsd a policy-t ``IrqPolicySpreadMessagesAcrossAllProcessors``-ra, Realtek-en pedig ``IrqPolicySpecifiedProcessors``-ra, majd állíts be egy olyan affinity-t amely megfelel a registry-ben konfigurált beállításoknak (pl. ha ``*RSSBaseProcNumber`` "4", és a ``*NumRssQueues`` "2", akkor válaszd ki az 4, 5 CPU-t).
+
+</details>
+
+> [!IMPORTANT]
+> Néhány Realtek NIC-en nem funkcionál megfelelően az RSS hogyha több mint 1 RSS Queue van beállítva. A Hyperthreading/SMT kikapcsolása megoldhatja ezt a problémát.
+
+A változtatások után ellenőrizd [xperf](/bin/xperf-dpcisr.bat)-el hogy működik e a kívánt konfiguráció.
 
   - Lásd [Hány RSS Queue-ra van szükséged](/docs/research.md#hány-rss-queue-ra-van-szükséged)
 
