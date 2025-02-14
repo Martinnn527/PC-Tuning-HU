@@ -101,6 +101,7 @@
     - [5.36.6 QoS Policy](#5366-qos-policy)
     - [5.36.7 Discord](#5367-discord)
     - [5.36.8 Epic Games](#5368-epic-games)
+    - [5.36.9 Steam](#5369-steam)
   - [5.37 Interruptok és DPC-k](#537-interruptok-és-dpc-k)
     - [5.37.1 GPU és DirectX Graphics Kernel](#5371-gpu-és-directx-graphics-kernel)
     - [5.37.2 XHCI és Audio Controller](#5372-xhci-és-audio-controller)
@@ -1234,16 +1235,17 @@ Opcionálisan használj [DiscordFixer](https://github.com/HerXayah/Discord-Fixer
 Néhány Epic-es játéknál automatikusan fut az **EOSOverlayRenderer-Win64-Shipping.exe** ami általában a **C:\Program Files (x86)\Epic Games\Launcher\Portal\Extras\Overlay** directory-ban található. Használd az alábbi parancsot hogy átírd a nevét, abban az esetben ha az Epic Games-t az alapértelmezett helyre telepítetted. Játékbeli vásárlásokhoz (pl. VBucks feltöltés) kötelező futnia. Ebben az esetben csak írd vissza a nevét és indítsd újra a játékot.
 
 ```bat
-rename "C:\Program Files (x86)\Epic Games\Launcher\Portal\Extras\Overlay\EOSOverlayRenderer-Win64-Shipping.exe" EOSOverlayRenderer-Win64-Shipping.exee
+ren "C:\Program Files (x86)\Epic Games\Launcher\Portal\Extras\Overlay\EOSOverlayRenderer-Win64-Shipping.exe" EOSOverlayRenderer-Win64-Shipping.exee
 ```
 
 ### 5.36.9 Steam 
 
-Töltsd le a [NoSteamWebHelper](https://github.com/Aetopia/NoSteamWebHelper)-t 
+Töltsd le a [NoSteamWebHelper](https://github.com/Aetopia/NoSteamWebHelper)-t.
 
 - Másold be az **umpdc.dll**-t abba a mappába ahol a Steam.exe található.
 
-- Győződj meg róla hogy a Steam nem fut majd pedig indítsd
+Így mostantól automatikusan bezáródik a NoSteamWebHelper.exe amikor elindítasz egy játékot azonban amikor bezárod újra elindul hogy maga a Steam applikáció elérhető legyen.
+Vedd figyelembe hogy a Steam overlay nem lesz elérhető játék közben.
 
 ## 5.37 Interruptok és DPC-k
 
