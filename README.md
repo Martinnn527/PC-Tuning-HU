@@ -737,7 +737,7 @@ reg add "HKLM\SYSTEM\CurrentControlSet\Services\WSearch" /v "Start" /t REG_DWORD
 Nyisd meg a PowerShell-t majd másold be az alábbi parancsot.
 
 ```powershell
-C:\bin\scripts\disable-scheduled-tasks.ps1
+C:\bin\disable-scheduled-tasks.ps1
 ```
 
 ## 5.11 Egyéb beállítások
