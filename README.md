@@ -84,32 +84,33 @@
   - [5.25 BCD Store](#525-bcd-store)
   - [5.26 NIC konfigurálása](#526-nic-konfigurálása)
   - [5.27 Audio eszközök beállítása](#527-audio-eszközök-beállítása)
-  - [5.28 Szolgáltatások és driverek](#528-szolgáltatások-és-driverek)
-  - [5.29 Device Manager beállítása](#529-device-manager-beállítása)
-  - [5.30 Device Power Saving](#530-device-power-saving)
-  - [5.31 Fájl rendszer](#531-fájl-rendszer)
-  - [5.32 Event Trace Session](#532-event-trace-sessions-ets)
-  - [5.33 Message Signaled Interrupts](#533-message-signaled-interrupts)
-  - [5.34 XHCI Interrupt Moderation](#534-xhci-interrupt-moderation-imod)
-  - [5.35 Applikációk konfigurálása](#535-applikációk-konfigurálása)
-    - [5.35.1 FPS Limit](#5351-fps-limit)
-    - [5.35.2 Játék regisztrálása Game Bar-ban](#5352-játék-regisztálása-game-bar-ban)
-    - [5.35.3 Presentation Mode](#5353-presentation-mode)
-    - [5.35.4 Game Mode](#5354-game-mode)
-    - [5.35.5 Média lejátszó](#5355-media-lejátszó)
-    - [5.35.6 QoS Policy](#5356-qos-policy)
-    - [5.35.7 Discord](#5357-discord)
-    - [5.35.8 Epic Games](#5358-epic-games)
-  - [5.36 Interruptok és DPC-k](#536-interruptok-és-dpc-k)
-    - [5.36.1 GPU és DirectX Graphics Kernel](#5361-gpu-és-directx-graphics-kernel)
-    - [5.36.2 XHCI és Audio Controller](#5362-xhci-és-audio-controller)
-    - [5.36.3 Network Interface Card](#5363-network-interface-card-nic)   
-  - [5.37 Event Viewer ellenőrzése](#537-event-viewer-ellenőrzése)
-  - [5.38 CPU Idle States](#538-cpu-idle-states)
-  - [5.39 Timer Resolution](#539-timer-resolution)  
-    - [5.39.1 Maga a Timer Resolution beállítása](#5391-maga-a-timer-resolution-beállítása)
-  - [5.40 Paging File](#540-paging-file)
-  - [5.41 Cleanup és karbantartás](#541-cleanup-és-karbantartás)
+  - [5.28 Process Explorer](#528-process-explorer)
+  - [5.29 Szolgáltatások és driverek](#529-szolgáltatások-és-driverek)
+  - [5.30 Device Manager beállítása](#530-device-manager-beállítása)
+  - [5.31 Device Power Saving](#531-device-power-saving)
+  - [5.32 Fájl rendszer](#532-fájl-rendszer)
+  - [5.33 Event Trace Session](#533-event-trace-sessions-ets)
+  - [5.34 Message Signaled Interrupts](#534-message-signaled-interrupts)
+  - [5.35 XHCI Interrupt Moderation](#535-xhci-interrupt-moderation-imod)
+  - [5.36 Applikációk konfigurálása](#536-applikációk-konfigurálása)
+    - [5.36.1 FPS Limit](#5361-fps-limit)
+    - [5.36.2 Játék regisztrálása Game Bar-ban](#5362-játék-regisztálása-game-bar-ban)
+    - [5.36.3 Presentation Mode](#5363-presentation-mode)
+    - [5.36.4 Game Mode](#5364-game-mode)
+    - [5.36.5 Média lejátszó](#5365-media-lejátszó)
+    - [5.36.6 QoS Policy](#5366-qos-policy)
+    - [5.36.7 Discord](#5367-discord)
+    - [5.36.8 Epic Games](#5368-epic-games)
+  - [5.37 Interruptok és DPC-k](#537-interruptok-és-dpc-k)
+    - [5.37.1 GPU és DirectX Graphics Kernel](#5371-gpu-és-directx-graphics-kernel)
+    - [5.37.2 XHCI és Audio Controller](#5372-xhci-és-audio-controller)
+    - [5.37.3 Network Interface Card](#5373-network-interface-card-nic)   
+  - [5.38 Event Viewer ellenőrzése](#538-event-viewer-ellenőrzése)
+  - [5.39 CPU Idle States](#538-cpu-idle-states)
+  - [5.40 Timer Resolution](#540-timer-resolution)  
+    - [5.40.1 Maga a Timer Resolution beállítása](#5401-maga-a-timer-resolution-beállítása)
+  - [5.41 Paging File](#541-paging-file)
+  - [5.42 Cleanup és karbantartás](#542-cleanup-és-karbantartás)
 
 ## Bemutató
 
@@ -1034,7 +1035,26 @@ bcdedit /set disabledynamictick yes
 
 - A communications fülnél állítsd be hogy ``Do nothing``
 
-## 5.28 Szolgáltatások és driverek
+## 5.28 Process Explorer
+
+Használj Process Explorer-t mivel a stock Task Manager a CPU kihasználtságát %-ban jelzi ami félrevezető lehet ([1(https://aaron-margosis.medium.com/task-managers-cpu-numbers-are-all-but-meaningless-2d165b421e43)]). Ezzel ellentétben a Process Explorer idő-alapú terhelést mutat.
+
+- [Töltsd le](https://download.sysinternals.com/files/ProcessExplorer.zip) majd pedig csomagold ki.
+
+- Másold ki a **procexp64.exe**-t egy biztonságos helyre mint pl. **C:\Windows** majd nyisd meg.
+
+- **Options** -> **Replace Task Manager**. Innentől ha megnyitod a Task Manager-t automatikusan a Process Explorer nyílik meg. Opcionálisan állítsd be a továbbiakat:
+
+  - Confirm Kill 
+
+  - Allow Only One Instance
+  
+  - Always On Top (jól jön ha a játék crashel vagy lefagy)
+
+  - **View** -> **Select Columns** -> **Process Performance** majd pedig pipáld be a **Context Switch Delta**-t és a **CPU Cycles Delta**-t.
+
+
+## 5.29 Szolgáltatások és driverek
 
 > [!CAUTION]
 > Mindent figyelmesen olvass el és értelmezz mielőtt hozzákezdesz.
@@ -1065,7 +1085,7 @@ service-list-builder.exe --config C:\bin\minimal-services.ini
 
 - A scriptek a ``build`` mappában lesznek megépülve. NSudo-val az ``Enable All Priviliges`` bepipálásával kell futtatni őket.
 
-## 5.29 Device manager beállítása
+## 5.30 Device manager beállítása
 
 - A ``Disk drives`` kategóriánál jobb klikk az SSD-re -> ``Polciies`` -> és pipáld be a ``Turn off Windows write-cache buffer flushing on the device`` opciót.
 
@@ -1077,7 +1097,7 @@ service-list-builder.exe --config C:\bin\minimal-services.ini
 
 - Opcionálisan használd a [DeviceCleanup](https://www.majorgeeks.com/mg/getmirror/device_cleanup_tool,1.html) programot hogy eltávolíts rejtett eszközöket.
 
-## 5.30 Device Power Saving
+## 5.31 Device Power Saving
 
 - Nyisd meg a PowerShell-t és másold be az alábbi parancsot hogy kikapcsold az ``Allow the computer to turn off this device to save power`` opciót a device manager-ben minden alkalmaz eszközön.
 
@@ -1087,7 +1107,7 @@ Get-WmiObject MSPower_DeviceEnable -Namespace root\wmi | ForEach-Object { $_.ena
 
 - Ha kihúzod és visszadugod az eszközt akkor ez a beállítás visszaállhat tehát vagy kerüld el vagy futtasd a parancsot minden alkalommal, vagy pedig használd a [DriverPowerSaving](/bin/DriverPowerSaving.ps1) scriptet. Hogy minden újraindításnál automatikusan fusson húzd be ``shell:startup``-ba és használd a PowerShell paramétert hogy ne notepad-ként fusson.
 
-## 5.31 Fájl rendszer
+## 5.32 Fájl rendszer
 
 Nyisd meg a CMD-t és másold be az alábbi parancsokat.
 
@@ -1103,7 +1123,7 @@ Tiltsd le a [Last Acces Time Stamp Update](https://www.tenforums.com/tutorials/1
 fsutil behavior set disablelastaccess 1
 ```
 
-## 5.32 Event Trace Sessions (ETS)
+## 5.33 Event Trace Sessions (ETS)
 
 - Ezekkel a fájlokkal automatikusan tudsz váltani ETS Enabled és Disabled között aminek a hatását meg tudod nézni itt: ``Win+R -> perfmon -> Data Collector Sets -> Event Trace Session``. Azok a programok amelyek event tracing-re támaszkodnak nem fognak tudni adatot log-olni (pl. Event Viewer) amíg nem kapcsolod vissza őket, és pont ezért van egy enable és disable fájl. Nyisd meg a CMD-t és másold be a parancsokat hogy megépítsd a két registry fájlt a ``C:\`` meghajtón. NSudo-val kell majd futtatni őket Trusted Installer-ként.
 
@@ -1122,7 +1142,7 @@ reg export "HKLM\SYSTEM\CurrentControlSet\Control\WMI\Autologger" "C:\ets-enable
 for %a in ("SleepStudy" "Kernel-Processor-Power" "UserModePowerService") do (wevtutil sl Microsoft-Windows-%~a/Diagnostic /e:false)
 ```
 
-## 5.33 Message Signaled Interrupts
+## 5.34 Message Signaled Interrupts
 
 - Az MSI-k gyorsabbak mint a hagyományos signal-based interruptok és az IRQ sharing problémát is megoldhatják
 
@@ -1130,7 +1150,7 @@ for %a in ("SleepStudy" "Kernel-Processor-Power" "UserModePowerService") do (wev
 
 - Kapcsold be az MSI-ket az összes támogatott eszközön. Vedd figyelembe hogy néhány driver fejlesztő alapból kikapcsolva hagyja az MSI-ket, tehát ha újratelepítesz egy drivert utána mindig érdemes ellenőrizni.
 
-## 5.34 XHCI Interrupt Moderation (IMOD)
+## 5.35 XHCI Interrupt Moderation (IMOD)
 
 Windows 7-en az IMOD Interval 1ms, viszont az újabb OS-eken 0.05ms (50us) kivéve ha az adott USB drivernél más van megadva. Ez azt jelenti hogy amiután egy Interrupt generálva lett, az XHCI(USB) controller vár (úgynevezett buffer period) hogy több adat érkezzen mielőtt újabb Interruptot generálna. Ez csökkenti a CPU terhelését de adatvesztéshez vezethet.
 Példa: egy 1000-es polling rate-ű egér minden 1ms-ban küld adatot. Ha csak az egeret mozgatod egy 1ms-os intervallumban akkor nem történik Interrupt Moderation, mivel az interruptok generálási sebessége kisebb vagy egyenlő a meghatározott intervallummal. Azonban játék közben, ahol egyszerre mozgatod az egeret, nyomod a billentyűzetet stb, könnyen meghaladod az 1000 interrupt/másodpercet. Habár ez kevésbé valószínű 0,05 ms-os IMOD intervallum mellett, akkor is előfordulhat.
@@ -1147,9 +1167,9 @@ reg add "HKLM\SYSTEM\CurrentControlSet\Control\CI\Config" /v "VulnerableDriverBl
 PowerShell C:\XHCI-IMOD-Interval.ps1
 ```
 
-## 5.35 Applikációk konfigurálása
+## 5.36 Applikációk konfigurálása
 
-### 5.35.1 FPS Limit
+### 5.36.1 FPS Limit
 
 - Ha limitálod az FPS-t akkor a monitorod refresh rate-jének a többszörése korlátozd le. Lásd: [FPS Cap Calculator | BoringBoredom](https://boringboredom.github.io/tools/fpscapcalculator)
 
@@ -1157,11 +1177,11 @@ PowerShell C:\XHCI-IMOD-Interval.ps1
 
 - Ha RTSS-el limitálod az FPS-t sokkal smoothabb lesz a játék és konzisztensebb lesz a frame-pacing mivel busy-wait-et használ ami sokkal precízebb mint a passive-wait de cserébe nagyobb latency-vel és CPU overhead-el jár.
 
-### 5.35.2 Játék regisztálása Game Bar-ban
+### 5.36.2 Játék regisztálása Game Bar-ban
 
 Győződj meg róla hogy a Game Bar felismeri a játékot. Nyisd meg a Game Bar-t ``Win+G`` megnyomásával amikor játékban vagy és kapcsold be a ``Remember this is a game`` opciót. 
 
-### 5.35.3 Presentation Mode
+### 5.36.3 Presentation Mode
 
 Lásd: [Presentation Models](https://wiki.special-k.info/en/Presentation_Model)
 
@@ -1185,17 +1205,17 @@ reg add "HKCU\SYSTEM\GameConfigStore" /v "GameDVR_FSEBehavior" /t REG_DWORD /d "
 reg add "HKLM\SOFTWARE\Microsoft\Windows\Dwm" /v "OverlayTestMode" /t REG_DWORD /d "5" /f
 ```
 
-### 5.35.4 Game Mode
+### 5.36.4 Game Mode
 
 A Game Mode megakadályozza a Windows Update futását valamint bizonyos értesítések megjelenítését ([1](https://support.xbox.com/en-GB/help/games-apps/game-setup-and-play/use-game-mode-gaming-on-pc)). Fontos megjegyezni, hogy a Game Mode befolyásolhatja a folyamatok és thread-ek prioritását, attól függően, hogy a PsPrioritySeparation értéke hogyan van beállítva. Érdemes kísérletezni a Game Mode engedélyezésével és letiltásával, hogy meghatározd annak hatását a rendszer teljesítményére.
 
-### 5.35.5 Media lejátszó
+### 5.36.5 Media lejátszó
 
 - [mpv](https://mpv.io/)
 - [VLC](https://www.videolan.org/)
 - [mpc-hc](https://github.com/clsid2/mpc-hc)
 
-### 5.35.6 QoS Policy
+### 5.36.6 QoS Policy
 
 Ez a beállítás lehetővé teszi hogy a megadott applikáció csomagjait helyezze előnybe a többi applikációval szemben.
 
@@ -1203,13 +1223,13 @@ Lásd: [QoS Policy beállítása](/media/dscp-46-qos-policy.png)
 
 Csak akkor műkodik hogyha a routered támogatja a Quality of Service beállítást. Ezt vagy a router oldalán, vagy pedig egy külön [applikációban](https://www.microsoft.com/en-us/download/details.aspx?id=4865) tudod ellenőrizni. [New Capture](/media/network-monitor-new-capture.png), nyisd meg a játékot, amelyre DSCP-értéket állítottál be, és reprodukálj egy olyan helyzetet, amelyben csomagok küldésére és fogadására kerül sor. Nyomj egy F5-öt hogy elkezdd a logolást, 30 mp után pedig egy F7-et. A bal oldali ablakban kattints a játék nevére, majd kattints egy packet headerre. Bővítsd a packet info-t a frame deatils alatt, és végül bővítsd az Ipv4 alkategóriát. Ekkor láthatóvá válik az egyes folyamatok aktuális DSCP-értéke. ``"DifferentiatedServices Field: DSCP: 46, ECN: 0"``
 
-### 5.35.7 Discord
+### 5.36.7 Discord
 
 Opcionálisan használj [DiscordFixer](https://github.com/HerXayah/Discord-Fixer)-t. 
 
   - Lásd [/research.md/discord-fixer](/docs/research.md#3-discordfixer)
 
-### 5.35.8 Epic Games
+### 5.36.8 Epic Games
 
 Néhány Epic-es játéknál automatikusan fut az **EOSOverlayRenderer-Win64-Shipping.exe** ami általában a **C:\Program Files (x86)\Epic Games\Launcher\Portal\Extras\Overlay** directory-ban található. Használd az alábbi parancsot hogy átírd a nevét, abban az esetben ha az Epic Games-t az alapértelmezett helyre telepítetted. Játékbeli vásárlásokhoz (pl. VBucks feltöltés) kötelező futnia. Ebben az esetben csak írd vissza a nevét és indítsd újra a játékot.
 
@@ -1217,7 +1237,15 @@ Néhány Epic-es játéknál automatikusan fut az **EOSOverlayRenderer-Win64-Shi
 rename "C:\Program Files (x86)\Epic Games\Launcher\Portal\Extras\Overlay\EOSOverlayRenderer-Win64-Shipping.exe" EOSOverlayRenderer-Win64-Shipping.exee
 ```
 
-## 5.36 Interruptok és DPC-k
+### 5.36.9 Steam 
+
+Töltsd le a [NoSteamWebHelper](https://github.com/Aetopia/NoSteamWebHelper)-t 
+
+- Másold be az **umpdc.dll**-t abba a mappába ahol a Steam.exe található.
+
+- Győződj meg róla hogy a Steam nem fut majd pedig indítsd
+
+## 5.37 Interruptok és DPC-k
 
 A Windows CPU 0-án ütemez számos interruptot és DPC-t ami elég terhelő lehet egyetlen-egy CPU számára. Ezért affinity-ket kell beállítani és elkülöníteni/eloszlatni a drivereket.
 
@@ -1227,15 +1255,15 @@ A Windows CPU 0-án ütemez számos interruptot és DPC-t ami elég terhelő leh
 
   - Használd a [GoInterruptPolicy](https://github.com/spddl/GoInterruptPolicy) programot az affinity-k beállítására. Az adott eszközt úgy azonosíthatod, hogy összehasonlítod a ``Location``-t Device Managerben a ``Properties -> General`` résznél a GoInterruptPolicy-ban lévő ``Location Info``-val.
 
-### 5.36.1 GPU és DirectX Graphics Kernel
+### 5.37.1 GPU és DirectX Graphics Kernel
 
 Használhatod az [AutoGpuAffinity](https://github.com/valleyofdoom/AutoGpuAffinity)-t hogy benchmarkold az összes CPU-t. Ez segíthet eldönteni melyik CPU-n kerüljön feldolgozásra a GPU.
 
-### 5.36.2 XHCI és Audio controller
+### 5.37.2 XHCI és Audio controller
 
 Ez a két modul nagy számban generál interruptokat ezért érdemes elkülöníteni a kettőt ha nem USB audio-t használsz.
 
-### 5.36.3 Network Interface Card (NIC)
+### 5.37.3 Network Interface Card (NIC)
 
 Támogatnia kell az MSI-X-et ahhoz hogy az ISR azon a CPU-n fusson amelyik végrehajtja a DPC-ket. Figyelj arra hogy az RSS beállítás szabja meg hogy pontosan hány CPU-n van ütemezve a NIC. Például, ha az RSSBaseCpu a CPU 2-re van állítva és 4 RSS Queue-t használsz akkor a 2/3/4/5-ön lesz ütemezve.
 
@@ -1264,20 +1292,20 @@ A változtatások után ellenőrizd [xperf](/bin/xperf-dpcisr.bat)-el hogy műk�
 
 - Lásd [Hány RSS Queue-ra van szükséged](/docs/research.md#hány-rss-queue-ra-van-szükséged)
 
-## 5.37 Event Viewer ellenőrzése
+## 5.38 Event Viewer ellenőrzése
 
 Ez a lépés nem kötelező, azonban segíthet a megmagyarázhatatlan FPS drop-ok és többi probléma azonosításában. Ellenőrizd hogy nincs e teli hibaüzenettel az Event Viewer. ``Win+R`` -> ``eventvwr.msc``. 
 
   - Futtasd az ``ets-enable.reg`` fájlt mivel ez szükséges az event log működéséhez.
 
-## 5.38 CPU Idle States
+## 5.39 CPU Idle States
 
 Ez kényszeríti a C-State 0-t. Érdemes játék előtt kikapcsolni, majd játék után bekapcsolni az idle statet, mivel az magasabb hőfokokkal (A CPU hőmérsékletének nem lenne szabad elérni a thermal throttling pontot, mivel a hűtéssel már foglalkoztál a [BIOS](#12-hűtés) részlegnél) és energiafogyasztással jár. Kerüld az idle kikapcsolását ha a Hyper-Threading/Simultaneous Multithreading bevan kapcsolva, vagy pedig ha valamilyenféle frequency boosting feature-t használsz, mint például AMD-n a PBO, Turbo Boost vagy hasonló. 
 
    - [Idle Enable](/bin/enable_idle.bat)
    - [Idle Disable](/bin/disable_idle.bat)
 
-## 5.39 Timer Resolution
+## 5.40 Timer Resolution
 
 A clock interrupt frequency az a sebesség, amellyel a rendszer hardveres órája interruptokat generál, amelyek lehetővé teszik a scheduler számára különböző feladatok elvégzését. A legtöbb rendszeren alapértelmezés szerint a minimális frekvencia 64 Hz, ami azt jelenti, hogy 15,625 ms-onként generálódik egy clock interrupt. Az alacsonyabb frekvencia a kevesebb interruptoknak köszönhetően kisebb CPU-overhead-et és energiafogyasztást eredményez, de csökkenti a timing pontosságot és potenciálisan kevésbé responsive-abb multi-taskingot eredményez. A maximális frekvencia 2kHz, ami azt jelenti, hogy 0,5ms-enként generálódik egy clock-interrupt. A magasabb frekvencia nagyobb időzítési pontosságot és potenciálisan nagyobb multitasking-reakciókészséget eredményez, de növeli a CPU overheadet és az energiafogyasztást. A minimális, az aktuális és a maximális felbontás a [ClockRes](https://learn.microsoft.com/en-us/sysinternals/downloads/clockres)-ben tekinthető meg.
 
@@ -1295,7 +1323,7 @@ Ez lehetővé teszi a felbontás növelését egy külön folyamat során, ami a
 
 A nagyobb felbontás nagyobb Sleep pontosságot eredményez, de bizonyos esetekben a maximálisan támogatott 0,5 ms felbontás pont hogy kisebb pontosságot biztosít, mint a valamivel alacsonyabb, például 0,507 ms. Ezért célszerű a [MeasureSleep](https://github.com/valleyofdoom/TimerResolution) programban meghatározni, hogy melyik felbontással a legkisebb a Sleep(1) (delta), miközben a [SetTimerResolution](https://github.com/valleyofdoom/TimerResolution/releases) programmal különböző felbontásokat állítunk be. Ezt terhelés alatt kell elvégezni, mivel az idle benchmarkok félrevezetőek lehetnek. A folyamat automatizálására a [micro-adjust-benchmark.ps1](/bin/micro-adjust-benchmark.ps1) szkript használható.
 
-### 5.39.1 Maga a Timer Resolution beállítása
+### 5.40.1 Maga a Timer Resolution beállítása
 
 - Töltsd le a [SetTimerResolution](https://github.com/valleyofdoom/TimerResolution/releases)-t a ``C:\`` meghajtóba majd pedig menje be ``shell:startup``-ba -> Jobb klikk -> Create a shortcut és keresd ki az exe-t.
 
@@ -1308,11 +1336,11 @@ A nagyobb felbontás nagyobb Sleep pontosságot eredményez, de bizonyos esetekb
 C:\SetTimerResolution.exe --resolution 5000 --no-console
 ```
 
-## 5.40 Paging File
+## 5.41 Paging File
 
 Legtöbb esetben ajánlott bekapcsolva hagyni, ami az alap beállítás. Van egy érv, hogy jobb, ha kikapcsolod abban az esetben ha elég RAM-al rendelkezel a játékhoz mivel csökkenti az I/O overhead-et és a rendszermemória gyorsabb mint a disk, azonban FPS drop-okat eredményezhet akkor is ha a memória kihasználtsága közel sem éri el a 100%-ot.
 
-## 5.41 Cleanup és karbantartás
+## 5.42 Cleanup és karbantartás
 
 - Használj programokat mint a [BulkCrapUninstaller](https://github.com/Klocman/Bulk-Crap-Uninstaller) mivel a control panel-ban történő uninstall során sok fájl letörlése kimaradhat.
 
