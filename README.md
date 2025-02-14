@@ -1242,6 +1242,10 @@ ren "C:\Program Files (x86)\Epic Games\Launcher\Portal\Extras\Overlay\EOSOverlay
 
 ### 5.36.9 Steam 
 
+- Bal fent **Steam** -> **Settings** -> **Interface**, kapcsold ki az **Enable smooth scrolling in web view** és az **Enable GPU Accelerated rendering in web views** opciót.
+
+- **Library** -> kapcsold be a **Low Bandwith Mode**-ot, **Low Performance Mode**-ot és a **Disable Community Content**-et.
+
 Töltsd le a [NoSteamWebHelper](https://github.com/Aetopia/NoSteamWebHelper)-t.
 
 - Másold be az **umpdc.dll**-t abba a mappába ahol a Steam.exe található.
