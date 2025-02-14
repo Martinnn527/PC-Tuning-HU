@@ -696,6 +696,14 @@ C:\bin\disable-process-mitigations.bat
 
 - ``Win+R`` -> ``control userpasswords`` -> ``Users`` majd jobb klikk az ``Administrator``profilra, ``Set Password`` -> és hagyd üresen hogy eltávolítsd a jelszót.
 
+- Windows Server-en globálisan kikapcsolható a Telemetry az alábbi CMD parancsokkal.
+
+  ```bat
+  reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WSDAPI\AppCompat" /v AllowTelemetry /t REG_DWORD /d "0" /f
+  ```
+  ```bat
+  reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WSDAPI\AppCompat" /v AITEnable /t REG_DWORD /d "0" /f
+
 ## 5.6 Privacy Options
 
 ``Win+I`` -> ``Privacy`` és kapcsolj ki minden nem használt engedélyt.
