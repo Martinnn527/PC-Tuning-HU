@@ -694,7 +694,7 @@ C:\bin\disable-process-mitigations.bat
 
    - Nyisd meg a CMD-t és írd be hogy ``gpupdate /force`` hogy egyből életbe lépjenek a változások.
 
-- ``Win+R`` -> ``control userpasswords`` -> ``Users`` majd jobb klikk az ``Administrator``profilra, ``Set Password`` -> írd be a jelenlegi jelszavad majd töröld ki és hagyd üresen hogy eltávolítsd.
+- ``Win+R`` -> ``control userpasswords`` -> ``Users`` majd jobb klikk az ``Administrator``profilra, ``Set Password`` -> és hagyd üresen hogy eltávolítsd a jelszót.
 
 ## 5.6 Privacy Options
 
