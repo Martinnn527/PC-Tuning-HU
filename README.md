@@ -1038,7 +1038,7 @@ bcdedit /set disabledynamictick yes
 
 ## 5.28 Process Explorer
 
-Használj Process Explorer-t mivel a stock Task Manager a CPU kihasználtságát %-ban jelzi ami félrevezető lehet ([1(https://aaron-margosis.medium.com/task-managers-cpu-numbers-are-all-but-meaningless-2d165b421e43)]). Ezzel ellentétben a Process Explorer idő-alapú terhelést mutat.
+Használj Process Explorer-t mivel a stock Task Manager a CPU kihasználtságát %-ban jelzi ami félrevezető lehet [1](https://aaron-margosis.medium.com/task-managers-cpu-numbers-are-all-but-meaningless-2d165b421e43). Ezzel ellentétben a Process Explorer idő-alapú terhelést mutat.
 
 - [Töltsd le](https://download.sysinternals.com/files/ProcessExplorer.zip) majd pedig csomagold ki.
 
