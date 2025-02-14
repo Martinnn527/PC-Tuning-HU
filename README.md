@@ -99,6 +99,7 @@
     - [5.35.5 Média lejátszó](#5355-media-lejátszó)
     - [5.35.6 QoS Policy](#5356-qos-policy)
     - [5.35.7 Discord](#5357-discord)
+    - [5.35.8 Epic Games](#5358-epic-games)
   - [5.36 Interruptok és DPC-k](#536-interruptok-és-dpc-k)
     - [5.36.1 GPU és DirectX Graphics Kernel](#5361-gpu-és-directx-graphics-kernel)
     - [5.36.2 XHCI és Audio Controller](#5362-xhci-és-audio-controller)
@@ -1207,6 +1208,14 @@ Csak akkor műkodik hogyha a routered támogatja a Quality of Service beállít�
 Opcionálisan használj [DiscordFixer](https://github.com/HerXayah/Discord-Fixer)-t. 
 
   - Lásd [/research.md/discord-fixer](/docs/research.md#3-discordfixer)
+
+### 5.35.8 Epic Games
+
+Néhány Epic-es játéknál automatikusan fut az **EOSOverlayRenderer-Win64-Shipping.exe** ami általában a **C:\Program Files (x86)\Epic Games\Launcher\Portal\Extras\Overlay** directory-ban található. Használd az alábbi parancsot hogy átírd a nevét, abban az esetben ha az Epic Games-t az alapértelmezett helyre telepítetted. Játékbeli vásárlásokhoz (pl. VBucks feltöltés) kötelező futnia. Ebben az esetben csak írd vissza a nevét és indítsd újra a játékot.
+
+```bat
+rename "C:\Program Files (x86)\Epic Games\Launcher\Portal\Extras\Overlay\EOSOverlayRenderer-Win64-Shipping.exe" EOSOverlayRenderer-Win64-Shipping.exee
+```
 
 ## 5.36 Interruptok és DPC-k
 
