@@ -914,6 +914,8 @@ Ezt szükséges feltelepíteni mivel a start-menüvel és a Windows Search-el ka
 
 - ``Settings -> General Behavior -> Check for Windows updates on shutdown`` - Disabled
 
+- Opcionálisan használd a **bin** mappában lévő XML fájlt egy letisztult beállításért. Backup -> Load from XML file.
+
 ## 5.22 Spectre, Meltdown és CPU Microcode
 
 A Spectre és Meltdown letiltása egy régóta ismert teljesítményjavító trükk. Azonban az újabb platformok és rendszerarchitektúrák esetén előfordulhat teljesítménycsökkenés ([1](https://www.phoronix.com/review/amd-zen4-spectrev2)). Éppen ezért fontos benchmarkokat végezni, hogy meghatározzuk, hogy a teljesítmény pozitívan, negatívan vagy egyáltalán nem változik. Az állapota az  [InSpectre](https://www.grc.com/inspectre.htm) programmal, illetve a microcode DLL-ek átnevezésével állítható attól függően, hogy van-e microcode verzió eltérés az operációs rendszer és a BIOS között ([1](https://superuser.com/a/895447), [2](https://support.mozilla.org/en-US/kb/microcode-update)). 
