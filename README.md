@@ -30,7 +30,7 @@
   - [2.16 Ventilátor RPM](#216-ventilátor-rpm)
   - [2.17 HPET](#217-hpet)
   - [2.18 Software Installation](#218-software-telepítési-beállítások)
-  - [2.19 Legacy USB Support](#219-legacy-usb-support-legacy-usb-support)
+  - [2.19 Legacy USB Support](#219-legacy-usb-support)
   - [2.20 XHCI Hand-off](#220-xhci-hand-off)
   - [2.21 Execute Disable Bit/NX Mode](#221-execute-disable-bitnx-mode)
   - [2.22 BIOS Profilok és Backup](#222-bios-profil-és-backup)
