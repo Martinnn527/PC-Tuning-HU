@@ -1024,7 +1024,7 @@ bcdedit /set disabledynamictick yes
 
 - Tilts le minden nem használt adaptert. Jobb klikk a fő adapterre és ``Properties``
 
-- Kapcsold ki az összes funkciót kivéve a ``QoS Packet Scheduler``-t és az ``Internet Protocol Version 4 (TCP/IPv4)``-et.
+- Kapcsold ki az összes funkciót kivéve a ``QoS Packet Scheduler``-t (Ha a router-ed támogatja és használni tervezed) és az ``Internet Protocol Version 4 (TCP/IPv4)``-et.
 
 - Állíts be egy Static IP Address-t. Nyisd meg a CMD-t majd írd be hogy ``ipconfig /all``. Jobb klikk a fő adapteredre, ``Properties``, majd pedig kattints rá az ``Internet Protocol Version 4 (TCP/IPv4)``-re és írd át manuálisan az összes beállítást a CMD-ben kiírtaknak megfelelően.
 
