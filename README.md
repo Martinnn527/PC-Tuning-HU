@@ -1382,8 +1382,8 @@ Legtöbb esetben ajánlott bekapcsolva hagyni, ami az alap beállítás. Van egy
   - ``C:\Windows\Prefetch`` - prefetch fájlok (ennek a mappának üresnek kell lennie a ha a superfetch kivan kapcsolva)
   - ``C:\Windows\SoftwareDistribution`` - Windows Update cache
   - ``C:\Windows\Temp``- ideiglenes fájlok
-  - ``"%userprofile%"``
-  - ``"%userprofile%\AppData\Local\Temp"`` - ideiglenes fájlok
+  - ``%userprofile%``
+  - ``%userprofile%\AppData\Local\Temp`` - ideiglenes fájlok
   - Felhasználói directory-k (Downloads, Documents, stb.)
 
 - Opcionálisan tisztítsd a WinSxS mappát az alábbi parancssal. Ez egy hosszabb folyamat lehet.
