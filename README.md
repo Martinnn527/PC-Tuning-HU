@@ -1286,8 +1286,9 @@ Támogatnia kell az MSI-X-et ahhoz hogy az ISR azon a CPU-n fusson amelyik végr
 
   - Navigálj a következő registry key-hez: ``HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Class\{4d36e972-e325-11ce-bfc1-08002be10318}\0000``, használd a te driveredhez tartozó [Driver Key](/media/find-driver-key-example.png)-t.
 
-  - Add hozzá/írd át a következő értékeket:
+  - Add hozzá/írd át a következő értékeket (mindegyik **String**):
 
+    - ``*RSSProfile`` - "4" - különben a többi érték figyelmen kívül maradhat 
     - ``*RSS`` - "1" = Enable RSS - "0" = Disable RSS
     - ``*RSSBaseProcNumber`` - A te általad használni kívánt base CPU
     - ``*NumRssQueues`` - RSS Queue-k száma
