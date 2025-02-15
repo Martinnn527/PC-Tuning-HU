@@ -761,16 +761,10 @@ C:\bin\disable-scheduled-tasks.ps1
 
 Nyisd meg a CMD-t és másold be az alábbi parancsokat:
 
-- Állítsd be hogy a jelszó soha ne járjon le. Ezáltal a Windows nem fogja rendszeresen kérni hogy változtasd meg a jelszavad:
+- Ha használsz jelszót állítsd be hogy soha ne járjon le. Ezáltal a Windows nem fogja rendszeresen kérni hogy változtasd meg a jelszavad:
 
 ```bat
 net accounts /maxpwage:unlimited
-```
-- Tisztítsd ki a WinSxS mappát:
-(Ez eltarthat pár percig) 
-
-```bat
-DISM /Online /Cleanup-Image /StartComponentCleanup /ResetBase
 ```
 
 - Tiltsd le a lefoglalt tárhelyet:
