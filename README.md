@@ -789,8 +789,6 @@ reg add "HKLM\SYSTEM\CurrentControlSet\Services\SysMain" /v "Start" /t REG_DWORD
 
   ``Advanced -> Performance -> Settings -> Adjust for best performance``
 
-- Tiltsd le a paging file-t hogy elkerüld a szükségtelen I/O-t.
-
 - Kapcsolj ki mindent a Win+I megnyomásával, a **System -> Notifications and actions**-ben 
     
 ## 5.12 Runtime-ok feltelepítése
@@ -1354,6 +1352,9 @@ C:\SetTimerResolution.exe --resolution 5000 --no-console
 ## 5.41 Paging File
 
 Legtöbb esetben ajánlott bekapcsolva hagyni, ami az alap beállítás. Van egy érv, hogy jobb, ha kikapcsolod abban az esetben ha elég RAM-al rendelkezel a játékhoz mivel csökkenti az I/O overhead-et és a rendszermemória gyorsabb mint a disk, azonban FPS drop-okat eredményezhet akkor is ha a memória kihasználtsága közel sem éri el a 100%-ot.
+
+- **Win+R -> sysdm.cpl -> Advanced -> A Performance szekciónál Settings -> Advanced -> A Virtual Memory alatt Change -> Pipáld ki az "Automatically manage paging file size for all drives -> Válaszd ki a No paging file-t -> Set
+
 
 ## 5.42 Cleanup és karbantartás
 
