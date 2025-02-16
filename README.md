@@ -1322,8 +1322,7 @@ Az alapértelmezett 15,625ms-os felbontásnál nagyobb pontosságot igénylő al
 A timer resolution megvalósítása a Windows 10 2004+-ben úgy változott, hogy a hívó folyamat felbontásának emelése nem befolyásolja a rendszert globális szinten, vagyis az A folyamat 1 ms-ra emelése nem befolyásolja a B folyamatot az alapértelmezett 15,625 ms-os felbontásnál, ellentétben a korábbiakkal. Ez önmagában nagyszerű változás, mert csökkenti az overhead-et, mivel más folyamatok, például a tétlen háttérfolyamatok nem kapnak gyakran kiszolgálást a scheduler-től, és a hívó folyamat szükség szerint nagyobb pontosságot kap. Azonban ez korlátokat eredményez, ha nagyobb felbontást, például 0,5ms-ot szeretnénk kihasználni. Tekintettel arra, hogy a játékok nem nyílt forráskódúak a kód módosításához, valamint a DLL-injection-t vagy binary patching-et megakadályozza az anticheat, az egyetlen lehetőség az, hogy globálisan állítod be, amely az alábbi registry directory-ban alkalmazható Windows Server és Windows 11+ rendszereken.
 
 ```bat
-[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\kernel]
-"GlobalTimerResolutionRequests"=dword:00000001
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\kernel" /v GlobalTimerResolutionRequests /t REG_DWORD /d "1" /f
 ```
 
 Ez lehetővé teszi a felbontás növelését egy külön folyamat során, ami azt eredményezi, hogy a kívánt alkalmazás, például egy játék nagyobb pontosságot kap. Azonban, mint korábban említettük, a folyamatonkénti mód csökkenti a CPU-overhead-et, ami a globális beállítás visszaállítása esetén már nem áll fenn, és a háttérfolyamatok is szükségtelenül gyakran kiszolgálásra kerülnek. Az RTSS egy alternatív módszer a framerate korlátozására, és hybrid-waiting-et használ, ami nagyobb pontosságot eredményez, miközben megszűnik a GlobalTimerResolution visszaállításának szükségessége.
