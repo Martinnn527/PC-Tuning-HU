@@ -1234,7 +1234,7 @@ Abban az esetben ha a routered támogatja a Quality of Service beállítást, ak
 
 Opcionálisan használj [DiscordFixer](https://github.com/HerXayah/Discord-Fixer)-t. 
 
-  - Lásd [research.md/discord-fixer](/docs/research.md#3-discordfixer)
+  - Lásd [docs/research.md/discord-fixer](/docs/research.md#3-discordfixer)
 
 ### 5.36.8 Epic Games
 
