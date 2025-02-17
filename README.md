@@ -702,10 +702,10 @@ C:\bin\disable-process-mitigations.bat
 - Windows Server-en globálisan kikapcsolható a Telemetry az alábbi CMD parancsokkal.
 
   ```bat
-  reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WSDAPI\AppCompat" /v AllowTelemetry /t REG_DWORD /d "0" /f
+  reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WSDAPI\AppCompat" /v AllowTelemetry /t REG_DWORD /d "0" /f
   ```
   ```bat
-  reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WSDAPI\AppCompat" /v AITEnable /t REG_DWORD /d "0" /f
+  reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WSDAPI\AppCompat" /v AITEnable /t REG_DWORD /d "0" /f
 
 ## 5.6 Privacy Options
 
@@ -716,7 +716,7 @@ C:\bin\disable-process-mitigations.bat
 Bizonyos könyvtárak a fájlrendszeren indexelve vannak a Windows keresési funkcióihoz, amelyeket a Win+R megnyomása után a ``control srchadmin.dll`` beírásával megtekinthetsz. Az indexelés időszakosan a háttérben fut, és gyakran észrevehető CPU-terhelést okoz, amely a Process Explorer segítségével megfigyelhető, ahogyan az a [Process Explorer]() szekcióban levan írva. Ezért ajánlott a keresési indexelést globálisan letiltani a Windows Search szolgáltatás kikapcsolásával, azonban ez korlátozhatja a keresési funkciókat.
 
 ```bat
-reg add "HKLM\SYSTEM\CurrentControlSet\Services\WSearch" /v "Start" /t REG_DWORD /d "4" /f
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WSearch" /v "Start" /t REG_DWORD /d "4" /f
 ```
 
 ## 5.8 Idő, nyelv és régió
@@ -776,7 +776,7 @@ DISM /Online /Set-ReservedStorageState /State:Disabled
 - Ha nincs jelen HDD a rendszeren akkor a Superfetch/Prefetch letiltható:
 
 ```bat
-reg add "HKLM\SYSTEM\CurrentControlSet\Services\SysMain" /v "Start" /t REG_DWORD /d "4" /f
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SysMain" /v "Start" /t REG_DWORD /d "4" /f
 ```
 
 - Írd be a következőt Win+R-be: ``sysdm.cpl`` majd állítsd be az alábbiakat:
@@ -1071,7 +1071,7 @@ Ez a helyes módja a szolgáltatások kikapcsolásának. Nem kell egyesével kik
 - Használd az alábbi parancsot hogy a Software Protection ne próbáljon elindulni 30 másodpercenként miközben a szolgáltatások kivannak kapcsolva.
 
 ```bat
-reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SoftwareProtectionPlatform" /v "InactivityShutdownDelay" /t REG_DWORD /d "4294967295" /f
+reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SoftwareProtectionPlatform" /v "InactivityShutdownDelay" /t REG_DWORD /d "4294967295" /f
 ```
 
 - Nyisd meg a CMD-t a ``service-list-builder`` mappájában.
@@ -1130,7 +1130,7 @@ fsutil behavior set disablelastaccess 1
 
 - ets-enable.reg
 ```bat
-reg export "HKLM\SYSTEM\CurrentControlSet\Control\WMI\Autologger" "C:\ets-enable.reg"
+reg export "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\WMI\Autologger" "C:\ets-enable.reg"
 ```
 - ets-disable.reg
 
@@ -1159,7 +1159,7 @@ Példa: egy 1000-es polling rate-ű egér minden 1ms-ban küld adatot. Ha csak a
 - Töltsd le az [RWEverything](http://rweverything.com/download/)-et és másold be az alábbi parancsot hogy letiltsd a ``Microsoft Vulnerable Driver Blocklist``-et. 
 
 ```bat
-reg add "HKLM\SYSTEM\CurrentControlSet\Control\CI\Config" /v "VulnerableDriverBlocklistEnable" /t REG_DWORD /d "0" /f
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\CI\Config" /v "VulnerableDriverBlocklistEnable" /t REG_DWORD /d "0" /f
 ```
 
 - A ``bin`` mappában lévő [XHCI-IMOD-Interval.ps1](/bin/XHCI-IMOD-Interval.ps1) fájlt másold be a C:\-be. Ha az RWEverything-et máshova telepítetted akkor a ps1 fájlban a ``$rwePath = "C:\Program Files\RW-Everything\Rw.exe"`` sort írd át. Csinálj egy shortcut-ot ``shell:startup``-ba. Jobb klikk a fájlra -> ``Properties -> Shortcut`` és a Target helyére másold be az alábbi sort.
@@ -1203,7 +1203,7 @@ reg add "HKCU\SYSTEM\GameConfigStore" /v "GameDVR_FSEBehavior" /t REG_DWORD /d "
 - Ha ``Hardware Composed: Independent Flip``-en ragadtál és másik presentation mode-ot szeretnél használni másold be CMD-be a következőt:
 
 ```bat
-reg add "HKLM\SOFTWARE\Microsoft\Windows\Dwm" /v "OverlayTestMode" /t REG_DWORD /d "5" /f
+reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\Dwm" /v "OverlayTestMode" /t REG_DWORD /d "5" /f
 ```
 
 ### 5.36.4 Game Mode
