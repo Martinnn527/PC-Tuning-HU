@@ -1248,8 +1248,7 @@ Töltsd le a [NoSteamWebHelper](https://github.com/Aetopia/NoSteamWebHelper)-t.
 
 - Másold be az **umpdc.dll**-t abba a mappába ahol a Steam.exe található.
 
-Így mostantól automatikusan bezáródik a NoSteamWebHelper.exe amikor elindítasz egy játékot azonban amikor bezárod újra elindul hogy maga a Steam applikáció elérhető legyen.
-Vedd figyelembe hogy a Steam overlay nem lesz elérhető játék közben.
+Így mostantól automatikusan bezáródik a CEF/Chromium Embedded Framework amikor elindítasz egy játékot azonban amikor bezárod újra elindul hogy maga a Steam applikáció elérhető legyen. Vedd figyelembe hogy a Steam overlay nem lesz elérhető játék közben.
 
 ## 5.37 Interruptok és DPC-k
 
