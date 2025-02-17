@@ -1226,6 +1226,16 @@ Csak akkor műkodik hogyha a routered támogatja a Quality of Service beállít�
 
 ### 5.36.7 Discord
 
+- Data & Privacy - Use data to improve Discord - OFF
+
+- Voice & Video - Hardware Acceleration - OFF
+
+- Voice & Video - Enable Quality of Service High Packet Priority - OFF
+
+- Advanced - Hardware Acceleration - OFF
+
+- Game Overlay - OFF
+
 Opcionálisan használj [DiscordFixer](https://github.com/HerXayah/Discord-Fixer)-t. 
 
   - Lásd [/research.md/discord-fixer](/docs/research.md#3-discordfixer)
@@ -1237,6 +1247,7 @@ Néhány Epic-es játéknál automatikusan fut az **EOSOverlayRenderer-Win64-Shi
 ```bat
 ren "C:\Program Files (x86)\Epic Games\Launcher\Portal\Extras\Overlay\EOSOverlayRenderer-Win64-Shipping.exe" EOSOverlayRenderer-Win64-Shipping.exee
 ```
+Amiután elindítasz egy játékot, az Epic Games Launcher továbbra is fut a háttérben azonban bezárható a Steam-mel ellentétben.
 
 ### 5.36.9 Steam 
 
@@ -1254,11 +1265,7 @@ Töltsd le a [NoSteamWebHelper](https://github.com/Aetopia/NoSteamWebHelper)-t.
 
 A Windows CPU 0-án ütemez számos interruptot és DPC-t ami elég terhelő lehet egyetlen-egy CPU számára. Ezért affinity-ket kell beállítani és elkülöníteni/eloszlatni a drivereket.
 
-  - Használd a ``bin`` mappában lévő [xperf-dpcisr.bat](/bin/xperf-dpcisr.bat) scriptet hogy megfigyeld mely CPU-kon futnak a kernel-mode driverek. Nem tudod kezelni az affinity-ket anélkül, hogy tudnád mi fut melyik CPU-n.
-
-  - Ellenőrizd hogy egy ISR-hez tartozó DPC ugyanazon a CPU-n kerül-e feldolgozásra. ([példa](/media/isr-dpc-same-core.png))
-
-  - Használd a [GoInterruptPolicy](https://github.com/spddl/GoInterruptPolicy) programot az affinity-k beállítására. Az adott eszközt úgy azonosíthatod, hogy összehasonlítod a ``Location``-t Device Managerben a ``Properties -> General`` résznél a GoInterruptPolicy-ban lévő ``Location Info``-val.
+- Használd a [GoInterruptPolicy](https://github.com/spddl/GoInterruptPolicy) programot az affinity-k beállítására. Az adott eszközt úgy azonosíthatod, hogy összehasonlítod a ``Location``-t Device Managerben a ``Properties -> General`` résznél a GoInterruptPolicy-ban lévő ``Location Info``-val.
 
 ### 5.37.1 GPU és DirectX Graphics Kernel
 
@@ -1297,6 +1304,10 @@ A változtatások után ellenőrizd [xperf](/bin/xperf-dpcisr.bat)-el hogy műk�
 </details>
 
 - Lásd [Hány RSS Queue-ra van szükséged](/docs/research.md#hány-rss-queue-ra-van-szükséged)
+
+Amiután kész vagy az előbbi lépésekkel töltsd le a [Windows ADK](https://go.microsoft.com/fwlink/?linkid=2289980)-t, telepítsd fel a Windows Performance Analyzer-t és használd a ``bin`` mappában lévő [xperf-dpcisr.bat](/bin/xperf-dpcisr.bat) scriptet hogy megfigyeld helyesen működnek e az affinity policy-k.
+
+  - Ellenőrizd hogy egy ISR-hez tartozó DPC ugyanazon a CPU-n kerül-e feldolgozásra. ([példa](/media/isr-dpc-same-core.png))
 
 ## 5.38 Event Viewer ellenőrzése
 
