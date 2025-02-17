@@ -1218,11 +1218,7 @@ A Game Mode megakadályozza a Windows Update futását valamint bizonyos értes�
 
 ### 5.36.6 QoS Policy
 
-Ez a beállítás lehetővé teszi hogy a megadott applikáció csomagjait helyezze előnybe a többi applikációval szemben.
-
-Lásd: [QoS Policy beállítása](/media/dscp-46-qos-policy.png)
-
-Csak akkor műkodik hogyha a routered támogatja a Quality of Service beállítást. Ezt vagy a router oldalán, vagy pedig egy külön [applikációban](https://www.microsoft.com/en-us/download/details.aspx?id=4865) tudod ellenőrizni. [New Capture](/media/network-monitor-new-capture.png), nyisd meg a játékot, amelyre DSCP-értéket állítottál be, és reprodukálj egy olyan helyzetet, amelyben csomagok küldésére és fogadására kerül sor. Nyomj egy F5-öt hogy elkezdd a logolást, 30 mp után pedig egy F7-et. A bal oldali ablakban kattints a játék nevére, majd kattints egy packet headerre. Bővítsd a packet info-t a frame deatils alatt, és végül bővítsd az Ipv4 alkategóriát. Ekkor láthatóvá válik az egyes folyamatok aktuális DSCP-értéke. ``"DifferentiatedServices Field: DSCP: 46, ECN: 0"``
+Abban az esetben ha a routered támogatja a Quality of Service beállítást, akkor [konfigurálható egy QoS Policy](/media/dscp-46-qos-policy.png) hogy egy megadott applikáció csomagjait helyezze előnybe a többi applikációval szemben. Ezt vagy a router oldalán, vagy pedig egy külön [applikációban](https://www.microsoft.com/en-us/download/details.aspx?id=4865) tudod ellenőrizni. [New Capture](/media/network-monitor-new-capture.png), nyisd meg a játékot, amelyre DSCP-értéket állítottál be, és reprodukálj egy olyan helyzetet, amelyben csomagok küldésére és fogadására kerül sor mint pl. egy online meccs. Nyomj egy F5-öt hogy elkezdd a logolást, 30 mp után pedig egy F7-et. A bal oldali ablakban kattints a játék nevére, majd kattints egy packet headerre. Bővítsd a packet info-t a frame deatils alatt, és végül bővítsd az Ipv4 alkategóriát. Ekkor láthatóvá válik az egyes folyamatok aktuális DSCP-értéke: ``"DifferentiatedServices Field: DSCP: 46, ECN: 0"``.
 
 ### 5.36.7 Discord
 
