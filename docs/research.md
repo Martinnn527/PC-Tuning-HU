@@ -120,6 +120,6 @@ A Discord a hotkey-ek (Mute, Deafen, stb) használatához abban az esetben is le
 
 Ha azt szeretnéd hogy automatikusan DiscordFixer-en keresztül induljon el minden gép indításnál, csinálj egy shortcut-ot ``shell:startup``-ba.
 
-Érdemes megemlíteni hogy a raw input thread leállítása után sem teljesen tűnik el az egérmozgás lekövetése amikor nincs előtérben az applikáció ezért Process Explorer-ben további thread-eket tilthatsz le azonban nincs tesztelve hogy mi milyen funkcióért felelős. Az én esetemben a legtöbb cycles-t használó thread bezárása után nem tudtam képeket megnyitni böngészőben az "Open in browser" gombbal. 
+Érdemes megemlíteni hogy a raw input thread leállítása után sem teljesen tűnik el az egérmozgás lekövetése amikor nincs előtérben az applikáció ezért Process Explorer-ben további thread-eket tilthatsz le azonban nincs tesztelve hogy melyik milyen funkcióért felelős. Az én esetemben a legtöbb cycles-t használó thread bezárása után nem tudtam képeket megnyitni böngészőben az "Open in browser" gombbal. 
 
 
