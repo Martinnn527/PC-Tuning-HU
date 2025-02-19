@@ -1337,7 +1337,7 @@ A nagyobb felbontás nagyobb Sleep pontosságot eredményez, de bizonyos esetekb
 
 ### 5.40.1 Maga a Timer Resolution beállítása
 
-- Töltsd le a [SetTimerResolution](https://github.com/valleyofdoom/TimerResolution/releases)-t a ``C:\`` meghajtóba majd pedig menje be ``shell:startup``-ba -> Jobb klikk -> Create a shortcut -> C:\SetTimerResolution.exe
+- Töltsd le a [SetTimerResolution](https://github.com/valleyofdoom/TimerResolution/releases)-t a ``C:\`` meghajtóba majd pedig menj be ``shell:startup``-ba -> Jobb klikk -> Create a shortcut -> C:\SetTimerResolution.exe
 
 - Használd az alábbi példát és add hozzá a Target-hez a paramétereket.
 
