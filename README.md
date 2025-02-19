@@ -1352,7 +1352,9 @@ C:\SetTimerResolution.exe --resolution 5000 --no-console
 
 Legtöbb esetben ajánlott bekapcsolva hagyni, ami az alap beállítás. Van egy érv, hogy jobb, ha kikapcsolod abban az esetben ha elég RAM-al rendelkezel a játékhoz mivel csökkenti az I/O overhead-et és a rendszermemória gyorsabb mint a disk, azonban FPS drop-okat eredményezhet akkor is ha a memória kihasználtsága közel sem éri el a 100%-ot.
 
-- ``Win+R -> sysdm.cpl -> Advanced`` -> A ``Performance`` szekciónál ``Settings`` -> ``Advanced`` -> A ``Virtual Memory`` alatt ``Change`` -> Pipáld ki az ``Automatically manage paging file size for all drives`` opciót -> Válaszd ki a ``No paging file``-t -> ``Set``
+  - Hogy kikapcsold:
+  
+    - ``Win+R -> sysdm.cpl -> Advanced`` -> A ``Performance`` szekciónál ``Settings`` -> ``Advanced`` -> A ``Virtual Memory`` alatt ``Change`` -> Pipáld ki az ``Automatically manage paging file size for all drives`` opciót -> Válaszd ki a ``No paging file``-t -> ``Set``
 
 
 ## 5.42 Cleanup és karbantartás
