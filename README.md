@@ -783,7 +783,7 @@ reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SysMain" /v "Start
 
   ``Advanced -> Performance -> Settings -> Adjust for best performance``
 
-- Kapcsolj ki mindent a Win+I megnyomásával, a **System -> Notifications and actions**-ben 
+- Kapcsolj ki mindent a Win+I megnyomásával, a ``System`` -> ``Notifications and actions``-ben 
     
 ## 5.12 Runtime-ok feltelepítése
 
@@ -912,7 +912,7 @@ Ezt szükséges feltelepíteni mivel a start-menüvel és a Windows Search-el ka
 
 - ``Settings -> General Behavior -> Check for Windows updates on shutdown`` - Disabled
 
-- Opcionálisan használd a **bin** mappában lévő XML fájlt egy letisztult beállításért. Backup -> Load from XML file.
+- Opcionálisan használd a ``bin`` mappában lévő XML fájlt egy letisztult beállításért. Backup -> Load from XML file.
 
 ## 5.22 Spectre, Meltdown és CPU Microcode
 
@@ -1042,9 +1042,9 @@ Használj Process Explorer-t mivel a stock Task Manager a CPU kihasználtságát
 
 - [Töltsd le](https://download.sysinternals.com/files/ProcessExplorer.zip) majd pedig csomagold ki.
 
-- Másold ki a **procexp64.exe**-t egy biztonságos helyre mint pl. **C:\Windows** majd nyisd meg.
+- Másold ki a ``procexp64.exe``-t egy biztonságos helyre mint pl. ``C:\Windows`` majd nyisd meg.
 
-- **Options** -> **Replace Task Manager**. Innentől ha megnyitod a Task Manager-t automatikusan a Process Explorer nyílik meg. Opcionálisan állítsd be a továbbiakat:
+- ``Options`` -> ``Replace Task Manager``. Innentől ha megnyitod a Task Manager-t automatikusan a Process Explorer nyílik meg. Opcionálisan állítsd be a továbbiakat:
 
   - Confirm Kill 
 
@@ -1052,7 +1052,7 @@ Használj Process Explorer-t mivel a stock Task Manager a CPU kihasználtságát
   
   - Always On Top (jól jön ha a játék crashel vagy lefagy)
 
-  - **View** -> **Select Columns** -> **Process Performance** majd pedig pipáld be a **Context Switch Delta**-t és a **CPU Cycles Delta**-t.
+  - ``View`` -> ``Select Columns`` -> ``Process Performance`` majd pedig pipáld be a ``Context Switch Delta``-t, a ``CPU Cycles Delta``-t és a ``Base Priority``-t.
 
 
 ## 5.29 Szolgáltatások és driverek
@@ -1238,7 +1238,7 @@ Opcionálisan használj [DiscordFixer](https://github.com/HerXayah/Discord-Fixer
 
 ### 5.36.8 Epic Games
 
-Néhány Epic-es játéknál automatikusan fut az **EOSOverlayRenderer-Win64-Shipping.exe** ami általában a **C:\Program Files (x86)\Epic Games\Launcher\Portal\Extras\Overlay** directory-ban található. Használd az alábbi parancsot hogy átírd a nevét, abban az esetben ha az Epic Games-t az alapértelmezett helyre telepítetted. Játékbeli vásárlásokhoz (pl. VBucks feltöltés) kötelező futnia. Ebben az esetben csak írd vissza a nevét és indítsd újra a játékot.
+Néhány Epic-es játéknál automatikusan fut az ``EOSOverlayRenderer-Win64-Shipping.exe`` ami általában a ``C:\Program Files (x86)\Epic Games\Launcher\Portal\Extras\Overlay`` directory-ban található. Használd az alábbi parancsot hogy átírd a nevét, abban az esetben ha az Epic Games-t az alapértelmezett helyre telepítetted. Játékbeli vásárlásokhoz (pl. VBucks feltöltés) kötelező futnia. Ebben az esetben csak írd vissza a nevét és indítsd újra a játékot.
 
 ```bat
 ren "C:\Program Files (x86)\Epic Games\Launcher\Portal\Extras\Overlay\EOSOverlayRenderer-Win64-Shipping.exe" EOSOverlayRenderer-Win64-Shipping.exee
@@ -1247,13 +1247,13 @@ Amiután elindítasz egy játékot, az Epic Games Launcher továbbra is fut a h�
 
 ### 5.36.9 Steam 
 
-- Bal fent **Steam** -> **Settings** -> **Interface**, kapcsold ki az **Enable smooth scrolling in web view** és az **Enable GPU Accelerated rendering in web views** opciót.
+- Bal fent ``Steam`` -> ``Settings`` -> ``Interface``, kapcsold ki az ``Enable smooth scrolling in web view`` és az ``Enable GPU Accelerated rendering in web views`` opciót.
 
-- **Library** -> kapcsold be a **Low Bandwith Mode**-ot, **Low Performance Mode**-ot és a **Disable Community Content**-et.
+- ``Library`` -> kapcsold be a ``Low Bandwith Mode``-ot, ``Low Performance Mode``-ot és a ``Disable Community Content``-et.
 
 Töltsd le a [NoSteamWebHelper](https://github.com/Aetopia/NoSteamWebHelper)-t.
 
-- Másold be az **umpdc.dll**-t abba a mappába ahol a Steam.exe található.
+- Másold be az ``umpdc.dll``-t abba a mappába ahol a Steam.exe található.
 
 Így mostantól automatikusan bezáródik a CEF/Chromium Embedded Framework amikor elindítasz egy játékot azonban amikor bezárod újra elindul hogy maga a Steam applikáció elérhető legyen. Vedd figyelembe hogy a Steam overlay nem lesz elérhető játék közben.
 
@@ -1280,7 +1280,7 @@ Támogatnia kell az MSI-X-et ahhoz hogy az ISR azon a CPU-n fusson amelyik végr
 
   - Navigálj a következő registry key-hez: ``HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Class\{4d36e972-e325-11ce-bfc1-08002be10318}\0000``, használd a te driveredhez tartozó [Driver Key](/media/find-driver-key-example.png)-t.
 
-  - Add hozzá/írd át a következő értékeket (mindegyik **String**):
+  - Add hozzá/írd át a következő értékeket (mindegyik ``String``):
 
     - ``*RSSProfile`` - "4" - különben a többi érték figyelmen kívül maradhat 
     - ``*RSS`` - "1" = Enable RSS - "0" = Disable RSS
@@ -1353,7 +1353,7 @@ C:\SetTimerResolution.exe --resolution 5000 --no-console
 Legtöbb esetben ajánlott bekapcsolva hagyni, ami az alap beállítás. Van egy érv, hogy jobb, ha kikapcsolod abban az esetben ha elég RAM-al rendelkezel a játékhoz mivel csökkenti az I/O overhead-et és a rendszermemória gyorsabb mint a disk, azonban FPS drop-okat eredményezhet akkor is ha a memória kihasználtsága közel sem éri el a 100%-ot.
 
   - Hogy kikapcsold:
-  
+
     - ``Win+R -> sysdm.cpl -> Advanced`` -> A ``Performance`` szekciónál ``Settings`` -> ``Advanced`` -> A ``Virtual Memory`` alatt ``Change`` -> Pipáld ki az ``Automatically manage paging file size for all drives`` opciót -> Válaszd ki a ``No paging file``-t -> ``Set``
 
 
