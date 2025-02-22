@@ -140,11 +140,11 @@ Hardver > BIOS > Operációs rendszer
 
 ## 1.1 General
 
-- Lehetőleg minden nagyobb alkatrészcsere után telepítsd újra a Windowst (pl alaplap, cpu, stb). Videókártya az egyik kivétel.
+- Lehetőleg minden nagyobb alkatrészcsere után telepítsd újra a Windowst.
 
 - Kerüld a csavarok túlfeszítését.
 
-- Győződj meg róla hogy a kábelek rendesen bevannak dugva és nem lazák (pl. táp kábelek)
+- Győződj meg róla hogy a kábelek rendesen bevannak dugva és nem lazák (pl. tápkábelek)
 
 - Érdemes vezetékes eszközöket használni, mivel a vezetéknélküli eszközök hajlamosak aggresszív energiatakarékosságot alkalmazni a hosszabb akkumulátor élettartam érdekében, a túlzott EMI hátrányaival együtt.
 
@@ -152,7 +152,7 @@ Hardver > BIOS > Operációs rendszer
 
 - Frissítsd az SSD, NIC (Network Interface Controller), és a többi periféria firmware-ét.
 
-- Az alaplap kézikönyvében leírtak alapján szereld be a RAM modulokat a megfelőle foglalatokba. Legtöbb esetben dual-channel használata biztosítja a legjobb teljesítményt.
+- 4 DIMM-es alaplap esetében a kézikönyvben leírtak alapján szereld be a RAM modulokat a megfelőle foglalatokba. Legtöbb esetben ez a 2-4 slot.
 
 - Használj PCIe portokat amelyek egyenesen a CPU-ba mennek a PCH helyett. Ez jellemzően az M.2 és NVME SSD-kre és a GPU-ra vonatkozik. [HWiNFO](https://www.hwinfo.com/)-ban a PCIe Bus kategóriánál, vagy az alaplapod oldalán lévő manual-ban a PCI részlegnél találod meg a kellő információt.
 
@@ -160,9 +160,9 @@ Hardver > BIOS > Operációs rendszer
 
   - [Példa](/media/hwinfo-pcie-width-speed.png)
 
-- A nem P-State 0-ra korlátozott GPU-k esetében a kapcsolat sebessége csökkenhet miközben nincs terhelve. 
-  
-  - Ellenőrizd a [GPU-Z](https://www.techpowerup.com/gpuz/) programban a beépített renderelési teszt segítségével.
+  - A nem P-State 0-ra korlátozott GPU-k esetében a kapcsolat sebessége csökkenhet miközben nincs terhelve. 
+
+    - Ellenőrizd a [GPU-Z](https://www.techpowerup.com/gpuz/) programban a beépített renderelési teszt segítségével.
 
 - Ha egynél több beépített NIC-ed van, érdemes azt használni amelyik támogatja az MSI-X-et, mivel ez szükséges az RSS ([Receive-Side-Scaling](https://learn.microsoft.com/en-us/windows-hardware/drivers/network/introduction-to-receive-side-scaling)) helyes működéséhez. Ezt a 
 [GoInterruptPolicy](https://github.com/spddl/GoInterruptPolicy) programban ellenőrizni tudod.
@@ -173,11 +173,10 @@ Hardver > BIOS > Operációs rendszer
 
 - Gyakran érdemes tisztítani az alkatrészeket és a hűtőbordákat, mivel ha porosak, csökkentik a légáramlást és zárlatot okozhatnak.
 
-- Győzödj meg róla, hogy nincsen IRQ Sharing a rendszeren. Ellenőrizni tudod: ``Win+R`` -> ``msinfo32``, rányomsz a ``Hardware Resources``-re, majd a ``Conflicts/Sharing``-re. A ``Memory Address``-t  és az ``I/O Port``-ot figyelm kívül hagyhatod.
-
 - Használj GPU támasztót (GPU Bracket) hogy elkerüld a PCIe slot sérülését.
 
 - Kerüld a daisy chaining-et 
+
   - Lásd [Installation Remark for High Power Consumption Graphics Cards | Seasonic](https://knowledge.seasonic.com/article/8-installation-remark-for-high-power-consumption-graphics-cards)
 
 ## 1.2 Hűtés
@@ -187,6 +186,7 @@ Hardver > BIOS > Operációs rendszer
 - Érdemes a gépházad oldalát levenni a légáramlás segítése érdekében.
 
 - Használj magas minőségű hővezető pasztát és megfelelő mennyiséget.
+
   - Lásd [Best Thermal Paste for CPUs | Tom’s Hardware](https://www.tomshardware.com/best-picks/best-thermal-paste)
 
 - Ha heatsink nélküli NVME/M.2 SSD-t szerelsz be ügyelj arra hogy az alaplapon lévő thermal pad-ekről leveszed a fóliát.
@@ -199,20 +199,20 @@ Hardver > BIOS > Operációs rendszer
   
   - Az alaplapi ventilátorcsatlakozók általában 1A (12W) körüli áramerősséget bírnak, de ez alaplaponként eltérhet. Ha túl sok ventilátort csatlakoztatsz egyetlen headerre egy splitterrel, az túlterhelheti az áramkört, és akár meghibásodást is okozhat. Az RGB-s ventilátorok vagy egyes nagy teljesítményű ventilátorok még ennél is több áramot igényelhetnek.
 
-- Pasztázd újra a GPU-t.
+- Pasztázd újra a GPU-t és cseréld ki a gyári ventilátorokat ha nem megfelelőek.
 
 
 ## 1.3 Perifériák konfigurálása
 
-- A legtöbb modern periféria támogatja az onboard memory profilet. Állítsd be őket mielőtt újratelepítenéd a windowst, hogy ne kelljen a későbbi módosítások érdekében feltelepíteni a sok bloatware-t. Több infó a bloatware és a valós idejű applikáció elkülőnítéséről [dual-boot](https://en.wikipedia.org/wiki/Multi-booting) használatával a következő szekcióban.
+- A legtöbb modern periféria támogatja az onboard memory profile-t. Állítsd be őket mielőtt újratelepítenéd a Windowst, hogy ne kelljen a későbbi módosítások érdekében feltelepíteni a sok bloatware-t.
 
-- Magasabb DPI csökkenti a latency-t. Használj minimum 3200 dpi-t. Ügyelj arra hogy sensor smoothing ne lépjen életbe magasabb DPI használatakor. A windowsban az egér beállítások közt lejjebb viheted a pointer speedet tetszésed szerint ha a játék raw inputot használ.
+- Magasabb DPI csökkenti a latency-t. Használj minimum 3200 dpi-t. Ügyelj arra hogy sensor smoothing ne lépjen életbe magasabb DPI használatakor. Windowsban az egér beállítások közt lejjebb viheted a pointer speedet tetszésed szerint ha a játék raw inputot használ.
 
-- Magasabb polling rate csökkenti a jittert. Az 1000Hz-nél magasabb polling rate hardvertől függően negatívan befolyásolhatja a teljesítményt, ezért ennek megfelőlen kell beállítani. Ez nem akkora probléma a 2023 májusi Windows 11 Raw Input Stack update után ami limitálja a nem előtérben lévő programok polling frekvenciáját 125hz-re.
+- Magasabb polling rate csökkenti a jittert. Azonban 1000Hz-nél (1ms) magasabb polling rate hardvertől függően negatívan befolyásolhatja a teljesítményt, ezért ennek megfelőlen kell beállítani. Ez nem akkora probléma a 2023 májusi Windows 11 Raw Input Stack update után ami limitálja a nem előtérben lévő programok polling frekvenciáját 125hz-re (8ms).
 
-- Az USB kimenet ~7A-ra van korlátozva, és az RGB felesleges energiát igényel. Fontold meg az RGB kikapcsolását, mivel az effektek/animációk nagy terhet tesznek az MCU-ra, és késleltethetik a többi folyamatot. [OpenRGB](https://openrgb.org/) egy jó választás az RGB módosítására.
+- Az USB kimenet ~7A-ra van korlátozva, és az RGB felesleges energiát igényel. Fontold meg az RGB kikapcsolását, mivel az effektek/animációk nagy terhet tesznek az MCU-ra (Micro Controller Unit), és késleltethetik a többi folyamatot. [OpenRGB](https://openrgb.org/) egy jó választás az RGB módosítására.
 
-- Sűrített levegő segítségével tisztítsd az egér szenzorát.
+- Sűrített levegővel tisztítsd az egér szenzorát.
 
 ## 1.4 EMI minimalizálása
 
@@ -226,13 +226,13 @@ Hardver > BIOS > Operációs rendszer
 
 - Húzd ki az alaplapból a felesleges eszközöket, perifériákat, mint például LED-ek, RGB, előlapi csatlakozók, nem használt HDD-k.
 
-- Ethernet kábel vásárlásnál ajánlatos "shielded", vagy "árnyékolt" kábelt venni mivel ezek olyan kialakítással rendelkeznek ami segít kizárni a zavaró jeleket, amelyek befolyásholhatják a hálózati adatvitelt.
+- Ethernet kábel vásárlásnál ajánlatos árnyékolt kábelt venni mivel ezek olyan kialakítással rendelkeznek ami segít kizárni a zavaró jeleket, amelyek befolyásholhatják a hálózati adatvitelt.
 
 ## 1.5 USB portok elrendezésének konfigurálása
 
 Használd a kívánt XHCI-controller első néhány portját. Előfordulhat, hogy némelyikük fizikailag nem megállapítható, amit az [USB Device Tree Viewer](https://www.uwe-sieber.de/usbtreeview_e.html) programban megnézhetsz.
 
-  - A Ryzen-es rendszerek rendelkeznek egy XHCI-vezérlővel, amely közvetlenül a CPU-hoz csatlakozik. Ez [HWiNFO](https://www.hwinfo.com/)-ban a ``PCIe Bus`` kategóriában azonosítható. 
+  - A Ryzen-es rendszerek rendelkeznek egy XHCI-controller-rel, amely közvetlenül a CPU-hoz csatlakozik. Ez [HWiNFO](https://www.hwinfo.com/)-ban a ``PCIe Bus`` kategóriában azonosítható. 
 
      - [Példa](/media/ryzen-xhci-controller.png)      
 
@@ -258,37 +258,36 @@ Frissítés útán győződj meg róla, hogy a Spectre, Meltdown és CPU Microco
 
 ## 2.3 BIOS Reset
 
-Ha a CMOS reset nem állítja teljes mértékben vissza alaphelyzetbe a BIOS-t, használd az USB Flashback funkciót.
+Ha a CMOS reset nem állítja teljes mértékben alaphelyzetbe a BIOS-t, használd az USB Flashback funkciót.
 
 ## 2.4 Resizable BAR
 
-``Above 4G Encoding`` engedélyezése szükséges a működéséhez
+- ``Above 4G Encoding`` engedélyezése szükséges a működéséhez
 
-Csak RTX 3000 és annál újabb GPU-kon támogatott.
+- Csak RTX 3000 és annál újabb GPU-kon támogatott.
 
-Ellenőrizd a Resizable BAR státuszát [GPU-Z](https://www.techpowerup.com/gpuz)-ben.
+- Ellenőrizd a Resizable BAR státuszát [GPU-Z](https://www.techpowerup.com/gpuz)-ben.
 
 ## 2.5 Rejtett beállítások elérése
 
-Számos alaplap gyártó elrejt sok hasznos beállítást. 
-
-  - A legegyszerűbb megoldás erre az hogy az UEFI-ben lévő összes látható beállítást konfigurálod majd pedig [SCEWIN](https://github.com/ab3lkaizen/SCEHUB)-ben a maradék rejtett beállítással folytatod.
+Számos alaplap gyártó elrejt sok hasznos beállítást. A legegyszerűbb megoldás erre az hogy az UEFI-ben lévő összes látható beállítást konfigurálod majd pedig [SCEWIN](https://github.com/ab3lkaizen/SCEHUB)-ben a maradék rejtett beállítással folytatod.
 
 ## 2.6 Hyperthreading/SMT
 
-Kapcsold ki a [Hyper-Threading/Simultaneous Multithreading](https://en.wikipedia.org/wiki/Hyper-threading) funkciót. Ez például renderelés esetén hasznos lehet de mivel a CPU-nkénti több végrehajtó thread használtata növeli a processzor erőforrásainak igénybevételét, jóval nagyobb hőfokokkal és a rendszer nagyobb latencyjének, és jitterének potenciális forrása. Ha elegendő CPU-val rendelkezel a játék futtatásához, mindenféleképpen kapcsold ki. Ez a koncepció alkalmazható az Intel E-coreok esetében is.
+Kapcsold ki a [Hyper-Threading/Simultaneous Multithreading](https://en.wikipedia.org/wiki/Hyper-threading) funkciót. Ez például renderelés esetén hasznos lehet de mivel a CPU-nkénti több végrehajtó thread használtata növeli a processzor erőforrásainak igénybevételét, jóval nagyobb hőfokokkal jár és a rendszer nagyobb latencyjének, jitterének potenciális forrása. Ha elegendő CPU-val rendelkezel a játék futtatásához, mindenféleképpen kapcsold ki. Ez a koncepció alkalmazható az Intel E-coreok esetében is.
 
 ## 2.7 Power States
 
-- Kapcsold ki a C-States-eket. Keresd a *C1E*, *C6* kifejezéseket. S-States (*S3*, *S6*, *Hibernation*).
+- Kapcsold ki a C-States-eket. Keresd a *C1E*, *C6* kifejezéseket. Kapcsold ki az S-States-eket (*S3*, *S6*, *Hibernation*).
   
   - Ellenőrizd a C-State residency-t [HWiNFO](https://www.hwinfo.com/)-ban
   
   - Ellenőrizd az S-States-eket ``powercfg /a``-val 
 
-- Kapcsold ki az összes Power Saving funkciót, mint például: *ASPM* (Active State Power Management), ALPM (Aggressive Link Power Managemenet), DRAM Power Down, Hibernation, Clock Gating. Keresd a "power management", "power saving" kifejezéseket.  
+- Kapcsold ki az összes Power Saving funkciót, mint például: ASPM (Active State Power Management), ALPM (Aggressive Link Power Managemenet), DRAM Power Down, Hibernation, Clock Gating, Power Gating. Keresd a "power management", "power saving" kifejezéseket.  
 
 ## 2.8 Virtualization
+
 Kapcsold ki a Virtualization/SVM Mode, Intel VT-d/AMD-Vi beállításokat, mivel ezek a memória hozzáférés késeltetését növelhetik. A Virtualization szintén hatással lehet a BCLK-ra.
    
   - Ellenőrizd a Virtualization-t Task Manager-ben.
@@ -307,7 +306,7 @@ Kapcsold ki a Trusted Platform Module-t (TPM), mert előfordulhat, hogy a rendsz
 
 ## 2.11 Secure Boot
 
-Kapcsold ki a Secure Boot-ot. (Windows 11-en, a Vanguard, FACEIT, igényli a bekapcsolva hagyását.)
+Kapcsold ki a Secure Boot-ot. (Windows 11-en a Vanguard, FACEIT, igényli a bekapcsolva hagyását.)
 
   - ``Win+R`` -> ``msinfo32``-ben tudod ellenőrizni az állapotát.
 
@@ -327,13 +326,13 @@ Kapcsold ki a Spread Spectrumot és győződj meg róla hogy a BCLK frequency ke
 
 ## 2.14 PCIe Link Speeds
 
-PCIe Link Speed-et tedd a lehető legmagasabbra, mint például Gen 3, stb. Sose hagyd Auto-n.
+PCIe Link Speed-et tedd a lehető legmagasabbra, mint például Gen 4, stb. Sose hagyd Auto-n.
   
-  - Keresd a ``PCIe Speed``, ``Gen3`` kifejezéseket hogy megtaláld az adott beállítást [SCEWIN](https://github.com/ab3lkaizen/SCEHUB)-ben.
+  - Keresd a ``PCIe Speed``, ``Gen4`` kifejezéseket.
 
 ## 2.15 Statikus CPU frekvencia
 
-Ha statikus frekvenciát/feszültséget konfigurálsz a CPU-hoz, kapcsold ki a dynamic frequency funkciókat mint például a Speed shift, speedstep, és állítsd az AVX offsetet 0-ra, vagy tedd ``Disabled``-re. Precision Boost Overdrive (PBO) a Ryzen CPU-k esetében a statikus frekvencia és feszültésg alternatívája (X3D kivétel).
+Ha statikus frekvenciát/feszültséget konfigurálsz a CPU-hoz, kapcsold ki a dynamic frequency funkciókat mint például a Speed shift, speedstep, és állítsd az AVX offset-et 0-ra, vagy tedd ``Disabled``-re. Precision Boost Overdrive (PBO) a Ryzen CPU-k esetében a statikus frekvencia és feszültésg alternatívája (X3D kivétel).
 
   - Egyes esetekben a fent említett beállítások megakadályozhatják, hogy a processzor a BIOS-ban történő manuális beállítás ellenére is túllépje az alapfrekvenciát. Ennek megfelelően állítsd be, ha ez előfordul, és [HWiNFO](https://www.hwinfo.com/)-ban ellnőrizd az órajeleket.
 
@@ -349,8 +348,7 @@ Kapcsold be a High Precision Event Timer-t.
 
 ## 2.18 Software telepítési beállítások
 
-Ha automatikus software telepítéssel kapcsolatos beállítást találsz (pl. ASUS Armoury Crate, MSI Utility) kapcsold ki
-
+Ha automatikus software telepítéssel kapcsolatos beállítást találsz (pl. ASUS Armoury Crate, MSI Utility) kapcsold ki.
 
 ## 2.19 Legacy USB Support
 
@@ -362,7 +360,7 @@ Kapcsold ki az XHCI Hand-off-ot.
 
 ## 2.21 Execute Disable Bit/NX Mode
 
-Kapcsold ki az Execute Disable Bit/NX Mode-ot. Néhány applikáció (FACEIT, Valorant) igényli a bekapcsolva hagyását.
+Kapcsold ki az Execute Disable Bit/NX Mode-ot.
 
 ## 2.22 BIOS Profilok és Backup
 
@@ -382,11 +380,11 @@ Ajánlott egy ideiglenes OS-t feltelepíteni amin OC-zol és stressz tesztelsz h
 
 - Overclock-olás közben minden változtatás előtt mentsd el a BIOS profilod, hogy ne kelljen előről kezdeni ha esetleg reset-elni kell a CMOS-t. Lásd [BIOS Profilok és backup](#222-bios-profilok-és-backup)
 
-- Egyetlen-egy erorr vagy crash is túl sok. Figyeld a WHEA-kat a [HWiNFO](https://www.hwinfo.com/) hibaszámlálójával vagy konfigurálj egy Event Viewer filter-t.
+- Egyetlen-egy error vagy crash is túl sok. Figyeld a WHEA-kat a [HWiNFO](https://www.hwinfo.com/) hibaszámlálójával vagy konfigurálj egy Event Viewer filter-t.
 
 - Figyeld a feszültségeket az esetleges overvolting elkerülése érdekében.
 
-- Számtalan tényező járul hozzá a stabilitáshoz, mint például a hőmérséklet, az energiaellátás, a hardver minősége és még sok más.
+- Számtalan tényező járul hozzá a stabilitáshoz, mint például hőmérséklet, energiaellátás, hardver minősége és még sok más.
 
 - Az Overclock-olás nem feltétlen jár jobb teljesítménnyel az error correction miatt.
 
@@ -429,7 +427,7 @@ GPU overclockolásnál előfordulhat hogy számos power limit-et fel kell oldano
 
 - Linpack
 
-  - [StresKit](https://github.com/valleyofdoom/StresKit) Linpack-je
+  - [StresKit](https://github.com/valleyofdoom/StresKit)
   - [Linpack-Extended](https://github.com/BoringBoredom/Linpack-Extended)
   - [Linpack Xtreme Bootable](https://www.techpowerup.com/download/linpack-xtreme)
   
@@ -471,13 +469,13 @@ GPU overclockolásnál előfordulhat hogy számos power limit-et fel kell oldano
 
 - NVIDIA DCH driver-ek Windows 10 1803 és annál feljebb támogatottak.
 
-- Médialejátszás során kizárólag Windows 10 1709-en a Multimedia Class Scheduler Service (MMCS) felemeli a timer resolution-t 0.5ms-re ami korlátozzá a használni kívánt timer resolution beállítását.
+- Médialejátszás során kizárólag Windows 10 1709-en a Multimedia Class Scheduler Service (MMCS) felemeli a timer resolution-t 0.5ms-re ami megakadályozza a használni kívánt timer resolution beállítását.
 
 - Windows 10 1809+ szükséges a Ray Tracing-hez NVIDIA GPU-kon.
 
 - Windows 10 2004+ szükséges a [Hardware Accelerated GPU Scheduling](https://devblogs.microsoft.com/directx/hardware-accelerated-gpu-scheduling/) használatához ami létfontosságú a DLSS Frame Generation működéséhez [(1)](https://developer.nvidia.com/rtx/streamline/get-started).
 
-- Windows 10 2004-22H2 már nem támogatott a Global Timer Resolution [(1)](https://randomascii.wordpress.com/2020/10/04/windows-timer-resolution-the-great-rule-change/). A Microsoft lehetővé tette hogy Windows Server 2022+ és Windows 11-en vissza lehessen állítani a Global Timer Resolutiont egy registry key segítségével 
+- Windows 10 2004-22H2 már nem támogatott a Global Timer Resolution [(1)](https://randomascii.wordpress.com/2020/10/04/windows-timer-resolution-the-great-rule-change/). A Microsoft lehetővé tette hogy Windows Server 2022+ és Windows 11-en vissza lehessen állítani a Global Timer Resolutiont egy registry key segítségével. 
 
 - Windows 11-nek van egy frissített scheduler-je Intel 12th Gen és felette lévő CPU-k számára [(1)](https://www.anandtech.com/show/16959/intel-innovation-alder-lake-november-4th/3) azonban ezt replikálni lehet manuális affinity policy-k beállításával bármelyik Windows verzión.
 
@@ -487,7 +485,9 @@ GPU overclockolásnál előfordulhat hogy számos power limit-et fel kell oldano
 
 - Windows Home verziók nem támogatják a Group Policy Editor-t ami szükséges lesz a rendszer konfigurálásához.
 
-- Windows Server verziók nem támogatják az Xbox controllereket valamint PS controllerek esetén a DS4 programot.
+- Windows Server verziók nem támogatják az Xbox controllereket (Driver feltelepítése nélkül nem egyáltalán nem műküdik) valamint PlayStation controllerek esetén a DS4 programot (Senki nem használja :D).
+
+- Windows Server-en nincs Game Bar, Game Mode és ehhez hasonló funkciók.
 
 
 ## 4.2 Szükséges programok letöltése
@@ -510,7 +510,7 @@ Használd a ``certutil -hashfile <file>`` parancsot hogy ellenőrizd az ISO val�
   
 ## 4.4 Build Environment előkészítése
 
-- A Windows Defender-ben a Real-Time protection-t kapcsold mivel az lassíthatja a mount és unmount folyamatát, vagy hibát is okozhat.
+- Windows Defender-ben a Real-Time protection-t kapcsold mivel az lassíthatja a mount és unmount folyamatot, vagy hibát is okozhat.
 
 - Nyisd meg a CMD-t adminként és hagyd nyitva mivel ideiglenes környezeti változókat állítunk be amelyek visszaállnak ha bezárod.
 
@@ -550,21 +550,25 @@ Használd a ``certutil -hashfile <file>`` parancsot hogy ellenőrizd az ISO val�
 
   ```bat
   if exist "%EXTRACTED_ISO%\sources\install.wim" (echo true) else (echo false)
+  ```
+  ```bat
   if exist "%MOUNT_DIR%" (echo true) else (echo false)
+  ```
+  ```bat
   if exist "%OSCDIMG%" (echo true) else (echo false)
   ```
 
 ## 4.5 Nem használt verziók eltávolítása
 
-Távolíts el minden nem kívánt verziót. Használd az alábbi parancsokat hogy megkapd az adott kiadás index-ét majd eltávolítsd azokat. A végére csak a telepíteni kívánt verziónak kell megmaradnia az 1-es indexen. 
+Távolíts el minden nem kívánt verziót. Használd az alábbi parancsokat hogy megkapd az adott kiadás index-ét majd eltávolítsd azokat. A végére csak a telepíteni kívánt verziónak kell megmaradnia az 1-es indexen. Ajánlott minden verzió eltávolítása után futtatni a ``DISM /Get-WimInfo /WimFile:"%EXTRACTED_ISO%\sources\install.wim"`` parancsot hogy tisztán átlásd melyiket törlöd le.
 
  - Ajánlott verziók:
 
-   - Professional
+   - Professional/Pro
 
-   - Windows Server esetén: Standard (Desktop Experience)
+   - Windows Server esetén: Standard (Desktop Experience).
 
-- Az összes elérhető verzió és a hozzájuk tartozó indexek lekérése
+- Az összes elérhető verzió és a hozzájuk tartozó indexek lekérése:
 
   ```bat
   DISM /Get-WimInfo /WimFile:"%EXTRACTED_ISO%\sources\install.wim"
@@ -602,8 +606,7 @@ Ilyenkor érdemes az ethernet driver-t is bemásolni/integrálni.
 
 ## 4.9 Unmount és Commit
 
-Futtasd az alábbi parancsot a módosítások véglegesítéséhez az ISO-n. Ha hibaüzenetet kapsz, ellenőrizd, hogy a directory üres-e az ``explorer "%MOUNT_DIR%"
-`` beírásával. Ha üres, figyelmen kívül hagyhatod a hibaüzenetet, azonban ha nem akkor zárj be minden mappát és próbáld meg a parancsot újrafuttatni.
+Zárd be a %MOUNT_DIR% mappát majd futtasd az alábbi parancsot a módosítások véglegesítéséhez az ISO-n:
 
 ```bat
 DISM /Unmount-Wim /MountDir:"%MOUNT_DIR%" /Commit && rd /s /q "%MOUNT_DIR%"
@@ -611,7 +614,7 @@ DISM /Unmount-Wim /MountDir:"%MOUNT_DIR%" /Commit && rd /s /q "%MOUNT_DIR%"
 
 # 4.10 ISO Compression
 
-Ennek nincs különösen semmi előnye a méret csökkentésén kívül. Azonban telepítés közben a Windows setup automatikusan végrehajtja ezt a folyamatot ami sok időbe telhet.
+Ennek nincs különösen semmi előnye a méret csökkentésén kívül azonban telepítés közben a Windows Setup automatikusan végrehajtja ezt a folyamatot ami sok időbe telhet.
 
 ```bat
 DISM /Export-Image /SourceImageFile:"%EXTRACTED_ISO%\sources\install.wim" /SourceIndex:1 /DestinationImageFile:"%EXTRACTED_ISO%\sources\install.esd" /Compress:recovery /CheckIntegrity && del /f /q "%EXTRACTED_ISO%\sources\install.wim"
@@ -619,23 +622,20 @@ DISM /Export-Image /SourceImageFile:"%EXTRACTED_ISO%\sources\install.wim" /Sourc
 
 ## 4. 11 Átkonvertálás ISO-vá
 
-Használd az alábbi parancsot a kicsomagolt tartalom visszacsomagolásához egyetlen ISO fájlba, amely a ``C:\`` meghajtón fog létrejönni.
+Használd az alábbi parancsot a kicsomagolt tartalom visszacsomagolásához egyetlen ISO fájlba, amely a ``C:\`` meghajtón fog létrejönni ``Final.iso`` néven.
 
 ```bat
 "%OSCDIMG%" -m -o -u2 -udfver102 -l"Final" -bootdata:2#p0,e,b"%EXTRACTED_ISO%\boot\etfsboot.com"#pEF,e,b"%EXTRACTED_ISO%\efi\microsoft\boot\efisys.bin" "%EXTRACTED_ISO%" "C:\Final.iso"
 ```
 
-## 4.12 Telepítés Ventoy használatával
+## 4.12 Telepítés Pendrive-ról Ventoy használatával
 
-Töltsd le a [Ventoy](https://github.com/ventoy/Ventoy/releases)-t majd indítsd el a ``Ventoy2Disk.exe``-t. Az option menüpontnál válaszd ki a partíciótípust (GPT) és kapcsold ki a secure boot support-ot, majd válaszd ki a pendrive-od és kattints az Install-ra.
+Töltsd le a [Ventoy](https://github.com/ventoy/Ventoy/releases)-t majd indítsd el a ``Ventoy2Disk.exe``-t. Az ``Option`` menüpontnál válaszd ki a partíciótípust (GPT) és kapcsold ki a Secure Boot support-ot, majd válaszd ki a pendrive-od és kattints az Install-ra. Ha végzett, másold át a ``Final.iso``-t a pendriveod-ra.
 
-  - Lásd [media/identify-bios-mode.png](/media/identify-bios-mode.png)
 
 ## 4.13 ISO-ba való bootolás
 
 Ehhez a lépéshez húzd ki az ethernet kábeledet és ne legyél az internethez csatlakozva. Ezáltal elkerülhetjük a Microsoftba való bejelentkezést OOBE közben és a Windows nem fog automatikusan feltelepíteni frissítéseket és drivereket.
-
-- File Explorer-ben másold át a Windows ISO-t a pendrive-ra.
 
 - Ha a Secure Boot bevan kapcsolva, ideiglenesen kapcsold ki a telepítési folyamathoz. Boot-olj be a pendrive-ra BIOS-on belül és válaszd ki a Windows ISO-t. Folytasd a telepítést majd amikor végzett kapcsold vissza a Secure Boot-ot ha előzőleg bevolt.
 
@@ -643,7 +643,7 @@ Ehhez a lépéshez húzd ki az ethernet kábeledet és ne legyél az internethez
 
 - Windows Server telepítése során meg kell adnod egy komplex jelszót amit törölhetsz később.
 
-- Ha Windows 11-et telepítesz nyomj egy ``Shift+F10``-et hogy megnyisd a CMD-t és írd be a következő parancsot: ``oobe\BypassNRO.cmd``. Ezáltal megjelenik a ``continue with limited setup`` opció.
+- Ha Windows 11-et telepítesz nyomj egy ``Shift+F10``-et hogy megnyisd a CMD-t és írd be a következő parancsot: ``oobe\BypassNRO.cmd``. Ezáltal megjelenik a ``Continue with limited setup`` opció. Folytasd, majd pedig a példa alapján menj végig a setupon.
 
   - Példa [main/media/oobe-windows10+-example.mp4](main/media/oobe-windows10+-example.mp4)
 
@@ -653,7 +653,7 @@ Ehhez a lépéshez húzd ki az ethernet kábeledet és ne legyél az internethez
 
 ## 5.1 Unrestricted PowerShell Execution Policy
 
-Ez szükséges a scriptek futtatásához. Nyisd meg a PowerShell-t és másold be az alábbi parancsot.
+Ez szükséges a scriptek futtatásához. Nyisd meg a PowerShell-t és másold be az alábbi parancsot. Enter, és nyomj egy "A" betűt.
 
 ```powershell
 Set-ExecutionPolicy Unrestricted
@@ -661,7 +661,7 @@ Set-ExecutionPolicy Unrestricted
 
 ## 5.2 Process Mitigations (Windows 10 1709+)
 
-Nyisd meg az ``NSudo.LG.exe``-t, pipáld be az ``Enable All Priviliges`` checkbox-ot és írd be hogy ``cmd``, majd pedig másold be az alábbi parancsot
+Nyisd meg az ``NSudoLG.exe``-t, pipáld be az ``Enable All Priviliges`` checkbox-ot és írd be hogy ``cmd``, majd pedig másold be az alábbi parancsot. Ezután ne zárd be a CMD-t mivel szükség lesz rá a jövőbeli parancsok futattásához.
 
 ```bat
 C:\bin\disable-process-mitigations.bat
@@ -683,21 +683,21 @@ C:\bin\disable-process-mitigations.bat
 
 - GPU driverek később lesznek feltelepítve.
 
-- Próbáld meg a driver-t INF formában feltelepíteni task manager-en belül mivel az exe-k általában bloatware-t tartalmaznak. Próbáld meg 7-zip-el kicsomgalni az exe fájlt és azon belül megkeresni az INF fájlt.
+- Próbáld meg a driver-t INF formában feltelepíteni Task Manager-en belül mivel az exe-k általában bloatware-t tartalmaznak. Próbáld meg 7-Zip-el kicsomgalni az exe fájlt és azon belül megkeresni az INF fájlt.
 
 - NIC (Network Interface Controller) drivert telepítsd fel.
 
 ## 5.5 Windows Server konfigurálása
 
-- Server Manager-ben, menj a ``Manage -> Server Manager Properties`` és pipáld be a ``Do not start Server Manager automatically at logon`` opciót.
+- Server Manager-ben, menj a ``Manage -> Server Manager Properties``-be és pipáld be a ``Do not start Server Manager automatically at logon`` opciót.
 
 - ``Win+R -> services.msc``, keresd ki a ``Windows Audio`` és ``Windows Audio Endpoint Builder`` szolgáltatásokat majd pedig a startup type-ot tedd Automatic-ra.
 
-- ``Win+R -> gpedit.msc - >Computer Configuration -> Windows Settings -> Security Settings -> Account Policies -> Password Policy`` és kapcsold ki a ``Password must meet complexity requirements`` opciót.
+- ``Win+R -> gpedit.msc -> Computer Configuration -> Windows Settings -> Security Settings -> Account Policies -> Password Policy`` és kapcsold ki a ``Password must meet complexity requirements`` opciót.
 
    - Nyisd meg a CMD-t és írd be hogy ``gpupdate /force`` hogy egyből életbe lépjenek a változások.
 
-- ``Win+R`` -> ``control userpasswords`` -> ``Users`` majd jobb klikk az ``Administrator``profilra, ``Set Password`` -> és hagyd üresen hogy eltávolítsd a jelszót.
+- ``Win+R`` -> ``control userpasswords`` -> ``Users`` majd jobb klikk az ``Administrator``profilra, ``Set Password`` és hagyd üresen hogy eltávolítsd a jelszót.
 
 - Windows Server-en globálisan kikapcsolható a Telemetry az alábbi CMD parancsokkal.
 
@@ -713,7 +713,7 @@ C:\bin\disable-process-mitigations.bat
 
 ## 5.7 Search Indexing
 
-Bizonyos könyvtárak a fájlrendszeren indexelve vannak a Windows keresési funkcióihoz, amelyeket a Win+R megnyomása után a ``control srchadmin.dll`` beírásával megtekinthetsz. Az indexelés időszakosan a háttérben fut, és gyakran észrevehető CPU-terhelést okoz, amely a Process Explorer segítségével megfigyelhető, ahogyan az a [Process Explorer]() szekcióban levan írva. Ezért ajánlott a keresési indexelést globálisan letiltani a Windows Search szolgáltatás kikapcsolásával, azonban ez korlátozhatja a keresési funkciókat.
+Bizonyos könyvtárak a fájlrendszeren indexelve vannak a Windows keresési funkcióihoz, amelyeket a Win+R megnyomása után a ``control srchadmin.dll`` beírásával megtekinthetsz. Az indexelés időszakosan a háttérben fut, és gyakran észrevehető CPU-terhelést okoz, amely a Process Explorer segítségével megfigyelhető, ahogyan az a [Process Explorer](#528-process-explorer) szekcióban levan írva. Ezért ajánlott a keresési indexelést globálisan letiltani a Windows Search szolgáltatás kikapcsolásával, azonban ez korlátozhatja a keresési funkciókat.
 
 ```bat
 reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WSearch" /v "Start" /t REG_DWORD /d "4" /f
@@ -721,9 +721,9 @@ reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WSearch" /v "Start
 
 ## 5.8 Idő, nyelv és régió
 
-- ``Win+R`` -> ``intl.cpl`` és  ``timedate.cpl``. Konfiguráld tetszésed szerint.
-
 - ``Win+I -> Time & Language`` 
+
+  - Konfiguráld a régió és óra beállításokat.
 
   - Ha kizárólag egy billentyűzet layout-ot tervezel használni akkor töröld ki az összes többit mivel véletlen megnyomhatod a hotkey-t ami átváltja a layout-ot, ami zavaró lehet.
 
@@ -733,7 +733,7 @@ reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WSearch" /v "Start
 
 - Telepítsd fel az általad kedvelt böngészőt. Lásd: [privacytests.org](https://privacytests.org/)
 
-  - Ha Firefox-ot szeretnél feltelepíteni használd az alábbi parancsot PowerShell-ben egy minimális telepítésért.
+  - Ha Firefox-ot szeretnél feltelepíteni használd az alábbi parancsot PowerShell-ben egy minimális telepítésért. Ez feltelepíti a uBlock, FastForward és CleanURLs kiegészítőket. Ne felejtsd el őket konfigurálni.
 
     ```powershell
     C:\bin\install-firefox.ps1
@@ -743,15 +743,15 @@ reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WSearch" /v "Start
 
 - Kapcsolj ki minden nyomkövetőt.
 
-- Ajánlott kiegészítők:
+- Ajánlott kiegészítők böngészőtől függetlenül:
 
-   - uBlock Origin (Filter list-et állítsd be)
+   - uBlock Origin
    - CleanURLs
    - FastForward
 
 ## 5.10 Ütemezett feladatok kikapcsolása
 
-Nyisd meg a PowerShell-t majd másold be az alábbi parancsot.
+PowerShell-be másold be az alábbi parancsot.
 
 ```powershell
 C:\bin\disable-scheduled-tasks.ps1
@@ -759,9 +759,9 @@ C:\bin\disable-scheduled-tasks.ps1
 
 ## 5.11 Egyéb beállítások
 
-Nyisd meg a CMD-t és másold be az alábbi parancsokat:
+CMD-be másold be az alábbi parancsokat.
 
-- Ha használsz jelszót állítsd be hogy soha ne járjon le. Ezáltal a Windows nem fogja rendszeresen kérni hogy változtasd meg a jelszavad:
+- Ha használsz jelszót állítsd be hogy soha ne járjon le, ezáltal a Windows nem fogja rendszeresen kérni hogy változtasd meg a jelszavad:
 
 ```bat
 net accounts /maxpwage:unlimited
@@ -795,8 +795,7 @@ reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SysMain" /v "Start
 
 ``Win+R -> Optional Features`` majd pedig állítsd be úgy ahogy a képen látható.
 
-Ha a Windows Update kivan kapcsolva akkor nagy eséllyel nem fogsz tudni feltelepíteni funkciókat. Helyette DISM-el kell telepítened. Windows Serveren az ``OptionalFeatures`` megfelelője a
-``Server Manager -> Manage -> Remove Roles and Features``
+Ha a Windows Update kivan kapcsolva akkor nagy eséllyel nem fogsz tudni feltelepíteni funkciókat, helyette DISM-el kell telepítened. Windows Serveren az ``OptionalFeatures`` megfelelője a ``Server Manager -> Manage -> Remove Roles and Features``
 
    - [Példa](/media/features-example.png)
 
@@ -807,7 +806,7 @@ Ez segít a futó folyamatok kezelésében és átláthatóságában.
 
 ## 5.15 Hibernation
 
-Ahogy a [BIOS](#212-fast-startup-standby-és-hibernate) szekcióban leírtam, a Hibernation-t a Windowson belül is ki lehet kapcsolni. Így a PC egy tiszta shut down-t fog végrehajtani a gép leállításakor a szoftverállapot lemezre mentése helyett. Nyisd meg a CMD-t és másold be az alábbi parancsot.
+Ahogy a [BIOS](#212-fast-startup-standby-és-hibernate) szekcióban leírtam, a Hibernation-t a Windowson belül is ki lehet kapcsolni. Így a PC egy tiszta Shut Down-t fog végrehajtani a gép leállításakor a szoftverállapot lemezre mentése helyett. CMD-be másold be az alábbi parancsot.
 
 ```bat
 powercfg /h off
@@ -821,7 +820,7 @@ Javasolt a debloat scriptek elkerülése és az olyan komponensek eltávolítás
 
   - [AppxPackagesManager](https://github.com/valleyofdoom/AppxPackagesManager) használatával távolítsd el a nem kívánt programokat.
 
-  - Nyisd meg a CMD-t és töröld le a OneDrive-ot az alábbi parancssal.
+  - CMD-ben töröld le a OneDrive-ot az alábbi parancssal.
 
     ```bat
     for %a in ("SysWOW64" "System32") do (if exist "%windir%\%~a\OneDriveSetup.exe" ("%windir%\%~a\OneDriveSetup.exe" /uninstall)) && reg delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Desktop\NameSpace\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" /f
@@ -829,14 +828,13 @@ Javasolt a debloat scriptek elkerülése és az olyan komponensek eltávolítás
 
 - Chromium Microsoft Edge letiltása (nem letörlése). A böngészőt letiltani kell nem pedig letörölni a WebView Runtime megtartása érdekében.
         
-  - Nyisd meg a Microsoft Edge-t majd pedig a beállításokban kapcsolj ki bármilyen automatikus start-up beállítást mint pl. a lent felsoroltak
+  - Nyisd meg a Microsoft Edge-t majd pedig a beállításokban kapcsolj ki bármilyen automatikus start-up beállítást mint például:
 
-      - ``Startup boost``
       - ``Continue running background extensions and apps when Microsoft Edge is closed``
 
     - Töltsd le az [Autoruns](https://learn.microsoft.com/en-us/sysinternals/downloads/autoruns)-t és navigálj az ``Everything`` részhez, majd keress rá az ``Edge`` kifejezésre és pipálj ki mindent ami megjelenik.
 
-    - A böngésző frissítése visszaállít néhány beállítást. Használd az alábbi parancsot hogy ez ne forduljon elő. Ha error-t ír, Task Managerben zárj be minden rejtett Microsoft Edge folyamatot.
+    - A böngésző frissítése visszaállít néhány beállítást. Használd az alábbi parancsot CMD-ben hogy ez ne forduljon elő. Ha error-t ír, Task Managerben zárj be minden rejtett Microsoft Edge folyamatot.
 
      ```bat
      rd /s /q "C:\Program Files (x86)\Microsoft\EdgeUpdate"
@@ -848,11 +846,11 @@ Javasolt a debloat scriptek elkerülése és az olyan komponensek eltávolítás
    for /f "delims=" %a in ('where /r C:\ *edge.lnk*') do (del /f /q "%a")
    ```
 
-- A start menüben távolítsd el az alkalmazások parancsikonjait. Fontos megjegyezni, hogy ezek az alkalmazások valójában nincsenek telepítve--csak akkor települnek ha rájuk kattintasz.
+- A start menüben távolítsd el az alkalmazások parancsikonjait. Fontos megjegyezni, hogy ezek az alkalmazások valójában nincsenek telepítve--csak akkor települnek fel ha rájuk kattintasz.
 
 - ``Win+I -> Apps -> Apps & Features -> Optional Features`` és törölj le mindent kivéve a ``Notepad``-et, ``WordPad``-et és ``Windows Media Player``-t. Windows 11-en a ``WMIC`` is maradjon.
 
-- A ``smartscreen.exe`` figyelmen kívül hagyja a registry key-t ami szabályozza hogy fut-e, ezért át kell nevezni az exe-t hogy ne tudjon elindulni. Nyisd meg a CMD-t és másold be az alábbi parancsokat.
+- A ``smartscreen.exe`` figyelmen kívül hagyja a registry key-t ami szabályozza hogy fut-e, ezért át kell nevezni az exe-t hogy ne tudjon elindulni. CMD-be másold be az alábbi parancsokat.
 
 ```powershell
 C:\bin\MinSudo.exe --TrustedInstaller --Privileged
@@ -862,11 +860,11 @@ C:\bin\MinSudo.exe --TrustedInstaller --Privileged
 taskkill /f /im smartscreen.exe > nul 2>&1 & ren C:\Windows\System32\smartscreen.exe smartscreen.exee
 ```
 
-- Használd a Task Manager-t hogy ellenőrizd nem-e fut semmilyen bloatware a háttérben.
+- Task Manager-ben ellenőrizd hogy nem-e fut semmilyen bloatware a háttérben.
 
 ## 5.17 7-Zip letöltése és beállítása
 
-- [7-zip](https://www.7-zip.org/a/7z2301-x64.exe)
+- [7-Zip](https://www.7-zip.org/a/7z2301-x64.exe)
 
 - Nyisd meg a ``C:\Program Files\7-Zip\7zFM.exe-t`` , ``Tools -> Options`` és add hozzá a 7-Zip-et az összes fájl típushoz a ``+`` gombra kattintva. Lehetséges hogy kétszer kell megnyomnod hogy felülírd a már hozzáadott fájl típusokat.
 
@@ -880,7 +878,9 @@ Lásd [docs/configure-nvidia.md](/docs/confiugre-nvidia.md)
 
 - Állíts be egy magas, statikus fan speed-et mivel a fan curve funkció működéséhez futnia kell a programnak.
 
-- Hogy a rendszer automatikusan betöltse az 1. profilt (például) és utána bezárja a programot, menj be ``shell:startup``-ba -> jobb klikk -> ``Create a Shortcut`` és másold be az következőt:
+- Amiután konfiguráltad mentsd el az 1. profilra a beállításokat.
+
+- Hogy a rendszer automatikusan betöltse az 1. profilt és utána bezárja a programot, menj be ``shell:startup``-ba -> jobb klikk -> ``Create a Shortcut`` és másold be a következőt:
 
   ```bat
   "C:\Program Files (x86)\MSI Afterburner\MSIAfterburner.exe" /Profile1 /Q
@@ -888,15 +888,17 @@ Lásd [docs/configure-nvidia.md](/docs/confiugre-nvidia.md)
 
 ## 5.20 Felbontások és Scaling Mode
 
-- Keress egy stabil OC-t a monitorodhoz, az NVIDIA control panelben a ˙˙Change resolution -> Customize -> Create Custom Resolution˙˙ fülnél vidd feljebb a refresh rate-t ~3-asával amíg a monitor nem ír egy ``Out of Range`` üzenetet vagy pedig csak szimplán fekete a képernyő. Ha ez történik, csak várj 15 másodpercet és automatikusan visszaáll az előzőleg használt értékekre. Majd pedig egyesével vedd visszább a refresh ratet. Például ha 250 hz-ről ugrottál 253 hz-re és fekete volt a képernyő akkor 252-től indulva menj lejjebb amíg stabil nem lesz. Ezután teszteld [itt](https://www.testufo.com/) hogy nincs e screen tearing.
+- Keress egy stabil OC-t a monitorodhoz, az NVIDIA control panelben a ``Change resolution -> Customize -> Create Custom Resolution`` fülnél vidd feljebb a refresh rate-t ~3-asával amíg a monitor nem ír egy ``Out of Range`` üzenetet vagy pedig csak szimplán fekete a képernyő. Ha ez történik, csak várj 15 másodpercet és automatikusan visszaáll az előzőleg használt értékekre. Ezután egyesével vedd visszább a refresh ratet. Például ha 250 hz-ről ugrottál 253 hz-re és fekete volt a képernyő akkor 252-től indulva menj lejjebb amíg stabil nem lesz. Ezután teszteld [itt](https://www.testufo.com/) hogy nincs e screen tearing és hogy a monitor kábelének nincs e úgynevezett [coil whine](https://pcsupport.lenovo.com/ie/en/products/laptops-and-netbooks/solutions/ht511649)-ja.
 
 - Általában két lehetőséged van: Display, vagy GPU scaling. A monitorod natív felbontása nem igényel scalinget ezáltal identity scaling-et ([1](https://learn.microsoft.com/en-us/windows/win32/api/wingdi/ne-wingdi-displayconfig_scaling)), ([2](/docs/research.md#2-identity-scaling) használhatsz. 
 
-- Állíts be egy ``egész`` refresh ratet (a legmagasabbat amit az első pontnál eltudtál érni), például 60,00/240,00, nem 59,94/239,76. Ennek elérése érdekében használd az ``Exact``vagy pedig ``Exact reduced`` timing-ot [CRU](https://www.monitortests.com/forum/Thread-Custom-Resolution-Utility-CRU)-ban mivel a többi egy picit eltérő lehet, például 239.xxx.
+- Állíts be egy egész refresh ratet (a legmagasabbat amit az első pontnál eltudtál érni), például 60,00/240,00, nem 59,94/239,76. Ennek elérése érdekében használd az ``Exact``vagy pedig ``Exact reduced`` timing-ot [CRU](https://www.monitortests.com/forum/Thread-Custom-Resolution-Utility-CRU)-ban mivel a többi egy picit eltérő lehet, például 239.xxx.
 
 - Töröld az összes felbontást és egyéb bloatwaret (audio blocks) az alap felbontásodon kívül.
  
   - [Példa](/media/cru-example.png)  
+
+- 360hz vagy magasabb frekvencia esetén a ``DisplayID 2.0`` extension block-on belül add hozzá a használni kívánt felbontást.
 
 - Ha NVIDIA GPU-d van, győzödj meg róla hogy a ``Display`` opció a ``Perform scaling on`` beállításnál még mindig elérhető. Ha nem, futtasd a CRU mappájában lévő reset.exe-t hogy visszaállítsd a beállításokat alapra és konfiguráld újra a CRU-t. Minden változtatás után futtasd a restart64.exe-t hogy megtudd mi volt az ami a problémát okozta.
 
@@ -904,7 +906,7 @@ Lásd [docs/configure-nvidia.md](/docs/confiugre-nvidia.md)
 
 ## 5.21 Open-Shell
 
-Ezt szükséges feltelepíteni mivel a start-menüvel és a Windows Search-el kapcsolatos szolgáltatások ki lesznek kapcsolva.
+Ezt szükséges feltelepíteni mivel a start menüvel és a Windows Search-el kapcsolatos szolgáltatások ki lesznek kapcsolva és még jobb is mint az alap Windows Start menü.
 
 - [Open-Shell](https://github.com/Open-Shell/Open-Shell-Menu)
 
@@ -912,7 +914,7 @@ Ezt szükséges feltelepíteni mivel a start-menüvel és a Windows Search-el ka
 
 - ``Settings -> General Behavior -> Check for Windows updates on shutdown`` - Disabled
 
-- Opcionálisan használd a ``bin`` mappában lévő XML fájlt egy letisztult beállításért. Backup -> Load from XML file.
+- Opcionálisan használd a ``bin`` mappában lévő ``open-shell-settings.xml`` fájlt egy letisztult beállításért. Backup -> Load from XML file.
 
 ## 5.22 Spectre, Meltdown és CPU Microcode
 
@@ -921,7 +923,11 @@ A Spectre és Meltdown letiltása egy régóta ismert teljesítményjavító tr�
 <details>
 <summary>Instrukció a DLL-ek átnevezésére</summary>
 
-Nyisd meg a CMD-t majd pedig másold be a következőt: ``C:\bin\MinSudo.exe --TrustedInstaller --Privileged``. Ezután futtasd az alábbi kettő parancsot.
+CMD-be másold be a következő parancsokat:
+
+```bat
+C:\bin\MinSudo.exe --TrustedInstaller --Privileged
+```
 
 ```bat
 ren C:\Windows\System32\mcupdate_GenuineIntel.dll mcupdate_GenuineIntel.dlll
@@ -937,19 +943,19 @@ A Meltdown nincs hatással az AMD-s rendszerekre ([1](https://www.theverge.com/2
 
 ## 5.23 Power Plan
 
-- Állítsd be a high performance power plant:
+- Állítsd be a High performance power plant:
 
 ```bat
 powercfg /setactive 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c
 ```
 
-- Töröld ki a balanced power plant:
+- Töröld ki a Balanced power plant:
 
  ```bat
  powercfg /delete 381b4222-f694-41f0-9685-ff5bb260df2
  ```
 
-- Töröld ki a power saver power plant: 
+- Töröld ki a Power saving power plant: 
 
 ```bat
 powercfg /delete a1841308-3541-4fab-bc81-f71556f20b4a
@@ -992,7 +998,8 @@ powercfg /setactive scheme_current
 ```
 
 ## 5.24 Memory Management beállítások
-- Nyisd meg a PowerShell-t és másold be az alábbi parancsot hogy megtekintsd a beállításokat
+
+- PowerShell-be másold be az alábbi parancsot hogy megtekintsd a beállításokat:
 
 ```powershell
 Get-MMAgent
@@ -1020,13 +1027,13 @@ bcdedit /set disabledynamictick yes
 
 ## 5.26 NIC konfigurálása
 
-- ``Win+R``-be írd be hogy ``ncpa.cpl``. 
+- ``Win+R`` -> ``ncpa.cpl``. 
 
 - Tilts le minden nem használt adaptert. Jobb klikk a fő adapterre és ``Properties``
 
 - Kapcsold ki az összes funkciót kivéve a ``QoS Packet Scheduler``-t (Ha a router-ed támogatja és használni tervezed) és az ``Internet Protocol Version 4 (TCP/IPv4)``-et.
 
-- Állíts be egy Static IP Address-t. Nyisd meg a CMD-t majd írd be hogy ``ipconfig /all``. Jobb klikk a fő adapteredre, ``Properties``, majd pedig kattints rá az ``Internet Protocol Version 4 (TCP/IPv4)``-re és írd át manuálisan az összes beállítást a CMD-ben kiírtaknak megfelelően.
+- Állíts be egy Static IP Address-t. CMD-be írd be hogy ``ipconfig /all``. Jobb klikk a fő adapteredre, ``Properties``, majd pedig kattints rá az ``Internet Protocol Version 4 (TCP/IPv4)``-re és írd át manuálisan az összes beállítást a CMD-ben kiírtaknak megfelelően.
 
 ## 5.27 Audio eszközök beállítása
 
@@ -1034,7 +1041,7 @@ bcdedit /set disabledynamictick yes
 
 - Tiltsd le az összes nem használt Playback és recording eszközt.
 
-- A communications fülnél állítsd be hogy ``Do nothing``
+- A Communications fülnél állítsd be hogy ``Do nothing``
 
 ## 5.28 Process Explorer
 
@@ -1064,7 +1071,7 @@ Ez a helyes módja a szolgáltatások kikapcsolásának. Nem kell egyesével kik
 
 - Töltsd le a [service-list-builder](https://github.com/valleyofdoom/service-list-builder)-t.
 
-- A lista testreszabható a ``C:\bin\minimal-servies.ini`` módosításával. Számos leírás van az adott szolgáltatással kapcsolatban a connfigban. Például ha ethernetet használsz a Wi-Fi-vel kapcsolatos szolgáltatásokra nincsen szükséged. Ha újra szeretnéd generálni a scripteket, előtte mindenképpen futtasd a ``Services-Enable``-t mivel a program a szolgáltatások jelenlegi állapotára támaszkodik a jövőbeli scriptek megépítésére.
+- A lista testreszabható a ``C:\bin\minimal-servies.ini`` módosításával. Számos leírás van az adott szolgáltatással kapcsolatban a connfigban. Például ha ethernetet használsz a Wi-Fi-vel kapcsolatos szolgáltatásokra nincsen szükséged. Ha újra szeretnéd generálni a scripteket, előtte mindenképpen futtasd a ``Services-Enable.bat`` scriptet mivel a program a szolgáltatások jelenlegi állapotára támaszkodik a jövőbeli scriptek megépítésére.
 
 - A ``High precision event timer`` eszkösz a device manager-ben IRQ 0-t használ a legtöbb AMD-s rendszeren, ezáltal konfliktusba kerül a ``System Timer`` eszközzel amely szintén IRQ 0-t használ. Az egyetlen mód ennek megoldására az, hogy letiltod a ``System Timer`` szülő eszközét, amely az ``msisadrv`` (Módosítsd a konfigot).
 
@@ -1074,7 +1081,7 @@ Ez a helyes módja a szolgáltatások kikapcsolásának. Nem kell egyesével kik
 reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SoftwareProtectionPlatform" /v "InactivityShutdownDelay" /t REG_DWORD /d "4294967295" /f
 ```
 
-- Nyisd meg a CMD-t a ``service-list-builder`` mappájában.
+- Nyisd meg a CMD-t a ``service-list-builder`` mappájában (ahol az exe található).
 
 - Másold be az alábbi parancsot hogy megépítsd a scripteket.
 
@@ -1083,6 +1090,10 @@ service-list-builder.exe --config C:\bin\minimal-services.ini
 ```
 
 - Ha esetleg nem működik, add hozzá a ``--disable-service-warning" paramétert.
+
+- A program automatikusan ellenőrzi a dependency-vel kapcsolatos hibákat ezáltal szinte lehetetlen elrontani ezzel kapcsolatosan.
+
+  - Lásd: [media/services-dependency-example](/media/services-dependency-example.png)
 
 - A scriptek a ``build`` mappában lesznek megépülve. NSudo-val az ``Enable All Priviliges`` bepipálásával kell futtatni őket.
 
@@ -1387,11 +1398,11 @@ Legtöbb esetben ajánlott bekapcsolva hagyni, ami az alap beállítás. Van egy
   - ``%userprofile%\AppData\Local\Temp`` - ideiglenes fájlok
   - Felhasználói directory-k (Downloads, Documents, stb.)
 
-- Opcionálisan tisztítsd a WinSxS mappát az alábbi parancssal. Ez egy hosszabb folyamat lehet.
+- Tisztítsd a WinSxS mappát az alábbi parancssal. Ez egy hosszabb folyamat lehet.
 
   ```bat
   DISM /Online /Cleanup-Image /StartComponentCleanup /ResetBase
   ```
 
-- Opcionálisan töröld ki a System Restore Point-okat. ``Win+R -> sysdm.cpl``. Ajánlott teljesen kikapcsolni.
+- Töröld ki a System Restore Point-okat. ``Win+R -> sysdm.cpl``. Ajánlott teljesen kikapcsolni.
 
