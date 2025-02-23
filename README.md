@@ -175,9 +175,11 @@ Hardver > BIOS > Operációs rendszer
 
 - Használj GPU támasztót (GPU Bracket) hogy elkerüld a PCIe slot sérülését.
 
-- Kerüld a daisy chaining-et 
+- Kerüld a daisy chaining-et.
 
   - Lásd [Installation Remark for High Power Consumption Graphics Cards | Seasonic](https://knowledge.seasonic.com/article/8-installation-remark-for-high-power-consumption-graphics-cards)
+
+- Fektess be magas minőségű HDMI/DisplayPort, ethernet és tábkábelekbe.
 
 ## 1.2 Hűtés
 
