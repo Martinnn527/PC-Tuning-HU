@@ -1067,11 +1067,14 @@ Használj Process Explorer-t mivel a stock Task Manager a CPU kihasználtságát
 > [!CAUTION]
 > Mindent figyelmesen olvass el és értelmezz mielőtt hozzákezdesz.
 
-Ez a helyes módja a szolgáltatások kikapcsolásának. Nem kell egyesével kikapcsolni őket, ami alapból nem is lenne visszafordítható, kivéve ha mindent manuálisan visszakapcsolsz, ami egyáltalán nem praktikus. Ezért lesz kettő script létrehozva amivel váltani tudsz az Enabled és Disabled között.
+Ez a helyes módja a szolgáltatások kikapcsolásának. Nem kell egyesével kikapcsolni őket, ami alapból nem is lenne visszafordítható, kivéve ha mindent manuálisan visszakapcsolsz, ami egyáltalán nem praktikus. Ezért lesz kettő script létrehozva amivel váltani tudsz az Enabled és Disabled között. Fontos tudni, hogy a szolgáltatások egymásra épülnek. Ha letiltasz egy olyan szolgáltatást, amelyre egy másik szolgáltatás támaszkodik, akkor az a másik szolgáltatás nem fog tudni megfelelően működni, és hibát fog jelezni, emiatt rosszabb teljesíménnyel jár mitha szimplán bekapcsolva hagynád az adott szolgáltatást.  Amiután megépítetted a scripteket a program automatikusan ellenőrzi a dependency hibákat tehát szinte lehetetlen ezzel kapcsolatosan elrontani.
+
+  - Lásd: [media/services-dependency-example](/media/services-dependency-example.png)
 
 - Töltsd le a [service-list-builder](https://github.com/valleyofdoom/service-list-builder)-t.
 
-- A lista testreszabható a ``C:\bin\minimal-servies.ini`` módosításával. Számos leírás van az adott szolgáltatással kapcsolatban a connfigban. Például ha ethernetet használsz a Wi-Fi-vel kapcsolatos szolgáltatásokra nincsen szükséged. Ha újra szeretnéd generálni a scripteket, előtte mindenképpen futtasd a ``Services-Enable.bat`` scriptet mivel a program a szolgáltatások jelenlegi állapotára támaszkodik a jövőbeli scriptek megépítésére.
+- A lista testreszabható a ``C:\bin\minimal-servies.ini`` módosításával. Számos leírás van az adott szolgáltatással kapcsolatban a configban. Például ha ethernetet használsz a Wi-Fi-vel kapcsolatos szolgáltatásokra nincsen szükséged. Ha újra szeretnéd generálni a scripteket, előtte mindenképpen futtasd a ``Services-Enable.bat`` scriptet mivel a program a szolgáltatások jelenlegi állapotára támaszkodik a jövőbeli scriptek megépítésére.
+
 
 - A ``High precision event timer`` eszkösz a device manager-ben IRQ 0-t használ a legtöbb AMD-s rendszeren, ezáltal konfliktusba kerül a ``System Timer`` eszközzel amely szintén IRQ 0-t használ. Az egyetlen mód ennek megoldására az, hogy letiltod a ``System Timer`` szülő eszközét, amely az ``msisadrv`` (Módosítsd a konfigot).
 
@@ -1083,45 +1086,42 @@ reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Softwar
 
 - Nyisd meg a CMD-t a ``service-list-builder`` mappájában (ahol az exe található).
 
-- Másold be az alábbi parancsot hogy megépítsd a scripteket.
+- Másold be az alábbi parancsot hogy megépítsd a scripteket. Ha a program talál egy harmadik féltől származó szolgáltatást (pl. NVDisplay.ContainerLocalSystem) akkor az figyelmeztet. Ha mégis folytatni szeretnéd add hozzá a ``--disable-service-warning`` paramétert a parancs végére.
 
 ```bat
 service-list-builder.exe --config C:\bin\minimal-services.ini
 ```
 
-- Ha esetleg nem működik, add hozzá a ``--disable-service-warning" paramétert.
-
-- A program automatikusan ellenőrzi a dependency-vel kapcsolatos hibákat ezáltal szinte lehetetlen elrontani ezzel kapcsolatosan.
-
-  - Lásd: [media/services-dependency-example](/media/services-dependency-example.png)
-
 - A scriptek a ``build`` mappában lesznek megépülve. NSudo-val az ``Enable All Priviliges`` bepipálásával kell futtatni őket.
 
-## 5.30 Device manager beállítása
+## 5.30 Device Manager beállítása
 
 - A ``Disk drives`` kategóriánál jobb klikk az SSD-re -> ``Polciies`` -> és pipáld be a ``Turn off Windows write-cache buffer flushing on the device`` opciót.
 
 - A ``Network adapters`` kategóriánál ``Properties -> Advanced`` és kapcsolj ki minden power saving funkciót.
+  
+  - Energy-Efficient Ethernet
+  - Gigabit Lite
+  - Green Ethernet
+  - Power Saving Mode
 
-- ``View -> Devices by connection`` és tilts le minden PCIe, SATA, NVMe, XHCI controllert és USB Hub-ot amihez nincs semmi csatlakoztatva. Tilts le minden nem használt eszközt ami ugyanahhoz a PCIe port-hoz van csatlakoztatva mint a GPU
-
-- ``View -> Resources by connection`` és tilts le minden nem szükséges eszközt ami IRQ-t vagy I/O-t használ. 
+- ``View -> Devices by connection`` és tilts le minden PCIe (PCI Express Root Port, PCI Express Upstream/Downstream Switch Port), SATA, NVMe, XHCI Controllert és USB Hub-ot amihez nincs semmi csatlakoztatva. Tilts le minden nem használt eszközt ami ugyanahhoz a PCIe port-hoz van csatlakoztatva mint a GPU, pl. HD Audio.
 
 - Opcionálisan használd a [DeviceCleanup](https://www.majorgeeks.com/mg/getmirror/device_cleanup_tool,1.html) programot hogy eltávolíts rejtett eszközöket.
 
 ## 5.31 Device Power Saving
 
-- Nyisd meg a PowerShell-t és másold be az alábbi parancsot hogy kikapcsold az ``Allow the computer to turn off this device to save power`` opciót a device manager-ben minden alkalmaz eszközön.
+- Nyisd meg a PowerShell-t és másold be az alábbi parancsot hogy kikapcsold az ``Allow the computer to turn off this device to save power`` opciót a Device Manager-ben minden alkalmaz eszközön.
 
 ```powershell
 Get-WmiObject MSPower_DeviceEnable -Namespace root\wmi | ForEach-Object { $_.enable = $false; $_.psbase.put(); }
 ```
 
-- Ha kihúzod és visszadugod az eszközt akkor ez a beállítás visszaállhat tehát vagy kerüld el vagy futtasd a parancsot minden alkalommal, vagy pedig használd a [DriverPowerSaving](/bin/DriverPowerSaving.ps1) scriptet. Hogy minden újraindításnál automatikusan fusson húzd be ``shell:startup``-ba és használd a PowerShell paramétert hogy ne notepad-ként fusson.
+- Ha kihúzod és visszadugod az eszközt akkor ez a beállítás visszaállhat tehát vagy kerüld el vagy futtasd a parancsot minden alkalommal, vagy pedig használd a [DriverPowerSaving](/bin/DriverPowerSaving.ps1) scriptet hogy minden újraindításnál automatikusan fusson csinálj egy shortcut-ot ``shell:startup``-ba és használd a PowerShell paramétert hogy ne notepad-ként fusson. Ez ajánlatos, csak hogy biztosra menj.
 
 ## 5.32 Fájl rendszer
 
-Nyisd meg a CMD-t és másold be az alábbi parancsokat.
+CMD-be másold be az alábbi parancsokat.
 
 - Tiltsd le a [8.3-as fájlnevek](https://hu.wikipedia.org/wiki/8.3-as_f%C3%A1jln%C3%A9v) készítését FAT és NTFS formátumú meghajtókon
 
@@ -1137,7 +1137,7 @@ fsutil behavior set disablelastaccess 1
 
 ## 5.33 Event Trace Sessions (ETS)
 
-- Ezekkel a fájlokkal automatikusan tudsz váltani ETS Enabled és Disabled között aminek a hatását meg tudod nézni itt: ``Win+R -> perfmon -> Data Collector Sets -> Event Trace Session``. Azok a programok amelyek event tracing-re támaszkodnak nem fognak tudni adatot log-olni (pl. Event Viewer) amíg nem kapcsolod vissza őket, és pont ezért van egy enable és disable fájl. Nyisd meg a CMD-t és másold be a parancsokat hogy megépítsd a két registry fájlt a ``C:\`` meghajtón. NSudo-val kell majd futtatni őket Trusted Installer-ként.
+- Ezekkel a fájlokkal automatikusan tudsz váltani ETS Enabled és Disabled között aminek a hatását meg tudod nézni itt: ``Win+R -> perfmon -> Data Collector Sets -> Event Trace Session``. Azok a programok amelyek event tracing-re támaszkodnak nem fognak tudni adatot log-olni (pl. Event Viewer) amíg nem kapcsolod vissza őket, és pont ezért van egy enable és disable fájl. CMD-be másold be a parancsokat hogy megépítsd a két registry fájlt a ``C:\`` meghajtóban. NSudo-val kell majd futtatni őket.
 
 - ets-enable.reg
 ```bat
@@ -1156,7 +1156,7 @@ for %a in ("SleepStudy" "Kernel-Processor-Power" "UserModePowerService") do (wev
 
 ## 5.34 Message Signaled Interrupts
 
-- Az MSI-k gyorsabbak mint a hagyományos signal-based interruptok és az IRQ sharing problémát is megoldhatják
+- Az MSI-k gyorsabbak mint a hagyományos signal-based interruptok és az IRQ sharing problémát is megoldhatják.
 
 - Töltsd le a [GoInterruptPolicy](https://github.com/spddl/GoInterruptPolicy)-t.
 
@@ -1164,30 +1164,24 @@ for %a in ("SleepStudy" "Kernel-Processor-Power" "UserModePowerService") do (wev
 
 ## 5.35 XHCI Interrupt Moderation (IMOD)
 
-Windows 7-en az IMOD Interval 1ms, viszont az újabb OS-eken 0.05ms (50us) kivéve ha az adott USB drivernél más van megadva. Ez azt jelenti hogy amiután egy Interrupt generálva lett, az XHCI(USB) controller vár (úgynevezett buffer period) hogy több adat érkezzen mielőtt újabb Interruptot generálna. Ez csökkenti a CPU terhelését de adatvesztéshez vezethet.
+Windows 7-en az IMOD Interval 1ms, viszont az újabb OS-eken 0.05ms (50us) kivéve ha az adott USB drivernél más van megadva. Ez azt jelenti hogy amiután egy Interrupt generálva lett, az XHCI (USB) controller vár (úgynevezett buffer period) hogy több adat érkezzen mielőtt újabb Interruptot generálna. Ez csökkenti a CPU terhelését de adatvesztéshez vezethet.
 Példa: egy 1000-es polling rate-ű egér minden 1ms-ban küld adatot. Ha csak az egeret mozgatod egy 1ms-os intervallumban akkor nem történik Interrupt Moderation, mivel az interruptok generálási sebessége kisebb vagy egyenlő a meghatározott intervallummal. Azonban játék közben, ahol egyszerre mozgatod az egeret, nyomod a billentyűzetet stb, könnyen meghaladod az 1000 interrupt/másodpercet. Habár ez kevésbé valószínű 0,05 ms-os IMOD intervallum mellett, akkor is előfordulhat.
 
-- Töltsd le az [RWEverything](http://rweverything.com/download/)-et és másold be az alábbi parancsot hogy letiltsd a ``Microsoft Vulnerable Driver Blocklist``-et. 
+- Töltsd le az [RWEverything](http://rweverything.com/download/)-et és másold be CMD-be az alábbi parancsot hogy letiltsd a ``Microsoft Vulnerable Driver Blocklist``-et. 
 
 ```bat
 reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\CI\Config" /v "VulnerableDriverBlocklistEnable" /t REG_DWORD /d "0" /f
 ```
 
-- A ``bin`` mappában lévő [XHCI-IMOD-Interval.ps1](/bin/XHCI-IMOD-Interval.ps1) fájlt másold be a C:\-be. Ha az RWEverything-et máshova telepítetted akkor a ps1 fájlban a ``$rwePath = "C:\Program Files\RW-Everything\Rw.exe"`` sort írd át. Csinálj egy shortcut-ot ``shell:startup``-ba. Jobb klikk a fájlra -> ``Properties -> Shortcut`` és a Target helyére másold be az alábbi sort.
-
-```bat
-PowerShell C:\XHCI-IMOD-Interval.ps1
-```
+- A ``bin`` mappában lévő [XHCI-IMOD-Interval.ps1](/bin/XHCI-IMOD-Interval.ps1) fájlt másold be a ``C:\``-be. Ha az RWEverything-et máshova telepítetted akkor a ps1 fájlban a ``$rwePath = "C:\Program Files\RW-Everything\Rw.exe"`` sort írd át. Csinálj egy shortcut-ot ``shell:startup``-ba hogy minden indításnál fusson.
 
 ## 5.36 Applikációk konfigurálása
 
 ### 5.36.1 FPS Limit
 
-- Ha limitálod az FPS-t akkor a monitorod refresh rate-jének a többszörése korlátozd le. Lásd: [FPS Cap Calculator | BoringBoredom](https://boringboredom.github.io/tools/fpscapcalculator)
+- Ha limitálod az FPS-t akkor a monitorod refresh rate-jének a többszörése korlátozd le. Lásd: [FPS Cap Calculator | BoringBoredom](https://boringboredom.github.io/tools/fpscapcalculator). Bizonyosodj meg róla hogy a GPU nincs teljesen kihasználva mivel minél kevesebb a kihasználtsága annál kevesebb a system latency.
 
-- Bizonyosodj meg róla hogy a GPU nincs teljesen kihasználva mivel minél kevesebb a kihasználtsága annál kevesebb a system latency.
-
-- Ha RTSS-el limitálod az FPS-t sokkal smoothabb lesz a játék és konzisztensebb lesz a frame-pacing mivel busy-wait-et használ ami sokkal precízebb mint a passive-wait de cserébe nagyobb latency-vel és CPU overhead-el jár.
+- Ha RTSS-el limitálod az FPS-t sokkal konzisztensebb lesz a frame-pacing mivel busy-wait-et használ ami sokkal precízebb mint a passive-wait de cserébe nagyobb latency-vel és CPU overhead-el jár.
 
 ### 5.36.2 Játék regisztálása Game Bar-ban
 
@@ -1272,7 +1266,7 @@ Töltsd le a [NoSteamWebHelper](https://github.com/Aetopia/NoSteamWebHelper)-t.
 
 A Windows CPU 0-án ütemez számos interruptot és DPC-t ami elég terhelő lehet egyetlen-egy CPU számára. Ezért affinity-ket kell beállítani és elkülöníteni/eloszlatni a drivereket.
 
-- Használd a [GoInterruptPolicy](https://github.com/spddl/GoInterruptPolicy) programot az affinity-k beállítására. Az adott eszközt úgy azonosíthatod, hogy összehasonlítod a ``Location``-t Device Managerben a ``Properties -> General`` résznél a GoInterruptPolicy-ban lévő ``Location Info``-val.
+- Használd a [GoInterruptPolicy](https://github.com/spddl/GoInterruptPolicy) programot az affinity-k beállítására. Ha több ugyanolyan nevű eszköz van jelen, úgy azonosíthatod, hogy összehasonlítod a ``Location``-t Device Managerben a ``Properties -> General`` résznél a GoInterruptPolicy-ban lévő ``Location Info``-val.
 
 ### 5.37.1 GPU és DirectX Graphics Kernel
 
@@ -1324,7 +1318,7 @@ Ez a lépés nem kötelező, azonban segíthet a megmagyarázhatatlan FPS drop-o
 
 ## 5.39 CPU Idle States
 
-Ez kényszeríti a C-State 0-t. Érdemes játék előtt kikapcsolni, majd játék után bekapcsolni az idle statet, mivel az magasabb hőfokokkal (A CPU hőmérsékletének nem lenne szabad elérni a thermal throttling pontot, mivel a hűtéssel már foglalkoztál a [BIOS](#12-hűtés) részlegnél) és energiafogyasztással jár. Kerüld az idle kikapcsolását ha a Hyper-Threading/Simultaneous Multithreading bevan kapcsolva, vagy pedig ha valamilyenféle frequency boosting feature-t használsz, mint például AMD-n a PBO, Turbo Boost vagy hasonló. 
+Ez kényszeríti a C-State 0-t. Érdemes játék előtt kikapcsolni, majd játék után bekapcsolni az idle statet, mivel az magasabb hőfokokkal (A CPU hőmérsékletének nem lenne szabad elérni a thermal throttling pontot, mivel a hűtéssel már foglalkoztál a [hűtés](#12-hűtés) részlegnél) és energiafogyasztással jár. Kerüld az idle kikapcsolását ha a Hyper-Threading/Simultaneous Multithreading bevan kapcsolva, vagy pedig ha valamilyenféle frequency boosting feature-t használsz, mint például AMD-n a PBO, Turbo Boost vagy hasonló. 
 
    - [Idle Enable](/bin/enable_idle.bat)
    - [Idle Disable](/bin/disable_idle.bat)
@@ -1336,7 +1330,7 @@ A clock interrupt frequency az a sebesség, amellyel a rendszer hardveres óráj
 
 Az alapértelmezett 15,625ms-os felbontásnál nagyobb pontosságot igénylő alkalmazások (játékok, média lejátszás, stb) képesek megemelni az órajel interrupt frekvenciát olyan funkciókkal, mint a [timeBeginPeriod](https://learn.microsoft.com/en-us/windows/win32/api/timeapi/nf-timeapi-timebeginperiod) és az [NtSetTimerResolution](http://undocumented.ntinternals.net/index.html?page=UserMode%2FUndocumented%20Functions%2FTime%2FNtSetTimerResolution.html). A Sleep-el kapcsolatos funkciókra támaszkodó funkciók pontosságát az események ütemezésében közvetlenül befolyásolja az clock interruptok gyakorisága [(1)](https://randomascii.wordpress.com/wp-content/uploads/2020/10/image-5.png). A [Sleep](https://learn.microsoft.com/en-us/windows/win32/api/synchapi/nf-synchapi-sleep) példáján keresztül a Sleep(n) funkciónak valójában n milliszekundumot kell aludnia, és nem n plusz/mínusz egy tetszőleges értékig, különben váratlan event pacing-et eredményez ami nem ideális az olyan funkciók számára mint a sleep-based FPS limiterek. Megjegyzendő, hogy ez csak egy példa és sok valós idejű alkalmazás nem támaszkodik kifejezetten a Sleep funkcióra az event-pacing-hez. Egy tipikus érték, amelyre a játékfejlesztők a felbontást látszólag emelik, az 1ms, ami azt jelenti, hogy az alkalmazás az eventek ütemét 1ms-os felbontáson belül tudja tartani. Nagyon ritka esetekben előfordul, hogy a fejlesztők egyáltalán nem emelik meg a felbontást, miközben az alkalmazásuk az event-pacing pontossága miatt erre támaszkodik, de ez nem gyakori, és csak néhány ismeretlen programra, például kevésbé ismert játékokra vonatkozhat.
 
-A timer resolution megvalósítása Windows 10 2004+ után úgy változott, hogy a hívó folyamat felbontásának emelése nem befolyásolja a rendszert globális szinten, vagyis "A" folyamat 1 ms-ra emelése nem befolyásolja a "B" folyamatot az alapértelmezett 15,625 ms-os felbontásnál, ellentétben a korábbiakkal. Ez önmagában nagyszerű változás, mert csökkenti az overhead-et, mivel más folyamatok, például a tétlen háttérfolyamatok nem kapnak gyakran kiszolgálást a scheduler-től, és a hívó folyamat szükség szerint nagyobb pontosságot kap. Azonban ez korlátokat eredményez, ha ki szeretnénk használni a 0,5ms-os felbontást. Tekintettel arra, hogy a játékok nem nyílt forráskódúak a kód módosításához, valamint a DLL-injection-t vagy binary patching-et megakadályozza az anticheat, az egyetlen lehetőség az, hogy globálisan állítod be, amely az alábbi registry key-el alkalmazható Windows Server és Windows 11+ rendszereken.
+A timer resolution megvalósítása Windows 10 2004+ után úgy változott, hogy a hívó folyamat felbontásának emelése nem befolyásolja a rendszert globális szinten, vagyis "A" folyamat 1 ms-ra emelése nem befolyásolja a "B" folyamatot az alapértelmezett 15,625 ms-os felbontásnál, ellentétben a korábbiakkal. Ez önmagában nagyszerű változás, mert csökkenti az overhead-et, mivel más folyamatok, például a tétlen háttérfolyamatok nem kapnak gyakran kiszolgálást a scheduler-től, és a hívó folyamat szükség szerint nagyobb pontosságot kap. Azonban ez korlátokat eredményez, ha ki szeretnénk használni a 0,5ms-os felbontást. Tekintettel arra, hogy a játékok nem nyílt forráskódúak a kód módosításához, valamint a DLL-injection-t vagy binary patching-et megakadályozza az anticheat, az egyetlen lehetőség az, hogy globálisan állítod be, amely az alábbi registry key-el alkalmazható Windows Server és Windows 11+ rendszereken (Windows Server-en ez automatikusan jelen van és "1"-re van állítva).
 
 ```bat
 reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\kernel" /v GlobalTimerResolutionRequests /t REG_DWORD /d "1" /f
@@ -1346,6 +1340,7 @@ Azonban amint korábban említettem a folyamatonkénti mód csökkenti a CPU-ove
 
 A nagyobb felbontás nagyobb Sleep pontosságot eredményez, de bizonyos esetekben a maximálisan támogatott 0,5 ms felbontás pont hogy kisebb pontosságot biztosít, mint a valamivel alacsonyabb, például 0,507 ms. Ezért célszerű a [MeasureSleep](https://github.com/valleyofdoom/TimerResolution) programban meghatározni, hogy melyik felbontással a legkisebb a Sleep(1) (delta), miközben a [SetTimerResolution](https://github.com/valleyofdoom/TimerResolution/releases) programmal különböző felbontásokat állítunk be. Ezt terhelés alatt kell elvégezni, mivel az idle benchmarkok félrevezetőek lehetnek. A folyamat automatizálására a [micro-adjust-benchmark.ps1](/bin/micro-adjust-benchmark.ps1) script használható és az eredményt feltöltheted [chart-studio.plotly.com](https://chart-studio.plotly.com/create/#/)-ra az ``Import`` gombbal hogy könnyebben leolvasd.
 
+
 ### 5.40.1 Maga a Timer Resolution beállítása
 
 - Töltsd le a [SetTimerResolution](https://github.com/valleyofdoom/TimerResolution/releases)-t a ``C:\`` meghajtóba majd pedig menj be ``shell:startup``-ba -> Jobb klikk -> Create a shortcut -> ``C:\SetTimerResolution.exe``
@@ -1353,7 +1348,6 @@ A nagyobb felbontás nagyobb Sleep pontosságot eredményez, de bizonyos esetekb
 - Használd az alábbi példát és add hozzá a Target-hez a paramétereket.
 
   - ``5000 = 0.5ms``, ``5250 = 0.525ms`` stb.
-
 
 ```bat
 C:\SetTimerResolution.exe --resolution 5000 --no-console
@@ -1372,11 +1366,11 @@ Legtöbb esetben ajánlott bekapcsolva hagyni, ami az alap beállítás. Van egy
 
 - Használj programokat mint a [BulkCrapUninstaller](https://github.com/Klocman/Bulk-Crap-Uninstaller) mivel a control panel-ban történő uninstall során sok fájl letörlése kimaradhat.
 
-- Használj [Autoruns](https://learn.microsoft.com/en-us/sysinternals/downloads/autoruns)-t hogy letiltsd a nem kívánt programok automatikus futtatását. Ellenőrizd gyakran, főleg egy program feltelepítése után. 
+- Használj [Autoruns](https://learn.microsoft.com/en-us/sysinternals/downloads/autoruns)-t hogy letiltsd a nem kívánt programok/szolgáltatások automatikus futtatását Ellenőrizd gyakran, főleg egy program feltelepítése után. 
 
 - Disk Cleanup
 
-  - Nyisd meg a CMD-t és másold be az alábbi parancsot, pipálj be mindent kivéve a ``DirectX Shader Cache``-t és ``OK``.
+  - CMD-be másold be az alábbi parancsot, pipálj be mindent kivéve a ``DirectX Shader Cache``-t és ``OK``.
 
     ```bat
     cleanmgr /sageset:0
@@ -1398,7 +1392,7 @@ Legtöbb esetben ajánlott bekapcsolva hagyni, ami az alap beállítás. Van egy
   - ``%userprofile%\AppData\Local\Temp`` - ideiglenes fájlok
   - Felhasználói directory-k (Downloads, Documents, stb.)
 
-- Tisztítsd a WinSxS mappát az alábbi parancssal. Ez egy hosszabb folyamat lehet.
+- CMD-be másold be az alábbi parancsot hogy tisztítsd a WinSxS mappát az alábbi parancssal. Ez egy hosszabb folyamat lehet.
 
   ```bat
   DISM /Online /Cleanup-Image /StartComponentCleanup /ResetBase
