@@ -1125,13 +1125,13 @@ Get-WmiObject MSPower_DeviceEnable -Namespace root\wmi | ForEach-Object { $_.ena
 
 CMD-be másold be az alábbi parancsokat.
 
-- Tiltsd le a [8.3-as fájlnevek](https://hu.wikipedia.org/wiki/8.3-as_f%C3%A1jln%C3%A9v) készítését FAT és NTFS formátumú meghajtókon
+- Tiltsd le a [8.3-as fájlnevek](https://hu.wikipedia.org/wiki/8.3-as_f%C3%A1jln%C3%A9v) készítését FAT és NTFS formátumú meghajtókon:
 
 ```bat
 fsutil behavior set disable8dot3 1
 ```
 
-Tiltsd le a [Last Acces Time Stamp Update](https://www.tenforums.com/tutorials/139015-enable-disable-ntfs-last-access-time-stamp-updates-windows-10-a.html)-et.
+Tiltsd le a [Last Acces Time Stamp Update](https://www.tenforums.com/tutorials/139015-enable-disable-ntfs-last-access-time-stamp-updates-windows-10-a.html)-et:
 
 ```bat
 fsutil behavior set disablelastaccess 1
