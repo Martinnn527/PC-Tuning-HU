@@ -1162,9 +1162,9 @@ for %a in ("SleepStudy" "Kernel-Processor-Power" "UserModePowerService") do (wev
 
 - Töltsd le a [GoInterruptPolicy](https://github.com/spddl/GoInterruptPolicy)-t.
 
-- Kapcsold be az MSI-ket az összes támogatott eszközön. Vedd figyelembe hogy néhány driver fejlesztő alapból kikapcsolva hagyja az MSI-ket, tehát ha újratelepítesz egy drivert utána mindig érdemes ellenőrizni.
+- Kapcsold be az MSI-ket az összes támogatott eszközön. Vedd figyelembe hogy néhány driver fejlesztő alapból kikapcsolva hagyja az MSI-ket, tehát ha újratelepítesz egy drivert utána mindig érdemes ellenőrizni. Kerüld az eszközök újraindítását miután alkalmaztad a policy-ket, helyette indítsd újra a gépet.
 
-- ``Win+R -> msinfo32 -> Hardware Resources -> Conflicts/Sharing`` és győződj meg róla hogy nincs IRQ Sharing a rendszeren. Lehetséges hogy újra kell indítanod a gépet az előzőleg alkalmazott beállítások érvénybe lépéséhez.
+- ``Win+R -> msinfo32 -> Hardware Resources -> Conflicts/Sharing`` és győződj meg róla hogy nincs IRQ Sharing a rendszeren.
 
 ## 5.35 XHCI Interrupt Moderation (IMOD)
 
