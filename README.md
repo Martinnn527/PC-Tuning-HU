@@ -1183,7 +1183,10 @@ reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\CI\Config" /v "Vuln
 
 ### 5.36.1 FPS Limit
 
-- Ha limitálod az FPS-t akkor a monitorod refresh rate-jének a többszörése korlátozd le. Lásd: [FPS Cap Calculator | BoringBoredom](https://boringboredom.github.io/tools/fpscapcalculator). Bizonyosodj meg róla hogy a GPU nincs teljesen kihasználva mivel minél kevesebb a kihasználtsága annál kevesebb a system latency.
+- Ha limitálod az FPS-t akkor a monitorod refresh rate-jének a többszörése korlátozd le. Bizonyosodj meg róla hogy a GPU nincs teljesen kihasználva mivel minél kevesebb a kihasználtsága annál kevesebb a system latency.
+
+  - Lásd: [How to properly cap your FPS | Calypto](https://youtu.be/_73gFgNrYVQ?si=VeCh5MXDgjHQdJ7h)
+  - Lásd: [FPS Cap Calculator | BoringBoredom](https://boringboredom.github.io/tools/fpscapcalculator)
 
 - Ha RTSS-el limitálod az FPS-t sokkal konzisztensebb lesz a frame-pacing mivel busy-wait-et használ ami sokkal precízebb mint a passive-wait de cserébe nagyobb latency-vel és CPU overhead-el jár.
 
