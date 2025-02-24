@@ -1071,7 +1071,7 @@ Használj Process Explorer-t mivel a stock Task Manager a CPU kihasználtságát
 
 Ez a helyes módja a szolgáltatások kikapcsolásának. Nem kell egyesével kikapcsolni őket, ami alapból nem is lenne visszafordítható, kivéve ha mindent manuálisan visszakapcsolsz, ami egyáltalán nem praktikus. Ezért lesz kettő script létrehozva amivel váltani tudsz az Enabled (Gyári Windows) és Disabled között. Fontos tudni, hogy a szolgáltatások egymásra épülnek. Ha letiltasz egy olyan szolgáltatást, amelyre egy másik szolgáltatás támaszkodik, akkor az a másik szolgáltatás nem fog tudni megfelelően működni, és hibát fog jelezni, emiatt rosszabb teljesíménnyel jár mintha szimplán bekapcsolva hagynád az adott szolgáltatást. Amiután megépítetted a scripteket a program automatikusan ellenőrzi a dependency hibákat tehát szinte lehetetlen ezzel kapcsolatosan elrontani.
 
-  - Lásd: [media/services-dependency-example](/media/services-dependency-example.png)
+  Lásd: [media/services-dependency-example](/media/services-dependency-example.png)
 
 - Töltsd le a [service-list-builder](https://github.com/valleyofdoom/service-list-builder)-t.
 
