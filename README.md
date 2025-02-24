@@ -1193,9 +1193,9 @@ Győződj meg róla hogy a Game Bar felismeri a játékot. Nyisd meg a Game Bar-
 
 ### 5.36.3 Presentation Mode
 
-Lásd: [Presentation Models](https://wiki.special-k.info/en/Presentation_Model)
+Ez nem egy ajánlás hogy melyik Presentation Mode-ot használd, inkább csak informatív okból írom le.
 
-- Ez nem egy ajánlás hogy melyik Presentation Mode-ot használd, inkább csak informatív okból írom le.
+- Lásd: [Presentation Models](https://wiki.special-k.info/en/Presentation_Model)
 
 - [PresentMon](https://github.com/GameTechDev/PresentMon)-al ellenőrizd hogy a kívánt Presentation Mode-ot használod-e.
 
