@@ -1088,7 +1088,7 @@ reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Softwar
 
 - Nyisd meg a CMD-t a ``service-list-builder`` mappájában (ahol az exe található).
 
-- Másold be az alábbi parancsot hogy megépítsd a scripteket. Ha a program talál egy harmadik féltől származó szolgáltatást (pl. NVDisplay.ContainerLocalSystem) akkor az figyelmeztet. Ha mégis folytatni szeretnéd add hozzá a ``--disable-service-warning`` paramétert a parancs végére.
+- Másold be az alábbi parancsot hogy megépítsd a scripteket. Ha a program talál egy harmadik féltől származó szolgáltatást (pl. *NVDisplay.ContainerLocalSystem*) akkor az figyelmeztet. Ha mégis folytatni szeretnéd add hozzá a ``--disable-service-warning`` paramétert a parancs végére.
 
 ```bat
 service-list-builder.exe --config C:\bin\minimal-services.ini
