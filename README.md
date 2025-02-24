@@ -1139,7 +1139,7 @@ fsutil behavior set disablelastaccess 1
 
 ## 5.33 Event Trace Sessions (ETS)
 
-- Ezekkel a fájlokkal automatikusan tudsz váltani ETS Enabled és Disabled között aminek a hatását meg tudod nézni itt: ``Win+R -> perfmon -> Data Collector Sets -> Event Trace Session``. Azok a programok amelyek event tracing-re támaszkodnak nem fognak tudni adatot log-olni (pl. Event Viewer) amíg nem kapcsolod vissza őket, és pont ezért van egy enable és disable fájl. CMD-be másold be a parancsokat hogy megépítsd a két registry fájlt a ``C:\`` meghajtóban. NSudo-val kell majd futtatni őket.
+Ezekkel a fájlokkal automatikusan tudsz váltani ETS Enabled és Disabled között aminek a hatását meg tudod nézni itt: ``Win+R -> perfmon -> Data Collector Sets -> Event Trace Session``. Azok a programok amelyek Event Tracing-re támaszkodnak (pl. Event Viewer) nem fognak tudni adatot log-olni amíg kivan kapcsolva. CMD-be másold be az alábbi parancsokat hogy megépítsd a két registry fájlt a ``C:\`` meghajtón. Futtasd az ``ets-disable.reg``-et NSudo-val.
 
 - ets-enable.reg
 ```bat
