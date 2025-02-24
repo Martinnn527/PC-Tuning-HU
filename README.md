@@ -1247,12 +1247,12 @@ Opcionálisan használj [DiscordFixer](https://github.com/HerXayah/Discord-Fixer
 
 ### 5.36.8 Epic Games
 
-Néhány Epic-es játéknál automatikusan fut az ``EOSOverlayRenderer-Win64-Shipping.exe`` ami általában a ``C:\Program Files (x86)\Epic Games\Launcher\Portal\Extras\Overlay`` directory-ban található. Használd az alábbi parancsot hogy átírd a nevét, abban az esetben ha az Epic Games-t az alapértelmezett helyre telepítetted. Játékbeli vásárlásokhoz (pl. VBucks feltöltés) kötelező futnia. Ebben az esetben csak írd vissza a nevét és indítsd újra a játékot.
+- Néhány Epic-es játéknál automatikusan fut az ``EOSOverlayRenderer-Win64-Shipping.exe`` ami általában a ``C:\Program Files (x86)\Epic Games\Launcher\Portal\Extras\Overlay`` directory-ban található. Használd az alábbi parancsot hogy átírd a nevét, abban az esetben ha az Epic Games-t az alapértelmezett helyre telepítetted. Játékbeli vásárlásokhoz (pl. VBucks feltöltés) kötelező futnia. Ebben az esetben csak írd vissza a nevét és indítsd újra a játékot.
 
 ```bat
 ren "C:\Program Files (x86)\Epic Games\Launcher\Portal\Extras\Overlay\EOSOverlayRenderer-Win64-Shipping.exe" EOSOverlayRenderer-Win64-Shipping.exee
 ```
-Amiután elindítasz egy játékot, az Epic Games Launcher továbbra is fut a háttérben azonban bezárható a Steam-mel ellentétben.
+- Amiután elindítasz egy játékot, az Epic Games Launcher továbbra is fut a háttérben azonban bezárható a Steam-mel ellentétben.
 
 ### 5.36.9 Steam 
 
