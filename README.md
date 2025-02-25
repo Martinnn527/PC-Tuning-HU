@@ -491,7 +491,6 @@ GPU overclockolásnál előfordulhat hogy számos power limit-et fel kell oldano
 
 - Windows Server-en nincs Game Bar, Game Mode és ehhez hasonló funkciók.
 
-
 ## 4.2 Szükséges programok letöltése
 
 - [7-Zip](https://www.7-zip.org/)
@@ -701,13 +700,11 @@ C:\bin\disable-process-mitigations.bat
 
 - ``Win+R`` -> ``control userpasswords`` -> ``Users`` majd jobb klikk az ``Administrator``profilra, ``Set Password`` és hagyd üresen hogy eltávolítsd a jelszót.
 
-- Windows Server-en globálisan kikapcsolható a Telemetry az alábbi CMD parancsokkal.
+- Windows Server-en globálisan kikapcsolható a Telemetry az alábbi CMD paranccsal.
 
   ```bat
-  reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WSDAPI\AppCompat" /v AllowTelemetry /t REG_DWORD /d "0" /f
+  reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\DataCollection" /v AllowTelemetry /t REG_DWORD /d "0" /f
   ```
-  ```bat
-  reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WSDAPI\AppCompat" /v AITEnable /t REG_DWORD /d "0" /f
 
 ## 5.6 Privacy Options
 
