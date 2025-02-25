@@ -667,7 +667,11 @@ Set-ExecutionPolicy Unrestricted
 
 ## 5.2 Process Mitigations (Windows 10 1709+)
 
-Nyisd meg a CMD-t ``C:\bin\NSudoLG.exe``-n keresztül (írd be hogy ``cmd``) az ``Enable All Priviliges`` bepipálásával, majd pedig másold be az alábbi parancsot. Ezután ne zárd be a CMD-t mivel szükség lesz rá a jövőbeli parancsok futattásához.
+Nyisd meg a CMD-t majd pedig másold be az alábbi parancsokat sorrendben.
+
+```bat
+C:\bin\MinSudo.exe --TrustedInstaller --Privileged
+```
 
 ```bat
 C:\bin\disable-process-mitigations.bat
@@ -701,7 +705,7 @@ A beállítások módosíthatók a ``bin`` mappában lévő ``registry-options.j
 
 - ``Win+R -> gpedit.msc -> Computer Configuration -> Windows Settings -> Security Settings -> Account Policies -> Password Policy`` és kapcsold ki a ``Password must meet complexity requirements`` opciót.
 
-   - Nyisd meg a CMD-t és írd be hogy ``gpupdate /force`` hogy egyből életbe lépjenek a változások.
+   - CMD-be írd be hogy: ``gpupdate /force``, így egyből életbe lépnek a változások.
 
 - ``Win+R`` -> ``control userpasswords`` -> ``Users`` majd jobb klikk az ``Administrator``profilra, ``Set Password`` és hagyd üresen hogy eltávolítsd a jelszót.
 
@@ -830,7 +834,7 @@ Javasolt a debloat scriptek elkerülése és az olyan komponensek eltávolítás
     for %a in ("SysWOW64" "System32") do (if exist "%windir%\%~a\OneDriveSetup.exe" ("%windir%\%~a\OneDriveSetup.exe" /uninstall)) && reg delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Desktop\NameSpace\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" /f
     ```  
 
-- Chromium Microsoft Edge letiltása (nem letörlése). A böngészőt letiltani kell nem pedig letörölni a WebView Runtime megtartása érdekében.
+- Microsoft Edge letiltása (nem letörlése). A böngészőt letiltani kell nem pedig letörölni a WebView Runtime megtartása érdekében.
         
   - Nyisd meg a Microsoft Edge-t majd pedig a beállításokban kapcsolj ki bármilyen automatikus start-up beállítást mint például:
 
@@ -856,7 +860,7 @@ Javasolt a debloat scriptek elkerülése és az olyan komponensek eltávolítás
 
 - A ``smartscreen.exe`` figyelmen kívül hagyja a registry key-t ami szabályozza hogy fut-e, ezért át kell nevezni az exe-t hogy ne tudjon elindulni. CMD-be másold be az alábbi parancsokat.
 
-```powershell
+```bat
 C:\bin\MinSudo.exe --TrustedInstaller --Privileged
 ```
 
