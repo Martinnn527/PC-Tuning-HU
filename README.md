@@ -1415,5 +1415,5 @@ Legtöbb esetben ajánlott bekapcsolva hagyni, ami az alap beállítás. Van egy
   DISM /Online /Cleanup-Image /StartComponentCleanup /ResetBase
   ```
 
-- Töröld ki a System Restore Point-okat. ``Win+R -> sysdm.cpl``. Ajánlott teljesen kikapcsolni.
+- Töröld ki a System Restore Point-okat: ``Win+R -> sysdm.cpl``. Ajánlott teljesen kikapcsolni.
 
