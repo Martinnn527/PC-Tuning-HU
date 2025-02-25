@@ -290,7 +290,7 @@ Kapcsold ki a [Hyper-Threading/Simultaneous Multithreading](https://en.wikipedia
 
 ## 2.8 Virtualization
 
-Kapcsold ki a Virtualization/SVM Mode, Intel VT-d/AMD-Vi beállításokat, mivel ezek a memória hozzáférés késeltetését növelhetik. A Virtualization szintén hatással lehet a BCLK-ra.
+Kapcsold ki a Virtualization/SVM Mode, Intel VT-d/AMD-Vi, IOMMU beállításokat mivel ezek a memória hozzáférés késeltetését növelhetik. A Virtualization szintén hatással lehet a BCLK-ra.
    
   - Ellenőrizd a Virtualization-t Task Manager-ben.
 
@@ -304,7 +304,7 @@ Kapcsold ki a Trusted Platform Module-t (TPM), mert előfordulhat, hogy a rendsz
 
   - Windows 11-en néhány anti-cheat (Vanguard, FACEIT) működéséhez bekapcsolva kell hagyni.
 
-  - Ellenőrizd a TPM állapotát : ``Win+R`` -> ``msinfo32``
+  - Ellenőrizd a TPM állapotát : ``Win+R`` -> ``tpm.msc``
 
 ## 2.11 Secure Boot
 
@@ -1318,9 +1318,13 @@ Amiután kész vagy az előbbi lépésekkel töltsd le a [Windows ADK](https://g
 
 ## 5.38 Event Viewer ellenőrzése
 
-Ez a lépés nem kötelező, azonban segíthet a megmagyarázhatatlan FPS drop-ok és többi probléma azonosításában. Ellenőrizd hogy nincs e teli hibaüzenettel az Event Viewer. ``Win+R`` -> ``eventvwr.msc``. 
+Ez a lépés nem kötelező, azonban segíthet a megmagyarázhatatlan FPS drop-ok és többi probléma azonosításában.
 
+  - Ha még nem tetted, futtasd a ``Services-Disable.bat`` scriptet.
   - Futtasd az ``ets-enable.reg`` fájlt mivel ez szükséges az event log működéséhez.
+  - Tedd a ``Wecsvc`` és ``EventLog`` szolgáltatás értékét "2"-re a registry editorban: ``HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services`` és indítsd újra a gépet.
+
+Használd a gépet egy darabig, ellenőrizd nincs-e teli hibaüzenettel az Event Viewer és amiután végeztél állítsd vissza a fent említett két szolgáltatás értékét "4"-re.
 
 ## 5.39 CPU Idle States
 
@@ -1372,7 +1376,7 @@ Legtöbb esetben ajánlott bekapcsolva hagyni, ami az alap beállítás. Van egy
 
 - Használj programokat mint a [BulkCrapUninstaller](https://github.com/Klocman/Bulk-Crap-Uninstaller) mivel a control panel-ban történő uninstall során sok fájl letörlése kimaradhat.
 
-- Használj [Autoruns](https://learn.microsoft.com/en-us/sysinternals/downloads/autoruns)-t hogy letiltsd a nem kívánt programok/szolgáltatások automatikus futtatását Ellenőrizd gyakran, főleg egy program feltelepítése után. 
+- Használj [Autoruns](https://learn.microsoft.com/en-us/sysinternals/downloads/autoruns)-t hogy letiltsd a nem kívánt programok/szolgáltatások automatikus futtatását Ellenőrizd gyakran, főleg egy program feltelepítése után. Töröld ki az összes sárgával jelölt elemet. Lehet hogy ``C:\bin\NSudoLG.exe``-vel kell futtatnod az Autoruns-t az ``Enable All Priviliges`` bepipálásával.
 
 - Disk Cleanup
 
