@@ -116,7 +116,7 @@ Scaling Mode: 1
 
 ## 3. DiscordFixer
 
-A Discord a hotkey-ek (Mute, Deafen, stb) használatához abban az esetben is leköveti az egér mozgását (raw_input thread) amikor nincs előtérben a Discord ezáltal jóval több értelmetlen context switching-et és cycles-t eredményez ([1](/media/discordfixer-research-example.png)). A DiscordFixer automatikusan leállítja a raw_input thread host folyamatát azonban a hotkey funkciók nem lesznek elérhetők és az én esetemben nem ismeri fel a Discord az éppen futó játékot. Lásd a DiscordFixer [GitHub repo](https://github.com/HerXayah/Discord-Fixer?tab=readme-ov-file#usage)-ját a használati útmutatóért.
+A Discord a hotkey-ek (Mute, Deafen, stb) használatához abban az esetben is leköveti az egér mozgását (raw_input thread) amikor nincs előtérben a Discord ezáltal jóval több értelmetlen context switching-et és cycles-t eredményez ([1](/media/discordfixer-research-example.png)). A DiscordFixer automatikusan leállítja a raw_input thread host folyamatát azonban a hotkey funkciók nem lesznek elérhetők. Lásd a DiscordFixer [GitHub repo](https://github.com/HerXayah/Discord-Fixer?tab=readme-ov-file#usage)-ját a használati útmutatóért.
 
 Ha azt szeretnéd hogy automatikusan DiscordFixer-en keresztül induljon el minden gép indításnál, csinálj egy shortcut-ot ``shell:startup``-ba.
 
