@@ -1409,7 +1409,7 @@ Legtöbb esetben ajánlott bekapcsolva hagyni, ami az alap beállítás. Van egy
   - ``%userprofile%\AppData\Local\Temp`` - ideiglenes fájlok
   - Felhasználói directory-k (Downloads, Documents, stb.)
 
-- CMD-be másold be az alábbi parancsot hogy tisztítsd a WinSxS mappát az alábbi parancssal. Ez egy hosszabb folyamat lehet.
+- CMD-be másold be az alábbi parancsot hogy tisztítsd a WinSxS mappát. Ez egy hosszabb folyamat lehet.
 
   ```bat
   DISM /Online /Cleanup-Image /StartComponentCleanup /ResetBase
