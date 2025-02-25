@@ -608,7 +608,7 @@ DISM /Image:"%MOUNT_DIR%" /Enable-Feature /FeatureName:NetFx3 /All /LimitAccess 
 explorer "%MOUNT_DIR%"
 ```
 
-Ilyenkor érdemes az ethernet driver-t is bemásolni/integrálni.
+Ilyenkor érdemes az ethernet driver-t is bemásolni/integrálni. Próbáld meg a driver-t INF formában integrálni mivel az exe-k általában bloatware-t tartalmaznak. Néhány esetben 7-Zip-el ki tudod csomagolni az exe-t és azon belül megkeresni az INF fájlt.
 
 ## 4.9 Unmount és Commit
 
@@ -691,9 +691,7 @@ A beállítások módosíthatók a ``bin`` mappában lévő ``registry-options.j
 
 - GPU driverek később lesznek feltelepítve.
 
-- Próbáld meg a driver-t INF formában feltelepíteni Task Manager-en belül mivel az exe-k általában bloatware-t tartalmaznak. Próbáld meg 7-Zip-el kicsomgalni az exe fájlt és azon belül megkeresni az INF fájlt.
-
-- NIC (Network Interface Controller) drivert telepítsd fel.
+- NIC (Network Interface Controller) drivert telepítsd fel lehetőleg INF-ként Device Manager-ben, ahogy [itt](#48-szükséges-fájlok-integrálása) levan írva.
 
 ## 5.5 Windows Server konfigurálása
 
