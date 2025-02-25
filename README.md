@@ -659,7 +659,7 @@ Ehhez a lépéshez húzd ki az ethernet kábeledet és ne legyél az internethez
 
 ## 5.1 Unrestricted PowerShell Execution Policy
 
-Ez szükséges a scriptek futtatásához. Nyisd meg a PowerShell-t és másold be az alábbi parancsot. Enter, és nyomj egy "A" betűt.
+Ez szükséges a scriptek futtatásának engedélyezésére. Nyisd meg a PowerShell-t és másold be az alábbi parancsot. Válaszd ki a "Yes to all" opciót ("A" betű).
 
 ```powershell
 Set-ExecutionPolicy Unrestricted
@@ -667,7 +667,7 @@ Set-ExecutionPolicy Unrestricted
 
 ## 5.2 Process Mitigations (Windows 10 1709+)
 
-Nyisd meg az ``NSudoLG.exe``-t, pipáld be az ``Enable All Priviliges`` checkbox-ot és írd be hogy ``cmd``, majd pedig másold be az alábbi parancsot. Ezután ne zárd be a CMD-t mivel szükség lesz rá a jövőbeli parancsok futattásához.
+Nyisd meg a CMD-t ``C:\bin\NSudoLG.exe``-n keresztül (írd be hogy ``cmd``) az ``Enable All Priviliges`` bepipálásával, majd pedig másold be az alábbi parancsot. Ezután ne zárd be a CMD-t mivel szükség lesz rá a jövőbeli parancsok futattásához.
 
 ```bat
 C:\bin\disable-process-mitigations.bat
