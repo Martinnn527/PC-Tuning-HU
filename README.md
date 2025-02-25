@@ -1383,7 +1383,7 @@ Legtöbb esetben ajánlott bekapcsolva hagyni, ami az alap beállítás. Van egy
 
 - Használj programokat mint a [BulkCrapUninstaller](https://github.com/Klocman/Bulk-Crap-Uninstaller) mivel a control panel-ban történő uninstall során sok fájl letörlése kimaradhat.
 
-- Használj [Autoruns](https://learn.microsoft.com/en-us/sysinternals/downloads/autoruns)-t hogy letiltsd a nem kívánt programok/szolgáltatások automatikus futtatását Ellenőrizd gyakran, főleg egy program feltelepítése után. Töröld ki az összes sárgával jelölt elemet. Lehet hogy ``C:\bin\NSudoLG.exe``-vel kell futtatnod az Autoruns-t az ``Enable All Priviliges`` bepipálásával.
+- Használj [Autoruns](https://learn.microsoft.com/en-us/sysinternals/downloads/autoruns)-t hogy letiltsd a nem kívánt programok/szolgáltatások automatikus futtatását. Ellenőrizd gyakran, főleg egy program feltelepítése után. Töröld ki az összes sárgával jelölt elemet. Lehet hogy ``C:\bin\NSudoLG.exe``-vel kell futtatnod az Autoruns-t az ``Enable All Priviliges`` bepipálásával.
 
 - Disk Cleanup
 
