@@ -274,18 +274,16 @@ Ha a CMOS reset nem állítja teljes mértékben alaphelyzetbe a BIOS-t, haszná
 
 Számos alaplap gyártó elrejt sok hasznos beállítást. A legegyszerűbb megoldás erre az hogy az UEFI-ben lévő összes látható beállítást konfigurálod majd pedig [SCEWIN](https://github.com/ab3lkaizen/SCEHUB)-ben a maradék rejtett beállítással folytatod.
 
-## 2.6 Hyperthreading/SMT
+## 2.6 Hyperthreading/Simultaneous Multithreading
 
 Kapcsold ki a [Hyper-Threading/Simultaneous Multithreading](https://en.wikipedia.org/wiki/Hyper-threading) funkciót. Ez például renderelés esetén hasznos lehet de mivel a CPU-nkénti több végrehajtó thread használtata növeli a processzor erőforrásainak igénybevételét, jóval nagyobb hőfokokkal jár és a rendszer nagyobb latencyjének, jitterének potenciális forrása. Ha elegendő CPU-val rendelkezel a játék futtatásához, mindenféleképpen kapcsold ki. Ez a koncepció alkalmazható az Intel E-coreok esetében is.
 
 ## 2.7 Power States
 
-- Kapcsold ki a C-States-eket. Keresd a *C1E*, *C6* kifejezéseket. Kapcsold ki az S-States-eket (*S3*, *S6*, *Hibernation*).
+- Kapcsold ki a C-States-eket. Keresd a *C1E*, *C6* kifejezéseket. 
   
   - Ellenőrizd a C-State residency-t [HWiNFO](https://www.hwinfo.com/)-ban
   
-  - Ellenőrizd az S-States-eket ``powercfg /a``-val 
-
 - Kapcsold ki az összes Power Saving funkciót, mint például: ASPM (Active State Power Management), ALPM (Aggressive Link Power Managemenet), DRAM Power Down, Hibernation, Clock Gating, Power Gating. Keresd a "power management", "power saving" kifejezéseket.  
 
 ## 2.8 Virtualization
@@ -315,28 +313,35 @@ Kapcsold ki a Secure Boot-ot. (Windows 11-en a Vanguard, FACEIT, igényli a beka
 ## 2.12 Fast Startup, Standby és Hibernate
 
 Ez leginkább személyes preferencia, tapasztalat és nézőpont kérdése. Vannak, akik nem használják a Fast Startup-ot, Standby-t vagy Hibernation-t, mert ezek néha váratlan problémákat okozhatnak ([magyarázat](https://www.youtube.com/watch?v=OBGxt8zhbRk)). Ehelyett inkább tiszta rendszerindítást részesítenek előnyben, így nem mentik és állítják vissza a kernel és a szoftverek állapotát és korlátozzák a rendszer energiaállapotait S0-ra (működő állapot) és S5-re (alvó állapot).
-A rendszer energiaállapotairól [itt](https://learn.microsoft.com/en-us/windows/win32/power/system-power-states) tudhatsz meg többet. A BIOS-ban ezek az opciók gyakran Fast Startup, Suspend to RAM, S-States (S1, S2, S3, S4, S5), Standby, Memory Fast Boot, Hibernation vagy hasonló néven szerepelnek. Az aktuális S-State állapotokat a következő parancssorral ellenőrizheted: ``CMD``-> ``powercfg /a``
+A rendszer energiaállapotairól [itt](https://learn.microsoft.com/en-us/windows/win32/power/system-power-states) tudhatsz meg többet. A BIOS-ban ezek az opciók gyakran Fast Startup, Suspend to RAM, S-States (S1, S2, S3, S4, S5), Standby, Memory Fast Boot, Hibernation vagy hasonló néven szerepelnek.
 
-A Windows-on belül is kikapcsolható a Fast Startup és Hibernation funckió ami letörli a ``C:\hiberfil.sys`` fájlt
+A Windows-on belül is kikapcsolható a Fast Startup és Hibernation funckió ami letörli a ``C:\hiberfil.sys`` fájlt. Másold be az alábbi parancsot CMD-be:
 
-```cmd
+```bat
 powercfg /h off
 ```
+
+Ellenőrizd a változásokat a következő paranccsal:
+
+```bat
+powercfg /a 
+```
+
 ## 2.13 Spread Spectrum
 
-Kapcsold ki a Spread Spectrumot és győződj meg róla hogy a BCLK frequency kereken 100.000 és nem Auto. [HWiNFO](https://www.hwinfo.com/)/[CPU-Z](https://www.cpuid.com/softwares/cpu-z.html)-ben ellenőrizni tudod.
+Kapcsold ki a Spread Spectrumot és győződj meg róla hogy a BCLK Frequency a lehető legközelebb van a 100-hoz. [HWiNFO](https://www.hwinfo.com/)/[CPU-Z](https://www.cpuid.com/softwares/cpu-z.html)-ben ellenőrizni tudod.
 
 ## 2.14 PCIe Link Speeds
 
-PCIe Link Speed-et tedd a lehető legmagasabbra, mint például Gen 4, stb. Sose hagyd Auto-n.
+PCIe Link Speed-et tedd a lehető legmagasabbra, mint például Gen 4, stb.
   
   - Keresd a ``PCIe Speed``, ``Gen4`` kifejezéseket.
 
 ## 2.15 Statikus CPU frekvencia
 
-Ha statikus frekvenciát/feszültséget konfigurálsz a CPU-hoz, kapcsold ki a dynamic frequency funkciókat mint például a Speed shift, speedstep, és állítsd az AVX offset-et 0-ra, vagy tedd ``Disabled``-re. Precision Boost Overdrive (PBO) a Ryzen CPU-k esetében a statikus frekvencia és feszültésg alternatívája (X3D kivétel).
+Ha statikus frekvenciát/feszültséget konfigurálsz a CPU-hoz, kapcsold ki a dynamic frequency funkciókat mint például a SpeedShift, SpeedStep, és állítsd az AVX Offset-et 0-ra, vagy tedd ``Disabled``-re. Precision Boost Overdrive (PBO) a Ryzen CPU-k esetében a statikus frekvencia és feszültésg alternatívája (X3D kivétel).
 
-  - Egyes esetekben a fent említett beállítások megakadályozhatják, hogy a processzor a BIOS-ban történő manuális beállítás ellenére is túllépje az alapfrekvenciát. Ennek megfelelően állítsd be, ha ez előfordul, és [HWiNFO](https://www.hwinfo.com/)-ban ellnőrizd az órajeleket.
+  - Egyes esetekben a fent említett beállítások megakadályozhatják, hogy a processzor a BIOS-ban történő manuális beállítás ellenére is túllépje az alapfrekvenciát. Ennek megfelelően állítsd be, ha ez előfordul, és [HWiNFO](https://www.hwinfo.com/)-ban ellenőrizd az órajeleket.
 
 ## 2.16 Ventilátor RPM
 
@@ -346,7 +351,7 @@ Konfiguráld a fan speedeket. állíts be egy [fan curve](https://imgur.com/a/ul
 
 Kapcsold be a High Precision Event Timer-t. 
   
-  - Újabb AMD rendszereken nincs hatása ennek a beállításnak.
+  - Újabb AMD-s rendszereken nincs hatása ennek a beállításnak.
 
 ## 2.18 Software telepítési beállítások
 
@@ -366,7 +371,7 @@ Kapcsold ki az Execute Disable Bit/NX Mode-ot.
 
 ## 2.22 BIOS Profilok és Backup
 
-Mentsd le a jelenlegi BIOS profilodat hogyha valamilyen oknál fogva alaphelyzetbe kell állítani akkor ne kelljen előről kezdened az egészet. A legtöbb alaplapon egy mentett profil betöltése CMOS reset után nem mindig fogja az összes beállítást visszaállítani úgy ahogy volt. Ezért ajánlatos [SCEWIN](https://github.com/ab3lkaizen/SCEHUB)-el exportálni a jelenlegi profilod majd reset után újra exportálni és összehasonlítani a két NVRAM fájlt [Notepad++ Compare Plugin](https://sourceforge.net/projects/npp-compare/)-al vagy [Visual Studio Code](https://code.visualstudio.com/download)-al.
+Mentsd le a jelenlegi BIOS profilodat hogyha valamilyen oknál fogva alaphelyzetbe kell állítani akkor ne kelljen előről kezdened az egészet. A legtöbb alaplapon egy mentett profil betöltése CMOS reset után nem mindig fogja az összes beállítást visszaállítani úgy ahogy volt, ezért ajánlatos [SCEWIN](https://github.com/ab3lkaizen/SCEHUB)-el exportálni a jelenlegi profilod majd reset után újra exportálni és összehasonlítani a két NVRAM fájlt [Notepad++ Compare Plugin](https://sourceforge.net/projects/npp-compare/)-al vagy [Visual Studio Code](https://code.visualstudio.com/download)-al.
 
 ---
 
@@ -374,7 +379,7 @@ Mentsd le a jelenlegi BIOS profilodat hogyha valamilyen oknál fogva alaphelyzet
 
 ## 3.1 Ideiglenes OS
 
-Ajánlott egy ideiglenes OS-t feltelepíteni amin OC-zol és stressz tesztelsz hogy elkerüld a fő OS-ed meghibásodását. RAM stressz teszt esetén így még több RAM-ot tudsz tesztelni mivel a háttérben futó programok nem használnak felesleges memóriát. A safe mode minimális tesztelési környezetként is szolgálhat de előfordulhat hogy bizonyos szoftverek nem fognak működni.
+Ajánlott egy ideiglenes OS-t feltelepíteni/dual-bootolni amin OC-zol és stressz tesztelsz hogy elkerüld a fő OS-ed meghibásodását. RAM stressz teszt esetén így még több RAM-ot tudsz tesztelni mivel a háttérben futó programok nem használnak felesleges memóriát. A Safe Mode minimális tesztelési környezetként is szolgálhat de előfordulhat hogy bizonyos szoftverek nem fognak működni.
 
 ## 3.2 Általános infó
 
@@ -425,7 +430,7 @@ GPU overclockolásnál előfordulhat hogy számos power limit-et fel kell oldano
 
 ## 3.7 Stressz-tesztelő eszközök
 
-- StresKit (bootolható)
+- [StresKit](https://github.com/valleyofdoom/StresKit) (bootolható)
 
 - Linpack
 
