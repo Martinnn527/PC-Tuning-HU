@@ -717,7 +717,7 @@ A beállítások módosíthatók a ``bin`` mappában lévő ``registry-options.j
 
 ## 5.7 Search Indexing
 
-Bizonyos könyvtárak a fájlrendszeren indexelve vannak a Windows keresési funkcióihoz, amelyeket a Win+R megnyomása után a ``control srchadmin.dll`` beírásával megtekinthetsz. Az indexelés időszakosan a háttérben fut, és gyakran észrevehető CPU-terhelést okoz, amely a Process Explorer segítségével megfigyelhető, ahogyan az a [Process Explorer](#528-process-explorer) szekcióban levan írva. Ezért ajánlott a keresési indexelést globálisan letiltani a Windows Search szolgáltatás kikapcsolásával, azonban ez korlátozhatja a keresési funkciókat.
+Bizonyos könyvtárak a fájlrendszeren indexelve vannak a Windows keresési funkcióihoz, amelyeket a Win+R megnyomása után a ``control srchadmin.dll`` beírásával megtekinthetsz. Az indexelés időszakosan a háttérben fut, és gyakran észrevehető CPU-terhelést okoz. Ezért ajánlott a keresési indexelést globálisan letiltani a Windows Search szolgáltatás kikapcsolásával, azonban ez korlátozhatja a keresési funkciókat. Másold be CMD-be az alábbi parancsot.
 
 ```bat
 reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WSearch" /v "Start" /t REG_DWORD /d "4" /f
