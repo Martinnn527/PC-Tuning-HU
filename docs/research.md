@@ -118,7 +118,7 @@ Scaling Mode: 1
 
 A Discord a hotkey-ek (Mute, Deafen, stb) használatához abban az esetben is leköveti az egér mozgását (raw_input thread) amikor nincs előtérben a Discord ezáltal jóval több értelmetlen context switching-et és cycles-t eredményez ([1](/media/discordfixer-research-example.png)). A DiscordFixer automatikusan leállítja a raw_input thread host folyamatát azonban a hotkey funkciók nem lesznek elérhetők. Lásd a DiscordFixer [GitHub repo](https://github.com/HerXayah/Discord-Fixer?tab=readme-ov-file#usage)-ját a használati útmutatóért.
 
-Ha azt szeretnéd hogy automatikusan DiscordFixer-en keresztül induljon el minden gép indításnál, csinálj egy shortcut-ot ``shell:startup``-ba.
+Ha azt szeretnéd hogy a Discord automatikusan DiscordFixer-en keresztül induljon el minden gép indításnál, csinálj egy shortcut-ot ``shell:startup``-ba.
 
 Érdemes megemlíteni hogy a raw input thread leállítása után sem teljesen tűnik el az egérmozgás lekövetése amikor nincs előtérben az applikáció ezért Process Explorer-ben további thread-eket tilthatsz le azonban nincs tesztelve hogy melyik milyen funkcióért felelős. Az én esetemben a legtöbb cycles-t használó thread bezárása után nem tudtam képeket megnyitni böngészőben az "Open in browser" gombbal. 
 
