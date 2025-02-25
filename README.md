@@ -1402,7 +1402,7 @@ Legtöbb esetben ajánlott bekapcsolva hagyni, ami az alap beállítás. Van egy
 - Helyek ahol érdemes ellenőrizni a nem kívánt fájlokat
 
   - ``C:\``
-  - ``C:\Windows\Prefetch`` - prefetch fájlok (ennek a mappának üresnek kell lennie a ha a superfetch kivan kapcsolva)
+  - ``C:\Windows\Prefetch`` - prefetch fájlok (ennek a mappának üresnek kell lennie ha a superfetch kivan kapcsolva)
   - ``C:\Windows\SoftwareDistribution`` - Windows Update cache
   - ``C:\Windows\Temp``- ideiglenes fájlok
   - ``%userprofile%``
