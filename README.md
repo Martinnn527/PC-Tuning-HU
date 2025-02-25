@@ -670,6 +670,8 @@ C:\bin\disable-process-mitigations.bat
 
 ## 5.3 Registry Script
 
+A beállítások módosíthatók a ``bin`` mappában lévő ``registry-options.json`` módosításával. Ha kifejezetten játékra használod a rendszert ajánlott nem hozzá nyúlni mivel az alap config-ban minden ``true`` értékre van állítva.
+
 - Nyisd meg a PowerShell-t adminként majd másold be az alábbi parancsot. Ha error-t kapsz, kapcsold ki a tamper protection-t Windows Defenderben (Windows 10 1909+). Ha így sem jó akkor boot-olj be Safe Mode-ba és futtasd ott a parancsot.
 
   ```powershell
@@ -700,7 +702,7 @@ C:\bin\disable-process-mitigations.bat
 
 - ``Win+R`` -> ``control userpasswords`` -> ``Users`` majd jobb klikk az ``Administrator``profilra, ``Set Password`` és hagyd üresen hogy eltávolítsd a jelszót.
 
-- Windows Server-en globálisan kikapcsolható a Telemetry az alábbi CMD paranccsal.
+- Windows Server-en globálisan kikapcsolható a Telemetry az alábbi CMD paranccsal azonban ha a [registry](#53-registry-script) szekciónál ``true``-ra van állítva a ``disable telemetry`` ez a registry key már jelen van.
 
   ```bat
   reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\DataCollection" /v AllowTelemetry /t REG_DWORD /d "0" /f
