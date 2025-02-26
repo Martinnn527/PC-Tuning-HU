@@ -152,7 +152,7 @@ Hardver > BIOS > Operációs rendszer
 
 - Frissítsd az SSD, NIC (Network Interface Controller), és a többi periféria firmware-ét.
 
-- 4 DIMM-es alaplap esetében a kézikönyvben leírtak alapján szereld be a RAM modulokat a megfelőle foglalatokba. Legtöbb esetben ez a 2-4 slot.
+- 4 DIMM-es alaplap esetében a kézikönyvben leírtak alapján szereld be a RAM modulokat a megfelelő foglalatokba. Legtöbb esetben ez a 2-4 slot.
 
 - Használj PCIe portokat amelyek egyenesen a CPU-ba mennek a PCH helyett. Ez jellemzően az M.2 és NVME SSD-kre és a GPU-ra vonatkozik. [HWiNFO](https://www.hwinfo.com/)-ban a PCIe Bus kategóriánál, vagy az alaplapod oldalán lévő manual-ban a PCI részlegnél találod meg a kellő információt.
 
