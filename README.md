@@ -191,7 +191,7 @@ Hardver > BIOS > Operációs rendszer
 
   - Lásd [Best Thermal Paste for CPUs | Tom’s Hardware](https://www.tomshardware.com/best-picks/best-thermal-paste)
 
-- Ha heatsink nélküli NVME/M.2 SSD-t szerelsz be ügyelj arra hogy az alaplapon lévő thermal pad-ekről leveszed a fóliát.
+- Ha heatsink nélküli NVME/M.2 SSD-t szerelsz be ügyelj arra hogy az alaplapon lévő thermal pad-ekről levedd a fóliát.
 
 - Használj nem RGB-s ventilátorokat magas statikus nyomással.
 
@@ -199,18 +199,18 @@ Hardver > BIOS > Operációs rendszer
 
 - A ventilátorok alaplapi csatlakoztatásánál fontos figyelembe venni a ventilátorcsatlakozó (fan header) terhelhetőségét, különösen ventilátor-elosztók (splitterek) használata esetén.
   
-  - Az alaplapi ventilátorcsatlakozók általában 1A (12W) körüli áramerősséget bírnak, de ez alaplaponként eltérhet. Ha túl sok ventilátort csatlakoztatsz egyetlen headerre egy splitterrel, az túlterhelheti az áramkört, és akár meghibásodást is okozhat. Az RGB-s ventilátorok vagy egyes nagy teljesítményű ventilátorok még ennél is több áramot igényelhetnek.
+  - Az alaplapi ventilátorcsatlakozók általában 2A (24W) körüli áramerősséget bírnak, de ez alaplaponként eltérhet. Ha túl sok ventilátort csatlakoztatsz egyetlen headerre egy elosztóval, az túlterhelheti az áramkört, és akár meghibásodást is okozhat. Az RGB-s ventilátorok vagy egyes nagy teljesítményű ventilátorok még ennél is több áramot igényelhetnek. 
 
 - Pasztázd újra a GPU-t és cseréld ki a gyári ventilátorokat ha nem megfelelőek.
 
 
 ## 1.3 Perifériák konfigurálása
 
-- A legtöbb modern periféria támogatja az onboard memory profile-t. Állítsd be őket mielőtt újratelepítenéd a Windowst, hogy ne kelljen a későbbi módosítások érdekében feltelepíteni a sok bloatware-t.
+- A legtöbb modern periféria támogatja az Onboard Memory Profile-t. Állítsd be őket mielőtt újratelepítenéd a Windowst, hogy ne kelljen a későbbi módosítások érdekében feltelepíteni a sok bloatware-t.
 
 - Magasabb DPI csökkenti a latency-t. Használj minimum 3200 dpi-t. Ügyelj arra hogy sensor smoothing ne lépjen életbe magasabb DPI használatakor. Windowsban az egér beállítások közt lejjebb viheted a pointer speedet tetszésed szerint ha a játék raw inputot használ.
 
-- Magasabb polling rate csökkenti a jittert. Azonban 1000Hz-nél (1ms) magasabb polling rate hardvertől függően negatívan befolyásolhatja a teljesítményt, ezért ennek megfelőlen kell beállítani. Ez nem akkora probléma a 2023 májusi Windows 11 Raw Input Stack update után ami limitálja a nem előtérben lévő programok polling frekvenciáját 125hz-re (8ms).
+- Magasabb polling rate csökkenti a jittert, azonban 1000Hz-nél (1ms) magasabb polling rate hardvertől függően negatívan befolyásolhatja a teljesítményt, ezért ennek megfelőlen kell beállítani. Ez nem akkora probléma a 2023 májusi Windows 11 Raw Input Stack update után ami limitálja a nem előtérben lévő programok polling frekvenciáját 125hz-re (8ms).
 
 - Az USB kimenet ~7A-ra van korlátozva, és az RGB felesleges energiát igényel. Fontold meg az RGB kikapcsolását, mivel az effektek/animációk nagy terhet tesznek az MCU-ra (Micro Controller Unit), és késleltethetik a többi folyamatot. [OpenRGB](https://openrgb.org/) egy jó választás az RGB módosítására.
 
@@ -232,13 +232,13 @@ Hardver > BIOS > Operációs rendszer
 
 ## 1.5 USB portok elrendezésének konfigurálása
 
-- Használd a kívánt XHCI-controller első néhány portját. Előfordulhat, hogy némelyikük fizikailag nem megállapítható, amit az [USB Device Tree Viewer](https://www.uwe-sieber.de/usbtreeview_e.html) programban megnézhetsz.
+- Használd a kívánt XHCI Controller első néhány portját. Előfordulhat, hogy némelyikük fizikailag nem megállapítható, amit az [USB Device Tree Viewer](https://www.uwe-sieber.de/usbtreeview_e.html) programban megnézhetsz.
 
-  - A Ryzen-es rendszerek rendelkeznek egy vagy több XHCI-controller-rel, amely közvetlenül a CPU-hoz csatlakozik. Ez [HWiNFO](https://www.hwinfo.com/)-ban a ``PCIe Bus`` kategóriában azonosítható. 
+  - A Ryzen-es rendszerek rendelkeznek egy vagy több XHCI-controller-rel, amely közvetlenül a CPU-hoz csatlakozik. Ez [HWiNFO](https://www.hwinfo.com/)-ban a ``Bus`` kategóriában azonosítható. 
 
      - [Példa](/media/ryzen-xhci-controller.png)      
 
-- Ha egynél több XHCI-controller-ed van, akkor az olyan eszközöket, mint például az egér, billentyűzet, és fejhallgató, egy másik controller-re különítheted el, hogy azok ne zavarják a polling konzisztenciáját.
+- Ha egynél több XHCI Controller-ed van, akkor az olyan eszközöket, mint például az egér, billentyűzet, és fejhallgató, egy másik controller-re különítheted el, hogy azok ne zavarják a polling konzisztenciáját.
 
 - Kerüld a Root Hub-on belüli USB Hub-ok használatát.
   
@@ -249,7 +249,7 @@ Hardver > BIOS > Operációs rendszer
 # 2. BIOS
 
 > [!CAUTION] 
-Fontos, hogy a módosított beállítások valóban pozítívan befolyásolják a teljesítményt és jegyezd fel őket valahova hogy a jövőben könnyebben megoldj egy felmerülő problémát. Mielőtt belekezdesz ajánlott hogy állítsd alaphelyzetbe a BIOS-t hogy tiszta lappal indulj ha esetleg valami rosszul volt beállítva.
+Fontos, hogy a módosított beállítások valóban pozítívan befolyásolják a teljesítményt (Lásd: [Benchmarkolás](#0-benchmarkolás)). Mielőtt belekezdesz, ajánlott alaphelyzetbe állítani a BIOS-t hogy tiszta lappal indulj ha esetleg valami rosszul volt beállítva.
 
 >[!CAUTION]
 Szintén fontos hogy a BIOS módosítása mindig kockázattal jár, ezért körültekintően folytasd.
@@ -274,11 +274,13 @@ Ha a CMOS reset nem állítja teljes mértékben alaphelyzetbe a BIOS-t, haszná
 
 - Ellenőrizd a Resizable BAR státuszát [GPU-Z](https://www.techpowerup.com/gpuz)-ben.
 
+Fontos megjegyezni hogy néhány játékban a ReBAR használata negatívan befolyásolhatja a teljesítményt [(1)(https://www.techspot.com/review/2234-nvidia-resizable-bar/)] ezért végezz [benchmark](#0-benchmarkolás)-okat.
+
 ## 2.5 Rejtett beállítások elérése
 
 Számos alaplap gyártó elrejt sok hasznos beállítást. A legegyszerűbb megoldás erre az hogy az UEFI-ben lévő összes látható beállítást konfigurálod majd pedig [SCEWIN](https://github.com/ab3lkaizen/SCEHUB)-ben a maradék rejtett beállítással folytatod.
 
-## 2.6 Hyperthreading/Simultaneous Multithreading
+## 2.6 Hyper-threading/Simultaneous Multithreading
 
 Kapcsold ki a [Hyper-Threading/Simultaneous Multithreading](https://en.wikipedia.org/wiki/Hyper-threading) funkciót. Ez például renderelés esetén hasznos lehet de mivel a CPU-nkénti több végrehajtó thread használtata növeli a processzor erőforrásainak igénybevételét, jóval nagyobb hőfokokkal jár és a rendszer nagyobb latencyjének, jitterének potenciális forrása. Ha elegendő CPU-val rendelkezel a játék futtatásához, mindenféleképpen kapcsold ki. Ez a koncepció alkalmazható az Intel E-coreok esetében is.
 
@@ -661,6 +663,9 @@ Ehhez a lépéshez húzd ki az ethernet kábeledet és ne legyél az internethez
 
 # 5. Post Install
 
+> [!CAUTION] 
+Fontos, hogy a módosított beállítások valóban pozítívan befolyásolják a teljesítményt (Lásd: [Benchmarkolás](#0-benchmarkolás)).
+
 ## 5.1 Unrestricted PowerShell Execution Policy
 
 Ez szükséges a scriptek futtatásának engedélyezésére. Nyisd meg a PowerShell-t és másold be az alábbi parancsot. Válaszd ki a "Yes to all" opciót ("A" betű).
@@ -671,13 +676,13 @@ Set-ExecutionPolicy Unrestricted
 
 ## 5.2 Process Mitigations (Windows 10 1709+)
 
-Nyisd meg a CMD-t majd pedig másold be az alábbi parancsokat sorrendben.
+Nyisd meg a CMD-t majd pedig másold be az alábbi parancsokat sorrendben. Ezután ne zárd be a CMD-t.
 
-```bat
+```powershell 
 C:\bin\MinSudo.exe --TrustedInstaller --Privileged
 ```
 
-```bat
+```powershell
 C:\bin\disable-process-mitigations.bat
 ```
 
