@@ -232,13 +232,17 @@ Hardver > BIOS > Operációs rendszer
 
 ## 1.5 USB portok elrendezésének konfigurálása
 
-Használd a kívánt XHCI-controller első néhány portját. Előfordulhat, hogy némelyikük fizikailag nem megállapítható, amit az [USB Device Tree Viewer](https://www.uwe-sieber.de/usbtreeview_e.html) programban megnézhetsz.
+- Használd a kívánt XHCI-controller első néhány portját. Előfordulhat, hogy némelyikük fizikailag nem megállapítható, amit az [USB Device Tree Viewer](https://www.uwe-sieber.de/usbtreeview_e.html) programban megnézhetsz.
 
-  - A Ryzen-es rendszerek rendelkeznek egy XHCI-controller-rel, amely közvetlenül a CPU-hoz csatlakozik. Ez [HWiNFO](https://www.hwinfo.com/)-ban a ``PCIe Bus`` kategóriában azonosítható. 
+  - A Ryzen-es rendszerek rendelkeznek egy vagy több XHCI-controller-rel, amely közvetlenül a CPU-hoz csatlakozik. Ez [HWiNFO](https://www.hwinfo.com/)-ban a ``PCIe Bus`` kategóriában azonosítható. 
 
      - [Példa](/media/ryzen-xhci-controller.png)      
 
-Ha egynél több XHCI-controller-ed van, akkor az olyan eszközöket, mint például az egér, billentyűzet, és fejhallgató, egy másik controller-re különítheted el, hogy azok ne zavarják a polling konzisztenciáját.
+- Ha egynél több XHCI-controller-ed van, akkor az olyan eszközöket, mint például az egér, billentyűzet, és fejhallgató, egy másik controller-re különítheted el, hogy azok ne zavarják a polling konzisztenciáját.
+
+- Kerüld a Root Hub-on belüli USB Hub-ok használatát.
+  
+  - [Példa](/media/usb-hub-internal-headers.png)
 
 ---
 
@@ -1104,6 +1108,10 @@ service-list-builder.exe --config C:\bin\minimal-services.ini
 
 ## 5.30 Device Manager beállítása
 
+Ha még nem tetted, futtattad a ``Services-Disable.bat`` scriptet. ``NE`` tiltsd le azokat az eszközöket amelyek mellett egy sárga ikon van. 
+
+``Win+R`` -> ``devmgmt.msc`` hogy megnyisd a Device Manager-t.
+
 - A ``Disk drives`` kategóriánál jobb klikk az SSD-re -> ``Polciies`` -> és pipáld be a ``Turn off Windows write-cache buffer flushing on the device`` opciót.
 
 - A ``Network adapters`` kategóriánál ``Properties -> Advanced`` és kapcsolj ki minden power saving funkciót.
@@ -1115,7 +1123,12 @@ service-list-builder.exe --config C:\bin\minimal-services.ini
 
 - ``View -> Devices by connection`` és tilts le minden PCIe (PCI Express Root Port, PCI Express Upstream/Downstream Switch Port), SATA, NVMe, XHCI Controllert és USB Hub-ot amihez nincs semmi csatlakoztatva. Tilts le minden nem használt eszközt ami ugyanahhoz a PCIe port-hoz van csatlakoztatva mint a GPU, pl. HD Audio.
 
+- A HID eszközöket is letilthatod azonban lehetséges hogy az adott periféria szoftvere nem fogja felimserni az eszközt. Ha véletlen letiltod az egered, használd a billentyűzeted hogy visszakapcsold az Enter, Tab és nyilak használatával.
+
+- Futtasd a ``Services-Enable.bat`` scriptet. Mostmár letilthatod az eszközöket amelyek mellett sárga ikon van mivel ezeknek valóban problémájuk van és nem a ``Services-Disable.bat`` által vannak kezelve.
+
 - Opcionálisan használd a [DeviceCleanup](https://www.majorgeeks.com/mg/getmirror/device_cleanup_tool,1.html) programot hogy eltávolíts rejtett eszközöket.
+
 
 ## 5.31 Device Power Saving
 
