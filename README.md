@@ -882,7 +882,7 @@ Ez segít a futó folyamatok kezelésében és átláthatóságában.
 
 ## 5.15 Hibernation
 
-Ahogy a [BIOS](#212-fast-startup-standby-és-hibernate) szekcióban leírtam, a Hibernation-t a Windowson belül is ki lehet kapcsolni. Így a PC egy tiszta Shut Down-t fog végrehajtani a gép leállításakor a szoftverállapot lemezre mentése helyett. CMD-be másold be az alábbi parancsot.
+A Hibernation-t Windowson belül is ki lehet kapcsolni így a PC egy tiszta Shut Down-t fog végrehajtani a gép leállításakor a szoftverállapot lemezre mentése helyett. CMD-be másold be az alábbi parancsot.
 
 ```bat
 powercfg /h off
@@ -894,18 +894,19 @@ Javasolt a debloat scriptek elkerülése és az olyan komponensek eltávolítás
 
 - Még nem ajánlott letörölni az Xbox Game Bar-t mivel a későbbi lépésekben problémába ütközhetsz ([Játék regisztrálása Game Bar-ban](#5352-játék-regisztálása-game-bar-ban)).
 
-  - [AppxPackagesManager](https://github.com/valleyofdoom/AppxPackagesManager) használatával távolítsd el a nem kívánt programokat.
+- [AppxPackagesManager](https://github.com/valleyofdoom/AppxPackagesManager) használatával távolítsd el a nem kívánt programokat.
 
-  - CMD-ben töröld le a OneDrive-ot az alábbi parancssal.
+- CMD-ben töröld le a OneDrive-ot az alábbi parancssal.
 
-    ```bat
-    for %a in ("SysWOW64" "System32") do (if exist "%windir%\%~a\OneDriveSetup.exe" ("%windir%\%~a\OneDriveSetup.exe" /uninstall)) && reg delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Desktop\NameSpace\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" /f
-    ```  
+```bat
+for %a in ("SysWOW64" "System32") do (if exist "%windir%\%~a\OneDriveSetup.exe" ("%windir%\%~a\OneDriveSetup.exe" /uninstall)) && reg delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Desktop\NameSpace\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" /f
+```  
 
 - Microsoft Edge letiltása (nem letörlése). A böngészőt letiltani kell nem pedig letörölni a WebView Runtime megtartása érdekében.
         
   - Nyisd meg a Microsoft Edge-t majd pedig a beállításokban kapcsolj ki bármilyen automatikus start-up beállítást mint például:
-
+      
+      - ``Settings -> System and performance -> Startup boost``
       - ``Continue running background extensions and apps when Microsoft Edge is closed``
 
     - Töltsd le az [Autoruns](https://learn.microsoft.com/en-us/sysinternals/downloads/autoruns)-t és navigálj az ``Everything`` részhez, majd keress rá az ``Edge`` kifejezésre és pipálj ki mindent ami megjelenik.
