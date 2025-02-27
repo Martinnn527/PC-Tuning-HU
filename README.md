@@ -614,7 +614,7 @@ DISM /Image:"%MOUNT_DIR%" /Enable-Feature /FeatureName:NetFx3 /All /LimitAccess 
 explorer "%MOUNT_DIR%"
 ```
 
-Ilyenkor érdemes az ethernet driver-t is bemásolni/integrálni. Próbáld meg a driver-t INF formában integrálni mivel az exe-k általában bloatware-t tartalmaznak. Néhány esetben 7-Zip-el ki tudod csomagolni az exe-t és azon belül megkeresni az INF fájlt.
+Ilyenkor érdemes az ethernet driver-t is bemásolni/integrálni. Próbáld meg a driver-t INF formában megszerezni mivel az exe-k általában bloatware-t tartalmaznak. Néhány esetben 7-Zip-el ki tudod csomagolni az exe-t és azon belül megkeresni az INF fájlt.
 
 ## 4.9 Unmount és Commit
 
@@ -647,7 +647,7 @@ Töltsd le a [Ventoy](https://github.com/ventoy/Ventoy/releases)-t majd indítsd
 
 ## 4.13 ISO-ba való bootolás
 
-Ehhez a lépéshez húzd ki az ethernet kábeledet és ne legyél az internethez csatlakozva. Ezáltal elkerülhetjük a Microsoftba való bejelentkezést OOBE közben és a Windows nem fog automatikusan feltelepíteni frissítéseket és drivereket.
+Ehhez a lépéshez húzd ki az ethernet kábeledet és ne legyél az internethez csatlakozva, ezáltal elkerülhetjük a Microsoftba való bejelentkezést OOBE közben és a Windows nem fog automatikusan feltelepíteni frissítéseket és drivereket.
 
 - Ha a Secure Boot bevan kapcsolva, ideiglenesen kapcsold ki a telepítési folyamathoz. Boot-olj be a pendrive-ra BIOS-on belül és válaszd ki a Windows ISO-t. Folytasd a telepítést majd amikor végzett kapcsold vissza a Secure Boot-ot ha előzőleg bevolt.
 
@@ -657,7 +657,7 @@ Ehhez a lépéshez húzd ki az ethernet kábeledet és ne legyél az internethez
 
 - Ha Windows 11-et telepítesz nyomj egy ``Shift+F10``-et hogy megnyisd a CMD-t és írd be a következő parancsot: ``oobe\BypassNRO.cmd``. Ezáltal megjelenik a ``Continue with limited setup`` opció. Folytasd, majd pedig a példa alapján menj végig a setupon.
 
-  - Példa [main/media/oobe-windows10+-example.mp4](main/media/oobe-windows10+-example.mp4)
+  - [Példa](main/media/oobe-windows10+-example.mp4)
 
 ---
 
@@ -676,19 +676,17 @@ Set-ExecutionPolicy Unrestricted
 
 ## 5.2 Process Mitigations (Windows 10 1709+)
 
-Nyisd meg a CMD-t majd pedig másold be az alábbi parancsokat sorrendben. Ezután ne zárd be a CMD-t.
+Ez alapból bevan kapcsolva és negatívan befolyásolja a teljesítményt. Windows Defender-ben az ``Exploit Protection`` oldalon ki lehet ezeket kapcsolni. Vedd figyelembe hogy a következő lépésben a Defender ki lesz kapcsolva ezáltal nem lesz elérhető a GUI-ban ez a beállítás de az alábbi script-tel kikapcsolható.
 
-```powershell 
-C:\bin\MinSudo.exe --TrustedInstaller --Privileged
-```
+Nyisd meg a CMD-t adminként majd pedig másold be az alábbi parancsot.
 
-```powershell
+```bat
 C:\bin\disable-process-mitigations.bat
 ```
 
 ## 5.3 Registry Script
 
-A beállítások módosíthatók a ``bin`` mappában lévő ``registry-options.json`` módosításával. Ha kifejezetten játékra használod a rendszert ajánlott nem hozzá nyúlni mivel az alap config-ban minden ``true`` értékre van állítva.
+A beállítások módosíthatók a ``bin`` mappában lévő ``registry-options.json`` módosításával (az értékek ``true`` és ``false``). Ha kifejezetten játékra használod a rendszert ajánlott nem hozzá nyúlni mivel az alap configban minden ``true`` értékre van állítva.
 
 - Nyisd meg a PowerShell-t adminként majd másold be az alábbi parancsot. Ha error-t kapsz, kapcsold ki a tamper protection-t Windows Defenderben (Windows 10 1909+). Ha így sem jó akkor boot-olj be Safe Mode-ba és futtasd ott a parancsot.
 
@@ -867,7 +865,7 @@ Javasolt a debloat scriptek elkerülése és az olyan komponensek eltávolítás
 
 - ``Win+I -> Apps -> Apps & Features -> Optional Features`` és törölj le mindent kivéve a ``Notepad``-et, ``WordPad``-et és ``Windows Media Player``-t. Windows 11-en a ``WMIC`` is maradjon.
 
-- A ``smartscreen.exe`` figyelmen kívül hagyja a registry key-t ami szabályozza hogy fut-e, ezért át kell nevezni az exe-t hogy ne tudjon elindulni. CMD-be másold be az alábbi parancsokat.
+- A ``smartscreen.exe`` figyelmen kívül hagyja a registry key-t ami szabályozza hogy fut-e, ezért át kell nevezni az exe-t hogy ne tudjon elindulni. CMD-be másold be az alábbi parancsokat sorrendben.
 
 ```bat
 C:\bin\MinSudo.exe --TrustedInstaller --Privileged
