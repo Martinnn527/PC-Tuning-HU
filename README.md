@@ -750,6 +750,10 @@ reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WSearch" /v "Start
 
   - Ha Firefox-ot szeretnél feltelepíteni használd az alábbi parancsot PowerShell-ben egy minimális telepítésért.
 
+```powershell
+C:\bin\install-firefox.ps1
+```
+
 <details>
 <summary>Mit csinál pontosan a script?</summary>
 
@@ -814,10 +818,6 @@ reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WSearch" /v "Start
   - ``"browser.newtabpage.activity-stream.asrouter.userprefs.cfr.features", false``
   
 </details>
-
-```powershell
-C:\bin\install-firefox.ps1
-```
 
 - Kapcsold ki a hardveres gyorsítást/hardware acceleration-t.
 
