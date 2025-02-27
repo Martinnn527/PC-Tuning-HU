@@ -274,7 +274,7 @@ Ha a CMOS reset nem állítja teljes mértékben alaphelyzetbe a BIOS-t, flashel
 
 - Ellenőrizd a Resizable BAR státuszát [GPU-Z](https://www.techpowerup.com/gpuz)-ben.
 
-Fontos megjegyezni hogy néhány játékban a ReBAR használata negatívan befolyásolhatja a teljesítményt [(1)(https://www.techspot.com/review/2234-nvidia-resizable-bar/)] ezért végezz [benchmark](#0-benchmarkolás)-okat.
+Fontos megjegyezni hogy néhány játékban a ReBAR használata negatívan befolyásolhatja a teljesítményt [(1)](https://www.techspot.com/review/2234-nvidia-resizable-bar/) ezért végezz [benchmark](#0-benchmarkolás)-okat.
 
 ## 2.5 Rejtett beállítások elérése
 
