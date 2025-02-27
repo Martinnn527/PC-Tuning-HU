@@ -786,9 +786,9 @@ reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WSearch" /v "Start
 
 </details>
 
-    ```powershell
-    C:\bin\install-firefox.ps1
-    ```
+```powershell
+C:\bin\install-firefox.ps1
+```
 
 - Kapcsold ki a hardveres gyorsítást/hardware acceleration-t.
 
