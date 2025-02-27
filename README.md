@@ -475,7 +475,7 @@ GPU overclockolásnál előfordulhat hogy számos power limit-et fel kell oldano
     |NVIDIA 10-es és régebbi szériák|Majdnem az összes Windows verzió támogatja|
     |NVIDIA 16, 20-as széria|Win7, Win8, Win10 1709+|
     |NVIDIA 30-as széria|Win7, Win10 1803+|
-    |NVIDIA 40 series|Win10 1803+|
+    |NVIDIA 40-es széria|Win10 1803+|
     |AMD|Lásd a driver oldalát|
 
 - Windows Server nem támogatja a fogyasztói NIC-ek nagy részét. Az [ehhez](https://github.com/loopback-kr/Intel-I219-V-for-Windows-Server) hasonló megoldási lehetőségekre viszont felfigyel az anti-cheat a driver érvénytelen [tanúsítványa](https://learn.microsoft.com/hu-hu/windows-hardware/drivers/dashboard/code-signing-cert-manage) miatt.
