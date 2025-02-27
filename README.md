@@ -1027,7 +1027,7 @@ A Meltdown nincs hatással az AMD-s rendszerekre ([1](https://www.theverge.com/2
 
 ## 5.23 Power Plan
 
-- Állítsd be a High performance power plant:
+- Állítsd be a High Performance power plant:
 
 ```bat
 powercfg /setactive 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c
@@ -1039,7 +1039,7 @@ powercfg /setactive 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c
  powercfg /delete 381b4222-f694-41f0-9685-ff5bb260df2
  ```
 
-- Töröld ki a Power saving power plant: 
+- Töröld ki a Power Saving power plant: 
 
 ```bat
 powercfg /delete a1841308-3541-4fab-bc81-f71556f20b4a
@@ -1063,16 +1063,59 @@ powercfg /setacvalueindex scheme_current 2a737441-1930-4402-8d77-b2bebba308a3 48
 powercfg /setacvalueindex scheme_current 7516b95f-f776-4464-8c53-06167f40cc99 3c0bc021-c8a8-4e07-a973-6b14cbcb2b7e 0
 ```
 
-- Disable core parking: 
+- Processor performance core parking min cores - 100
 
 ```bat
 powercfg /setacvalueindex scheme_current 54533251-82be-4824-96c1-47b60b740d00 0cc5b647-c1df-4637-891a-dec35c318583 100
 ```
+```bat
+powercfg /setacvalueindex scheme_current 54533251-82be-4824-96c1-47b60b740d00 0cc5b647-c1df-4637-891a-dec35c318584 100
+```
 
-- Processor performance time check interval - 5000ms: 
+- Processor performance time check interval - 5000: 
 
 ```bat
 powercfg /setacvalueindex scheme_current 54533251-82be-4824-96c1-47b60b740d00 4d2b0152-7d5c-498b-88e2-34345392a2c5 5000
+```
+
+- Processor energy performance preference policy - 0
+
+```bat
+powercfg /setacvalueindex %GUID% SUB_PROCESSOR PERFEPP 0
+```
+
+- Processor energy performance preference policy for Processor Power Efficiency Class 1 - 0
+
+```bat
+powercfg /setacvalueindex %GUID% SUB_PROCESSOR PERFEPP1 0
+```
+
+- Allow Throttle States - Off
+
+```bat
+powercfg /setacvalueindex %GUID% SUB_PROCESSOR THROTTLING 0
+```
+
+- Processor idle demote threshold - 100
+
+```bat
+powercfg /setacvalueindex %GUID% SUB_PROCESSOR IDLEDEMOTE 100
+```
+
+- Processor idle promote threshold - 100
+
+```bat
+powercfg /setacvalueindex %GUID% SUB_PROCESSOR IDLEPROMOTE 100
+```
+- Allow Standby States - Off
+
+```bat
+powercfg /setacvalueindex %GUID% SUB_SLEEP ALLOWSTANDBY 0
+```
+- Processor performance core parking min cores for Processor Power Efficiency Class 1 - 100
+
+```bat
+powercfg /setacvalueindex %GUID% SUB_PROCESSOR CPMINCORES1 100
 ```
 
 - Végül pedig:
