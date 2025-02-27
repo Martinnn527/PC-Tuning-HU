@@ -618,7 +618,7 @@ Ilyenkor érdemes az ethernet driver-t is bemásolni/integrálni. Próbáld meg 
 
 ## 4.9 Unmount és Commit
 
-Zárd be a %MOUNT_DIR% mappát majd futtasd az alábbi parancsot a módosítások véglegesítéséhez az ISO-n:
+Zárd be a ``%MOUNT_DIR%`` mappát majd futtasd az alábbi parancsot a módosítások véglegesítéséhez az ISO-n:
 
 ```bat
 DISM /Unmount-Wim /MountDir:"%MOUNT_DIR%" /Commit && rd /s /q "%MOUNT_DIR%"
@@ -804,9 +804,9 @@ reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SysMain" /v "Start
     
 ## 5.12 Runtime-ok feltelepítése
 
-- [VcRedist](https://github.com/abbodi1406/vcredist)
-
+- [Visual C++ Redistributable](https://github.com/abbodi1406/vcredist)
 - [DirectX](https://www.microsoft.com/en-gb/download/details.aspx?id=8109)
+- [.NET 4.8](https://dotnet.microsoft.com/en-us/download/dotnet-framework/net48)
 
 ## 5.13 Optional Features
 
