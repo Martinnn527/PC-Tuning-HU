@@ -907,7 +907,7 @@ Lásd [docs/configure-nvidia.md](/docs/confiugre-nvidia.md)
 
 ## 5.20 Felbontások és Scaling Mode
 
-- Keress egy stabil OC-t a monitorodhoz, az NVIDIA control panelben a ``Change resolution -> Customize -> Create Custom Resolution`` fülnél vidd feljebb a refresh rate-t ~3-asával amíg a monitor nem ír egy ``Out of Range`` üzenetet vagy pedig csak szimplán fekete a képernyő. Ha ez történik, csak várj 15 másodpercet és automatikusan visszaáll az előzőleg használt értékekre. Ezután egyesével vedd visszább a refresh ratet. Például ha 250 hz-ről ugrottál 253 hz-re és fekete volt a képernyő akkor 252-től indulva menj lejjebb amíg stabil nem lesz. Ezután teszteld [itt](https://www.testufo.com/) hogy nincs e screen tearing és hogy a monitor kábelének nincs e úgynevezett [coil whine](https://pcsupport.lenovo.com/ie/en/products/laptops-and-netbooks/solutions/ht511649)-ja.
+- Keress egy stabil OC-t a monitorodhoz. NVIDIA Control Panel-ben a ``Change resolution -> Customize -> Create Custom Resolution`` fülnél vidd feljebb a refresh rate-t ~3-asával amíg a monitor nem ír egy ``Out of Range`` üzenetet vagy pedig csak szimplán fekete a képernyő. Ha ez történik, csak várj 15 másodpercet és automatikusan visszaáll az előzőleg használt értékekre. Ezután egyesével vedd visszább a refresh ratet. Például ha 250 hz-ről ugrottál 253 hz-re és fekete volt a képernyő akkor 252-től indulva menj lejjebb amíg stabil nem lesz. Ezután teszteld [itt](https://www.testufo.com/) hogy nincs e screen tearing és hogy a monitor kábelének nincs e úgynevezett [coil whine](https://pcsupport.lenovo.com/ie/en/products/laptops-and-netbooks/solutions/ht511649)-ja.
 
 - Általában két lehetőséged van: Display, vagy GPU scaling. A monitorod natív felbontása nem igényel scalinget ezáltal identity scaling-et ([1](https://learn.microsoft.com/en-us/windows/win32/api/wingdi/ne-wingdi-displayconfig_scaling)), ([2](/docs/research.md#2-identity-scaling)) használhatsz. 
 
@@ -1270,7 +1270,7 @@ Abban az esetben ha a routered támogatja a Quality of Service beállítást, ak
 
 - Game Overlay - OFF
 
-- Ha le szeretnéd tiltani az automikus frissítéseket, használd az alábbi parancsot.
+- Ha le szeretnéd tiltani az automikus frissítéseket, használd az alábbi parancsot hogy átnevezd az ``Update.exe`` fájlt.
 
 ```bat
 ren "%LOCALAPPDATA%\Discord\Update.exe" "Update.exee"
