@@ -676,9 +676,9 @@ Set-ExecutionPolicy Unrestricted
 
 ## 5.2 Process Mitigations (Windows 10 1709+)
 
-Ez alapból bevan kapcsolva és negatívan befolyásolja a teljesítményt. Windows Defender-ben az ``Exploit Protection`` oldalon ki lehet ezeket kapcsolni. Vedd figyelembe hogy a következő lépésben a Defender ki lesz kapcsolva ezáltal nem lesz elérhető a GUI-ban ez a beállítás de az alábbi script-tel kikapcsolható.
+Ez alapból bevan kapcsolva és negatívan befolyásolja a teljesítményt. Ha nem szeretnél scripteket futtatni, akkor Windows Defender-ben az ``Exploit Protection`` oldalon ki lehet ezeket kapcsolni. Vedd figyelembe hogy a következő lépésben a Defender ki lesz kapcsolva ezáltal nem lesz elérhető a GUI hogy visszakapcsold azonban a [Set-ProcessMitigation](https://learn.microsoft.com/en-us/powershell/module/processmitigations/set-processmitigation?view=windowsserver2025-ps) használható PowerShell-ben.
 
-Nyisd meg a CMD-t adminként majd pedig másold be az alábbi parancsot.
+Az alábbi script-tel szintén kikapcsolható a Process Mitigation. Nyisd meg a CMD-t adminként majd pedig másold be az alábbi parancsot.
 
 ```bat
 C:\bin\disable-process-mitigations.bat
@@ -688,7 +688,7 @@ C:\bin\disable-process-mitigations.bat
 
 A beállítások módosíthatók a ``bin`` mappában lévő ``registry-options.json`` módosításával (az értékek ``true`` és ``false``). Ha kifejezetten játékra használod a rendszert ajánlott nem hozzá nyúlni mivel az alap configban minden ``true`` értékre van állítva.
 
-- Nyisd meg a PowerShell-t adminként majd másold be az alábbi parancsot. Ha error-t kapsz, kapcsold ki a tamper protection-t Windows Defenderben (Windows 10 1909+). Ha így sem jó akkor boot-olj be Safe Mode-ba és futtasd ott a parancsot.
+- Nyisd meg a PowerShell-t adminként majd másold be az alábbi parancsot. Ha error-t kapsz, kapcsold ki a Tamper Protection-t és Real-Time Protection-t Windows Defenderben. Ha ugyanúgy error-t kapsz, boot-olj be Safe Mode-ba és futtasd ott.
 
   ```powershell
   C:\bin\apply-registry.ps1
@@ -728,7 +728,7 @@ A beállítások módosíthatók a ``bin`` mappában lévő ``registry-options.j
 
 ## 5.7 Search Indexing
 
-Bizonyos könyvtárak a fájlrendszeren indexelve vannak a Windows keresési funkcióihoz, amelyeket a Win+R megnyomása után a ``control srchadmin.dll`` beírásával megtekinthetsz. Az indexelés időszakosan a háttérben fut, és gyakran észrevehető CPU-terhelést okoz. Ezért ajánlott a keresési indexelést globálisan letiltani a Windows Search szolgáltatás kikapcsolásával, azonban ez korlátozhatja a keresési funkciókat. Másold be CMD-be az alábbi parancsot.
+Bizonyos könyvtárak a fájlrendszeren indexelve vannak a Windows keresési funkcióihoz, amelyeket``Win+R`` -> ``control srchadmin.dll`` beírásával megtekinthetsz. Az indexelés időszakosan a háttérben fut, és gyakran észrevehető CPU terhelést okoz ezért ajánlott a keresési indexelést globálisan letiltani a Windows Search szolgáltatás kikapcsolásával, azonban ez korlátozhatja a keresési funkciókat. Másold be CMD-be az alábbi parancsot.
 
 ```bat
 reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WSearch" /v "Start" /t REG_DWORD /d "4" /f
@@ -742,13 +742,49 @@ reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WSearch" /v "Start
 
   - Ha kizárólag egy billentyűzet layout-ot tervezel használni akkor töröld ki az összes többit mivel véletlen megnyomhatod a hotkey-t ami átváltja a layout-ot, ami zavaró lehet.
 
-- Szinkronizáld a rendszer óráját.
+- Állítsd be és szinkronizáld a rendszer óráját.
 
 ## 5.9 Böngésző konfigurálása
 
 - Telepítsd fel az általad kedvelt böngészőt. Lásd: [privacytests.org](https://privacytests.org/)
 
-  - Ha Firefox-ot szeretnél feltelepíteni használd az alábbi parancsot PowerShell-ben egy minimális telepítésért. Ez feltelepíti a uBlock, FastForward és CleanURLs kiegészítőket. Ne felejtsd el őket konfigurálni.
+  - Ha Firefox-ot szeretnél feltelepíteni használd az alábbi parancsot PowerShell-ben egy minimális telepítésért.
+
+<details>
+<summary>Mit csinál pontosan a script?</summary>
+
+- Feltelepíti a legfrissebb Firefox verziót
+- Letörli a felsorolt fájlokat:
+  - "crashreporter.exe",
+    "crashreporter.ini",
+    "defaultagent.ini",
+    "defaultagent_localized.ini",
+    "default-browser-agent.exe",
+    "maintenanceservice.exe",
+    "maintenanceservice_installer.exe",
+    "pingsender.exe",
+    "updater.exe",
+    "updater.ini",
+    "update-settings.ini"
+- Kikapcsolja a frissítéseket a DisableAppUpdate policy használatával
+- Hozzáadja a uBlock Origin, FastForward és CleanURLs kiegészítőket
+- Konfigurálja a következőket:
+  - "datareporting.healthreport.uploadEnabled", false
+  - "browser.newtabpage.activity-stream.feeds.section.topstories", false
+  - "browser.newtabpage.activity-stream.feeds.topsites", false
+  - "dom.security.https_only_mode", true
+  - "browser.uidensity`", 1
+  - "full-screen-api.transition-duration.enter", "0 0"
+  - "full-screen-api.transition-duration.leave", "0 0"
+  - "full-screen-api.warning.timeout", 0
+  - "nglayout.enable_drag_images", false
+  - "reader.parse-on-load.enabled", false
+  - "browser.tabs.firefox-view", false
+  - "browser.tabs.tabmanager.enabled", false
+  - "browser.newtabpage.activity-stream.asrouter.userprefs.cfr.addons", false
+  - "browser.newtabpage.activity-stream.asrouter.userprefs.cfr.features", false
+
+</details>
 
     ```powershell
     C:\bin\install-firefox.ps1
