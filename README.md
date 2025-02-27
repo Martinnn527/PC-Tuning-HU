@@ -750,9 +750,9 @@ reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WSearch" /v "Start
 
   - Ha Firefox-ot szeretnél feltelepíteni használd az alábbi parancsot PowerShell-ben egy minimális telepítésért.
 
-```powershell
-C:\bin\install-firefox.ps1
-```
+  ```powershell
+  C:\bin\install-firefox.ps1
+  ```
 
 <details>
 <summary>Mit csinál pontosan a script?</summary>
@@ -819,15 +819,17 @@ C:\bin\install-firefox.ps1
   
 </details>
 
+--- 
+
 - Kapcsold ki a hardveres gyorsítást/hardware acceleration-t.
 
 - Kapcsolj ki minden nyomkövetőt.
 
-- Ajánlott kiegészítők böngészőtől függetlenül:
+- Konfiguráld/telepítsd fel a következő kiegészítőket:
 
-   - uBlock Origin
-   - CleanURLs
-   - FastForward
+   - uBlock Origin - Állítsd be a filter list-et. Ajánlott mindent bepipálni
+   - CleanURLs - Nem szükséges konfiguráció
+   - FastForward - A ``Recommended: "XY"`` alapján állítsd be
 
 ## 5.10 Ütemezett feladatok kikapcsolása
 
