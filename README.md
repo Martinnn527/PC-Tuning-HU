@@ -748,7 +748,7 @@ reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WSearch" /v "Start
 
 - Telepítsd fel az általad kedvelt böngészőt. Lásd: [privacytests.org](https://privacytests.org/)
 
-  - Ha Firefox-ot szeretnél feltelepíteni használd az alábbi parancsot PowerShell-ben egy minimális telepítésért.
+- Ha Firefox-ot szeretnél feltelepíteni használd az alábbi parancsot PowerShell-ben egy minimális telepítésért.
 
 ```powershell
 C:\bin\install-firefox.ps1
