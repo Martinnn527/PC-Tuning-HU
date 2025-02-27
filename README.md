@@ -754,36 +754,65 @@ reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WSearch" /v "Start
 <summary>Mit csinál pontosan a script?</summary>
 
 - Feltelepíti a legfrissebb Firefox verziót
-- Letörli a felsorolt fájlokat:
-  - "crashreporter.exe",
-    "crashreporter.ini",
-    "defaultagent.ini",
-    "defaultagent_localized.ini",
-    "default-browser-agent.exe",
-    "maintenanceservice.exe",
-    "maintenanceservice_installer.exe",
-    "pingsender.exe",
-    "updater.exe",
-    "updater.ini",
-    "update-settings.ini"
-- Kikapcsolja a frissítéseket a DisableAppUpdate policy használatával
-- Hozzáadja a uBlock Origin, FastForward és CleanURLs kiegészítőket
-- Konfigurálja a következőket:
-  - "datareporting.healthreport.uploadEnabled", false
-  - "browser.newtabpage.activity-stream.feeds.section.topstories", false
-  - "browser.newtabpage.activity-stream.feeds.topsites", false
-  - "dom.security.https_only_mode", true
-  - "browser.uidensity`", 1
-  - "full-screen-api.transition-duration.enter", "0 0"
-  - "full-screen-api.transition-duration.leave", "0 0"
-  - "full-screen-api.warning.timeout", 0
-  - "nglayout.enable_drag_images", false
-  - "reader.parse-on-load.enabled", false
-  - "browser.tabs.firefox-view", false
-  - "browser.tabs.tabmanager.enabled", false
-  - "browser.newtabpage.activity-stream.asrouter.userprefs.cfr.addons", false
-  - "browser.newtabpage.activity-stream.asrouter.userprefs.cfr.features", false
 
+- Letörli a felsorolt fájlokat:
+
+  - "crashreporter.exe",
+
+  - "crashreporter.ini",
+
+  - "defaultagent.ini",
+
+  - "defaultagent_localized.ini",
+
+  - "default-browser-agent.exe",
+
+  - "maintenanceservice.exe",
+
+  - "maintenanceservice_installer.exe",
+
+  - "pingsender.exe",
+
+  - "updater.exe",
+
+  - "updater.ini",
+
+  - "update-settings.ini"
+  
+- Kikapcsolja a frissítéseket a DisableAppUpdate policy használatával
+
+- Hozzáadja a uBlock Origin, FastForward és CleanURLs kiegészítőket
+
+- Konfigurálja a következőket:
+
+  - "datareporting.healthreport.uploadEnabled", false
+
+  - "browser.newtabpage.activity-stream.feeds.section.topstories", false
+
+  - "browser.newtabpage.activity-stream.feeds.topsites", false
+
+  - "dom.security.https_only_mode", true
+
+  - "browser.uidensity`", 1
+
+  - "full-screen-api.transition-duration.enter", "0 0"
+
+  - "full-screen-api.transition-duration.leave", "0 0"
+
+  - "full-screen-api.warning.timeout", 0
+
+  - "nglayout.enable_drag_images", false
+
+  - "reader.parse-on-load.enabled", false
+
+  - "browser.tabs.firefox-view", false
+
+  - "browser.tabs.tabmanager.enabled", false
+
+  - "browser.newtabpage.activity-stream.asrouter.userprefs.cfr.addons", false
+
+  - "browser.newtabpage.activity-stream.asrouter.userprefs.cfr.features", false
+  
 </details>
 
 ```powershell
