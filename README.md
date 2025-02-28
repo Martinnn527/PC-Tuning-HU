@@ -45,7 +45,7 @@
 - [4. Pre Install](#4-pre-install)
   - [4.1 Windows verzió kiválasztása](#41-milyen-windows-verziót-használj)
   - [4.2 Szükséges programok letöltése](#42-szükséges-programok-letöltése)
-  - [4.3 Stock ISO letöltése](#43-stock-iso-letöltése)
+  - [4.3 Eredeti ISO letöltése](#43-eredeti-iso-letöltése)
   - [4.4 Build Environment előkészítése](#44-build-environment-előkészítése)
   - [4.5 Nem használt verziók eltávolítása](#45-nem-használt-verziók-eltávolítása)
   - [4.6 Mountold az ISO-t](#46-mountold-az-iso-t)
