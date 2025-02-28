@@ -510,7 +510,7 @@ Használd a ``certutil -hashfile <file>`` parancsot hogy ellenőrizd az ISO val�
  
   - [os.click](https://os.click/en)
   - [New Download Links](https://docs.google.com/spreadsheets/d/1zTF5uRJKfZ3ziLxAZHh47kF85ja34_OFB5C5bVSPumk/edit?gid=0#gid=0)
-  - [Adguard File List](https://files.rg-adguard.net/)
+  - [Adguard File List](https://files.rg-adguard.net/version/f0bd8307-d897-ef77-dbd6-216fefbe94c5)
   - [Server 2022](https://www.microsoft.com/en-us/evalcenter/download-windows-server-2022)
 
   
