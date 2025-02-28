@@ -506,7 +506,7 @@ GPU overclockolásnál előfordulhat hogy számos power limit-et fel kell oldano
 
 Használd a ``certutil -hashfile <file>`` parancsot hogy ellenőrizd az ISO valódiságát/korruptságát. 
 
-- ISO források:
+- Megbízható ISO források:
  
   - [os.click](https://os.click/en)
   - [New Download Links](https://docs.google.com/spreadsheets/d/1zTF5uRJKfZ3ziLxAZHh47kF85ja34_OFB5C5bVSPumk/edit?gid=0#gid=0)
