@@ -1082,41 +1082,41 @@ powercfg /setacvalueindex scheme_current 54533251-82be-4824-96c1-47b60b740d00 4d
 - Processor energy performance preference policy - 0
 
 ```bat
-powercfg /setacvalueindex %GUID% SUB_PROCESSOR PERFEPP 0
+powercfg /setacvalueindex scheme_current SUB_PROCESSOR PERFEPP 0
 ```
 
 - Processor energy performance preference policy for Processor Power Efficiency Class 1 - 0
 
 ```bat
-powercfg /setacvalueindex %GUID% SUB_PROCESSOR PERFEPP1 0
+powercfg /setacvalueindex scheme_current SUB_PROCESSOR PERFEPP1 0
 ```
 
 - Allow Throttle States - Off
 
 ```bat
-powercfg /setacvalueindex %GUID% SUB_PROCESSOR THROTTLING 0
+powercfg /setacvalueindex scheme_current SUB_PROCESSOR THROTTLING 0
 ```
 
 - Processor idle demote threshold - 100
 
 ```bat
-powercfg /setacvalueindex %GUID% SUB_PROCESSOR IDLEDEMOTE 100
+powercfg /setacvalueindex scheme_current SUB_PROCESSOR IDLEDEMOTE 100
 ```
 
 - Processor idle promote threshold - 100
 
 ```bat
-powercfg /setacvalueindex %GUID% SUB_PROCESSOR IDLEPROMOTE 100
+powercfg /setacvalueindex scheme_current SUB_PROCESSOR IDLEPROMOTE 100
 ```
 - Allow Standby States - Off
 
 ```bat
-powercfg /setacvalueindex %GUID% SUB_SLEEP ALLOWSTANDBY 0
+powercfg /setacvalueindex scheme_current SUB_SLEEP ALLOWSTANDBY 0
 ```
 - Processor performance core parking min cores for Processor Power Efficiency Class 1 - 100
 
 ```bat
-powercfg /setacvalueindex %GUID% SUB_PROCESSOR CPMINCORES1 100
+powercfg /setacvalueindex scheme_current SUB_PROCESSOR CPMINCORES1 100
 ```
 
 - Végül pedig:
