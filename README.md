@@ -502,7 +502,7 @@ GPU overclockolásnál előfordulhat hogy számos power limit-et fel kell oldano
 
 - [Windows ADK](https://learn.microsoft.com/en-us/windows-hardware/get-started/adk-install)
 
-## 4.3 Stock ISO letöltése
+## 4.3 Eredeti ISO letöltése
 
 Használd a ``certutil -hashfile <file>`` parancsot hogy ellenőrizd az ISO valódiságát/korruptságát. 
 
@@ -511,7 +511,7 @@ Használd a ``certutil -hashfile <file>`` parancsot hogy ellenőrizd az ISO val�
   - [os.click](https://os.click/en)
   - [New Download Links](https://docs.google.com/spreadsheets/d/1zTF5uRJKfZ3ziLxAZHh47kF85ja34_OFB5C5bVSPumk/edit?gid=0#gid=0)
   - [Adguard File List](https://files.rg-adguard.net/)
-  - [Server 2022](https://info.microsoft.com/ww-landing-windows-server-2022.html) - Akármit beírhatsz a sorokba, el fogja fogadni.
+  - [Server 2022](https://www.microsoft.com/en-us/evalcenter/download-windows-server-2022)
 
   
 ## 4.4 Build Environment előkészítése
