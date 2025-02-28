@@ -125,10 +125,12 @@ Hardver > BIOS > Operációs rendszer
 
 # 0. Benchmarkolás
 
+Ez az egyik legfontosabb része az útmutatónak. Benchmarkolás nélkül vakon állítasz be mindent és nem tudod az adott beállítás teljesítményre való hatását.
+
 - [FrameView](https://www.nvidia.com/en-gb/geforce/technologies/frameview/) - [PC Latency](https://images.nvidia.com/content/images/article/system-latency-optimization-guide/nvidia-latency-optimization-guide-pc-latency.png)
 - [Frame Latency Meter](https://github.com/GPUOpen-Tools/frame_latency_meter)
 - [PresentMon](https://github.com/BoringBoredom/Frame-Time-Analysis/raw/main/presentmon/presentmon.zip) - Lásd a teljes listát [itt](https://github.com/GameTechDev/PresentMon/blob/main/README-CaptureApplication.md#metric-definitions)
-- [Windows Performance Toolkit](https://learn.microsoft.com/en-us/windows-hardware/test/wpt/) - ISR/DPC végrehajtási idők ellenőrzése [xperf](/bin/xperf-dpcisr.bat)-el
+- [XTW](https://github.com/valleyofdoom/xtw) - ISR/DPC végrehajtási idők ellenőrzése
 - [Mouse Tester](https://github.com/valleyofdoom/MouseTester) - Egér teljesítményének mérése (pl. polling interval)
 - [NVIDIA Reflex Analyzer](https://www.nvidia.com/en-gb/geforce/news/reflex-latency-analyzer-360hz-g-sync-monitors/) - End-to-end latency
 - [Frame-Time-Analysis](https://boringboredom.github.io/Frame-Time-Analysis/) - CSV adatok elemzése amit a fenti programok log-oltak
@@ -144,17 +146,17 @@ Hardver > BIOS > Operációs rendszer
 
 - Kerüld a csavarok túlfeszítését.
 
-- Győződj meg róla hogy a kábelek rendesen bevannak dugva és nem lazák (pl. tápkábelek)
+- Győződj meg róla hogy a kábelek rendesen bevannak dugva és nem lazák (legfőképp tápkábelek)
 
 - Érdemes vezetékes eszközöket használni, mivel a vezetéknélküli eszközök hajlamosak aggresszív energiatakarékosságot alkalmazni a hosszabb akkumulátor élettartam érdekében, a túlzott EMI hátrányaival együtt.
 
-- A [CrystalDiskInfo](https://crystalmark.info/en/software/crystaldiskinfo/) és [CrystalDiskMark](https://crystalmark.info/en/software/crystaldiskmark/) programmal megtekinthető az SSD állapota. Új SSD vásárlásakor ellenőrizd a teljes olvasás/írás értékét hogy megállapítsd, nem e használt.
+- A [CrystalDiskInfo](https://crystalmark.info/en/software/crystaldiskinfo/) és [CrystalDiskMark](https://crystalmark.info/en/software/crystaldiskmark/) programmal megtekinthető az SSD állapota. 
 
 - Frissítsd az SSD, NIC (Network Interface Controller), és a többi periféria firmware-ét.
 
-- 4 DIMM-es alaplap esetében a kézikönyvben leírtak alapján szereld be a RAM modulokat a megfelelő foglalatokba. Legtöbb esetben ez a 2-4 slot.
+- 4 DIMM-es alaplap esetében a kézikönyvben leírtak alapján szereld be a RAM modulokat a megfelelő foglalatokba. Legtöbb esetben ez a 2. és 4. slot.
 
-- Használj PCIe portokat amelyek egyenesen a CPU-ba mennek a PCH helyett. Ez jellemzően az M.2 és NVME SSD-kre és a GPU-ra vonatkozik. [HWiNFO](https://www.hwinfo.com/)-ban a PCIe Bus kategóriánál, vagy az alaplapod oldalán lévő manual-ban a PCI részlegnél találod meg a kellő információt.
+- Használj PCIe portokat amelyek egyenesen a CPU-ba mennek a PCH helyett. Ez jellemzően a GPU-ra, M.2 és NVME SSD-re vonatkozik. [HWiNFO](https://www.hwinfo.com/)-ban a PCIe Bus kategóriánál, vagy az alaplapod oldalán lévő manual-ban a PCI részlegnél találod meg a kellő információt.
 
 - Győződj meg róla, hogy a PCIe Bus kategóriába tartozó PCIe eszközök sebessége megegyezik a maximálisan támogatott értékkel, mint például ``x16 3.0``.
 
@@ -183,13 +185,15 @@ Hardver > BIOS > Operációs rendszer
 
 ## 1.2 Hűtés
 
-- Semmiképp se legyen a gép szőnyegen, vagy olyan helyen ahol nincs elegendő légáramlás. Ha mégis arra kerülne a sor, hogy szőnyegre teszed, akkor egy fa lapot tegyél a gépház alá, így hűvösebb felületen lesz, és kevésbé fog porosodni.
-
-- Érdemes a gépházad oldalát levenni a légáramlás segítése érdekében.
+- Semmiképp se legyen a gép szőnyegen, vagy olyan helyen ahol nincs elegendő légáramlás.
 
 - Használj magas minőségű hővezető pasztát és megfelelő mennyiséget.
 
   - Lásd [Best Thermal Paste for CPUs | Tom’s Hardware](https://www.tomshardware.com/best-picks/best-thermal-paste)
+
+- Szereld be megfelelően az AIO-t.
+
+  - Lásd [Stop Doing It Wrong: How to Kill Your CPU Cooler | Gamers Nexus](https://www.youtube.com/watch?v=BbGomv195sk)
 
 - Ha heatsink nélküli NVME/M.2 SSD-t szerelsz be ügyelj arra hogy az alaplapon lévő thermal pad-ekről levedd a fóliát.
 
@@ -208,11 +212,11 @@ Hardver > BIOS > Operációs rendszer
 
 - A legtöbb modern periféria támogatja az Onboard Memory Profile-t. Állítsd be őket mielőtt újratelepítenéd a Windowst, hogy ne kelljen a későbbi módosítások érdekében feltelepíteni a sok bloatware-t.
 
-- Magasabb DPI csökkenti a latency-t. Használj minimum 3200 dpi-t. Ügyelj arra hogy sensor smoothing ne lépjen életbe magasabb DPI használatakor. Windowsban az egér beállítások közt lejjebb viheted a pointer speedet tetszésed szerint ha a játék raw inputot használ.
+- Magasabb DPI csökkenti a latency-t. Ügyelj arra hogy sensor smoothing ne lépjen életbe magasabb DPI használatakor. Windowsban az egér beállítások közt lejjebb viheted a pointer speedet tetszésed szerint ha a játék raw inputot használ.
 
 - Magasabb polling rate csökkenti a jittert, azonban 1000Hz-nél (1ms) magasabb polling rate hardvertől függően negatívan befolyásolhatja a teljesítményt, ezért ennek megfelőlen kell beállítani. Ez nem akkora probléma a 2023 májusi Windows 11 Raw Input Stack update után ami limitálja a nem előtérben lévő programok polling frekvenciáját 125hz-re (8ms).
 
-- Az USB kimenet ~7A-ra van korlátozva, és az RGB felesleges energiát igényel. Fontold meg az RGB kikapcsolását, mivel az effektek/animációk nagy terhet tesznek az MCU-ra (Micro Controller Unit), és késleltethetik a többi folyamatot. [OpenRGB](https://openrgb.org/) egy jó választás az RGB módosítására.
+- Az USB kimenet ~7A-ra van korlátozva, és az RGB felesleges energiát igényel. Fontold meg az RGB kikapcsolását, mivel az effektek/animációk nagy terhet tesznek az MCU-ra (Micro Controller Unit), és késleltethetik a többi folyamatot.
 
 - Sűrített levegővel tisztítsd az egér szenzorát.
 
