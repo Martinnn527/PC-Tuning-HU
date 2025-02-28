@@ -600,7 +600,7 @@ DISM /Mount-Wim /WimFile:"%EXTRACTED_ISO%\sources\install.wim" /Index:1 /MountDi
 DISM /Image:"%MOUNT_DIR%" /Enable-Feature /FeatureName:NetFx3 /All /LimitAccess /Source:"%EXTRACTED_ISO%\sources\sxs"
 ```
 
-# 4.8 Szükséges fájlok integrálása
+## 4.8 Szükséges fájlok integrálása
 
 [Klónold a repository-t](https://github.com/Martinnn527/PC-Tuning-HU/archive/refs/heads/main.zip) majd a ``bin`` mappát másold be a mountolt directory-ba:
 
@@ -618,7 +618,7 @@ Zárd be a ``%MOUNT_DIR%`` mappát majd futtasd az alábbi parancsot a módosít
 DISM /Unmount-Wim /MountDir:"%MOUNT_DIR%" /Commit && rd /s /q "%MOUNT_DIR%"
 ```
 
-# 4.10 ISO Compression
+## 4.10 ISO Compression
 
 Ennek nincs különösen semmi előnye a méret csökkentésén kívül azonban telepítés közben a Windows Setup automatikusan végrehajtja ezt a folyamatot ami sok időbe telhet.
 
@@ -641,7 +641,9 @@ Töltsd le a [Ventoy](https://github.com/ventoy/Ventoy/releases)-t majd indítsd
 
 ## 4.13 ISO-ba való bootolás
 
-Ehhez a lépéshez húzd ki az ethernet kábeledet és ne legyél az internethez csatlakozva, ezáltal elkerülhetjük a Microsoftba való bejelentkezést OOBE közben és a Windows nem fog automatikusan feltelepíteni frissítéseket és drivereket.
+Mielőtt még elkezdenéd a telepítést, fontold meg a Secure Erase használatát a BIOS-ban. Ez letöröl minden adatot a kiválasztott SSD/HDD-ről.
+
+Húzd ki az ethernet kábeledet és ne legyél az internethez csatlakozva, ezáltal elkerülhetjük a Microsoftba való bejelentkezést OOBE közben és a Windows nem fog automatikusan feltelepíteni frissítéseket és drivereket.
 
 - Ha a Secure Boot bevan kapcsolva, ideiglenesen kapcsold ki a telepítési folyamathoz. Boot-olj be a pendrive-ra BIOS-on belül és válaszd ki a Windows ISO-t. Folytasd a telepítést majd amikor végzett kapcsold vissza a Secure Boot-ot ha előzőleg bevolt.
 
