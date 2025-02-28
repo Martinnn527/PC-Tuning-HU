@@ -1448,13 +1448,11 @@ Támogatnia kell az MSI-X-et ahhoz hogy az ISR azon a CPU-n fusson amelyik végr
  >
  > Néhány Realtek NIC-en nem funkcionál megfelelően az RSS hogyha több mint 1 RSS Queue van beállítva. A Hyperthreading/SMT kikapcsolása megoldhatja ezt a problémát.
 
-A változtatások után ellenőrizd [xperf](/bin/xperf-dpcisr.bat)-el hogy működik e a kívánt konfiguráció.
-
 </details>
 
 - Lásd [Hány RSS Queue-ra van szükséged](/docs/research.md#hány-rss-queue-ra-van-szükséged)
 
-Amiután kész vagy az előbbi lépésekkel töltsd le a [Windows ADK](https://go.microsoft.com/fwlink/?linkid=2289980)-t, telepítsd fel a Windows Performance Analyzer-t és használd a ``bin`` mappában lévő [xperf-dpcisr.bat](/bin/xperf-dpcisr.bat) scriptet hogy megfigyeld helyesen működnek e az affinity policy-k.
+Amiután kész vagy az előbbi lépésekkel töltsd le az [XTW](https://github.com/valleyofdoom/xtw)-t hogy megfigyeld helyesen működnek e az affinity policy-k.
 
   - Ellenőrizd hogy egy ISR-hez tartozó DPC ugyanazon a CPU-n kerül-e feldolgozásra. ([példa](/media/isr-dpc-same-core.png))
 
