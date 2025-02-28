@@ -53,7 +53,7 @@
 
 # 2. HDCP kikapcsolása
 
-Keresd ki a driverhez tartozó driver key-t device manager-ben a [Példa](/media/find-driver-key-example.png) alapján, nyiss meg egy notepad-et, másold be az alábbi parancsot majd cseréld ki a driver key-t a sajátoddal.
+Keresd ki a GPU driverhez tartozó [Driver Key](/media/find-driver-key-example.png)-t és cseréld ki a sajátoddal majd másold be CMD-be az alábbi parancsot:
 
 ```bat
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}\0000" /v "RMHdcpKeyglobZero" /t REG_DWORD /d "1" /f
@@ -70,8 +70,6 @@ reg add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08
 - Antialiasing - Gamma Correction - Off
 
 - Low Latency Mode - On
-
-- Monitor Technology - G-SYNC vagy Fixed Refresh Rate
 
 - Power management mode - Prefer maximum performance
 
@@ -93,7 +91,7 @@ reg add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08
 
 - Az alábbi registry key-el minimalizálhatod a GPU órajel ingadozását azonban magasabb idle hőfokokkal és energiafogyasztással jár. Amikor nem játszol fontold meg a [limit-nvpstate](https://github.com/valleyofdoom/limit-nvpstate) használatát.
 
-  - A driver key-t cseréld ki a sajátodra [példa](/media/find-driver-key-example.png)
+  - A [Driver Key](/media/find-driver-key-example.png)-t cseréld ki a sajátodra majd másold be CMD-be az alábbi parancsot:
 
   ```bat
   reg add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}\0000" /v "DisableDynamicPstate" /t REG_DWORD /d "1" /f
@@ -105,7 +103,7 @@ reg add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08
 
 - Kapcsold ki az ``Enable Ansel``-t
 
-- Ha a Resizable BAR bevan kapcsolva, kísérletezhetsz a kényszerítésével nem támogatott játékokhoz. Fontos megjegyezni hogy számos játékban negatívan befolyásolja a teljesítményt ([1](https://www.techspot.com/review/2234-nvidia-resizable-bar)).
+- Ha a Resizable BAR bevan kapcsolva, kísérletezhetsz a kényszerítésével nem támogatott játékokhoz. Fontos megjegyezni hogy számos játékban negatívan befolyásolhatja a teljesítményt ([1](https://www.techspot.com/review/2234-nvidia-resizable-bar)).
 
   - rBAR - Feature
   - rBAR - Options
