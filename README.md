@@ -426,7 +426,7 @@ GPU overclockolásnál előfordulhat hogy számos power limit-et fel kell oldano
 
 - Győződj meg róla hogy a CPU a megfelelő frekvencián fut mielőtt belekezdesz abban az esetben ha kikapcsoltad a SpeedStep és SpeedShift-hez hasonló beállításokat ami megakadályozhatja a CPU-t hogy túllépje az alapfrekvenciát.
 
-- Konfiguráld a RAM frekvenciát és timing-okat manuálisan jelentős teljesítménybeli javulásért. [(1)](https://kingfaris.co.uk/blog/intel-ram-oc-impact). Az XMP nem hangol be nagyon sok timing-ot és nem is garantál stabilitást.
+- Konfiguráld a RAM frekvenciát és timing-okat manuálisan jelentős teljesítménybeli javulásért [(1)](https://kingfaris.co.uk/blog/intel-ram-oc-impact). Az XMP nem hangol be nagyon sok timing-ot és nem is garantál stabilitást.
 
    - Lásd [Eden’s DDR4 guide](https://web.archive.org/web/20231211232729/https://cdn.discordapp.com/attachments/328891236918493184/1172922515962724444/DDR4_Guide_V1.2.1.pdf)
    - Lásd [KoTbelowall/INTEL-DDR4-RAM-OC-GUIDE-by-KoT](https://github.com/KoTbelowall/INTEL-DDR4-RAM-OC-GUIDE-by-KoT)
