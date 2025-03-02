@@ -496,7 +496,7 @@ GPU overclockolásnál előfordulhat hogy számos power limit-et fel kell oldano
 
 - Windows Home verziók nem támogatják a Group Policy Editor-t ami szükséges lesz a rendszer konfigurálásához.
 
-- Windows Server verziók nem támogatják az Xbox controllereket (Driver feltelepítése nélkül nem egyáltalán nem műküdik) valamint PlayStation controllerek esetén a DS4 programot (Senki nem használja :D).
+- Windows Server verziók nem támogatják az Xbox controllereket (Driver feltelepítése nélkül nem egyáltalán nem működik) valamint PlayStation controllerek esetén a DS4 programot (Senki nem használja :D).
 
 - Windows Server-en nincs Game Bar, Game Mode és ehhez hasonló funkciók.
 
