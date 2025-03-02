@@ -131,7 +131,7 @@ Ez az egyik legfontosabb része az útmutatónak. Benchmarkolás nélkül vakon 
 - [Frame Latency Meter](https://github.com/GPUOpen-Tools/frame_latency_meter)
 - [PresentMon](https://github.com/BoringBoredom/Frame-Time-Analysis/raw/main/presentmon/presentmon.zip) - Lásd a teljes listát [itt](https://github.com/GameTechDev/PresentMon/blob/main/README-CaptureApplication.md#metric-definitions)
 - [XTW](https://github.com/valleyofdoom/xtw) - ISR/DPC végrehajtási idők ellenőrzése
-- [Mouse Tester](https://github.com/valleyofdoom/MouseTester) - Egér teljesítményének mérése (pl. polling interval)
+- [Mouse Tester](https://github.com/valleyofdoom/MouseTester) - Egér teljesítményének mérése (pl. polling stabilitás)
 - [NVIDIA Reflex Analyzer](https://www.nvidia.com/en-gb/geforce/news/reflex-latency-analyzer-360hz-g-sync-monitors/) - End-to-end latency
 - [Frame-Time-Analysis](https://boringboredom.github.io/Frame-Time-Analysis/) - CSV adatok elemzése amit a fenti programok log-oltak
 
