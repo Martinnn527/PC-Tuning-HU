@@ -716,7 +716,7 @@ A beállítások módosíthatók a ``bin`` mappában lévő ``registry-options.j
 
 - ``Win+R`` -> ``control userpasswords`` -> ``Users`` majd jobb klikk az ``Administrator``profilra, ``Set Password`` és hagyd üresen hogy eltávolítsd a jelszót.
 
-- Windows Server-en globálisan kikapcsolható a Telemetry az alábbi CMD paranccsal azonban ha a [registry](#53-registry-script) szekciónál ``true``-ra van állítva a ``disable telemetry`` ez a registry key már jelen van.
+- Windows Server-en globálisan kikapcsolható a Telemetry az alábbi CMD paranccsal azonban ha a ``registry-options.json``-ban ``true``-ra van állítva a ``disable telemetry`` ez a registry key már jelen van.
 
   ```bat
   reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\DataCollection" /v AllowTelemetry /t REG_DWORD /d "0" /f
@@ -825,7 +825,7 @@ C:\bin\install-firefox.ps1
 
 - Kapcsolj ki minden nyomkövetőt.
 
-- Konfiguráld/telepítsd fel a következő kiegészítőket:
+- Telepítsd/konfiguráld a következő kiegészítőket:
 
    - uBlock Origin - Állítsd be a filter list-et. Ajánlott mindent bepipálni
    - CleanURLs - Nem szükséges konfiguráció
@@ -833,7 +833,7 @@ C:\bin\install-firefox.ps1
 
 ## 5.10 Ütemezett feladatok kikapcsolása
 
-PowerShell-be másold be az alábbi parancsot.
+Az alábbi PowerShell parancs kikapcsolja az ütemezett feladatokat amik rendszeresen futnak a háttérben. Ha nem szeretsz scripteket futtatni vagy csak ellenőrizni szeretnéd hogy mit változtatott a script, használd a [TaskSchedulerView](https://www.nirsoft.net/utils/task_scheduler_view.html) programot.
 
 ```powershell
 C:\bin\disable-scheduled-tasks.ps1
@@ -861,11 +861,9 @@ DISM /Online /Set-ReservedStorageState /State:Disabled
 reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SysMain" /v "Start" /t REG_DWORD /d "4" /f
 ```
 
-- Írd be a következőt Win+R-be: ``sysdm.cpl`` majd állítsd be az alábbiakat:
+- Konfiguráld a ``Win+R -> sysdm.cpl -> Advanced -> Performance -> Settings`` menüt. Ez modern rendszereken nem befolyásolja a teljesítményt azonban letisztultabb lesz a Windows.
 
-  ``Advanced -> Performance -> Settings -> Adjust for best performance``
-
-- Kapcsolj ki mindent a Win+I megnyomásával, a ``System`` -> ``Notifications and actions``-ben 
+- Kapcsolj ki mindent a ``System`` -> ``Notifications and actions``-ben a ``Win+I`` megnyomásával.
     
 ## 5.12 Runtime-ok feltelepítése
 
@@ -877,7 +875,7 @@ reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SysMain" /v "Start
 
 ``Win+R -> Optional Features`` majd pedig állítsd be úgy ahogy a képen látható.
 
-Ha a Windows Update kivan kapcsolva akkor nagy eséllyel nem fogsz tudni feltelepíteni funkciókat, helyette DISM-el kell telepítened. Windows Serveren az ``OptionalFeatures`` megfelelője a ``Server Manager -> Manage -> Remove Roles and Features``
+Ha a Windows Update kivan kapcsolva akkor nagy eséllyel nem fogsz tudni feltelepíteni. Windows Serveren az ``OptionalFeatures`` megfelelője a ``Server Manager -> Manage -> Remove Roles and Features``
 
    - [Példa](/media/features-example.png)
 
@@ -902,7 +900,7 @@ Javasolt a debloat scriptek elkerülése és az olyan komponensek eltávolítás
 
 - [AppxPackagesManager](https://github.com/valleyofdoom/AppxPackagesManager) használatával távolítsd el a nem kívánt programokat.
 
-- CMD-ben töröld le a OneDrive-ot az alábbi parancssal.
+- Töröld le a OneDrive-ot az alábbi CMD paranccsal.
 
 ```bat
 for %a in ("SysWOW64" "System32") do (if exist "%windir%\%~a\OneDriveSetup.exe" ("%windir%\%~a\OneDriveSetup.exe" /uninstall)) && reg delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Desktop\NameSpace\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" /f
@@ -910,7 +908,7 @@ for %a in ("SysWOW64" "System32") do (if exist "%windir%\%~a\OneDriveSetup.exe" 
 
 - Microsoft Edge letiltása (nem letörlése). A böngészőt letiltani kell nem pedig letörölni a WebView Runtime megtartása érdekében.
         
-  - Nyisd meg a Microsoft Edge-t majd pedig a beállításokban kapcsolj ki bármilyen automatikus start-up beállítást mint például:
+  - Nyisd meg a Microsoft Edge-et majd pedig a beállításokban kapcsolj ki bármilyen automatikus start-up beállítást mint például:
       
       - ``Settings -> System and performance -> Startup boost``
       - ``Continue running background extensions and apps when Microsoft Edge is closed``
@@ -977,13 +975,13 @@ Lásd [docs/configure-nvidia.md](/docs/confiugre-nvidia.md)
 
 - Általában két lehetőséged van: Display, vagy GPU scaling. A monitorod natív felbontása nem igényel scalinget ezáltal identity scaling-et ([1](https://learn.microsoft.com/en-us/windows/win32/api/wingdi/ne-wingdi-displayconfig_scaling)), ([2](/docs/research.md#2-identity-scaling)) használhatsz. 
 
-- Állíts be egy egész refresh ratet (a legmagasabbat amit az első pontnál eltudtál érni), például 60,00/240,00, nem 59,94/239,76. Ennek elérése érdekében használd az ``Exact``vagy pedig ``Exact reduced`` timing-ot [CRU](https://www.monitortests.com/forum/Thread-Custom-Resolution-Utility-CRU)-ban mivel a többi egy picit eltérő lehet, például 239.xxx.
+- Állíts be egy egész refresh ratet (a legmagasabbat amit az első pontnál eltudtál érni), például 60,00/240,00, nem 59,94/239,76. Ennek elérése érdekében használd az ``Exact`` vagy ``Exact reduced`` timing-ot [CRU](https://www.monitortests.com/forum/Thread-Custom-Resolution-Utility-CRU)-ban mivel a többi egy picit eltérő lehet.
 
-- Töröld az összes felbontást és egyéb bloatwaret (audio blocks) az alap felbontásodon kívül.
+  - 280hz vagy magasabb frekvencia esetén a ``DisplayID 2.0`` extension block-on belül add hozzá a használni kívánt felbontást.
+
+- Töröld az összes nem használt felbontást és egyéb bloatwaret. Az alábbi példa szimplán egy kiinduló pont és lehetséges hogy neked máshogy kell beállítanod.
  
   - [Példa](/media/cru-example.png)  
-
-- 360hz vagy magasabb frekvencia esetén a ``DisplayID 2.0`` extension block-on belül add hozzá a használni kívánt felbontást.
 
 - Ha NVIDIA GPU-d van, győzödj meg róla hogy a ``Display`` opció a ``Perform scaling on`` beállításnál még mindig elérhető. Ha nem, futtasd a CRU mappájában lévő reset.exe-t hogy visszaállítsd a beállításokat alapra és konfiguráld újra a CRU-t. Minden változtatás után futtasd a restart64.exe-t hogy megtudd mi volt az ami a problémát okozta.
 
@@ -1003,7 +1001,7 @@ Ezt szükséges feltelepíteni mivel a start menüvel és a Windows Search-el ka
 
 ## 5.22 Spectre, Meltdown és CPU Microcode
 
-A Spectre és Meltdown letiltása egy régóta ismert teljesítményjavító trükk. Azonban az újabb platformok és rendszerarchitektúrák esetén előfordulhat teljesítménycsökkenés ([1](https://www.phoronix.com/review/amd-zen4-spectrev2)). Éppen ezért fontos benchmarkokat végezni, hogy meghatározzuk, hogy a teljesítmény pozitívan, negatívan vagy egyáltalán nem változik. Az állapota az  [InSpectre](https://www.grc.com/inspectre.htm) programmal, illetve a microcode DLL-ek átnevezésével állítható attól függően, hogy van-e microcode verzió eltérés az operációs rendszer és a BIOS között ([1](https://superuser.com/a/895447), [2](https://support.mozilla.org/en-US/kb/microcode-update)). 
+Az újabb platformok és rendszerarchitektúrák esetén előfordulhat teljesítménycsökkenés a kikapcsolásukkal ([1](https://www.phoronix.com/review/amd-zen4-spectrev2)). Éppen ezért fontos benchmarkokat végezni hogy meghatározzuk, hogy a teljesítmény pozitívan, negatívan vagy egyáltalán nem változik. Az állapotuk az [InSpectre](https://www.grc.com/inspectre.htm) programmal, illetve a microcode DLL-ek átnevezésével állítható attól függően, hogy van-e microcode verzió eltérés az operációs rendszer és a BIOS között ([1](https://superuser.com/a/895447), [2](https://support.mozilla.org/en-US/kb/microcode-update)). 
 
 <details>
 <summary>Instrukció a DLL-ek átnevezésére</summary>
@@ -1161,19 +1159,19 @@ bcdedit /set disabledynamictick yes
 
 - Kapcsold ki az összes funkciót kivéve a ``QoS Packet Scheduler``-t (Ha a router-ed támogatja és használni tervezed) és az ``Internet Protocol Version 4 (TCP/IPv4)``-et.
 
-- Állíts be egy Static IP Address-t. CMD-be írd be hogy ``ipconfig /all``. Jobb klikk a fő adapteredre, ``Properties``, majd pedig kattints rá az ``Internet Protocol Version 4 (TCP/IPv4)``-re és írd át manuálisan az összes beállítást a CMD-ben kiírtaknak megfelelően.
+- Állíts be egy Statikus IP-t. CMD-be írd be hogy ``ipconfig /all``. Jobb klikk a fő adapteredre, ``Properties``, majd pedig kattints rá az ``Internet Protocol Version 4 (TCP/IPv4)``-re és írd át manuálisan az összes beállítást a CMD-ben kiírtaknak megfelelően.
 
 ## 5.27 Audio eszközök beállítása
 
-- Nyisd meg a sound control panel-t: ``Win+R : mmsys.cpl``
+- ``Win+R : mmsys.cpl``
 
-- Tiltsd le az összes nem használt Playback és recording eszközt.
+- Tiltsd le az összes nem használt Playback és Recording eszközt.
 
 - A Communications fülnél állítsd be hogy ``Do nothing``
 
 ## 5.28 Process Explorer
 
-Használj Process Explorer-t mivel a stock Task Manager a CPU kihasználtságát %-ban jelzi ami félrevezető lehet [1](https://aaron-margosis.medium.com/task-managers-cpu-numbers-are-all-but-meaningless-2d165b421e43). Ezzel ellentétben a Process Explorer idő-alapú terhelést mutat.
+Használj Process Explorer-t mivel a stock Task Manager a CPU kihasználtságát %-ban jelzi ami félrevezető lehet [1](https://aaron-margosis.medium.com/task-managers-cpu-numbers-are-all-but-meaningless-2d165b421e43). Ezzel ellentétben a Process Explorer idő-alapú terhelést mutat nem beszélve számos funkcióról ami nem elérhető az alap Task Manager-ben.
 
 - [Töltsd le](https://download.sysinternals.com/files/ProcessExplorer.zip) majd pedig csomagold ki.
 
@@ -1187,7 +1185,7 @@ Használj Process Explorer-t mivel a stock Task Manager a CPU kihasználtságát
   
   - Always On Top (jól jön ha a játék crashel vagy lefagy)
 
-  - ``View`` -> ``Select Columns`` -> ``Process Performance`` majd pedig pipáld be a ``Context Switch Delta``-t, a ``CPU Cycles Delta``-t és a ``Base Priority``-t.
+  - ``View`` -> ``Select Columns`` -> ``Process Performance`` majd pedig pipáld be a ``Context Switch Delta``-t, ``CPU Cycles Delta``-t és a ``Base Priority``-t.
 
 
 ## 5.29 Szolgáltatások és driverek
@@ -1224,9 +1222,11 @@ service-list-builder.exe --config C:\bin\minimal-services.ini
 
 ## 5.30 Device Manager beállítása
 
-Ha még nem tetted, futtattad a ``Services-Disable.bat`` scriptet. ``NE`` tiltsd le azokat az eszközöket amelyek mellett egy sárga ikon van. 
+- Ha még nem tetted, futtattad a ``Services-Disable.bat`` scriptet. 
 
-``Win+R`` -> ``devmgmt.msc`` hogy megnyisd a Device Manager-t.
+- ``NE`` tiltsd le azokat az eszközöket amelyek mellett egy sárga ikon van. 
+
+- ``Win+R`` -> ``devmgmt.msc`` hogy megnyisd a Device Manager-t.
 
 - A ``Disk drives`` kategóriánál jobb klikk az SSD-re -> ``Polciies`` -> és pipáld be a ``Turn off Windows write-cache buffer flushing on the device`` opciót.
 
@@ -1237,7 +1237,7 @@ Ha még nem tetted, futtattad a ``Services-Disable.bat`` scriptet. ``NE`` tiltsd
   - Green Ethernet
   - Power Saving Mode
 
-- ``View -> Devices by connection`` és tilts le minden PCIe (PCI Express Root Port, PCI Express Upstream/Downstream Switch Port), SATA, NVMe, XHCI Controllert és USB Hub-ot amihez nincs semmi csatlakoztatva. Tilts le minden nem használt eszközt ami ugyanahhoz a PCIe port-hoz van csatlakoztatva mint a GPU, pl. HD Audio.
+- ``View -> Devices by connection`` és tilts le minden PCIe, SATA, NVMe, XHCI Controllert és USB Hub-ot amihez nincs semmi csatlakoztatva. Tilts le minden nem használt eszközt ami ugyanahhoz a PCIe port-hoz van csatlakoztatva mint a GPU, pl. HD Audio. Ha valamiben nem vagy biztos inkább ne tiltsd le, vagy keress rá az interneten.
 
 - A HID eszközöket is letilthatod azonban lehetséges hogy az adott periféria szoftvere nem fogja felimserni az eszközt. Ha véletlen letiltod az egered, használd a billentyűzeted hogy visszakapcsold az Enter, Tab és nyilak használatával.
 
