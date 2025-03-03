@@ -115,7 +115,7 @@
 
 ## Bemutató
 
-Az útmutató célja a Windows-alapú rendszerek finomhangolása, többek között a hardver-, operációs rendszer- és szoftverek konfigurálása. Az útmutatás széleskörű célok elérésére van kialakítva, beleértve a biztonság és adatvédelem javítása, azonban legfőképp a competitive játékokban való előny megszerzésére és valós idejű feladatok futtatására van kihegyezve. Hangsúlyt fektet arra, hogy a felhasználók saját maguk végezzék el a beállításokat, ellenőrizzék azok hatását, és minimalizálják a scriptek használatát annak érdekében hogy a folyamat átláthatóbb legyen, és elkerüljék a nem kívánt módosításokat. A szekciókat sorrendben kell követni mivel egyes lépések a korábbi lépések befejezésétől függnek, ezért minden szekció számozott.
+Ezen útmutató célja a Windows-alapú rendszerek finomhangolása, többek között a hardver-, operációs rendszer- és szoftverek konfigurálása. Az útmutatás széleskörű célok elérésére van kialakítva, beleértve a biztonság és adatvédelem javítása, azonban legfőképp a competitive játékokban való előny megszerzésére és valós idejű feladatok futtatására van kihegyezve. Hangsúlyt fektet arra, hogy a felhasználók saját maguk végezzék el a beállításokat, ellenőrizzék azok hatását, és minimalizálják a scriptek használatát annak érdekében hogy a folyamat átláthatóbb legyen, és elkerüljék a nem kívánt módosításokat. A szekciókat sorrendben kell követni mivel egyes lépések a korábbi lépések befejezésétől függnek, ezért minden szekció számozott.
 
 > [!CAUTION]
 Hardver > BIOS > Operációs rendszer
