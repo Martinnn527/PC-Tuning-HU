@@ -268,7 +268,7 @@ Frissítés útán győződj meg róla, hogy a Spectre, Meltdown és CPU Microco
 
 ## 2.3 BIOS Reset
 
-Ha a CMOS reset nem állítja teljes mértékben alaphelyzetbe a BIOS-t, flasheld újra a BIOS-t.
+Ha a CMOS reset nem állítja teljes mértékben alaphelyzetbe a BIOS-t, flasheld újra.
 
 ## 2.4 Resizable BAR
 
