@@ -94,7 +94,7 @@
   - [5.35 XHCI Interrupt Moderation](#535-xhci-interrupt-moderation-imod)
   - [5.36 Applikációk konfigurálása](#536-applikációk-konfigurálása)
     - [5.36.1 FPS Limit](#5361-fps-limit)
-    - [5.36.2 Játék regisztrálása Game Bar-ban](#5362-játék-regisztálása-game-bar-ban)
+    - [5.36.2 Játék regisztrálása Game Bar-ban](#5362-játék-regisztrálása-game-bar-ban)
     - [5.36.3 Presentation Mode](#5363-presentation-mode)
     - [5.36.4 Game Mode](#5364-game-mode)
     - [5.36.5 Média lejátszó](#5365-media-lejátszó)
