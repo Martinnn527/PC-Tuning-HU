@@ -875,7 +875,7 @@ reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SysMain" /v "Start
 
 ``Win+R -> Optional Features`` majd pedig állítsd be úgy ahogy a képen látható.
 
-Ha a Windows Update kivan kapcsolva akkor nagy eséllyel nem fogsz tudni feltelepíteni. Windows Serveren az ``OptionalFeatures`` megfelelője a ``Server Manager -> Manage -> Remove Roles and Features``
+Windows Serveren az ``OptionalFeatures`` megfelelője a ``Server Manager -> Manage -> Remove Roles and Features``
 
    - [Példa](/media/features-example.png)
 
