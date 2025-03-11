@@ -1139,6 +1139,8 @@ Disable-MMAgent -MemoryCompression
 
 ## 5.25 BCD Store
 
+CMD-be másold be az alábbi parancsokat.
+
 [DEP (Data Execution Prevention)](https://learn.microsoft.com/en-us/windows/win32/memory/data-execution-prevention) kikapcsolása:
 
 ```bat
@@ -1159,7 +1161,9 @@ bcdedit /set disabledynamictick yes
 
 - Kapcsold ki az összes funkciót kivéve a ``QoS Packet Scheduler``-t (Ha a router-ed támogatja és használni tervezed) és az ``Internet Protocol Version 4 (TCP/IPv4)``-et.
 
-- Állíts be egy Statikus IP-t. CMD-be írd be hogy ``ipconfig /all``. Jobb klikk a fő adapteredre, ``Properties``, majd pedig kattints rá az ``Internet Protocol Version 4 (TCP/IPv4)``-re és írd át manuálisan az összes beállítást a CMD-ben kiírtaknak megfelelően.
+- Állíts be egy Statikus IP-t. CMD-be írd be hogy ``ipconfig /all``. Jobb klikk a fő adapteredre, ``Properties``, majd pedig kattints rá az ``Internet Protocol Version 4 (TCP/IPv4)``-re és írd át manuálisan az összes beállítást a CMD-ben kiírtaknak megfelelően. 
+
+  - Lásd: [Recommended DNS Providers | Privacy Guides](https://www.privacyguides.org/en/dns/#recommended-providers)
 
 ## 5.27 Audio eszközök beállítása
 
