@@ -54,7 +54,7 @@
   - [4.9 Unmount és Commit](#49-unmount-és-commit)
   - [4.10 ISO Compression](#410-iso-compression)
   - [4.11 Átkonvertálás ISO-vá](#4-11-átkonvertálás-iso-vá)
-  - [4.12 Telepítés Ventoy használatával](#412-telepítés-ventoy-használatával)
+  - [4.12 Telepítés Ventoy használatával](#412-telepítés-pendrive-ról-ventoy-használatával)
   - [4.13 ISO-ba való bootolás](#413-iso-ba-való-bootolás)
 - [5. Post Install](#5-post-install)
   - [5.1 Unrestricted PowerShell Execution Policy](#51-unrestricted-powershell-execution-policy)
@@ -398,7 +398,7 @@ Ajánlott egy ideiglenes OS-t feltelepíteni/dual-bootolni amin OC-zol és stres
 
 - Szoftveren belül ellenőrizd a változtatásokat a váratlan eredmények elkerülése érdekében (pl. frekvencia, feszültség, timing-ok)
 
-- Overclock-olás közben minden változtatás előtt mentsd el a BIOS profilod, hogy ne kelljen előről kezdeni ha esetleg reset-elni kell a CMOS-t. Lásd [BIOS Profilok és backup](#222-bios-profilok-és-backup)
+- Overclockolás közben minden változtatás előtt mentsd el a BIOS profilod, hogy ne kelljen előről kezdeni ha esetleg reset-elni kell a CMOS-t. Lásd [BIOS Profilok és backup](#222-bios-profilok-és-backup)
 
 - Egyetlen-egy error vagy crash is túl sok. Figyeld a WHEA-kat a [HWiNFO](https://www.hwinfo.com/) hibaszámlálójával vagy konfigurálj egy Event Viewer filter-t.
 
@@ -654,11 +654,13 @@ Töltsd le a [Ventoy](https://github.com/ventoy/Ventoy/releases)-t majd indítsd
 
 ## 4.13 ISO-ba való bootolás
 
-Mielőtt még elkezdenéd a telepítést, fontold meg a Secure Erase használatát a BIOS-ban. Ez letöröl minden adatot a kiválasztott SSD/HDD-ről.
+Mielőtt még elkezdenéd a telepítést, fontold meg a Secure Erase használatát a BIOS-ban.
+
+  - Lásd: [How to securely erase an SSD | Tom's Hardware](https://www.tomshardware.com/how-to/secure-erase-ssd-or-hard-drive)
 
 Húzd ki az ethernet kábeledet és ne legyél az internethez csatlakozva, ezáltal elkerülhetjük a Microsoftba való bejelentkezést OOBE közben és a Windows nem fog automatikusan feltelepíteni frissítéseket és drivereket.
 
-- Ha a Secure Boot bevan kapcsolva, ideiglenesen kapcsold ki a telepítési folyamathoz. Boot-olj be a pendrive-ra BIOS-on belül és válaszd ki a Windows ISO-t. Folytasd a telepítést majd amikor végzett kapcsold vissza a Secure Boot-ot ha előzőleg bevolt.
+- Ha a Secure Boot bevan kapcsolva, ideiglenesen kapcsold ki a telepítési folyamathoz mivel problémákat okozhat. Bootolj be a pendrive-ra BIOS-on belül és válaszd ki a Final.ISO-t. Folytasd a telepítést majd amikor végzett kapcsold vissza a Secure Boot-ot ha előzőleg bevolt.
 
 ## 4.14 OOBE Setup
 
@@ -715,7 +717,7 @@ A beállítások módosíthatók a ``bin`` mappában lévő ``registry-options.j
 
 ## 5.5 Windows Server konfigurálása
 
-- Server Manager-ben, menj a ``Manage -> Server Manager Properties``-be és pipáld be a ``Do not start Server Manager automatically at logon`` opciót.
+- Server Manager-ben menj a ``Manage -> Server Manager Properties``-be és pipáld be a ``Do not start Server Manager automatically at logon`` opciót.
 
 - ``Win+R -> services.msc``, keresd ki a ``Windows Audio`` és ``Windows Audio Endpoint Builder`` szolgáltatásokat majd pedig a startup type-ot tedd Automatic-ra.
 
