@@ -286,7 +286,7 @@ Számos alaplap gyártó elrejt sok hasznos beállítást. A legegyszerűbb mego
 
   - [Töltsd le a SCEWIN-t](https://github.com/ab3lkaizen/SCEHUB/releases/download/1.2.0/DL_SCEWIN.exe)
   - Csomagold ki, majd futtasd az ``Export.bat`` fájlt
-  - Exportálás után az ``NVRAM.txt`` megnyitásával láthatóvá válik az összes beállítás. 
+  - Exportálás után az ``NVRAM.txt`` megnyitásával láthatóvá válik az összes beállítás
   - A változó típusától függően helyezd a ``*`` jelet a kívánt opcióhoz vagy írd át az értékét
   - Az ``Import.bat`` futtatásával elmented a beállításokat amelyek egy újraindítás után életbe lépnek
   - Hiba esetén lásd: [Solutions for various error messages](https://github.com/ab3lkaizen/SCEHUB?tab=readme-ov-file#solutions-for-various-error-messages)
