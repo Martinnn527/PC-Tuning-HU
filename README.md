@@ -961,6 +961,7 @@ taskkill /f /im smartscreen.exe > nul 2>&1 & ren C:\Windows\System32\smartscreen
 ## 5.18 GPU Driver
 
 Lásd [docs/configure-nvidia.md](/docs/configure-nvidia.md)
+
 Lásd [docs/configure-amd.md](/docs/configure-amd.md)
 
 ## 5.19 MSI Afterburner
