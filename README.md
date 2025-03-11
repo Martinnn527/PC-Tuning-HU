@@ -6,7 +6,7 @@
 
 - [0. Benchmarkolás](#0-benchmarkolás)
 - [1. Physical Setup](#1-physical-setup)
-  - [1.1 General](#11-general)
+  - [1.1 Általános információ](#11-általános-információ)
   - [1.2 Hűtés](#12-hűtés)
   - [1.3 Perifériák konfigurálása](#13-perifériák-konfigurálása)
   - [1.4 EMI minimalizálása](#14-emi-minimalizálása)
@@ -140,7 +140,7 @@ Ez az egyik legfontosabb része az útmutatónak. Benchmarkolás nélkül vakon 
 
 # 1. Physical Setup
 
-## 1.1 General
+## 1.1 Általános információ
 
 - Lehetőleg minden nagyobb alkatrészcsere után telepítsd újra a Windowst.
 
@@ -264,7 +264,7 @@ Ellenőrizd hogy van e frissebb BIOS és hogy van e pozitív változás, mint p�
 
 ## 2.2 CPU Microcode az UEFI-ben
 
-Frissítés útán győződj meg róla, hogy a Spectre, Meltdown és CPU Microcode státusza rendben van magán az operációs rendszeren. Ha problémába ütköznél akkor lehet, hogy BIOS szinten kell visszaállítanod a CPU Microcode-ot.
+Frissítés után az [InSpectre](https://www.grc.com/inspectre.htm) programmal ellenőrizd hogy a Spectre, Meltdown és CPU Microcode státusza rendben van magán az operációs rendszeren . Ha problémába ütköznél akkor lehet, hogy BIOS szinten kell visszaállítanod a CPU Microcode-ot, azonban számos alaplapon egyáltalán nem elérhető ez a beállítás.
 
 ## 2.3 BIOS Reset
 
@@ -284,9 +284,18 @@ Fontos megjegyezni hogy néhány játékban a ReBAR használata negatívan befol
 
 Számos alaplap gyártó elrejt sok hasznos beállítást. A legegyszerűbb megoldás erre az hogy az UEFI-ben lévő összes látható beállítást konfigurálod majd pedig [SCEWIN](https://github.com/ab3lkaizen/SCEHUB)-ben a maradék rejtett beállítással folytatod.
 
+  - [Töltsd le a SCEWIN-t](https://github.com/ab3lkaizen/SCEHUB/releases/download/1.2.0/DL_SCEWIN.exe)
+  - Csomagold ki, majd futtasd az ``Export.bat`` fájlt
+  - Exportálás után az ``NVRAM.txt`` megnyitásával láthatóvá válik az összes beállítás. 
+  - A változó típusától függően helyezd a ``*`` jelet a kívánt opcióhoz vagy írd át az értékét
+  - Az ``Import.bat`` futtatásával elmented a beállításokat amelyek egy újraindítás után életbe lépnek
+  - Hiba esetén lásd: [Solutions for various error messages](https://github.com/ab3lkaizen/SCEHUB?tab=readme-ov-file#solutions-for-various-error-messages)
+
+Vedd figyelembe hogy alaplap márkától, akár BIOS verziótól függően eltérhetnek az adott beállítás nevei, például: ``C-States``, ``C State``, ``C-State`` stb. 
+
 ## 2.6 Hyper-threading/Simultaneous Multithreading
 
-Kapcsold ki a [Hyper-Threading/Simultaneous Multithreading](https://en.wikipedia.org/wiki/Hyper-threading) funkciót. Ez például renderelés esetén hasznos lehet de mivel a CPU-nkénti több végrehajtó thread használtata növeli a processzor erőforrásainak igénybevételét, jóval nagyobb hőfokokkal jár és a rendszer nagyobb latencyjének, jitterének potenciális forrása. Ha elegendő CPU-val rendelkezel a játék futtatásához, mindenféleképpen kapcsold ki. Ez a koncepció alkalmazható az Intel E-coreok esetében is.
+Kapcsold ki a [Hyper-Threading/Simultaneous Multithreading](https://en.wikipedia.org/wiki/Hyper-threading) funkciót. Ez például renderelés esetén hasznos lehet de mivel a CPU-nkénti több végrehajtó thread használtata növeli a processzor erőforrásainak igénybevételét, jóval nagyobb hőfokokkal jár és a rendszer nagyobb latencyjének, jitterének forrása. Ha elegendő CPU-val rendelkezel a játék futtatásához (minimum 6), mindenféleképpen kapcsold ki. Ez a koncepció alkalmazható az Intel E-coreok esetében is.
 
 ## 2.7 Power States
 
@@ -304,7 +313,7 @@ Kapcsold ki a Virtualization/SVM Mode, Intel VT-d/AMD-Vi, IOMMU beállításokat
 
 ## 2.9 Nem használt eszközök letiltása
 
-Kapcsold ki az összes nem használt eszközt, mint például nem használt NIC-ek, Bluetooth, WiFi, High Definition Audio (ha nem használsz alaplap audio-t), iGPU, SATA és RAM slotok.
+Kapcsold ki az összes nem használt eszközt, mint például nem használt NIC-ek, Bluetooth, WiFi, High Definition Audio (ha nem használsz alaplap audio-t), iGPU, SATA (és RAM slotok).
 
 ## 2.10 Trusted Platform Module
 
@@ -322,7 +331,7 @@ Kapcsold ki a Secure Boot-ot. (Windows 11-en a Vanguard, FACEIT, igényli a beka
 
 ## 2.12 Fast Startup, Standby és Hibernate
 
-Ez leginkább személyes preferencia, tapasztalat és nézőpont kérdése. Vannak, akik nem használják a Fast Startup-ot, Standby-t vagy Hibernation-t, mert ezek néha váratlan problémákat okozhatnak ([magyarázat](https://www.youtube.com/watch?v=OBGxt8zhbRk)). Ehelyett inkább tiszta rendszerindítást részesítenek előnyben, így nem mentik és állítják vissza a kernel és a szoftverek állapotát és korlátozzák a rendszer energiaállapotait S0-ra (működő állapot) és S5-re (alvó állapot).
+Ez leginkább személyes preferencia kérdése. Vannak, akik nem használják a Fast Startup-ot, Standby-t vagy Hibernation-t, mert ezek néha váratlan problémákat okozhatnak ([magyarázat](https://www.youtube.com/watch?v=OBGxt8zhbRk)). Ehelyett inkább tiszta rendszerindítást részesítenek előnyben, így nem mentik és állítják vissza a kernel és a szoftverek állapotát és korlátozzák a rendszer energiaállapotait S0-ra (működő állapot) és S5-re (alvó állapot).
 A rendszer energiaállapotairól [itt](https://learn.microsoft.com/en-us/windows/win32/power/system-power-states) tudhatsz meg többet. A BIOS-ban ezek az opciók gyakran Fast Startup, Suspend to RAM, S-States (S1, S2, S3, S4, S5), Standby, Memory Fast Boot, Hibernation vagy hasonló néven szerepelnek.
 
 Ellenőrizd a változásokat a következő paranccsal:
@@ -333,7 +342,7 @@ powercfg /a
 
 ## 2.13 Spread Spectrum
 
-Kapcsold ki a Spread Spectrumot és győződj meg róla hogy a BCLK Frequency a lehető legközelebb van a 100-hoz. [HWiNFO](https://www.hwinfo.com/)/[CPU-Z](https://www.cpuid.com/softwares/cpu-z.html)-ben ellenőrizni tudod.
+Kapcsold ki a Spread Spectrumot és győződj meg róla hogy a BCLK Frequency a lehető legközelebb van a 100-hoz. [HWiNFO](https://www.hwinfo.com/)/[CPU-Z](https://www.cpuid.com/softwares/cpu-z.html)-ban ellenőrizni tudod.
 
 ## 2.14 PCIe Link Speeds
 
@@ -343,7 +352,7 @@ PCIe Link Speed-et tedd a lehető legmagasabbra, mint például Gen 4, stb.
 
 ## 2.15 Statikus CPU frekvencia
 
-Ha statikus frekvenciát/feszültséget konfigurálsz a CPU-hoz, kapcsold ki a dynamic frequency funkciókat mint például a SpeedShift, SpeedStep, és állítsd az AVX Offset-et 0-ra, vagy tedd ``Disabled``-re. Precision Boost Overdrive (PBO) a Ryzen CPU-k esetében a statikus frekvencia és feszültésg alternatívája (X3D kivétel).
+Ha statikus frekvenciát/feszültséget konfigurálsz a CPU-hoz, kapcsold ki a dynamic frequency funkciókat mint például a SpeedShift, SpeedStep, és állítsd az AVX Offset-et 0-ra, vagy tedd ``Disabled``-re. Precision Boost Overdrive (PBO) a Ryzen CPU-k esetében a statikus frekvencia és feszültésg alternatívája.
 
   - Egyes esetekben a fent említett beállítások megakadályozhatják, hogy a processzor a BIOS-ban történő manuális beállítás ellenére is túllépje az alapfrekvenciát. Ennek megfelelően állítsd be, ha ez előfordul, és [HWiNFO](https://www.hwinfo.com/)-ban ellenőrizd az órajeleket.
 
@@ -951,7 +960,8 @@ taskkill /f /im smartscreen.exe > nul 2>&1 & ren C:\Windows\System32\smartscreen
 
 ## 5.18 GPU Driver
 
-Lásd [docs/configure-nvidia.md](/docs/confiugre-nvidia.md)
+Lásd [docs/configure-nvidia.md](/docs/configure-nvidia.md)
+Lásd [docs/configure-amd.md](/docs/configure-amd.md)
 
 ## 5.19 MSI Afterburner
 
