@@ -264,7 +264,7 @@ Ellenőrizd hogy van e frissebb BIOS és hogy van e pozitív változás, mint p�
 
 ## 2.2 CPU Microcode az UEFI-ben
 
-Frissítés után az [InSpectre](https://www.grc.com/inspectre.htm) programmal ellenőrizd hogy a Spectre, Meltdown és CPU Microcode státusza rendben van magán az operációs rendszeren . Ha problémába ütköznél akkor lehet, hogy BIOS szinten kell visszaállítanod a CPU Microcode-ot, azonban számos alaplapon egyáltalán nem elérhető ez a beállítás.
+Frissítés után az [InSpectre](https://www.grc.com/inspectre.htm) programmal ellenőrizd hogy a Spectre, Meltdown és CPU Microcode státusza rendben van magán az operációs rendszeren. Ha problémába ütköznél akkor lehet, hogy BIOS szinten kell visszaállítanod a CPU Microcode-ot, azonban számos alaplapon egyáltalán nem elérhető ez a beállítás.
 
 ## 2.3 BIOS Reset
 
