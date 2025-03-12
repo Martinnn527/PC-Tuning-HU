@@ -125,6 +125,7 @@ Ezen útmutató célja a Windows-alapú rendszerek finomhangolása, többek köz
 - Olvasási készség, szövegértés
 - Directory-k navigálása CLI-ben
 - Tudj parancsokat kimásolni és beilleszteni
+- Internet használata segítségként
 
 ---
 
