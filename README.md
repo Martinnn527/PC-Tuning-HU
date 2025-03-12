@@ -7,7 +7,7 @@
 - [Bemutató](#bemutató)
 - [Követelmények](#követelmények)
 - [0. Benchmarkolás](#0-benchmarkolás)
-- [1. Physical Setup](#1-physical-setup)
+- [1. Fizikai beállítása](#1-physical-setup)
   - [1.1 Általános információ](#11-általános-információ)
   - [1.2 Hűtés](#12-hűtés)
   - [1.3 Perifériák konfigurálása](#13-perifériák-konfigurálása)
@@ -44,7 +44,7 @@
   - [3.5 GPU](#35-gpu)
   - [3.6 CPU/RAM](#36-cpuram)
   - [3.7 Stressz-tesztelő eszközök](#37-stressz-tesztelő-eszközök)
-- [4. Pre Install](#4-pre-install)
+- [4. ISO testreszabása](#4-iso-testreszabása)
   - [4.1 Windows verzió kiválasztása](#41-milyen-windows-verziót-használj)
   - [4.2 Szükséges programok letöltése](#42-szükséges-programok-letöltése)
   - [4.3 Eredeti ISO letöltése](#43-eredeti-iso-letöltése)
@@ -54,11 +54,11 @@
   - [4.7 NET 3.5 bekapcsolása](#47-net-35-bekapcsolása)
   - [4.8 Szükséges fájlok integrálása](#48-szükséges-fájlok-integrálása)
   - [4.9 Unmount és Commit](#49-unmount-és-commit)
-  - [4.10 ISO Compression](#410-iso-compression)
+  - [4.10 ISO Zsugorítása](#410-iso-zsugorítása)
   - [4.11 Átkonvertálás ISO-vá](#4-11-átkonvertálás-iso-vá)
   - [4.12 Telepítés Ventoy használatával](#412-telepítés-pendrive-ról-ventoy-használatával)
   - [4.13 ISO-ba való bootolás](#413-iso-ba-való-bootolás)
-- [5. Post Install](#5-post-install)
+- [5. Telepítés utáni instrukciók](#5-telepítés-utáni-instrukciók)
   - [5.1 Unrestricted PowerShell Execution Policy](#51-unrestricted-powershell-execution-policy)
   - [5.2 Process Mitigations](#52-process-mitigations-windows-10-1709)
   - [5.3 Registry Script](#53-registry-script)
@@ -150,7 +150,7 @@ Ez az egyik legfontosabb része az útmutatónak. Benchmarkolás nélkül vakon 
 ---
 
 
-# 1. Physical Setup
+# 1. Fizikális beállítás
 
 ## 1.1 Általános információ
 
@@ -483,7 +483,7 @@ GPU overclockolásnál előfordulhat hogy számos power limit-et fel kell oldano
 
 ---
 
-# 4. Pre-Install
+# 4. ISO testreszabása
 
 ## 4.1 Milyen Windows verziót használj?
 
@@ -647,7 +647,7 @@ Zárd be a ``%MOUNT_DIR%`` mappát majd futtasd az alábbi parancsot a módosít
 DISM /Unmount-Wim /MountDir:"%MOUNT_DIR%" /Commit && rd /s /q "%MOUNT_DIR%"
 ```
 
-## 4.10 ISO Compression
+## 4.10 ISO Zsugorítása
 
 Ennek nincs különösen semmi előnye a méret csökkentésén kívül azonban telepítés közben a Windows Setup automatikusan végrehajtja ezt a folyamatot ami sok időbe telhet.
 
@@ -686,7 +686,7 @@ Húzd ki az ethernet kábeledet és ne legyél az internethez csatlakozva, ezál
 
 ---
 
-# 5. Post Install
+# 5. Telepítés utáni instrukciók
 
 > [!CAUTION] 
 Fontos, hogy a módosított beállítások valóban pozítívan befolyásolják a teljesítményt (Lásd: [Benchmarkolás](#0-benchmarkolás)).
