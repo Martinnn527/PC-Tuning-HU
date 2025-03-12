@@ -48,7 +48,7 @@
   - [4.1 Windows verzió kiválasztása](#41-milyen-windows-verziót-használj)
   - [4.2 Szükséges programok letöltése](#42-szükséges-programok-letöltése)
   - [4.3 Eredeti ISO letöltése](#43-eredeti-iso-letöltése)
-  - [4.4 Build Environment előkészítése](#44-build-environment-előkészítése)
+  - [4.4 Munkakörnyezet előkészítése](#44-munkakörnyezet-előkészítése)
   - [4.5 Nem használt verziók eltávolítása](#45-nem-használt-verziók-eltávolítása)
   - [4.6 Mountold az ISO-t](#46-mountold-az-iso-t)
   - [4.7 NET 3.5 bekapcsolása](#47-net-35-bekapcsolása)
@@ -83,7 +83,7 @@
   - [5.22 Spectre, Meltdown és CPU Microcode](#522-spectre-meltdown-és-cpu-microcode)
   - [5.23 Power Plan](#523-power-plan)
   - [5.24 Memory Management beállítások](#524-memory-management-beállítások)
-  - [5.25 BCD Store](#525-bcd-store)
+  - [5.25 BCD Adattár](#525-bcd-adattár)
   - [5.26 NIC konfigurálása](#526-nic-konfigurálása)
   - [5.27 Audio eszközök beállítása](#527-audio-eszközök-beállítása)
   - [5.28 Process Explorer](#528-process-explorer)
@@ -91,7 +91,7 @@
   - [5.30 Device Manager beállítása](#530-device-manager-beállítása)
   - [5.31 Device Power Saving](#531-device-power-saving)
   - [5.32 Fájl rendszer](#532-fájl-rendszer)
-  - [5.33 Event Trace Session](#533-event-trace-sessions-ets)
+  - [5.33 Event Trace Sessions](#533-event-trace-sessions-ets)
   - [5.34 Message Signaled Interrupts](#534-message-signaled-interrupts)
   - [5.35 XHCI Interrupt Moderation](#535-xhci-interrupt-moderation-imod)
   - [5.36 Applikációk konfigurálása](#536-applikációk-konfigurálása)
@@ -541,7 +541,7 @@ Használd a ``certutil -hashfile <file>`` parancsot hogy ellenőrizd az ISO val�
   - [Server 2022](https://www.microsoft.com/en-us/evalcenter/download-windows-server-2022)
 
   
-## 4.4 Build Environment előkészítése
+## 4.4 Munkakörnyezet előkészítése
 
 - Windows Defender-ben a Real-Time protection-t kapcsold mivel az lassíthatja a mount és unmount folyamatot, vagy hibát is okozhat.
 
@@ -1305,7 +1305,7 @@ Tiltsd le a [Last Acces Time Stamp Update](https://www.tenforums.com/tutorials/1
 fsutil behavior set disablelastaccess 1
 ```
 
-## 5.33 Event Trace Sessions (ETS)
+## 5.33 Event Trace Sessions
 
 Ezekkel a fájlokkal automatikusan tudsz váltani ETS Enabled és Disabled között aminek a hatását meg tudod nézni itt: ``Win+R -> perfmon -> Data Collector Sets -> Event Trace Session``. Azok a programok amelyek Event Tracing-re támaszkodnak (pl. Event Viewer) nem fognak tudni adatot log-olni amíg kivan kapcsolva. CMD-be másold be az alábbi parancsokat hogy megépítsd a két registry fájlt a ``C:\`` meghajtón. Futtasd az ``ets-disable.reg``-et NSudo-val.
 
