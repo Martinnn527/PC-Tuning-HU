@@ -715,6 +715,8 @@ A beállítások módosíthatók a ``bin`` mappában lévő ``registry-options.j
 
 - NIC (Network Interface Controller) drivert telepítsd fel lehetőleg INF-ként Device Manager-ben, ahogy [itt](#48-szükséges-fájlok-integrálása) levan írva.
 
+- Ha teheted [telepíts fel egy külön XHCI/USB driver-t](https://winraid.level1techs.com/t/outdated-usb-3-0-3-1-drivers-original-and-modded/30871) mivel a [Microsoftos jóval magasabb DPC latency-vel jár](/media/driver-example.png). Ez egy viszonylag kockázatos folyamat mivel a modern hardvereknek nincs külön, dedikált drivere ezért régebbieket kell feltelepíteni ami nem 100% hogy működik, és akár tönkre is teheti az operiációs rendszert. Vedd figyelembe hogy néhány driver nem WHQL-tanusított, azaz nem a Microsoft írta alá és a Secure Boot miatt ezáltal nem töltődik be boot-nál, tehát nem lesz egér, billentyűzet stb.
+
 ## 5.5 Windows Server konfigurálása
 
 - Server Manager-ben menj a ``Manage -> Server Manager Properties``-be és pipáld be a ``Do not start Server Manager automatically at logon`` opciót.
@@ -1448,6 +1450,8 @@ Támogatnia kell az MSI-X-et ahhoz hogy az ISR azon a CPU-n fusson amelyik végr
   <details> 
   <summary>RSS beállítása</summary>
 
+  - Lásd [Hány RSS Queue-ra van szükséged](/docs/research.md#hány-rss-queue-ra-van-szükséged)
+  
   - Navigálj a következő registry key-hez: ``HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Class\{4d36e972-e325-11ce-bfc1-08002be10318}\0000``, használd a te driveredhez tartozó [Driver Key](/media/find-driver-key-example.png)-t.
 
   - Add hozzá/írd át a következő értékeket (mindegyik ``String``):
@@ -1463,11 +1467,9 @@ Támogatnia kell az MSI-X-et ahhoz hogy az ISR azon a CPU-n fusson amelyik végr
  - Intel NIC-eken állítsd a policy-t ``IrqPolicySpreadMessagesAcrossAllProcessors``-ra, Realtek-en pedig ``IrqPolicySpecifiedProcessors``-ra, majd állíts be egy olyan affinity-t amely megfelel a registry-ben konfigurált beállításoknak (pl. ha ``*RSSBaseProcNumber`` "4", és a ``*NumRssQueues`` "2", akkor válaszd ki az 4, 5 CPU-t).
 
  >
- > Néhány Realtek NIC-en nem funkcionál megfelelően az RSS hogyha több mint 1 RSS Queue van beállítva. A Hyperthreading/SMT kikapcsolása megoldhatja ezt a problémát.
+ > Néhány Realtek NIC-en nem funkcionál megfelelően az RSS hogyha több mint 1 RSS Queue van beállítva. A Hyperthreading/SMT kikapcsolása vagy különbőző MSI Limit-ek beállítása megoldhatja ezt a problémát.
 
 </details>
-
-- Lásd [Hány RSS Queue-ra van szükséged](/docs/research.md#hány-rss-queue-ra-van-szükséged)
 
 Amiután kész vagy az előbbi lépésekkel töltsd le az [XTW](https://github.com/valleyofdoom/xtw)-t hogy megfigyeld helyesen működnek e az affinity policy-k.
 
