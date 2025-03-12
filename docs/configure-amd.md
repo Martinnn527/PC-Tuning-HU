@@ -1,10 +1,10 @@
-# 1. Tartalomjegyzék
+## 1. Tartalomjegyzék
 
    - 1. [Tartalomjegyzék](#1-tartalomjegyzék)
    - 2. [Driver feltelepítése](#2-driver-feltelepítése)
    - 3. [Radeon Software konfigurálása](#3-radeon-software-konfigurálása)
 
-# 2. Driver feltelepítése
+## 2. Driver feltelepítése
 
 - [Töltsd le](https://www.amd.com/en/support/download/drivers.html) és csomagold ki a legújabb ajánlott driver-t
 
@@ -28,7 +28,7 @@
 
 - AMD UCM-UCSI Device
 
-# 3. Radeon Software konfigurálása
+## 3. Radeon Software konfigurálása
 
 Grapics oldal:
 
