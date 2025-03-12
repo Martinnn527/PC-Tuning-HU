@@ -681,7 +681,7 @@ Húzd ki az ethernet kábeledet és ne legyél az internethez csatlakozva, ezál
 
 - Ha Windows 11-et telepítesz nyomj egy ``Shift+F10``-et hogy megnyisd a CMD-t és írd be a következő parancsot: ``oobe\BypassNRO.cmd``. Ezáltal megjelenik a ``Continue with limited setup`` opció. Folytasd, majd pedig a példa alapján menj végig a setupon.
 
-  - [Példa](main/media/oobe-windows10+-example.mp4)
+  - [Példa](/media/oobe-windows10+-example.mp4)
 
 ---
 
