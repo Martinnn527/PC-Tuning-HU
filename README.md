@@ -124,6 +124,8 @@ Ezen útmutató célja a Windows-alapú rendszerek finomhangolása, többek köz
 - Directory-k navigálása CLI-ben
 - Tudj parancsokat kimásolni és beilleszteni
 
+---
+
 > [!CAUTION]
 Hardver > BIOS > Operációs rendszer
 
