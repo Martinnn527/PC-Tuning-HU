@@ -681,9 +681,7 @@ Húzd ki az ethernet kábeledet és ne legyél az internethez csatlakozva, ezál
 
 - Windows Server telepítése során meg kell adnod egy komplex jelszót amit törölhetsz később.
 
-- Ha Windows 11-et telepítesz nyomj egy ``Shift+F10``-et hogy megnyisd a CMD-t és írd be a következő parancsot: ``oobe\BypassNRO.cmd``. Ezáltal megjelenik a ``Continue with limited setup`` opció. Folytasd, majd pedig a példa alapján menj végig a setupon.
-
-  - [Példa](/media/oobe-windows10+-example.mp4)
+- Ha Windows 11-et telepítesz nyomj egy ``Shift+F10``-et hogy megnyisd a CMD-t és írd be a következő parancsot: ``oobe\BypassNRO.cmd``. Ezáltal megjelenik a ``Continue with limited setup`` opció. Folytasd a setup-ot a megszokottak szerint.
 
 ---
 
