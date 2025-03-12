@@ -848,8 +848,6 @@ C:\bin\install-firefox.ps1
 
 --- 
 
-- Kapcsold ki a hardveres gyorsítást/hardware acceleration-t.
-
 - Kapcsolj ki minden nyomkövetőt.
 
 - Telepítsd/konfiguráld a következő kiegészítőket:
