@@ -634,6 +634,8 @@ DISM /Image:"%MOUNT_DIR%" /Enable-Feature /FeatureName:NetFx3 /All /LimitAccess 
 explorer "%MOUNT_DIR%"
 ```
 
+A teljes elérési útnak ``C:\bin``-nek kell lennie.
+
 Ilyenkor érdemes az ethernet driver-t is bemásolni/integrálni. Próbáld meg a driver-t INF formában megszerezni mivel az exe-k általában bloatware-t tartalmaznak. Néhány esetben 7-Zip-el ki tudod csomagolni az exe-t és azon belül megkeresni az INF fájlt.
 
 ## 4.9 Unmount és Commit
