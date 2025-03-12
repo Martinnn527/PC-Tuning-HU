@@ -1,8 +1,8 @@
 ## 1. Tartalomjegyzék
 
-   - 1. [Tartalomjegyzék](#1-tartalomjegyzék)
-   - 2. [Driver feltelepítése](#2-driver-feltelepítése)
-   - 3. [Radeon Software konfigurálása](#3-radeon-software-konfigurálása)
+   - [1. Tartalomjegyzék](#1-tartalomjegyzék)
+   - [2. Driver feltelepítése](#2-driver-feltelepítése)
+   - [3. Radeon Software konfigurálása](#3-radeon-software-konfigurálása)
 
 ## 2. Driver feltelepítése
 
