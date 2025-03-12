@@ -4,6 +4,8 @@
 
 ## Tartalomjegyzék
 
+- [Bemutató](#bemutató)
+- [Követelmények](#követelmények)
 - [0. Benchmarkolás](#0-benchmarkolás)
 - [1. Physical Setup](#1-physical-setup)
   - [1.1 Általános információ](#11-általános-információ)
