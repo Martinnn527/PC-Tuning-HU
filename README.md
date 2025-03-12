@@ -117,6 +117,13 @@
 
 Ezen útmutató célja a Windows-alapú rendszerek finomhangolása, többek között a hardver-, operációs rendszer- és szoftverek konfigurálása. Az útmutatás széleskörű célok elérésére van kialakítva, beleértve a biztonság és adatvédelem javítása, azonban legfőképp a competitive játékokban való előny megszerzésére és valós idejű feladatok futtatására van kihegyezve. Hangsúlyt fektet arra, hogy a felhasználók saját maguk végezzék el a beállításokat, ellenőrizzék azok hatását, és minimalizálják a scriptek használatát annak érdekében hogy a folyamat átláthatóbb legyen, és elkerüljék a nem kívánt módosításokat. A szekciókat sorrendben kell követni mivel egyes lépések a korábbi lépések befejezésétől függnek, ezért minden szekció számozott.
 
+## Követelmények
+
+- Pendrive (Minimum 8 GB)
+- Olvasási készség, szövegértés
+- Directory-k navigálása CLI-ben
+- Tudj parancsokat kimásolni és beilleszteni
+
 > [!CAUTION]
 Hardver > BIOS > Operációs rendszer
 
@@ -1316,7 +1323,7 @@ for %a in ("SleepStudy" "Kernel-Processor-Power" "UserModePowerService") do (wev
 
 - Töltsd le a [GoInterruptPolicy](https://github.com/spddl/GoInterruptPolicy)-t.
 
-- Kapcsold be az MSI-ket az összes támogatott eszközön. Vedd figyelembe hogy néhány driver fejlesztő alapból kikapcsolva hagyja az MSI-ket, tehát ha újratelepítesz egy drivert utána mindig érdemes ellenőrizni. Kerüld az eszközök újraindítását miután alkalmaztad a policy-ket, helyette indítsd újra a gépet.
+- Nyisd meg és sorold fel az eszközöket MSI Mode alapján. Kapcsold be az MSI-ket az összes támogatott eszközön. Vedd figyelembe hogy néhány driver fejlesztő alapból kikapcsolva hagyja az MSI-ket, tehát ha újratelepítesz egy drivert utána mindig érdemes ellenőrizni. Kerüld az eszközök újraindítását miután alkalmaztad a policy-ket, helyette indítsd újra a gépet.
 
 - ``Win+R -> msinfo32 -> Hardware Resources -> Conflicts/Sharing`` és győződj meg róla hogy nincs IRQ Sharing a rendszeren.
 
@@ -1325,7 +1332,7 @@ for %a in ("SleepStudy" "Kernel-Processor-Power" "UserModePowerService") do (wev
 Windows 7-en az IMOD Interval 1ms, viszont az újabb OS-eken 0.05ms (50us) kivéve ha az adott USB drivernél más van megadva. Ez azt jelenti hogy amiután egy Interrupt generálva lett, az XHCI (USB) controller vár (úgynevezett buffer period) hogy több adat érkezzen mielőtt újabb Interruptot generálna. Ez csökkenti a CPU terhelését de adatvesztéshez vezethet.
 Példa: egy 1000-es polling rate-ű egér minden 1ms-ban küld adatot. Ha csak az egeret mozgatod egy 1ms-os intervallumban akkor nem történik Interrupt Moderation, mivel az interruptok generálási sebessége kisebb vagy egyenlő a meghatározott intervallummal. Azonban játék közben, ahol egyszerre mozgatod az egeret, nyomod a billentyűzetet stb, könnyen meghaladod az 1000 interrupt/másodpercet. Habár ez kevésbé valószínű 0,05 ms-os IMOD intervallum mellett, akkor is előfordulhat.
 
-- Töltsd le az [RWEverything](http://rweverything.com/download/)-et és másold be CMD-be az alábbi parancsot hogy letiltsd a ``Microsoft Vulnerable Driver Blocklist``-et. 
+- Töltsd le és telepítsd fel az [RWEverything](http://rweverything.com/download/)-et és másold be CMD-be az alábbi parancsot hogy letiltsd a ``Microsoft Vulnerable Driver Blocklist``-et. 
 
 ```bat
 reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\CI\Config" /v "VulnerableDriverBlocklistEnable" /t REG_DWORD /d "0" /f
@@ -1433,15 +1440,15 @@ Töltsd le a [NoSteamWebHelper](https://github.com/Aetopia/NoSteamWebHelper)-t.
 
 A Windows CPU 0-án ütemez számos interruptot és DPC-t ami elég terhelő lehet egyetlen-egy CPU számára. Ezért affinity-ket kell beállítani és elkülöníteni/eloszlatni a drivereket.
 
-- Használd a [GoInterruptPolicy](https://github.com/spddl/GoInterruptPolicy) programot az affinity-k beállítására. Ha több ugyanolyan nevű eszköz van jelen, úgy azonosíthatod, hogy összehasonlítod a ``Location``-t Device Managerben a ``Properties -> General`` résznél a GoInterruptPolicy-ban lévő ``Location Info``-val.
+- Használd a [GoInterruptPolicy](https://github.com/spddl/GoInterruptPolicy) programot az affinity-k beállítására: Dupla klikk az adott eszközre -> Device Policy -> ``IrqPolicySpecifiedProcessors`` és válaszd ki a használni kívánt CPU-t/kat. Ha több ugyanolyan nevű eszköz van jelen, úgy azonosíthatod, hogy összehasonlítod a ``Location``-t Device Managerben a ``Properties -> General`` résznél a GoInterruptPolicy-ban lévő ``Location Info``-val.
 
 ### 5.37.1 GPU és DirectX Graphics Kernel
 
-Használhatod az [AutoGpuAffinity](https://github.com/valleyofdoom/AutoGpuAffinity)-t hogy benchmarkold az összes CPU-t. Ez segíthet eldönteni melyik CPU-n kerüljön feldolgozásra a GPU.
+Használhatod az [AutoGpuAffinity](https://github.com/valleyofdoom/AutoGpuAffinity)-t hogy benchmarkold az összes CPU-t. Ez segíthet eldönteni melyik CPU-n kerüljön feldolgozásra a GPU. Ha nem használsz Hyper-Threading/SMT-t és E-Core-okat akkor szinte azonosan fog teljesíteni az összes CPU.
 
 ### 5.37.2 XHCI és Audio controller
 
-Ez a két modul nagy számban generál interruptokat ezért érdemes elkülöníteni a kettőt ha nem USB audio-t használsz.
+Ez a két modul nagy számban generál interruptokat ezért érdemes elkülöníteni a kettőt ha több XHCI controller-ed van vagy pedig alaplapi audio-t használsz.
 
 ### 5.37.3 Network Interface Card (NIC)
 
