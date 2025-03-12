@@ -650,7 +650,7 @@ Ennek nincs különösen semmi előnye a méret csökkentésén kívül azonban 
 DISM /Export-Image /SourceImageFile:"%EXTRACTED_ISO%\sources\install.wim" /SourceIndex:1 /DestinationImageFile:"%EXTRACTED_ISO%\sources\install.esd" /Compress:recovery /CheckIntegrity && del /f /q "%EXTRACTED_ISO%\sources\install.wim"
 ```
 
-## 4. 11 Átkonvertálás ISO-vá
+## 4.11 Átkonvertálás ISO-vá
 
 Használd az alábbi parancsot a kicsomagolt tartalom visszacsomagolásához egyetlen ISO fájlba, amely a ``C:\`` meghajtón fog létrejönni ``Final.iso`` néven.
 
