@@ -7,7 +7,7 @@
 - [Bemutató](#bemutató)
 - [Követelmények](#követelmények)
 - [0. Benchmarkolás](#0-benchmarkolás)
-- [1. Fizikai beállítása](#1-physical-setup)
+- [1. Fizikális beállítás](#1-physical-setup)
   - [1.1 Általános információ](#11-általános-információ)
   - [1.2 Hűtés](#12-hűtés)
   - [1.3 Perifériák konfigurálása](#13-perifériák-konfigurálása)
