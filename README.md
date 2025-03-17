@@ -47,14 +47,14 @@
 - [4. Telepítés előtti instrukciók](#4-telepítés-előtti-instrukciók)
   - [4.1 Windows verzió kiválasztása](#41-milyen-windows-verziót-használj)
   - [4.2 Eredeti ISO letöltése](#43-eredeti-iso-letöltése)
-  - [4.3 ISO testreszabása (Opcionális)](#43-iso-testreszabása)
+  - [4.3 ISO testreszabása (Opcionális)](#43-iso-testreszabása-opcionális)
   - [4.4 Szükséges fájlok integrálása](#44-szükséges-fájlok-integrálása)
   - [4.5 Telepítés Ventoy használatával](#45-telepítés-pendrive-ról-ventoy-használatával)
   - [4.6 ISO-ba való bootolás](#46-iso-ba-való-bootolás)
   - [4.7 OOBE Setup](#47-oobe-setup)
 - [5. Telepítés utáni instrukciók](#5-telepítés-utáni-instrukciók)
   - [5.1 Unrestricted PowerShell Execution Policy](#51-unrestricted-powershell-execution-policy)
-  - [5.2 Process Mitigations](#52-process-mitigations-windows-10-1709)
+  - [5.2 Process Mitigations](#52-process-mitigations)
   - [5.3 Registry Script](#53-registry-script)
   - [5.4 Driverek telepítése](#54-driverek-telepítése)
   - [5.5 Windows Server konfigurálása](#55-windows-server-konfigurálása)
@@ -572,7 +572,7 @@ Ez szükséges a scriptek futtatásának engedélyezésére. Nyisd meg a PowerSh
 Set-ExecutionPolicy Unrestricted
 ```
 
-## 5.2 Process Mitigations (Windows 10 1709+)
+## 5.2 Process Mitigations
 
 Ez alapból bevan kapcsolva és negatívan befolyásolja a teljesítményt. Ha nem szeretnél scripteket futtatni, akkor Windows Defender-ben az ``Exploit Protection`` oldalon ki lehet ezeket kapcsolni. Vedd figyelembe hogy a következő lépésben a Defender ki lesz kapcsolva ezáltal nem lesz elérhető a GUI hogy visszakapcsold azonban a [Set-ProcessMitigation](https://learn.microsoft.com/en-us/powershell/module/processmitigations/set-processmitigation?view=windowsserver2025-ps) használható PowerShell-ben.
 
@@ -1055,6 +1055,8 @@ Használj Process Explorer-t mivel a stock Task Manager a CPU kihasználtságát
   - Power Saving Mode
 
 - ``View -> Devices by connection`` és tilts le minden PCIe, SATA, NVMe, XHCI Controllert és USB Hub-ot amihez nincs semmi csatlakoztatva. Tilts le minden nem használt eszközt ami ugyanahhoz a PCIe port-hoz van csatlakoztatva mint a GPU, pl. HD Audio. Ha valamiben nem vagy biztos inkább ne tiltsd le, vagy keress rá az interneten.
+
+- ``View -> Resources by connection`` és tilts le minden nem használt eszközt ami I/O-t vagy IRQ-t használ.
 
 - A HID eszközöket is letilthatod azonban lehetséges hogy az adott periféria szoftvere nem fogja felimserni az eszközt. Ha véletlen letiltod az egered, használd a billentyűzeted hogy visszakapcsold az Enter, Tab és nyilak használatával.
 
