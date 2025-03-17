@@ -25,7 +25,7 @@
   - [2.9 Nem használt eszközök letiltása](#29-nem-használt-eszközök-letiltása)
   - [2.10 Trusted Platform Module](#210-trusted-platform-module)
   - [2.11 Secure Boot](#211-secure-boot)
-  - [2.12 Fast Startup, Standby, Hibernation](#212-fast-startup-standby-és-hibernate)
+  - [2.12 Fast Startup, Standby, Hibernation](#212-fast-startup-standby-hibernation)
   - [2.13 Spread Spectrum](#213-spread-spectrum)
   - [2.14 PCIe Link Speeds](#214-pcie-link-speeds)
   - [2.15 Statikus CPU frekvencia](#215-statikus-cpu-frekvencia)
@@ -332,9 +332,9 @@ Fontos megjegyezni hogy néhány játékban a ReBAR használata negatívan befol
 
   - ``Win+R`` -> ``msinfo32``-ben tudod ellenőrizni az állapotát.
 
-## 2.12 Fast Startup, Standby és Hibernation
+## 2.12 Fast Startup, Standby, Hibernation
 
-- Kapcsold ki a Fast Startup, Standby, Hibernation opciót, mivel ezek néha váratlan problémákat okozhatnak ([magyarázat](https://www.youtube.com/watch?v=OBGxt8zhbRk)). A rendszer energiaállapotairól [itt](https://learn.microsoft.com/en-us/windows/win32/power/system-power-states) tudhatsz meg többet. A BIOS-ban ezek az opciók gyakran Fast Startup, Suspend to RAM, S-States (S1, S2, S3, S4, S5), Standby, Memory Fast Boot, Hibernation vagy hasonló néven szerepelnek.
+- Kapcsold ki a Fast Startup, Standby, Hibernation opciót, mivel ezek néha váratlan problémákat okozhatnak ([magyarázat](https://www.youtube.com/watch?v=OBGxt8zhbRk)). A rendszer energiaállapotairól [itt](https://learn.microsoft.com/en-us/windows/win32/power/system-power-states) tudhatsz meg többet. A BIOS-ban ezek az opciók gyakran Fast Startup, Fast Boot, Suspend to RAM, S-States (S1, S2, S3, S4, S5), Standby, Memory Fast Boot, Hibernation vagy hasonló néven szerepelnek.
 
 Ellenőrizd a változásokat CMD-ben a következő paranccsal:
 
