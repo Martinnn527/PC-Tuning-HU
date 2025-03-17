@@ -336,11 +336,11 @@ Fontos megjegyezni hogy néhány játékban a ReBAR használata negatívan befol
 
 - Kapcsold ki a Fast Startup, Standby, Hibernation opciót, mivel ezek néha váratlan problémákat okozhatnak ([magyarázat](https://www.youtube.com/watch?v=OBGxt8zhbRk)). A rendszer energiaállapotairól [itt](https://learn.microsoft.com/en-us/windows/win32/power/system-power-states) tudhatsz meg többet. A BIOS-ban ezek az opciók gyakran Fast Startup, Fast Boot, Suspend to RAM, S-States (S1, S2, S3, S4, S5), Standby, Memory Fast Boot, Hibernation vagy hasonló néven szerepelnek.
 
-Ellenőrizd a változásokat CMD-ben a következő paranccsal:
+- Ellenőrizd a változásokat CMD-ben a következő paranccsal:
 
-```bat
-powercfg /a 
-```
+  ```bat
+  powercfg /a 
+  ```
 
 ## 2.13 Spread Spectrum
 
