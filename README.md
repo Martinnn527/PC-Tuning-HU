@@ -263,15 +263,15 @@ Szintén fontos hogy a BIOS módosítása mindig kockázattal jár, ezért kör�
 
 ## 2.1 BIOS frissítések
 
-Ellenőrizd hogy van e frissebb BIOS és hogy van e pozitív változás, mint például stabilabb memória, azonban figyelj oda a fórumokon felvetett problémákra az adott BIOS verzióval kapcsolatban.
+- Ellenőrizd hogy van e frissebb BIOS és hogy van e pozitív változás, mint például stabilabb memória, azonban figyelj oda a fórumokon felvetett problémákra az adott BIOS verzióval kapcsolatban.
 
 ## 2.2 CPU Microcode az UEFI-ben
 
-Frissítés után az [InSpectre](https://www.grc.com/inspectre.htm) programmal ellenőrizd hogy a Spectre, Meltdown és CPU Microcode státusza rendben van magán az operációs rendszeren. Ha problémába ütköznél akkor lehet, hogy BIOS szinten kell visszaállítanod a CPU Microcode-ot, azonban számos alaplapon egyáltalán nem elérhető ez a beállítás.
+- Frissítés után az [InSpectre](https://www.grc.com/inspectre.htm) programmal ellenőrizd hogy a Spectre, Meltdown és CPU Microcode státusza rendben van magán az operációs rendszeren. Ha problémába ütköznél akkor lehet, hogy BIOS szinten kell visszaállítanod a CPU Microcode-ot, azonban számos alaplapon egyáltalán nem elérhető ez a beállítás.
 
 ## 2.3 BIOS Reset
 
-Ha a CMOS reset nem állítja teljes mértékben alaphelyzetbe a BIOS-t, flasheld újra.
+- Ha a CMOS reset nem állítja teljes mértékben alaphelyzetbe a BIOS-t, flasheld újra.
 
 ## 2.4 Resizable BAR
 
@@ -285,7 +285,7 @@ Fontos megjegyezni hogy néhány játékban a ReBAR használata negatívan befol
 
 ## 2.5 Rejtett beállítások elérése
 
-Számos alaplap gyártó elrejt sok hasznos beállítást. A legegyszerűbb megoldás erre az hogy az UEFI-ben lévő összes látható beállítást konfigurálod majd pedig [SCEWIN](https://github.com/ab3lkaizen/SCEHUB)-ben a maradék rejtett beállítással folytatod.
+- Számos alaplap gyártó elrejt sok hasznos beállítást. A legegyszerűbb megoldás erre az hogy az UEFI-ben lévő összes látható beállítást konfigurálod majd pedig [SCEWIN](https://github.com/ab3lkaizen/SCEHUB)-ben a maradék rejtett beállítással folytatod.
 
   - [Töltsd le a SCEWIN-t](https://github.com/ab3lkaizen/SCEHUB/releases/download/1.2.0/DL_SCEWIN.exe)
   - Csomagold ki, majd futtasd az ``Export.bat`` fájlt
@@ -294,11 +294,11 @@ Számos alaplap gyártó elrejt sok hasznos beállítást. A legegyszerűbb mego
   - Az ``Import.bat`` futtatásával elmented a beállításokat amelyek egy újraindítás után életbe lépnek
   - Hiba esetén lásd: [Solutions for various error messages](https://github.com/ab3lkaizen/SCEHUB?tab=readme-ov-file#solutions-for-various-error-messages)
 
-Vedd figyelembe hogy alaplap márkától, akár BIOS verziótól függően eltérhetnek az adott beállítás nevei, például: ``C-States``, ``C State``, ``C-State`` stb. 
+- Vedd figyelembe hogy alaplap márkától, akár BIOS verziótól függően eltérhetnek az adott beállítás nevei, például: ``C-States``, ``C State``, ``C-State`` stb. 
 
 ## 2.6 Hyper-Threading/Simultaneous Multithreading
 
-Kapcsold ki a [Hyper-Threading/Simultaneous Multithreading](https://en.wikipedia.org/wiki/Hyper-threading) funkciót. Ez például renderelés esetén hasznos lehet de mivel a CPU-nkénti több végrehajtó thread használtata növeli a processzor erőforrásainak igénybevételét, jóval nagyobb hőfokokkal jár és a rendszer nagyobb latencyjének, jitterének forrása. Ha elegendő CPU-val rendelkezel a játék futtatásához (minimum 6), mindenféleképpen kapcsold ki. Ez a koncepció alkalmazható az Intel E-coreok esetében is.
+- Kapcsold ki a [Hyper-Threading/Simultaneous Multithreading](https://en.wikipedia.org/wiki/Hyper-threading) funkciót. Ez például renderelés esetén hasznos lehet de mivel a CPU-nkénti több végrehajtó thread használtata növeli a processzor erőforrásainak igénybevételét, jóval nagyobb hőfokokkal jár és a rendszer nagyobb latencyjének, jitterének forrása. Ha elegendő CPU-val rendelkezel a játék futtatásához (minimum 6), mindenféleképpen kapcsold ki. Ez a koncepció alkalmazható az Intel E-coreok esetében is.
 
 ## 2.7 Power Saving
 
@@ -310,17 +310,17 @@ Kapcsold ki a [Hyper-Threading/Simultaneous Multithreading](https://en.wikipedia
 
 ## 2.8 Virtualization
 
-Kapcsold ki a Virtualization/SVM Mode, Intel VT-d/AMD-Vi, IOMMU beállításokat mivel ezek a memória hozzáférés késeltetését növelhetik. A Virtualization szintén hatással lehet a BCLK-ra.
+- Kapcsold ki a Virtualization/SVM Mode, Intel VT-d/AMD-Vi, IOMMU beállításokat mivel ezek a memória hozzáférés késeltetését növelhetik. A Virtualization szintén hatással lehet a BCLK-ra.
    
   - Ellenőrizd a Virtualization-t Task Manager-ben.
 
 ## 2.9 Nem használt eszközök letiltása
 
-Kapcsold ki az összes nem használt eszközt, mint például nem használt NIC-ek, Bluetooth, WiFi, High Definition Audio (ha nem használsz alaplap audio-t), iGPU, SATA (és RAM slotok).
+- Tiltsd le az összes nem használt eszközt, mint például nem használt NIC-ek, Bluetooth, WiFi, High Definition Audio (ha nem használsz alaplap audio-t), iGPU, SATA (és RAM slotok).
 
 ## 2.10 Trusted Platform Module
 
-Kapcsold ki a Trusted Platform Module-t (TPM), mert előfordulhat, hogy a rendszer System Management Mode-ba (SMM) kerül a System Management Interruptok (SMI) [1](https://www.youtube.com/watch?v=X72LgcMpM9k&t=2060s) miatt. Ezek olyan nagy prioritású, leállíthatatlan hardveres megszakítások, amelyek azonnal felfüggesztik a CPU összes többi tevékenységét. 
+- Kapcsold ki a Trusted Platform Module-t (TPM), mert előfordulhat, hogy a rendszer System Management Mode-ba (SMM) kerül a System Management Interruptok (SMI) [1](https://www.youtube.com/watch?v=X72LgcMpM9k&t=2060s) miatt. Ezek olyan nagy prioritású, leállíthatatlan hardveres megszakítások, amelyek azonnal felfüggesztik a CPU összes többi tevékenységét. 
 
   - Windows 11-en néhány anti-cheat (Vanguard, FACEIT) működéséhez bekapcsolva kell hagyni.
 
@@ -328,16 +328,15 @@ Kapcsold ki a Trusted Platform Module-t (TPM), mert előfordulhat, hogy a rendsz
 
 ## 2.11 Secure Boot
 
-Kapcsold ki a Secure Boot-ot. (Windows 11-en a Vanguard, FACEIT, igényli a bekapcsolva hagyását.)
+- Kapcsold ki a Secure Boot-ot. (Windows 11-en a Vanguard, FACEIT, igényli a bekapcsolva hagyását.)
 
   - ``Win+R`` -> ``msinfo32``-ben tudod ellenőrizni az állapotát.
 
-## 2.12 Fast Startup, Standby és Hibernate
+## 2.12 Fast Startup, Standby és Hibernation
 
-Ez leginkább személyes preferencia kérdése. Vannak, akik nem használják a Fast Startup-ot, Standby-t vagy Hibernation-t, mert ezek néha váratlan problémákat okozhatnak ([magyarázat](https://www.youtube.com/watch?v=OBGxt8zhbRk)). Ehelyett inkább tiszta rendszerindítást részesítenek előnyben, így nem mentik és állítják vissza a kernel és a szoftverek állapotát és korlátozzák a rendszer energiaállapotait S0-ra (működő állapot) és S5-re (alvó állapot).
-A rendszer energiaállapotairól [itt](https://learn.microsoft.com/en-us/windows/win32/power/system-power-states) tudhatsz meg többet. A BIOS-ban ezek az opciók gyakran Fast Startup, Suspend to RAM, S-States (S1, S2, S3, S4, S5), Standby, Memory Fast Boot, Hibernation vagy hasonló néven szerepelnek.
+- Kapcsold ki a Fast Startup, Standby, Hibernation opciót, mivel ezek néha váratlan problémákat okozhatnak ([magyarázat](https://www.youtube.com/watch?v=OBGxt8zhbRk)). A rendszer energiaállapotairól [itt](https://learn.microsoft.com/en-us/windows/win32/power/system-power-states) tudhatsz meg többet. A BIOS-ban ezek az opciók gyakran Fast Startup, Suspend to RAM, S-States (S1, S2, S3, S4, S5), Standby, Memory Fast Boot, Hibernation vagy hasonló néven szerepelnek.
 
-Ellenőrizd a változásokat a következő paranccsal:
+Ellenőrizd a változásokat CMD-ben a következő paranccsal:
 
 ```bat
 powercfg /a 
@@ -345,49 +344,49 @@ powercfg /a
 
 ## 2.13 Spread Spectrum
 
-Kapcsold ki a Spread Spectrumot és győződj meg róla hogy a BCLK Frequency a lehető legközelebb van a 100-hoz. [HWiNFO](https://www.hwinfo.com/)/[CPU-Z](https://www.cpuid.com/softwares/cpu-z.html)-ban ellenőrizni tudod.
+- Kapcsold ki a Spread Spectrumot és győződj meg róla hogy a BCLK Frequency a lehető legközelebb van a 100-hoz. [HWiNFO](https://www.hwinfo.com/)/[CPU-Z](https://www.cpuid.com/softwares/cpu-z.html)-ban ellenőrizni tudod.
 
 ## 2.14 PCIe Link Speeds
 
-PCIe Link Speed-et tedd a lehető legmagasabbra, mint például Gen 4, stb.
+- PCIe Link Speed-et tedd a lehető legmagasabbra, mint például Gen 4, stb.
   
   - Keresd a ``PCIe Speed``, ``Gen4`` kifejezéseket.
 
 ## 2.15 Statikus CPU frekvencia
 
-Ha statikus frekvenciát/feszültséget konfigurálsz a CPU-hoz, kapcsold ki a dynamic frequency funkciókat mint például a SpeedShift, SpeedStep, és állítsd az AVX Offset-et 0-ra, vagy tedd ``Disabled``-re. Precision Boost Overdrive (PBO) a Ryzen CPU-k esetében a statikus frekvencia és feszültésg alternatívája.
+- Ha statikus frekvenciát/feszültséget konfigurálsz a CPU-hoz, kapcsold ki a dynamic frequency funkciókat mint például a SpeedShift, SpeedStep. A Precision Boost Overdrive (PBO) a Ryzen CPU-k esetében a statikus frekvencia és feszültésg alternatívája.
 
   - Egyes esetekben a fent említett beállítások megakadályozhatják, hogy a processzor a BIOS-ban történő manuális beállítás ellenére is túllépje az alapfrekvenciát. Ennek megfelelően állítsd be, ha ez előfordul, és [HWiNFO](https://www.hwinfo.com/)-ban ellenőrizd az órajeleket.
 
 ## 2.16 Ventilátor RPM
 
-Konfiguráld a fan speedeket. állíts be egy [fan curve](https://imgur.com/a/ultimate-fan-speed-curve-by-kgtc-iteration-1-fr-en-de-ru-ar-es-hu-kr-sw-etc-https-translate-google-com-2UDYXp0)-öt vagy egy statikus, magas RPM-et.
+- Konfiguráld a fan speedeket. állíts be egy [fan curve](https://imgur.com/a/ultimate-fan-speed-curve-by-kgtc-iteration-1-fr-en-de-ru-ar-es-hu-kr-sw-etc-https-translate-google-com-2UDYXp0)-öt vagy egy statikus, magas RPM-et.
 
 ## 2.17 HPET
 
-Kapcsold be a High Precision Event Timer-t. 
+- Kapcsold be a High Precision Event Timer-t. 
   
   - Újabb AMD-s rendszereken nincs hatása ennek a beállításnak.
 
 ## 2.18 Software telepítési beállítások
 
-Ha automatikus software telepítéssel kapcsolatos beállítást találsz (pl. ASUS Armoury Crate, MSI Utility) kapcsold ki.
+- Ha automatikus software telepítéssel kapcsolatos beállítást találsz (pl. ASUS Armoury Crate, MSI Utility) kapcsold ki.
 
 ## 2.19 Legacy USB Support
 
-Kapcsold ki a Legacy USB Support-ot. Lehetséges hogy be kell kapcsolnod hogy új operációs rendszert telepíts fel vagy hogy hozzáférj a BIOS-hoz.
+- Kapcsold ki a Legacy USB Support-ot. Lehetséges hogy be kell kapcsolnod hogy új operációs rendszert telepíts fel vagy hogy hozzáférj a BIOS-hoz.
 
 ## 2.20 XHCI Hand-off
 
-Kapcsold ki az XHCI Hand-off-ot.
+- Kapcsold ki az XHCI Hand-off-ot.
 
 ## 2.21 Execute Disable Bit/NX Mode
 
-Kapcsold ki az Execute Disable Bit/NX Mode-ot.
+- Kapcsold ki az Execute Disable Bit/NX Mode-ot.
 
 ## 2.22 BIOS Profilok és Backup
 
-Mentsd le a jelenlegi BIOS profilodat hogyha valamilyen oknál fogva alaphelyzetbe kell állítani akkor ne kelljen előről kezdened az egészet. A legtöbb alaplapon egy mentett profil betöltése CMOS reset után nem mindig fogja az összes beállítást visszaállítani úgy ahogy volt, ezért ajánlatos [SCEWIN](https://github.com/ab3lkaizen/SCEHUB)-el exportálni a jelenlegi profilod majd reset után újra exportálni és összehasonlítani a két NVRAM fájlt [Notepad++ Compare Plugin](https://sourceforge.net/projects/npp-compare/)-al vagy [Visual Studio Code](https://code.visualstudio.com/download)-al.
+- Mentsd le a jelenlegi BIOS profilodat hogyha valamilyen oknál fogva alaphelyzetbe kell állítani akkor ne kelljen előről kezdened az egészet. A legtöbb alaplapon egy mentett profil betöltése CMOS reset után nem mindig fogja az összes beállítást visszaállítani úgy ahogy volt, ezért ajánlatos [SCEWIN](https://github.com/ab3lkaizen/SCEHUB)-el exportálni a jelenlegi profilod majd reset után újra exportálni és összehasonlítani a két NVRAM fájlt [Notepad++ Compare Plugin](https://sourceforge.net/projects/npp-compare/)-al vagy [Visual Studio Code](https://code.visualstudio.com/download)-al.
 
 ---
 
@@ -395,7 +394,7 @@ Mentsd le a jelenlegi BIOS profilodat hogyha valamilyen oknál fogva alaphelyzet
 
 ## 3.1 Ideiglenes OS
 
-Ajánlott egy ideiglenes OS-t feltelepíteni/dual-bootolni amin OC-zol és stressz tesztelsz hogy elkerüld a fő OS-ed meghibásodását. RAM stressz teszt esetén így még több RAM-ot tudsz tesztelni mivel a háttérben futó programok nem használnak felesleges memóriát. A Safe Mode minimális tesztelési környezetként is szolgálhat de előfordulhat hogy bizonyos szoftverek nem fognak működni.
+- Ajánlott egy ideiglenes OS-t feltelepíteni/dual-bootolni amin OC-zol és stressz tesztelsz hogy elkerüld a fő OS-ed meghibásodását. RAM stressz teszt esetén így még több RAM-ot tudsz tesztelni mivel a háttérben futó programok nem használnak felesleges memóriát. A Safe Mode minimális tesztelési környezetként is szolgálhat de előfordulhat hogy bizonyos szoftverek nem fognak működni.
 
 ## 3.2 Általános infó
 
@@ -413,7 +412,7 @@ Ajánlott egy ideiglenes OS-t feltelepíteni/dual-bootolni amin OC-zol és stres
 
 ## 3.3 Hőmérsékletkezelés
 
-Kerüld a thermal trotthling-et minden áron. Underclock-olj ha a hűtőd nem megfelelő. Egy stabil hőmérsékléten futó alkatrész alacsonyabb frekvenciával sokkal előnyösebb mint egy magasabb frekvencián futó viszont túlmelegedő alkatrész. 
+- Kerüld a thermal trotthling-et minden áron. Underclock-olj ha a hűtőd nem megfelelő. Egy stabil hőmérsékléten futó alkatrész alacsonyabb frekvenciával sokkal előnyösebb mint egy magasabb frekvencián futó viszont túlmelegedő alkatrész. 
 
   - Lásd [RAM Overclock Stability and Heat Management | buildzoid](https://www.youtube.com/watch?v=iCD0ih4qzHw)
 
@@ -427,7 +426,7 @@ Ez nem egy ajánlás hogy milyen LLC mode-ot használj, inkább csak informatív
 
 ## 3.5 GPU
 
-GPU overclockolásnál előfordulhat hogy számos power limit-et fel kell oldanod.
+- GPU overclockolásnál előfordulhat hogy számos power limit-et fel kell oldanod.
 
   - NVIDIA rendszereken kapcsold ki a ``CUDA - Force P2 State``-et [NVIDIA Profile Inspector](https://github.com/Orbmu2k/nvidiaProfileInspector)-ban hogy elkerüld a memory downclock-ot stressz teszt közben.
   
@@ -533,8 +532,6 @@ Használd a ``certutil -hashfile <file>`` parancsot hogy ellenőrizd az ISO val�
 
 [Klónold a repository-t](https://github.com/Martinnn527/PC-Tuning-HU/archive/refs/heads/main.zip) majd a ``bin`` mappát másold át a Pendriveodra.
 
-A teljes elérési útnak ``C:\bin``-nek kell lennie.
-
 Ilyenkor érdemes az ethernet driver-t is bemásolni. Próbáld meg a driver-t INF formában megszerezni mivel az exe-k általában bloatware-t tartalmaznak. Néhány esetben 7-Zip-el ki tudod csomagolni az exe-t és azon belül megkeresni az INF fájlt.
 
 ## 4.5 Telepítés Pendrive-ról Ventoy használatával
@@ -566,7 +563,7 @@ Fontos, hogy a módosított beállítások valóban pozítívan befolyásolják 
 
 ## 5.1 Unrestricted PowerShell Execution Policy
 
-Ez szükséges a scriptek futtatásának engedélyezésére. Nyisd meg a PowerShell-t és másold be az alábbi parancsot. Válaszd ki a "Yes to all" opciót ("A" betű).
+- Ez szükséges a scriptek futtatásának engedélyezésére. Nyisd meg a PowerShell-t és másold be az alábbi parancsot. Válaszd ki a "Yes to all" opciót ("A" betű).
 
 ```powershell
 Set-ExecutionPolicy Unrestricted
@@ -574,7 +571,9 @@ Set-ExecutionPolicy Unrestricted
 
 ## 5.2 Process Mitigations
 
-Ez alapból bevan kapcsolva és negatívan befolyásolja a teljesítményt. Ha nem szeretnél scripteket futtatni, akkor Windows Defender-ben az ``Exploit Protection`` oldalon ki lehet ezeket kapcsolni. Vedd figyelembe hogy a következő lépésben a Defender ki lesz kapcsolva ezáltal nem lesz elérhető a GUI hogy visszakapcsold azonban a [Set-ProcessMitigation](https://learn.microsoft.com/en-us/powershell/module/processmitigations/set-processmitigation?view=windowsserver2025-ps) használható PowerShell-ben.
+- Ha még nem tetted, másold be a Pendriveodon lévő ``bin`` mappát a C:\-be. A teljes elérési útnak ``C:\bin``-nek kell lennie.
+
+- Ez alapból bevan kapcsolva és negatívan befolyásolja a teljesítményt. Ha nem szeretnél scripteket futtatni, akkor Windows Defender-ben az ``Exploit Protection`` oldalon ki lehet ezeket kapcsolni. Vedd figyelembe hogy a következő lépésben a Defender ki lesz kapcsolva ezáltal nem lesz elérhető a GUI hogy visszakapcsold azonban a [Set-ProcessMitigation](https://learn.microsoft.com/en-us/powershell/module/processmitigations/set-processmitigation?view=windowsserver2025-ps) használható PowerShell-ben.
 
 Az alábbi script-tel szintén kikapcsolható a Process Mitigation. Nyisd meg a CMD-t adminként majd pedig másold be az alábbi parancsot.
 
@@ -584,7 +583,7 @@ C:\bin\disable-process-mitigations.bat
 
 ## 5.3 Registry Script
 
-A beállítások módosíthatók a ``bin`` mappában lévő ``registry-options.json`` módosításával (az értékek ``true`` és ``false``). Ha kifejezetten játékra használod a rendszert ajánlott nem hozzá nyúlni mivel az alap configban minden ``true`` értékre van állítva.
+- A beállítások módosíthatók a ``bin`` mappában lévő ``registry-options.json`` módosításával (az értékek ``true`` és ``false``). Ha kifejezetten játékra használod a rendszert ajánlott nem hozzá nyúlni mivel az alap configban minden ``true`` értékre van állítva.
 
 - Nyisd meg a PowerShell-t adminként majd másold be az alábbi parancsot. Ha error-t kapsz, kapcsold ki a Tamper Protection-t és Real-Time Protection-t Windows Defenderben. Ha ugyanúgy error-t kapsz, boot-olj be Safe Mode-ba és futtasd ott.
 
