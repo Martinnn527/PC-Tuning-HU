@@ -19,7 +19,7 @@
   - [2.3 BIOS Reset](#23-bios-reset)
   - [2.4 Resizable BAR](#24-resizable-bar)
   - [2.5 Rejtett beállítások elérése](#25-rejtett-beállítások-elérése)
-  - [2.6 Hyper-threading/Simultaneous Multithreading](#26-hyper-threadingsimultaneous-multithreading)
+  - [2.6 Hyper-Threading/Simultaneous Multithreading](#26-hyper-threadingsimultaneous-multithreading)
   - [2.7 Power States](#27-power-states)
   - [2.8 Virtualization](#28-virtualization)
   - [2.9 Nem használt eszközök letiltása](#29-nem-használt-eszközök-letiltása)
