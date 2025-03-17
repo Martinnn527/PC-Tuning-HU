@@ -13,24 +13,24 @@
 
 - [Töltsd le a legújabb Game Ready drivert](https://www.nvidia.com/en-us/drivers/) és csomagold ki 7-Zip-el egy külön mappába.
 
-  - Törölj le mindent kivéve a következőket:
+- Törölj le mindent kivéve a következőket:
 
-     ```
-     Display.Driver
-     NVI2
-     EULA.txt
-     ListDevices.txt
-     setup.cfg
-     setup.exe
-     ```
+   ```
+   Display.Driver
+   NVI2
+   EULA.txt
+   ListDevices.txt
+   setup.cfg
+   setup.exe
+   ```
 
-  - Töröld ki az alábbi sorokat a ``setup.cfg``-ből (közel a fálj legalján található):
+- Töröld ki az alábbi sorokat a ``setup.cfg``-ből (közel a fálj legalján található):
 
-     ``` 
-     <file name="${{EulaHtmlFile}}"/>
-     <file name="${{FunctionalConsentFile}}"/>
-     <file name="${{PrivacyPolicyFile}}"/>
-    ```
+   ``` 
+   <file name="${{EulaHtmlFile}}"/>
+   <file name="${{FunctionalConsentFile}}"/>
+   <file name="${{PrivacyPolicyFile}}"/>
+   ```
 
 - Indítsd el a ``setup.exe``-t és telepítsd fel a drivert.
 
