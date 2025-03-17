@@ -24,7 +24,7 @@
    setup.exe
    ```
 
-- Töröld ki az alábbi sorokat a ``setup.cfg``-ből (közel a fálj legalján található):
+- Töröld ki az alábbi sorokat a ``setup.cfg``-ből (közel a fájl legalján található):
 
    ``` 
    <file name="${{EulaHtmlFile}}"/>
