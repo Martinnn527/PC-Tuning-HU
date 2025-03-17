@@ -113,8 +113,12 @@ reg add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08
 
    - [cuda-force-p2-state-analysis.png](/media/cuda-force-p2-state-analysis.png)
 
-## 3.6 NVIDIA Display Container LS Script
+## 3.6 NVIDIA Display Container
 
-Ha kikapcsoltad az ``NVDisplay.ContainerLocalSystem`` szolgáltatást a [Szolgáltatások és driverek](#528-szolgáltatások-és-driverek) szekcióban és NVIDIA Control Panel-ban átállítottad a színeket, akkor használd az [nvcontainer.ps1](/bin/nvcontainer.ps1) scriptet hogy minden indításnál automatikusan elinduljon és bezáródjon az ``NVDisplay.ContainerLocalSystem``.
+Tiltsd le az NVIDIA Display Container szolgáltatást az alábbi paranccsal.
+
+```bat
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\NVDisplay.ContainerLocalSystem" /v "Start" /t REG_DWORD /d "4" /f
+``
 
 
