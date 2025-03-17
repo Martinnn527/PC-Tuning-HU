@@ -9,7 +9,7 @@
 - [4. NVIDIA Profile Inspector konfigurálása](#4-nvidia-profile-inspector-konfigurálása)
 - [5. NVIDIA Display Container](#5-nvidia-display-container)   
 
-# 1. Driver letöltése és feltelepítése
+## 1. Driver letöltése és feltelepítése
 
 - [Töltsd le a legújabb Game Ready drivert](https://www.nvidia.com/en-us/drivers/) és csomagold ki 7-Zip-el egy külön mappába.
 
@@ -35,9 +35,9 @@
 - Indítsd el a ``setup.exe``-t.
 
 
-# 2. NVIDIA Control Panel konfigurálása
+## 2. NVIDIA Control Panel konfigurálása
 
-## 2.1 Manage 3D Settings
+### 2.1 Manage 3D Settings
 
 - Low Latency Mode - On
 
@@ -49,15 +49,15 @@
 
 - Threaded Optimization - Off ([1](https://tweakguides.pcgamingwiki.com/NVFORCE_8.html)).
 
-## 2.2 Change resolution
+### 2.2 Change resolution
 
 - Output dynamic range - Full
 
-## 2.3 Adjust Video Color Settings
+### 2.3 Adjust Video Color Settings
 
 - Dynamic range - Full
 
-# 3. GPU órajel lockolása/P-State 0
+## 3. GPU órajel lockolása/P-State 0
 
 - Az alábbi registry key-el minimalizálhatod a GPU órajel ingadozását azonban magasabb idle hőfokokkal és energiafogyasztással jár. Amikor nem játszol fontold meg a [limit-nvpstate](https://github.com/valleyofdoom/limit-nvpstate) használatát.
 
