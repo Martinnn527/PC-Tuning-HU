@@ -1,4 +1,4 @@
-Tartalomjegyzék
+# Tartalomjegyzék
 
 - [1. Szükséges programok letöltése](#1-szükséges-programok-letöltése)
 - [2. Munkakörnyezet előkészítése](#2-munkakörnyezet-előkészítése)
