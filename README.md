@@ -364,7 +364,7 @@ Fontos megjegyezni hogy néhány játékban a ReBAR használata negatívan befol
 
 ## 2.17 HPET
 
-- Kapcsold be a High Precision Event Timer-t. Ha ez a beállítás sehogy sem elérhető, nagy eséllyel bevan kapcsolva.
+- Kapcsold be a High Precision Event Timer-t. Ha ez a beállítás sehogy sem elérhető, nagy eséllyel már bevan kapcsolva.
   
   - Újabb AMD-s rendszereken nincs hatása ennek a beállításnak.
 
