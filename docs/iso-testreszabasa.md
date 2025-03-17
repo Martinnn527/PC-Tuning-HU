@@ -1,14 +1,14 @@
 Tartalomjegyzék
 
-[1. Szükséges programok letöltése](#1-szükséges-programok-letöltése)
-[2. Munkakörnyezet előkészítése](#2-munkakörnyezet-előkészítése)
-[3. Nem használt verziók eltávolítása](#3-nem-használt-verziók-eltávolítása)
-[4. Mountold az ISO-t](#4-mountold-az-iso-t)
-[5. NET 3.5 bekapcsolása](#5-net-35-bekapcsolása)
-[6. Szükséges fájlok integrálása](#6-szükséges-fájlok-integrálása)
-[7. Unmount és Commit](#7-unmount-és-commit)
-[8. ISO zsugorítása](#8-iso-zsugorítása)
-[9. Átkonvertálás ISO-vá](#9-átkonvertálás-iso-vá)
+- [1. Szükséges programok letöltése](#1-szükséges-programok-letöltése)
+- [2. Munkakörnyezet előkészítése](#2-munkakörnyezet-előkészítése)
+- [3. Nem használt verziók eltávolítása](#3-nem-használt-verziók-eltávolítása)
+- [4. Mountold az ISO-t](#4-mountold-az-iso-t)
+- [5. NET 3.5 bekapcsolása](#5-net-35-bekapcsolása)
+- [6. Szükséges fájlok integrálása](#6-szükséges-fájlok-integrálása)
+- [7. Unmount és Commit](#7-unmount-és-commit)
+- [8. ISO zsugorítása](#8-iso-zsugorítása)
+- [9. Átkonvertálás ISO-vá](#9-átkonvertálás-iso-vá)
 
 ## 1. Szükséges programok letöltése
 
