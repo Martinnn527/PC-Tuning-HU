@@ -8,7 +8,7 @@
     - [3.3 Adjust Video Color Settings](#33-adjust-video-color-settings)
     - [3.4 GPU órajel lockolása/P-State 0](#34-gpu-órajel-lockolásap-state-0)
     - [3.5 NVIDIA Profile Inspector konfigurálása](#35-nvidia-profile-inspector-konfigurálása)
-    - [3.6 NVIDIA Display Container LS Script](#36-nvidia-display-container-ls-script)
+    - [3.6 NVIDIA Display Container](#36-nvidia-display-container)
 
 # 1. Driver letöltése és feltelepítése
 
