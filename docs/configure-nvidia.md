@@ -32,7 +32,7 @@
      <file name="${{PrivacyPolicyFile}}"/>
     ```
 
-- Indítsd el a ``setup.exe``-t.
+- Indítsd el a ``setup.exe``-t és telepítsd fel a drivert.
 
 
 ## 2. NVIDIA Control Panel konfigurálása
