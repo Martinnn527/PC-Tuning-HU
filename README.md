@@ -101,10 +101,10 @@
     - [5.35.1 GPU és DirectX Graphics Kernel](#5351-gpu-és-directx-graphics-kernel)
     - [5.35.2 XHCI és Audio Controller](#5352-xhci-és-audio-controller)
     - [5.35.3 Network Interface Card](#5353-network-interface-card-nic)   
-  - [5.36 Event Viewer ellenőrzése](#537-event-viewer-ellenőrzése)
-  - [5.37 CPU Idle States](#538-cpu-idle-states)
-  - [5.38 Paging File](#539-paging-file)
-  - [5.39 Cleanup és karbantartás](#541-cleanup-és-karbantartás)
+  - [5.36 Event Viewer ellenőrzése](#536-event-viewer-ellenőrzése)
+  - [5.37 CPU Idle States](#537-cpu-idle-states)
+  - [5.38 Paging File](#538-paging-file)
+  - [5.39 Cleanup és karbantartás](#539-cleanup-és-karbantartás)
 
 ## Bemutató
 
