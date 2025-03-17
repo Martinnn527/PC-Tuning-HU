@@ -20,7 +20,7 @@
   - [2.4 Resizable BAR](#24-resizable-bar)
   - [2.5 Rejtett beállítások elérése](#25-rejtett-beállítások-elérése)
   - [2.6 Hyper-Threading/Simultaneous Multithreading](#26-hyper-threadingsimultaneous-multithreading)
-  - [2.7 Power States](#27-power-states)
+  - [2.7 Power Saving](#27-power-saving)
   - [2.8 Virtualization](#28-virtualization)
   - [2.9 Nem használt eszközök letiltása](#29-nem-használt-eszközök-letiltása)
   - [2.10 Trusted Platform Module](#210-trusted-platform-module)
@@ -84,7 +84,7 @@
   - [5.29 Device Manager beállítása](#529-device-manager-beállítása)
   - [5.30 Device Power Saving](#530-device-power-saving)
   - [5.31 Fájl rendszer](#531-fájl-rendszer)
-  - [5.32 Event Trace Sessions](#532-event-trace-sessions-ets)
+  - [5.32 Event Trace Sessions](#532-event-trace-sessions)
   - [5.33 Message Signaled Interrupts](#533-message-signaled-interrupts)
   - [5.34 XHCI Interrupt Moderation](#534-xhci-interrupt-moderation-imod)
   - [5.35 Applikációk konfigurálása](#535-applikációk-konfigurálása)
@@ -296,17 +296,17 @@ Számos alaplap gyártó elrejt sok hasznos beállítást. A legegyszerűbb mego
 
 Vedd figyelembe hogy alaplap márkától, akár BIOS verziótól függően eltérhetnek az adott beállítás nevei, például: ``C-States``, ``C State``, ``C-State`` stb. 
 
-## 2.6 Hyper-threading/Simultaneous Multithreading
+## 2.6 Hyper-Threading/Simultaneous Multithreading
 
 Kapcsold ki a [Hyper-Threading/Simultaneous Multithreading](https://en.wikipedia.org/wiki/Hyper-threading) funkciót. Ez például renderelés esetén hasznos lehet de mivel a CPU-nkénti több végrehajtó thread használtata növeli a processzor erőforrásainak igénybevételét, jóval nagyobb hőfokokkal jár és a rendszer nagyobb latencyjének, jitterének forrása. Ha elegendő CPU-val rendelkezel a játék futtatásához (minimum 6), mindenféleképpen kapcsold ki. Ez a koncepció alkalmazható az Intel E-coreok esetében is.
 
-## 2.7 Power States
+## 2.7 Power Saving
 
-- Kapcsold ki a C-States-eket. Keresd a *C1E*, *C6* kifejezéseket. 
+- Kapcsold ki a C-States-eket.
   
   - Ellenőrizd a C-State residency-t [HWiNFO](https://www.hwinfo.com/)-ban
   
-- Kapcsold ki az összes Power Saving funkciót, mint például: ASPM (Active State Power Management), ALPM (Aggressive Link Power Managemenet), DRAM Power Down, Hibernation, Clock Gating, Power Gating. Keresd a "power management", "power saving" kifejezéseket.  
+- Kapcsold ki az összes Power Saving funkciót, mint például: ASPM (Active State Power Management), ALPM (Aggressive Link Power Managemenet), DRAM Power Down, Hibernation, Clock Gating, Power Gating, PCIe Power Management Keresd a "power management", "power saving" kifejezéseket.  
 
 ## 2.8 Virtualization
 
@@ -904,19 +904,7 @@ Lásd [docs/configure-amd.md](/docs/configure-amd.md)
 
 - Ellenőrizd hogy a CRU-ban generált felbontás van-e használatban: ``Win+I:  System ->  Advanced display settings``
 
-## 5.22 Open-Shell
-
-Ezt szükséges feltelepíteni mivel a start menüvel és a Windows Search-el kapcsolatos szolgáltatások ki lesznek kapcsolva és még jobb is mint az alap Windows Start menü.
-
-- [Open-Shell](https://github.com/Open-Shell/Open-Shell-Menu)
-
-- Csak az ``Open-Shell Menu``-t telepítsd fel.
-
-- ``Settings -> General Behavior -> Check for Windows updates on shutdown`` - Disabled
-
-- Opcionálisan használd a ``bin`` mappában lévő ``open-shell-settings.xml`` fájlt egy letisztult beállításért. Backup -> Load from XML file.
-
-## 5.23 Spectre, Meltdown és CPU Microcode
+## 5.22 Spectre, Meltdown és CPU Microcode
 
 Az újabb platformok és rendszerarchitektúrák esetén előfordulhat teljesítménycsökkenés a kikapcsolásukkal ([1](https://www.phoronix.com/review/amd-zen4-spectrev2)). Éppen ezért fontos benchmarkokat végezni hogy meghatározzuk, hogy a teljesítmény pozitívan, negatívan vagy egyáltalán nem változik. Az állapotuk az [InSpectre](https://www.grc.com/inspectre.htm) programmal, illetve a microcode DLL-ek átnevezésével állítható attól függően, hogy van-e microcode verzió eltérés az operációs rendszer és a BIOS között ([1](https://superuser.com/a/895447), [2](https://support.mozilla.org/en-US/kb/microcode-update)). 
 
@@ -941,7 +929,7 @@ ren C:\Windows\System32\mcupdate_AuthenticAMD.dll mcupdate_AuthenticAMD.dlll
 
 A Meltdown nincs hatással az AMD-s rendszerekre ([1](https://www.theverge.com/2018/1/3/16844630/intel-processor-security-flaw-bug-kernel-windows-linux), [2](https://www.phoronix.com/news/x86-PTI-Initial-Gaming-Tests), [3](https://lkml.org/lkml/2018/1/3/425)) és szükséges pár anti-cheat működéséhez (FACEIT).
 
-## 5.24 Power Plan
+## 5.23 Power Plan
 
 - Állítsd be a High Performance power plant:
 
@@ -1000,7 +988,7 @@ powercfg /setacvalueindex scheme_current 54533251-82be-4824-96c1-47b60b740d00 4d
 powercfg /setactive scheme_current
 ```
 
-## 5.25 Memory Management beállítások
+## 5.24 Memory Management beállítások
 
 - PowerShell-be másold be az alábbi parancsot hogy megtekintsd a beállításokat:
 
@@ -1014,7 +1002,7 @@ Get-MMAgent
 Disable-MMAgent -MemoryCompression
 ```
 
-## 5.26 NIC konfigurálása
+## 5.25 NIC konfigurálása
 
 - ``Win+R`` -> ``ncpa.cpl``. 
 
@@ -1026,7 +1014,7 @@ Disable-MMAgent -MemoryCompression
 
   - Lásd: [Recommended DNS Providers | Privacy Guides](https://www.privacyguides.org/en/dns/#recommended-providers)
 
-## 5.27 Audio eszközök beállítása
+## 5.26 Audio eszközök beállítása
 
 - ``Win+R : mmsys.cpl``
 
@@ -1034,7 +1022,7 @@ Disable-MMAgent -MemoryCompression
 
 - A Communications fülnél állítsd be hogy ``Do nothing``
 
-## 5.28 Process Explorer
+## 5.27 Process Explorer
 
 Használj Process Explorer-t mivel a stock Task Manager a CPU kihasználtságát %-ban jelzi ami félrevezető lehet [1](https://aaron-margosis.medium.com/task-managers-cpu-numbers-are-all-but-meaningless-2d165b421e43). Ezzel ellentétben a Process Explorer idő-alapú terhelést mutat nem beszélve számos funkcióról ami nem elérhető az alap Task Manager-ben.
 
@@ -1053,7 +1041,7 @@ Használj Process Explorer-t mivel a stock Task Manager a CPU kihasználtságát
   - ``View`` -> ``Select Columns`` -> ``Process Performance`` majd pedig pipáld be a ``Context Switch Delta``-t, ``CPU Cycles Delta``-t és a ``Base Priority``-t.
 
 
-## 5.29 Device Manager beállítása
+## 5.28 Device Manager beállítása
 
 - ``Win+R`` -> ``devmgmt.msc`` hogy megnyisd a Device Manager-t.
 
@@ -1073,7 +1061,7 @@ Használj Process Explorer-t mivel a stock Task Manager a CPU kihasználtságát
 - Opcionálisan használd a [DeviceCleanup](https://www.majorgeeks.com/mg/getmirror/device_cleanup_tool,1.html) programot hogy eltávolíts rejtett eszközöket.
 
 
-## 5.30 Device Power Saving
+## 5.29 Device Power Saving
 
 - Nyisd meg a PowerShell-t és másold be az alábbi parancsot hogy kikapcsold az ``Allow the computer to turn off this device to save power`` opciót a Device Manager-ben minden alkalmaz eszközön.
 
@@ -1083,7 +1071,7 @@ Get-WmiObject MSPower_DeviceEnable -Namespace root\wmi | ForEach-Object { $_.ena
 
 - Ha kihúzod és visszadugod az eszközt akkor ez a beállítás visszaállhat tehát vagy kerüld el vagy futtasd a parancsot minden alkalommal, vagy pedig használd a [DriverPowerSaving](/bin/DriverPowerSaving.ps1) scriptet hogy minden újraindításnál automatikusan fusson csinálj egy shortcut-ot ``shell:startup``-ba és használd a PowerShell paramétert hogy ne notepad-ként fusson. Ez ajánlatos, csak hogy biztosra menj.
 
-## 5.31 Fájl rendszer
+## 5.30 Fájl rendszer
 
 CMD-be másold be az alábbi parancsokat.
 
@@ -1099,7 +1087,7 @@ Tiltsd le a [Last Acces Time Stamp Update](https://www.tenforums.com/tutorials/1
 fsutil behavior set disablelastaccess 1
 ```
 
-## 5.32 Event Trace Sessions
+## 5.31 Event Trace Sessions
 
 Ezekkel a fájlokkal automatikusan tudsz váltani ETS Enabled és Disabled között aminek a hatását meg tudod nézni itt: ``Win+R -> perfmon -> Data Collector Sets -> Event Trace Session``. Azok a programok amelyek Event Tracing-re támaszkodnak (pl. Event Viewer) nem fognak tudni adatot log-olni amíg kivan kapcsolva. CMD-be másold be az alábbi parancsokat hogy megépítsd a két registry fájlt a ``C:\`` meghajtón. Futtasd az ``ets-disable.reg``-et NSudo-val.
 
@@ -1118,7 +1106,7 @@ reg export "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\WMI\Autologger" 
 for %a in ("SleepStudy" "Kernel-Processor-Power" "UserModePowerService") do (wevtutil sl Microsoft-Windows-%~a/Diagnostic /e:false)
 ```
 
-## 5.33 Message Signaled Interrupts
+## 5.32 Message Signaled Interrupts
 
 - Az MSI-k gyorsabbak mint a hagyományos signal-based interruptok és az IRQ sharing problémát is megoldhatják.
 
@@ -1128,7 +1116,7 @@ for %a in ("SleepStudy" "Kernel-Processor-Power" "UserModePowerService") do (wev
 
 - ``Win+R -> msinfo32 -> Hardware Resources -> Conflicts/Sharing`` és győződj meg róla hogy nincs IRQ Sharing a rendszeren.
 
-## 5.34 XHCI Interrupt Moderation (IMOD)
+## 5.33 XHCI Interrupt Moderation (IMOD)
 
 Windows 7-en az IMOD Interval 1ms, viszont az újabb OS-eken 0.05ms (50us) kivéve ha az adott USB drivernél más van megadva. Ez azt jelenti hogy amiután egy Interrupt generálva lett, az XHCI (USB) controller vár (úgynevezett buffer period) hogy több adat érkezzen mielőtt újabb Interruptot generálna. Ez csökkenti a CPU terhelését de adatvesztéshez vezethet.
 Példa: egy 1000-es polling rate-ű egér minden 1ms-ban küld adatot. Ha csak az egeret mozgatod egy 1ms-os intervallumban akkor nem történik Interrupt Moderation, mivel az interruptok generálási sebessége kisebb vagy egyenlő a meghatározott intervallummal. Azonban játék közben, ahol egyszerre mozgatod az egeret, nyomod a billentyűzetet stb, könnyen meghaladod az 1000 interrupt/másodpercet. Habár ez kevésbé valószínű 0,05 ms-os IMOD intervallum mellett, akkor is előfordulhat.
@@ -1141,9 +1129,9 @@ reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\CI\Config" /v "Vuln
 
 - A ``bin`` mappában lévő [XHCI-IMOD-Interval.ps1](/bin/XHCI-IMOD-Interval.ps1) fájlt másold be a ``C:\``-be. Ha az RWEverything-et máshova telepítetted akkor a ps1 fájlban a ``$rwePath = "C:\Program Files\RW-Everything\Rw.exe"`` sort írd át. Csinálj egy shortcut-ot ``shell:startup``-ba hogy minden indításnál fusson.
 
-## 5.35 Applikációk konfigurálása
+## 5.34 Applikációk konfigurálása
 
-### 5.35.1 FPS Limit
+### 5.34.1 FPS Limit
 
 - Ha limitálod az FPS-t akkor a monitorod refresh rate-jének a többszörése korlátozd le. Bizonyosodj meg róla hogy a GPU nincs teljesen kihasználva mivel minél kevesebb a kihasználtsága annál kevesebb a system latency.
 
@@ -1152,11 +1140,11 @@ reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\CI\Config" /v "Vuln
 
 - Ha RTSS-el limitálod az FPS-t sokkal konzisztensebb lesz a frame-pacing mivel busy-wait-et használ ami sokkal precízebb mint a passive-wait de cserébe nagyobb latency-vel és CPU overhead-el jár.
 
-### 5.35.2 Játék regisztrálása Game Bar-ban
+### 5.34.2 Játék regisztrálása Game Bar-ban
 
 Győződj meg róla hogy a Game Bar felismeri a játékot. Nyisd meg a Game Bar-t ``Win+G`` megnyomásával amikor játékban vagy és kapcsold be a ``Remember this is a game`` opciót. 
 
-### 5.35.3 Presentation Mode
+### 5.34.3 Presentation Mode
 
 Ez nem egy ajánlás hogy melyik Presentation Mode-ot használd, inkább csak informatív okból írom le.
 
@@ -1180,21 +1168,21 @@ reg add "HKCU\SYSTEM\GameConfigStore" /v "GameDVR_FSEBehavior" /t REG_DWORD /d "
 reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\Dwm" /v "OverlayTestMode" /t REG_DWORD /d "5" /f
 ```
 
-### 5.35.4 Game Mode
+### 5.34.4 Game Mode
 
 A Game Mode megakadályozza a Windows Update futását valamint bizonyos értesítések megjelenítését ([1](https://support.xbox.com/en-GB/help/games-apps/game-setup-and-play/use-game-mode-gaming-on-pc)). Fontos megjegyezni, hogy a Game Mode befolyásolhatja a folyamatok és thread-ek prioritását, attól függően, hogy a PsPrioritySeparation értéke hogyan van beállítva. Érdemes kísérletezni a Game Mode engedélyezésével és letiltásával, hogy meghatározd annak hatását a rendszer teljesítményére.
 
-### 5.35.5 Media lejátszó
+### 5.34.5 Media lejátszó
 
 - [mpv](https://mpv.io/)
 - [VLC](https://www.videolan.org/)
 - [mpc-hc](https://github.com/clsid2/mpc-hc)
 
-### 5.35.6 QoS Policy
+### 5.34.6 QoS Policy
 
 Abban az esetben ha a routered támogatja a Quality of Service beállítást, akkor [konfigurálható egy QoS Policy](/media/dscp-46-qos-policy.png) hogy egy megadott applikáció csomagjait helyezze előnybe a többi applikációval szemben. Ezt vagy a router oldalán, vagy pedig egy külön [applikációban](https://www.microsoft.com/en-us/download/details.aspx?id=4865) tudod ellenőrizni. [New Capture](/media/network-monitor-new-capture.png), nyisd meg a játékot, amelyre DSCP-értéket állítottál be, és reprodukálj egy olyan helyzetet, amelyben csomagok küldésére és fogadására kerül sor mint pl. egy online meccs. Nyomj egy F5-öt hogy elkezdd a logolást, 30 mp után pedig egy F7-et. A bal oldali ablakban kattints a játék nevére, majd kattints egy packet headerre. Bővítsd a packet info-t a frame details alatt, és végül bővítsd az Ipv4 alkategóriát. Ekkor láthatóvá válik az egyes folyamatok aktuális DSCP-értéke: ``"DifferentiatedServices Field: DSCP: 46, ECN: 0"``.
 
-### 5.35.7 Discord
+### 5.34.7 Discord
 
 - Data & Privacy - Use data to improve Discord - OFF
 
@@ -1216,7 +1204,7 @@ ren "%LOCALAPPDATA%\Discord\Update.exe" "Update.exee"
 
   - Lásd [docs/research.md/discord-fixer](/docs/research.md#3-discordfixer)
 
-### 5.35.8 Epic Games
+### 5.34.8 Epic Games
 
 - Néhány Epic-es játéknál automatikusan fut az ``EOSOverlayRenderer-Win64-Shipping.exe`` ami általában a ``C:\Program Files (x86)\Epic Games\Launcher\Portal\Extras\Overlay`` directory-ban található. Használd az alábbi parancsot hogy átírd a nevét, abban az esetben ha az Epic Games-t az alapértelmezett helyre telepítetted. Játékbeli vásárlásokhoz (pl. VBucks feltöltés) kötelező futnia. Ebben az esetben csak írd vissza a nevét és indítsd újra a játékot. Fontos megjegyezni hogy az Epic Games frissítése automatikusan újra generálja a fájlt.
 
@@ -1225,7 +1213,7 @@ ren "C:\Program Files (x86)\Epic Games\Launcher\Portal\Extras\Overlay\EOSOverlay
 ```
 - Amiután elindítasz egy játékot, az Epic Games Launcher továbbra is fut a háttérben azonban bezárható a Steam-mel ellentétben.
 
-### 5.35.9 Steam 
+### 5.34.9 Steam 
 
 - Bal fent ``Steam`` -> ``Settings`` -> ``Interface``, kapcsold ki az ``Enable smooth scrolling in web view`` és az ``Enable GPU Accelerated rendering in web views`` opciót.
 
@@ -1237,21 +1225,21 @@ Töltsd le a [NoSteamWebHelper](https://github.com/Aetopia/NoSteamWebHelper)-t.
 
 Így mostantól automatikusan bezáródik a CEF/Chromium Embedded Framework amikor elindítasz egy játékot azonban amikor bezárod újra elindul hogy maga a Steam applikáció elérhető legyen. Vedd figyelembe hogy a Steam overlay nem lesz elérhető játék közben.
 
-## 5.36 Interruptok és DPC-k
+## 5.35 Interruptok és DPC-k
 
 A Windows CPU 0-án ütemez számos interruptot és DPC-t ami elég terhelő lehet egyetlen-egy CPU számára. Ezért affinity-ket kell beállítani és elkülöníteni/eloszlatni a drivereket.
 
 - Használd a [GoInterruptPolicy](https://github.com/spddl/GoInterruptPolicy) programot az affinity-k beállítására: Dupla klikk az adott eszközre -> Device Policy -> ``IrqPolicySpecifiedProcessors`` és válaszd ki a használni kívánt CPU-t/kat. Ha több ugyanolyan nevű eszköz van jelen, úgy azonosíthatod, hogy összehasonlítod a ``Location``-t Device Managerben a ``Properties -> General`` résznél a GoInterruptPolicy-ban lévő ``Location Info``-val.
 
-### 5.36.1 GPU és DirectX Graphics Kernel
+### 5.35.1 GPU és DirectX Graphics Kernel
 
 Használhatod az [AutoGpuAffinity](https://github.com/valleyofdoom/AutoGpuAffinity)-t hogy benchmarkold az összes CPU-t. Ez segíthet eldönteni melyik CPU-n kerüljön feldolgozásra a GPU. Ha nem használsz Hyper-Threading/SMT-t és E-Core-okat akkor szinte azonosan fog teljesíteni az összes CPU.
 
-### 5.36.2 XHCI és Audio controller
+### 5.35.2 XHCI és Audio controller
 
 Ez a két modul nagy számban generál interruptokat ezért érdemes elkülöníteni a kettőt ha több XHCI controller-ed van vagy pedig alaplapi audio-t használsz.
 
-### 5.36.3 Network Interface Card (NIC)
+### 5.35.3 Network Interface Card (NIC)
 
 Támogatnia kell az MSI-X-et ahhoz hogy az ISR azon a CPU-n fusson amelyik végrehajtja a DPC-ket. Figyelj arra hogy az RSS beállítás szabja meg hogy pontosan hány CPU-n van ütemezve a NIC. Például, ha az RSSBaseCpu a CPU 2-re van állítva és 4 RSS Queue-t használsz akkor a 2/3/4/5-ön lesz ütemezve.
 
@@ -1283,7 +1271,7 @@ Amiután kész vagy az előbbi lépésekkel töltsd le az [XTW](https://github.c
 
   - Ellenőrizd hogy egy ISR-hez tartozó DPC ugyanazon a CPU-n kerül-e feldolgozásra. ([példa](/media/isr-dpc-same-core.png))
 
-## 5.37 Event Viewer ellenőrzése
+## 5.36 Event Viewer ellenőrzése
 
 Ez a lépés nem kötelező, azonban segíthet a megmagyarázhatatlan FPS drop-ok és többi probléma azonosításában.
 
@@ -1291,14 +1279,14 @@ Ez a lépés nem kötelező, azonban segíthet a megmagyarázhatatlan FPS drop-o
   
 Pár perc használat után ellenőrizd nincs-e teli hibaüzenettel az Event Viewer, majd futtasd az ``ets-disable.reg`` fájlt.
 
-## 5.38 CPU Idle States
+## 5.37 CPU Idle States
 
 Ez kényszeríti a C-State 0-t. Érdemes játék előtt kikapcsolni, majd játék után bekapcsolni az idle statet, mivel az magasabb hőfokokkal (A CPU hőmérsékletének nem lenne szabad elérni a thermal throttling pontot, mivel a hűtéssel már foglalkoztál a [hűtés](#12-hűtés) részlegnél) és energiafogyasztással jár. Kerüld az idle kikapcsolását ha a Hyper-Threading/Simultaneous Multithreading bevan kapcsolva, vagy pedig ha valamilyenféle dynamic boosting feature-t használsz, mint például AMD-n a PBO, Turbo Boost vagy hasonló. 
 
    - [Idle Enable](/bin/enable_idle.bat)
    - [Idle Disable](/bin/disable_idle.bat)
 
-## 5.39 Paging File
+## 5.38 Paging File
 
 Legtöbb esetben ajánlott bekapcsolva hagyni, ami az alap beállítás. Van egy érv, hogy jobb ha kikapcsolod abban az esetben ha elég RAM-mal rendelkezel a játékhoz mivel csökkenti az I/O overheadet és a RAM gyorsabb mint a disk, azonban FPS drop-okat eredményezhet akkor is ha a memória kihasználtsága közel sem éri el a 100%-ot.
 
@@ -1307,7 +1295,7 @@ Legtöbb esetben ajánlott bekapcsolva hagyni, ami az alap beállítás. Van egy
     - ``Win+R -> sysdm.cpl -> Advanced`` -> A ``Performance`` szekciónál ``Settings`` -> ``Advanced`` -> A ``Virtual Memory`` alatt ``Change`` -> Pipáld ki az ``Automatically manage paging file size for all drives`` opciót -> Válaszd ki a ``No paging file``-t -> ``Set``
 
 
-## 5.40 Cleanup és karbantartás
+## 5.39 Cleanup és karbantartás
 
 - Használj programokat mint a [BulkCrapUninstaller](https://github.com/Klocman/Bulk-Crap-Uninstaller) mivel a control panel-ban történő uninstall során sok fájl letörlése kimaradhat.
 
