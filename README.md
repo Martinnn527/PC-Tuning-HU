@@ -44,20 +44,14 @@
   - [3.5 GPU](#35-gpu)
   - [3.6 CPU/RAM](#36-cpuram)
   - [3.7 Stressz-tesztelő eszközök](#37-stressz-tesztelő-eszközök)
-- [4. ISO testreszabása](#4-iso-testreszabása)
+- [4. Telepítés előtti instrukciók](#4-telepítés-előtti-instrukciók)
   - [4.1 Windows verzió kiválasztása](#41-milyen-windows-verziót-használj)
-  - [4.2 Szükséges programok letöltése](#42-szükséges-programok-letöltése)
-  - [4.3 Eredeti ISO letöltése](#43-eredeti-iso-letöltése)
-  - [4.4 Munkakörnyezet előkészítése](#44-munkakörnyezet-előkészítése)
-  - [4.5 Nem használt verziók eltávolítása](#45-nem-használt-verziók-eltávolítása)
-  - [4.6 Mountold az ISO-t](#46-mountold-az-iso-t)
-  - [4.7 NET 3.5 bekapcsolása](#47-net-35-bekapcsolása)
-  - [4.8 Szükséges fájlok integrálása](#48-szükséges-fájlok-integrálása)
-  - [4.9 Unmount és Commit](#49-unmount-és-commit)
-  - [4.10 ISO Zsugorítása](#410-iso-zsugorítása)
-  - [4.11 Átkonvertálás ISO-vá](#4-11-átkonvertálás-iso-vá)
-  - [4.12 Telepítés Ventoy használatával](#412-telepítés-pendrive-ról-ventoy-használatával)
-  - [4.13 ISO-ba való bootolás](#413-iso-ba-való-bootolás)
+  - [4.2 Eredeti ISO letöltése](#43-eredeti-iso-letöltése)
+  - [4.3 ISO testreszabása (Opcionális)](#43-iso-testreszabása)
+  - [4.4 Szükséges fájlok integrálása](#44-szükséges-fájlok-integrálása)
+  - [4.5 Telepítés Ventoy használatával](#45-telepítés-pendrive-ról-ventoy-használatával)
+  - [4.6 ISO-ba való bootolás](#46-iso-ba-való-bootolás)
+  - [4.7 OOBE Setup](#47-oobe-setup)
 - [5. Telepítés utáni instrukciók](#5-telepítés-utáni-instrukciók)
   - [5.1 Unrestricted PowerShell Execution Policy](#51-unrestricted-powershell-execution-policy)
   - [5.2 Process Mitigations](#52-process-mitigations-windows-10-1709)
@@ -69,51 +63,48 @@
   - [5.8 Idő, nyelv és régió](#58-idő-nyelv-és-régió)
   - [5.9 Böngésző konfigurálása](#59-böngésző-konfigurálása)
   - [5.10 Ütemezett feladatok kikapcsolása](#510-ütemezett-feladatok-kikapcsolása)
-  - [5.11 Egyéb beállítások](#511-egyéb-beállítások)
-  - [5.12 Runtime-ok feltelepítése](#512-runtime-ok-feltelepítése)
-  - [5.13 Optional Features](#513-optional-features)
-  - [5.14 Tray Icons](#514-tray-icons)
-  - [5.15 Hibernation](#515-hibernation)
-  - [5.16 Bloatware kezelése](#516-bloatware-kezelése)
-  - [5.17 7-Zip](#517-7-zip-letöltése-és-beállítása)
-  - [5.18 GPU Driver](#518-gpu-driver)
-  - [5.19 MSI Afterburner](#519-msi-afterburner)
-  - [5.20 Felbontások és Scaling Mode](#520-felbontások-és-scaling-mode)
-  - [5.21 Open-Shell](#521-open-shell)
+  - [5.11 Windows Aktiválása](#511-windows-aktiválása)
+  - [5.12 Egyéb beállítások](#512-egyéb-beállítások)
+  - [5.13 Runtime-ok feltelepítése](#513-runtime-ok-feltelepítése)
+  - [5.14 Optional Features](#514-optional-features)
+    - [5.14.1 NET 3.5](#5141-net-35)
+  - [5.15 Tray Icons](#515-tray-icons)
+  - [5.16 Hibernation](#516-hibernation)
+  - [5.17 Bloatware kezelése](#517-bloatware-kezelése)
+  - [5.18 7-Zip](#518-7-zip-letöltése-és-beállítása)
+  - [5.19 GPU Driver](#519-gpu-driver)
+  - [5.20 MSI Afterburner](#520-msi-afterburner)
+  - [5.21 Felbontások és Scaling Mode](#521-felbontások-és-scaling-mode)
   - [5.22 Spectre, Meltdown és CPU Microcode](#522-spectre-meltdown-és-cpu-microcode)
   - [5.23 Power Plan](#523-power-plan)
   - [5.24 Memory Management beállítások](#524-memory-management-beállítások)
-  - [5.25 BCD Adattár](#525-bcd-adattár)
   - [5.26 NIC konfigurálása](#526-nic-konfigurálása)
   - [5.27 Audio eszközök beállítása](#527-audio-eszközök-beállítása)
   - [5.28 Process Explorer](#528-process-explorer)
-  - [5.29 Szolgáltatások és driverek](#529-szolgáltatások-és-driverek)
-  - [5.30 Device Manager beállítása](#530-device-manager-beállítása)
-  - [5.31 Device Power Saving](#531-device-power-saving)
-  - [5.32 Fájl rendszer](#532-fájl-rendszer)
-  - [5.33 Event Trace Sessions](#533-event-trace-sessions-ets)
-  - [5.34 Message Signaled Interrupts](#534-message-signaled-interrupts)
-  - [5.35 XHCI Interrupt Moderation](#535-xhci-interrupt-moderation-imod)
-  - [5.36 Applikációk konfigurálása](#536-applikációk-konfigurálása)
-    - [5.36.1 FPS Limit](#5361-fps-limit)
-    - [5.36.2 Játék regisztrálása Game Bar-ban](#5362-játék-regisztrálása-game-bar-ban)
-    - [5.36.3 Presentation Mode](#5363-presentation-mode)
-    - [5.36.4 Game Mode](#5364-game-mode)
-    - [5.36.5 Média lejátszó](#5365-media-lejátszó)
-    - [5.36.6 QoS Policy](#5366-qos-policy)
-    - [5.36.7 Discord](#5367-discord)
-    - [5.36.8 Epic Games](#5368-epic-games)
-    - [5.36.9 Steam](#5369-steam)
-  - [5.37 Interruptok és DPC-k](#537-interruptok-és-dpc-k)
-    - [5.37.1 GPU és DirectX Graphics Kernel](#5371-gpu-és-directx-graphics-kernel)
-    - [5.37.2 XHCI és Audio Controller](#5372-xhci-és-audio-controller)
-    - [5.37.3 Network Interface Card](#5373-network-interface-card-nic)   
-  - [5.38 Event Viewer ellenőrzése](#538-event-viewer-ellenőrzése)
-  - [5.39 CPU Idle States](#538-cpu-idle-states)
-  - [5.40 Timer Resolution](#540-timer-resolution)  
-    - [5.40.1 Maga a Timer Resolution beállítása](#5401-maga-a-timer-resolution-beállítása)
-  - [5.41 Paging File](#541-paging-file)
-  - [5.42 Cleanup és karbantartás](#542-cleanup-és-karbantartás)
+  - [5.29 Device Manager beállítása](#529-device-manager-beállítása)
+  - [5.30 Device Power Saving](#530-device-power-saving)
+  - [5.31 Fájl rendszer](#531-fájl-rendszer)
+  - [5.32 Event Trace Sessions](#532-event-trace-sessions-ets)
+  - [5.33 Message Signaled Interrupts](#533-message-signaled-interrupts)
+  - [5.34 XHCI Interrupt Moderation](#534-xhci-interrupt-moderation-imod)
+  - [5.35 Applikációk konfigurálása](#535-applikációk-konfigurálása)
+    - [5.35.1 FPS Limit](#5351-fps-limit)
+    - [5.35.2 Játék regisztrálása Game Bar-ban](#5352-játék-regisztrálása-game-bar-ban)
+    - [5.35.3 Presentation Mode](#5353-presentation-mode)
+    - [5.35.4 Game Mode](#5354-game-mode)
+    - [5.35.5 Média lejátszó](#5355-media-lejátszó)
+    - [5.35.6 QoS Policy](#5356-qos-policy)
+    - [5.35.7 Discord](#5357-discord)
+    - [5.35.8 Epic Games](#5358-epic-games)
+    - [5.35.9 Steam](#5359-steam)
+  - [5.36 Interruptok és DPC-k](#536-interruptok-és-dpc-k)
+    - [5.36.1 GPU és DirectX Graphics Kernel](#5361-gpu-és-directx-graphics-kernel)
+    - [5.36.2 XHCI és Audio Controller](#5362-xhci-és-audio-controller)
+    - [5.36.3 Network Interface Card](#5363-network-interface-card-nic)   
+  - [5.37 Event Viewer ellenőrzése](#537-event-viewer-ellenőrzése)
+  - [5.38 CPU Idle States](#538-cpu-idle-states)
+  - [5.39 Paging File](#539-paging-file)
+  - [5.40 Cleanup és karbantartás](#541-cleanup-és-karbantartás)
 
 ## Bemutató
 
@@ -483,7 +474,7 @@ GPU overclockolásnál előfordulhat hogy számos power limit-et fel kell oldano
 
 ---
 
-# 4. ISO testreszabása
+# 4. Telepítés előtti instrukciók
 
 ## 4.1 Milyen Windows verziót használj?
 
@@ -523,13 +514,7 @@ GPU overclockolásnál előfordulhat hogy számos power limit-et fel kell oldano
 
 - Windows Server-en nincs Game Bar, Game Mode és ehhez hasonló funkciók.
 
-## 4.2 Szükséges programok letöltése
-
-- [7-Zip](https://www.7-zip.org/)
-
-- [Windows ADK](https://learn.microsoft.com/en-us/windows-hardware/get-started/adk-install)
-
-## 4.3 Eredeti ISO letöltése
+## 4.2 Eredeti ISO letöltése
 
 Használd a ``certutil -hashfile <file>`` parancsot hogy ellenőrizd az ISO valódiságát/korruptságát. 
 
@@ -540,135 +525,23 @@ Használd a ``certutil -hashfile <file>`` parancsot hogy ellenőrizd az ISO val�
   - [Adguard File List](https://files.rg-adguard.net/version/f0bd8307-d897-ef77-dbd6-216fefbe94c5)
   - [Server 2022](https://www.microsoft.com/en-us/evalcenter/download-windows-server-2022)
 
-  
-## 4.4 Munkakörnyezet előkészítése
+## 4.3 ISO Testreszabása (Opcionális)
 
-- Windows Defender-ben a Real-Time protection-t kapcsold mivel az lassíthatja a mount és unmount folyamatot, vagy hibát is okozhat.
+Útmutatás az ISO testreszabására DISM használatával: [docs/iso-testreszabasa.md](/docs/iso-testreszabasa.md)
 
-- Nyisd meg a CMD-t adminként és hagyd nyitva mivel ideiglenes környezeti változókat állítunk be amelyek visszaállnak ha bezárod.
+## 4.4 Szükséges fájlok integrálása
 
-- Futtasd az alábbi parancsot. Ha error-t kapsz, indítsd újra a CMD-t admin jogokkal azonban ha nem ír semmit folytasd.
-
-    ```bat
-    DISM > nul 2>&1 || echo error: administrator privileges required
-    ```
-
-- Csomagold ki az ISO tartalmát egy neked tetsző directory-ba majd pedig add hozzá az ``EXTRACTED_ISO`` változóhoz. 
- 
-- Példa:
-
-  ```bat
-  set "EXTRACTED_ISO=C:\en_windows_7_professional_with_sp1_x64_dvd_u_676939"
-  ```
-
-- Állítsd be hova lesz mount-olva az ISO.
-
-  ```bat
-  set "MOUNT_DIR=%temp%\MOUNT_DIR"
-  ```
-
--  Állítsd be az ``OSCDIMG`` változót az ``oscdimg.exe`` elérési útjára. Ha a Windows ADK-t az alapértelmezett helyre telepítetted nem kell a parancsot átírnod.
-
-   ```bat
-   set "OSCDIMG=C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Deployment Tools\amd64\Oscdimg\oscdimg.exe"
-   ```
-
-- Készítsd elő a ``MOUNT_DIR`` directory-t a mountolásra.
-
-  ```bat
-  > nul 2>&1 (DISM /Unmount-Wim /MountDir:"%MOUNT_DIR%" /Discard & rd /s /q "%MOUNT_DIR%" & mkdir "%MOUNT_DIR%")
-  ```
-
-- Ha a környezeti változok helyesen vannak konfigurálva akkor az alábbi parancsoknak ``true`` értéket kell mutatniuk.
-
-  ```bat
-  if exist "%EXTRACTED_ISO%\sources\install.wim" (echo true) else (echo false)
-  ```
-  ```bat
-  if exist "%MOUNT_DIR%" (echo true) else (echo false)
-  ```
-  ```bat
-  if exist "%OSCDIMG%" (echo true) else (echo false)
-  ```
-
-## 4.5 Nem használt verziók eltávolítása
-
-Távolíts el minden nem kívánt verziót. Használd az alábbi parancsokat hogy megkapd az adott kiadás index-ét majd eltávolítsd azokat. A végére csak a telepíteni kívánt verziónak kell megmaradnia az 1-es indexen. Ajánlott minden verzió eltávolítása után futtatni a ``DISM /Get-WimInfo /WimFile:"%EXTRACTED_ISO%\sources\install.wim"`` parancsot hogy tisztán átlásd melyiket törlöd le.
-
- - Ajánlott verziók:
-
-   - Professional/Pro
-
-   - Windows Server esetén: Standard (Desktop Experience).
-
-- Az összes elérhető verzió és a hozzájuk tartozó indexek lekérése:
-
-  ```bat
-  DISM /Get-WimInfo /WimFile:"%EXTRACTED_ISO%\sources\install.wim"
-  ```
- 
-- Távolítsd el a verziót index alapján. Cseréld ki az ``<index>``-et az index számmal.
-
-  ```bat
-  DISM /Delete-Image /ImageFile:"%EXTRACTED_ISO%\sources\install.wim" /Index:<index>
-  ```
-
-## 4.6 Mountold az ISO-t
-
-Mountold az ISO-t az alábbi parancssal.
-
-```bat
-DISM /Mount-Wim /WimFile:"%EXTRACTED_ISO%\sources\install.wim" /Index:1 /MountDir:"%MOUNT_DIR%"
-```
-
-## 4.7 NET 3.5 bekapcsolása
-
-```bat
-DISM /Image:"%MOUNT_DIR%" /Enable-Feature /FeatureName:NetFx3 /All /LimitAccess /Source:"%EXTRACTED_ISO%\sources\sxs"
-```
-
-## 4.8 Szükséges fájlok integrálása
-
-[Klónold a repository-t](https://github.com/Martinnn527/PC-Tuning-HU/archive/refs/heads/main.zip) majd a ``bin`` mappát másold be a mountolt directory-ba:
-
-```bat
-explorer "%MOUNT_DIR%"
-```
+[Klónold a repository-t](https://github.com/Martinnn527/PC-Tuning-HU/archive/refs/heads/main.zip) majd a ``bin`` mappát másold át a Pendriveodra.
 
 A teljes elérési útnak ``C:\bin``-nek kell lennie.
 
-Ilyenkor érdemes az ethernet driver-t is bemásolni/integrálni. Próbáld meg a driver-t INF formában megszerezni mivel az exe-k általában bloatware-t tartalmaznak. Néhány esetben 7-Zip-el ki tudod csomagolni az exe-t és azon belül megkeresni az INF fájlt.
+Ilyenkor érdemes az ethernet driver-t is bemásolni. Próbáld meg a driver-t INF formában megszerezni mivel az exe-k általában bloatware-t tartalmaznak. Néhány esetben 7-Zip-el ki tudod csomagolni az exe-t és azon belül megkeresni az INF fájlt.
 
-## 4.9 Unmount és Commit
+## 4.5 Telepítés Pendrive-ról Ventoy használatával
 
-Zárd be a ``%MOUNT_DIR%`` mappát majd futtasd az alábbi parancsot a módosítások véglegesítéséhez az ISO-n:
+Töltsd le a [Ventoy](https://github.com/ventoy/Ventoy/releases)-t majd indítsd el a ``Ventoy2Disk.exe``-t. Az ``Option`` menüpontnál válaszd ki a partíciótípust (GPT) és kapcsold ki a Secure Boot support-ot, majd válaszd ki a pendrive-od és kattints az Install-ra. Ha végzett, másold át az ISO-t a pendriveod-ra.
 
-```bat
-DISM /Unmount-Wim /MountDir:"%MOUNT_DIR%" /Commit && rd /s /q "%MOUNT_DIR%"
-```
-
-## 4.10 ISO Zsugorítása
-
-Ennek nincs különösen semmi előnye a méret csökkentésén kívül azonban telepítés közben a Windows Setup automatikusan végrehajtja ezt a folyamatot ami sok időbe telhet.
-
-```bat
-DISM /Export-Image /SourceImageFile:"%EXTRACTED_ISO%\sources\install.wim" /SourceIndex:1 /DestinationImageFile:"%EXTRACTED_ISO%\sources\install.esd" /Compress:recovery /CheckIntegrity && del /f /q "%EXTRACTED_ISO%\sources\install.wim"
-```
-
-## 4.11 Átkonvertálás ISO-vá
-
-Használd az alábbi parancsot a kicsomagolt tartalom visszacsomagolásához egyetlen ISO fájlba, amely a ``C:\`` meghajtón fog létrejönni ``Final.iso`` néven.
-
-```bat
-"%OSCDIMG%" -m -o -u2 -udfver102 -l"Final" -bootdata:2#p0,e,b"%EXTRACTED_ISO%\boot\etfsboot.com"#pEF,e,b"%EXTRACTED_ISO%\efi\microsoft\boot\efisys.bin" "%EXTRACTED_ISO%" "C:\Final.iso"
-```
-
-## 4.12 Telepítés Pendrive-ról Ventoy használatával
-
-Töltsd le a [Ventoy](https://github.com/ventoy/Ventoy/releases)-t majd indítsd el a ``Ventoy2Disk.exe``-t. Az ``Option`` menüpontnál válaszd ki a partíciótípust (GPT) és kapcsold ki a Secure Boot support-ot, majd válaszd ki a pendrive-od és kattints az Install-ra. Ha végzett, másold át a ``Final.iso``-t a pendriveod-ra.
-
-
-## 4.13 ISO-ba való bootolás
+## 4.6 ISO-ba való bootolás
 
 Mielőtt még elkezdenéd a telepítést, fontold meg a Secure Erase használatát a BIOS-ban.
 
@@ -676,13 +549,13 @@ Mielőtt még elkezdenéd a telepítést, fontold meg a Secure Erase használat�
 
 Húzd ki az ethernet kábeledet és ne legyél az internethez csatlakozva, ezáltal elkerülhetjük a Microsoftba való bejelentkezést OOBE közben és a Windows nem fog automatikusan feltelepíteni frissítéseket és drivereket.
 
-- Ha a Secure Boot bevan kapcsolva, ideiglenesen kapcsold ki a telepítési folyamathoz mivel problémákat okozhat. Bootolj be a pendrive-ra BIOS-on belül és válaszd ki a ``Final.iso``-t. Folytasd a telepítést majd amikor végzett kapcsold vissza a Secure Boot-ot ha előzőleg bevolt.
+- Ha a Secure Boot bevan kapcsolva, ideiglenesen kapcsold ki a telepítési folyamathoz mivel problémákat okozhat. Bootolj be a pendrive-ra BIOS-on belül és válaszd ki az ISO-t.
 
-## 4.14 OOBE Setup
+## 4.7 OOBE Setup
 
 - Windows Server telepítése során meg kell adnod egy komplex jelszót amit törölhetsz később.
 
-- Ha Windows 11-et telepítesz nyomj egy ``Shift+F10``-et hogy megnyisd a CMD-t és írd be a következő parancsot: ``oobe\BypassNRO.cmd``. Ezáltal megjelenik a ``Continue with limited setup`` opció. Folytasd a setup-ot a megszokottak szerint.
+- Ha Windows 11-et telepítesz nyomj egy ``Shift+F10``-et hogy megnyisd a CMD-t és írd be a következő parancsot: ``oobe\BypassNRO.cmd``. Ezáltal megjelenik a ``Continue with limited setup`` opció. Folytasd a setup-ot a megszokottak szerint. Amiután végzett a telepítés kapcsold ki a Secure Boot-ot ha előzőleg bevolt.
 
 ---
 
@@ -863,8 +736,15 @@ Az alábbi PowerShell parancs kikapcsolja az ütemezett feladatokat amik rendsze
 ```powershell
 C:\bin\disable-scheduled-tasks.ps1
 ```
+## 5.11 Windows Aktiválása
 
-## 5.11 Egyéb beállítások
+Ha nem vásároltál Windows kulcsot, használd PowerShell-ben az alábbi parancsot hogy aktiváld:
+
+```powershell
+irm https://massgrave.dev/get | iex
+```
+
+## 5.12 Egyéb beállítások
 
 CMD-be másold be az alábbi parancsokat.
 
@@ -890,13 +770,13 @@ reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SysMain" /v "Start
 
 - Kapcsolj ki mindent a ``System`` -> ``Notifications and actions``-ben a ``Win+I`` megnyomásával.
     
-## 5.12 Runtime-ok feltelepítése
+## 5.13 Runtime-ok feltelepítése
 
 - [Visual C++ Redistributable](https://github.com/abbodi1406/vcredist)
 - [DirectX](https://www.microsoft.com/en-gb/download/details.aspx?id=8109)
 - [.NET 4.8](https://dotnet.microsoft.com/en-us/download/dotnet-framework/net48)
 
-## 5.13 Optional Features
+## 5.14 Optional Features
 
 ``Win+R -> Optional Features`` majd pedig állítsd be úgy ahogy a képen látható.
 
@@ -904,12 +784,22 @@ Windows Serveren az ``OptionalFeatures`` megfelelője a ``Server Manager -> Mana
 
    - [Példa](/media/features-example.png)
 
-## 5.14 Tray Icons
+### 5.14.1 NET 3.5
+
+Ha kihagytad az [ISO testreszabása](#43-iso-testreszabása-opcionális) pontot akkor a NET 3.5 nincs bekapcsolva és nem fogod tudni feltelepíteni mivel a Windows Update kivan kapcsolva. Ezért egy külön módszerrel kell telepíteni.
+
+- Tölts le egy Windows ISO-t és csomagold ki. Cseréld ki a ``C:\EXTRACTED_ISO\sources\sxs``-t a megfelelő elérési úttal, majd futtasd a parancsot.
+
+```bat
+DISM /Online /Enable-Feature /FeatureName:NetFx3 /LimitAccess /Source:"C:\EXTRACTED_ISO\sources\sxs"
+```
+
+## 5.15 Tray Icons
 
 Jobb klikk a tálcára -> ``Taskbar settings -> Select which icons appear on the taskbar`` és kapcsold be az ``Always show all icons in the notifications area`` opciót.
 Ez segít a futó folyamatok kezelésében és átláthatóságában. 
 
-## 5.15 Hibernation
+## 5.16 Hibernation
 
 A Hibernation-t Windowson belül is ki lehet kapcsolni így a PC egy tiszta Shut Down-t fog végrehajtani a gép leállításakor a szoftverállapot lemezre mentése helyett. CMD-be másold be az alábbi parancsot.
 
@@ -917,7 +807,7 @@ A Hibernation-t Windowson belül is ki lehet kapcsolni így a PC egy tiszta Shut
 powercfg /h off
 ```
 
-## 5.16 Bloatware kezelése
+## 5.17 Bloatware kezelése
 
 Javasolt a debloat scriptek elkerülése és az olyan komponensek eltávolítása ami nem ténylegesen bloatware, mivel ez az operációs rendszer meghibásodásához vezethet.
 
@@ -968,19 +858,19 @@ taskkill /f /im smartscreen.exe > nul 2>&1 & ren C:\Windows\System32\smartscreen
 
 - Task Manager-ben ellenőrizd hogy nem-e fut semmilyen bloatware a háttérben.
 
-## 5.17 7-Zip letöltése és beállítása
+## 5.18 7-Zip letöltése és beállítása
 
 - [7-Zip](https://www.7-zip.org/a/7z2301-x64.exe)
 
 - Nyisd meg a ``C:\Program Files\7-Zip\7zFM.exe``-t -> ``Tools -> Options`` és add hozzá a 7-Zip-et az összes fájl típushoz a ``+`` gombra kattintva. Lehetséges hogy kétszer kell megnyomnod hogy felülírd a már hozzáadott fájl típusokat. A 7-Zip részleget a letisztultság kedvéért érdemes beállítani: ([1](/media/7-zip-settings-example.png)).
 
-## 5.18 GPU Driver
+## 5.19 GPU Driver
 
 Lásd [docs/configure-nvidia.md](/docs/configure-nvidia.md)
 
 Lásd [docs/configure-amd.md](/docs/configure-amd.md)
 
-## 5.19 MSI Afterburner
+## 5.20 MSI Afterburner
 
 - Töltsd le az [MSI Afterburner](https://www.msi.com/Landing/afterburner/graphics-cards)-t és telepítsd fel.
 
@@ -996,7 +886,7 @@ Lásd [docs/configure-amd.md](/docs/configure-amd.md)
   "C:\Program Files (x86)\MSI Afterburner\MSIAfterburner.exe" /Profile1 /Q
   ```
 
-## 5.20 Felbontások és Scaling Mode
+## 5.21 Felbontások és Scaling Mode
 
 - Keress egy stabil OC-t a monitorodhoz. NVIDIA Control Panel-ben a ``Change resolution -> Customize -> Create Custom Resolution`` fülnél vidd feljebb a refresh rate-t ~3-asával amíg a monitor nem ír egy ``Out of Range`` üzenetet vagy pedig csak szimplán fekete a képernyő. Ha ez történik, csak várj 15 másodpercet és automatikusan visszaáll az előzőleg használt értékekre. Ezután egyesével vedd visszább a refresh ratet. Például ha 250 hz-ről ugrottál 253 hz-re és fekete volt a képernyő akkor 252-től indulva menj lejjebb amíg stabil nem lesz. Ezután teszteld [itt](https://www.testufo.com/) hogy nincs e screen tearing és hogy a monitor kábelének nincs e úgynevezett [coil whine](https://pcsupport.lenovo.com/ie/en/products/laptops-and-netbooks/solutions/ht511649)-ja.
 
@@ -1014,7 +904,7 @@ Lásd [docs/configure-amd.md](/docs/configure-amd.md)
 
 - Ellenőrizd hogy a CRU-ban generált felbontás van-e használatban: ``Win+I:  System ->  Advanced display settings``
 
-## 5.21 Open-Shell
+## 5.22 Open-Shell
 
 Ezt szükséges feltelepíteni mivel a start menüvel és a Windows Search-el kapcsolatos szolgáltatások ki lesznek kapcsolva és még jobb is mint az alap Windows Start menü.
 
@@ -1026,7 +916,7 @@ Ezt szükséges feltelepíteni mivel a start menüvel és a Windows Search-el ka
 
 - Opcionálisan használd a ``bin`` mappában lévő ``open-shell-settings.xml`` fájlt egy letisztult beállításért. Backup -> Load from XML file.
 
-## 5.22 Spectre, Meltdown és CPU Microcode
+## 5.23 Spectre, Meltdown és CPU Microcode
 
 Az újabb platformok és rendszerarchitektúrák esetén előfordulhat teljesítménycsökkenés a kikapcsolásukkal ([1](https://www.phoronix.com/review/amd-zen4-spectrev2)). Éppen ezért fontos benchmarkokat végezni hogy meghatározzuk, hogy a teljesítmény pozitívan, negatívan vagy egyáltalán nem változik. Az állapotuk az [InSpectre](https://www.grc.com/inspectre.htm) programmal, illetve a microcode DLL-ek átnevezésével állítható attól függően, hogy van-e microcode verzió eltérés az operációs rendszer és a BIOS között ([1](https://superuser.com/a/895447), [2](https://support.mozilla.org/en-US/kb/microcode-update)). 
 
@@ -1051,7 +941,7 @@ ren C:\Windows\System32\mcupdate_AuthenticAMD.dll mcupdate_AuthenticAMD.dlll
 
 A Meltdown nincs hatással az AMD-s rendszerekre ([1](https://www.theverge.com/2018/1/3/16844630/intel-processor-security-flaw-bug-kernel-windows-linux), [2](https://www.phoronix.com/news/x86-PTI-Initial-Gaming-Tests), [3](https://lkml.org/lkml/2018/1/3/425)) és szükséges pár anti-cheat működéséhez (FACEIT).
 
-## 5.23 Power Plan
+## 5.24 Power Plan
 
 - Állítsd be a High Performance power plant:
 
@@ -1104,53 +994,13 @@ powercfg /setacvalueindex scheme_current 54533251-82be-4824-96c1-47b60b740d00 0c
 powercfg /setacvalueindex scheme_current 54533251-82be-4824-96c1-47b60b740d00 4d2b0152-7d5c-498b-88e2-34345392a2c5 5000
 ```
 
-- Processor energy performance preference policy - 0
-
-```bat
-powercfg /setacvalueindex scheme_current SUB_PROCESSOR PERFEPP 0
-```
-
-- Processor energy performance preference policy for Processor Power Efficiency Class 1 - 0
-
-```bat
-powercfg /setacvalueindex scheme_current SUB_PROCESSOR PERFEPP1 0
-```
-
-- Allow Throttle States - Off
-
-```bat
-powercfg /setacvalueindex scheme_current SUB_PROCESSOR THROTTLING 0
-```
-
-- Processor idle demote threshold - 100
-
-```bat
-powercfg /setacvalueindex scheme_current SUB_PROCESSOR IDLEDEMOTE 100
-```
-
-- Processor idle promote threshold - 100
-
-```bat
-powercfg /setacvalueindex scheme_current SUB_PROCESSOR IDLEPROMOTE 100
-```
-- Allow Standby States - Off
-
-```bat
-powercfg /setacvalueindex scheme_current SUB_SLEEP ALLOWSTANDBY 0
-```
-- Processor performance core parking min cores for Processor Power Efficiency Class 1 - 100
-
-```bat
-powercfg /setacvalueindex scheme_current SUB_PROCESSOR CPMINCORES1 100
-```
-
 - Végül pedig:
 
 ```bat
 powercfg /setactive scheme_current
 ```
 
-## 5.24 Memory Management beállítások
+## 5.25 Memory Management beállítások
 
 - PowerShell-be másold be az alábbi parancsot hogy megtekintsd a beállításokat:
 
@@ -1162,22 +1012,6 @@ Get-MMAgent
 
 ```powershell
 Disable-MMAgent -MemoryCompression
-```
-
-## 5.25 BCD Store
-
-CMD-be másold be az alábbi parancsokat.
-
-[DEP (Data Execution Prevention)](https://learn.microsoft.com/en-us/windows/win32/memory/data-execution-prevention) kikapcsolása:
-
-```bat
-bcdedit /set nx AlwaysOff
-```
-
-A [disabledynamictick](https://en.wikipedia.org/wiki/Tickless_kernel) parancs használható a rendszeres timer tick interrupts engedélyezésére.
-
-```bat
-bcdedit /set disabledynamictick yes
 ```
 
 ## 5.26 NIC konfigurálása
@@ -1219,43 +1053,7 @@ Használj Process Explorer-t mivel a stock Task Manager a CPU kihasználtságát
   - ``View`` -> ``Select Columns`` -> ``Process Performance`` majd pedig pipáld be a ``Context Switch Delta``-t, ``CPU Cycles Delta``-t és a ``Base Priority``-t.
 
 
-## 5.29 Szolgáltatások és driverek
-
-> [!CAUTION]
-> Mindent figyelmesen olvass el és értelmezz mielőtt hozzákezdesz.
-
-Ez a helyes módja a szolgáltatások kikapcsolásának. Nem kell egyesével kikapcsolni őket, ami alapból nem is lenne visszafordítható, kivéve ha mindent manuálisan visszakapcsolsz, ami egyáltalán nem praktikus. Ezért lesz kettő script létrehozva amivel váltani tudsz az Enabled (Gyári Windows) és Disabled között. Fontos tudni, hogy a szolgáltatások egymásra épülnek. Ha letiltasz egy olyan szolgáltatást, amelyre egy másik szolgáltatás támaszkodik, akkor az a másik szolgáltatás nem fog tudni megfelelően működni, és hibát fog jelezni, emiatt rosszabb teljesíménnyel jár mintha szimplán bekapcsolva hagynád az adott szolgáltatást. Amiután megépítetted a scripteket a program automatikusan ellenőrzi a dependency hibákat tehát szinte lehetetlen ezzel kapcsolatosan elrontani.
-
-- Lásd: [media/services-dependency-example](/media/services-dependency-example.png)
-
-- Töltsd le a [service-list-builder](https://github.com/valleyofdoom/service-list-builder)-t.
-
-- A lista testreszabható a ``C:\bin\minimal-servies.ini`` módosításával. Számos leírás van az adott szolgáltatással kapcsolatban a configban. Például ha ethernetet használsz a Wi-Fi-vel kapcsolatos szolgáltatásokra nincsen szükséged. Ha újra szeretnéd generálni a scripteket, előtte mindenképpen futtasd a ``Services-Enable.bat`` scriptet mivel a program a szolgáltatások jelenlegi állapotára támaszkodik a jövőbeli scriptek megépítésére.
-
-
-- A ``High precision event timer`` eszkösz a device manager-ben IRQ 0-t használ a legtöbb AMD-s rendszeren, ezáltal konfliktusba kerül a ``System Timer`` eszközzel amely szintén IRQ 0-t használ. Az egyetlen mód ennek megoldására az, hogy letiltod a ``System Timer`` szülő eszközét, amely az ``msisadrv`` (Módosítsd a konfigot).
-
-- Használd az alábbi parancsot hogy a Software Protection ne próbáljon elindulni 30 másodpercenként miközben a szolgáltatások kivannak kapcsolva.
-
-```bat
-reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SoftwareProtectionPlatform" /v "InactivityShutdownDelay" /t REG_DWORD /d "4294967295" /f
-```
-
-- Nyisd meg a CMD-t a ``service-list-builder`` mappájában (ahol az exe található).
-
-- Másold be az alábbi parancsot hogy megépítsd a scripteket. Ha a program talál egy harmadik féltől származó szolgáltatást (pl. *NVDisplay.ContainerLocalSystem*) akkor az figyelmeztet. Ha mégis folytatni szeretnéd add hozzá a ``--disable-service-warning`` paramétert a parancs végére.
-
-```bat
-service-list-builder.exe --config C:\bin\minimal-services.ini
-```
-
-- A scriptek a ``build`` mappában lesznek megépülve. NSudo-val az ``Enable All Priviliges`` bepipálásával kell futtatni őket.
-
-## 5.30 Device Manager beállítása
-
-- Ha még nem tetted, futtattad a ``Services-Disable.bat`` scriptet. 
-
-- ``NE`` tiltsd le azokat az eszközöket amelyek mellett egy sárga ikon van. 
+## 5.29 Device Manager beállítása
 
 - ``Win+R`` -> ``devmgmt.msc`` hogy megnyisd a Device Manager-t.
 
@@ -1272,12 +1070,10 @@ service-list-builder.exe --config C:\bin\minimal-services.ini
 
 - A HID eszközöket is letilthatod azonban lehetséges hogy az adott periféria szoftvere nem fogja felimserni az eszközt. Ha véletlen letiltod az egered, használd a billentyűzeted hogy visszakapcsold az Enter, Tab és nyilak használatával.
 
-- Futtasd a ``Services-Enable.bat`` scriptet. Mostmár letilthatod az eszközöket amelyek mellett sárga ikon van mivel ezeknek valóban problémájuk van és nem a ``Services-Disable.bat`` által vannak kezelve.
-
 - Opcionálisan használd a [DeviceCleanup](https://www.majorgeeks.com/mg/getmirror/device_cleanup_tool,1.html) programot hogy eltávolíts rejtett eszközöket.
 
 
-## 5.31 Device Power Saving
+## 5.30 Device Power Saving
 
 - Nyisd meg a PowerShell-t és másold be az alábbi parancsot hogy kikapcsold az ``Allow the computer to turn off this device to save power`` opciót a Device Manager-ben minden alkalmaz eszközön.
 
@@ -1287,7 +1083,7 @@ Get-WmiObject MSPower_DeviceEnable -Namespace root\wmi | ForEach-Object { $_.ena
 
 - Ha kihúzod és visszadugod az eszközt akkor ez a beállítás visszaállhat tehát vagy kerüld el vagy futtasd a parancsot minden alkalommal, vagy pedig használd a [DriverPowerSaving](/bin/DriverPowerSaving.ps1) scriptet hogy minden újraindításnál automatikusan fusson csinálj egy shortcut-ot ``shell:startup``-ba és használd a PowerShell paramétert hogy ne notepad-ként fusson. Ez ajánlatos, csak hogy biztosra menj.
 
-## 5.32 Fájl rendszer
+## 5.31 Fájl rendszer
 
 CMD-be másold be az alábbi parancsokat.
 
@@ -1303,7 +1099,7 @@ Tiltsd le a [Last Acces Time Stamp Update](https://www.tenforums.com/tutorials/1
 fsutil behavior set disablelastaccess 1
 ```
 
-## 5.33 Event Trace Sessions
+## 5.32 Event Trace Sessions
 
 Ezekkel a fájlokkal automatikusan tudsz váltani ETS Enabled és Disabled között aminek a hatását meg tudod nézni itt: ``Win+R -> perfmon -> Data Collector Sets -> Event Trace Session``. Azok a programok amelyek Event Tracing-re támaszkodnak (pl. Event Viewer) nem fognak tudni adatot log-olni amíg kivan kapcsolva. CMD-be másold be az alábbi parancsokat hogy megépítsd a két registry fájlt a ``C:\`` meghajtón. Futtasd az ``ets-disable.reg``-et NSudo-val.
 
@@ -1322,7 +1118,7 @@ reg export "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\WMI\Autologger" 
 for %a in ("SleepStudy" "Kernel-Processor-Power" "UserModePowerService") do (wevtutil sl Microsoft-Windows-%~a/Diagnostic /e:false)
 ```
 
-## 5.34 Message Signaled Interrupts
+## 5.33 Message Signaled Interrupts
 
 - Az MSI-k gyorsabbak mint a hagyományos signal-based interruptok és az IRQ sharing problémát is megoldhatják.
 
@@ -1332,7 +1128,7 @@ for %a in ("SleepStudy" "Kernel-Processor-Power" "UserModePowerService") do (wev
 
 - ``Win+R -> msinfo32 -> Hardware Resources -> Conflicts/Sharing`` és győződj meg róla hogy nincs IRQ Sharing a rendszeren.
 
-## 5.35 XHCI Interrupt Moderation (IMOD)
+## 5.34 XHCI Interrupt Moderation (IMOD)
 
 Windows 7-en az IMOD Interval 1ms, viszont az újabb OS-eken 0.05ms (50us) kivéve ha az adott USB drivernél más van megadva. Ez azt jelenti hogy amiután egy Interrupt generálva lett, az XHCI (USB) controller vár (úgynevezett buffer period) hogy több adat érkezzen mielőtt újabb Interruptot generálna. Ez csökkenti a CPU terhelését de adatvesztéshez vezethet.
 Példa: egy 1000-es polling rate-ű egér minden 1ms-ban küld adatot. Ha csak az egeret mozgatod egy 1ms-os intervallumban akkor nem történik Interrupt Moderation, mivel az interruptok generálási sebessége kisebb vagy egyenlő a meghatározott intervallummal. Azonban játék közben, ahol egyszerre mozgatod az egeret, nyomod a billentyűzetet stb, könnyen meghaladod az 1000 interrupt/másodpercet. Habár ez kevésbé valószínű 0,05 ms-os IMOD intervallum mellett, akkor is előfordulhat.
@@ -1345,9 +1141,9 @@ reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\CI\Config" /v "Vuln
 
 - A ``bin`` mappában lévő [XHCI-IMOD-Interval.ps1](/bin/XHCI-IMOD-Interval.ps1) fájlt másold be a ``C:\``-be. Ha az RWEverything-et máshova telepítetted akkor a ps1 fájlban a ``$rwePath = "C:\Program Files\RW-Everything\Rw.exe"`` sort írd át. Csinálj egy shortcut-ot ``shell:startup``-ba hogy minden indításnál fusson.
 
-## 5.36 Applikációk konfigurálása
+## 5.35 Applikációk konfigurálása
 
-### 5.36.1 FPS Limit
+### 5.35.1 FPS Limit
 
 - Ha limitálod az FPS-t akkor a monitorod refresh rate-jének a többszörése korlátozd le. Bizonyosodj meg róla hogy a GPU nincs teljesen kihasználva mivel minél kevesebb a kihasználtsága annál kevesebb a system latency.
 
@@ -1356,11 +1152,11 @@ reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\CI\Config" /v "Vuln
 
 - Ha RTSS-el limitálod az FPS-t sokkal konzisztensebb lesz a frame-pacing mivel busy-wait-et használ ami sokkal precízebb mint a passive-wait de cserébe nagyobb latency-vel és CPU overhead-el jár.
 
-### 5.36.2 Játék regisztrálása Game Bar-ban
+### 5.35.2 Játék regisztrálása Game Bar-ban
 
 Győződj meg róla hogy a Game Bar felismeri a játékot. Nyisd meg a Game Bar-t ``Win+G`` megnyomásával amikor játékban vagy és kapcsold be a ``Remember this is a game`` opciót. 
 
-### 5.36.3 Presentation Mode
+### 5.35.3 Presentation Mode
 
 Ez nem egy ajánlás hogy melyik Presentation Mode-ot használd, inkább csak informatív okból írom le.
 
@@ -1384,21 +1180,21 @@ reg add "HKCU\SYSTEM\GameConfigStore" /v "GameDVR_FSEBehavior" /t REG_DWORD /d "
 reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\Dwm" /v "OverlayTestMode" /t REG_DWORD /d "5" /f
 ```
 
-### 5.36.4 Game Mode
+### 5.35.4 Game Mode
 
 A Game Mode megakadályozza a Windows Update futását valamint bizonyos értesítések megjelenítését ([1](https://support.xbox.com/en-GB/help/games-apps/game-setup-and-play/use-game-mode-gaming-on-pc)). Fontos megjegyezni, hogy a Game Mode befolyásolhatja a folyamatok és thread-ek prioritását, attól függően, hogy a PsPrioritySeparation értéke hogyan van beállítva. Érdemes kísérletezni a Game Mode engedélyezésével és letiltásával, hogy meghatározd annak hatását a rendszer teljesítményére.
 
-### 5.36.5 Media lejátszó
+### 5.35.5 Media lejátszó
 
 - [mpv](https://mpv.io/)
 - [VLC](https://www.videolan.org/)
 - [mpc-hc](https://github.com/clsid2/mpc-hc)
 
-### 5.36.6 QoS Policy
+### 5.35.6 QoS Policy
 
 Abban az esetben ha a routered támogatja a Quality of Service beállítást, akkor [konfigurálható egy QoS Policy](/media/dscp-46-qos-policy.png) hogy egy megadott applikáció csomagjait helyezze előnybe a többi applikációval szemben. Ezt vagy a router oldalán, vagy pedig egy külön [applikációban](https://www.microsoft.com/en-us/download/details.aspx?id=4865) tudod ellenőrizni. [New Capture](/media/network-monitor-new-capture.png), nyisd meg a játékot, amelyre DSCP-értéket állítottál be, és reprodukálj egy olyan helyzetet, amelyben csomagok küldésére és fogadására kerül sor mint pl. egy online meccs. Nyomj egy F5-öt hogy elkezdd a logolást, 30 mp után pedig egy F7-et. A bal oldali ablakban kattints a játék nevére, majd kattints egy packet headerre. Bővítsd a packet info-t a frame details alatt, és végül bővítsd az Ipv4 alkategóriát. Ekkor láthatóvá válik az egyes folyamatok aktuális DSCP-értéke: ``"DifferentiatedServices Field: DSCP: 46, ECN: 0"``.
 
-### 5.36.7 Discord
+### 5.35.7 Discord
 
 - Data & Privacy - Use data to improve Discord - OFF
 
@@ -1420,7 +1216,7 @@ ren "%LOCALAPPDATA%\Discord\Update.exe" "Update.exee"
 
   - Lásd [docs/research.md/discord-fixer](/docs/research.md#3-discordfixer)
 
-### 5.36.8 Epic Games
+### 5.35.8 Epic Games
 
 - Néhány Epic-es játéknál automatikusan fut az ``EOSOverlayRenderer-Win64-Shipping.exe`` ami általában a ``C:\Program Files (x86)\Epic Games\Launcher\Portal\Extras\Overlay`` directory-ban található. Használd az alábbi parancsot hogy átírd a nevét, abban az esetben ha az Epic Games-t az alapértelmezett helyre telepítetted. Játékbeli vásárlásokhoz (pl. VBucks feltöltés) kötelező futnia. Ebben az esetben csak írd vissza a nevét és indítsd újra a játékot. Fontos megjegyezni hogy az Epic Games frissítése automatikusan újra generálja a fájlt.
 
@@ -1429,7 +1225,7 @@ ren "C:\Program Files (x86)\Epic Games\Launcher\Portal\Extras\Overlay\EOSOverlay
 ```
 - Amiután elindítasz egy játékot, az Epic Games Launcher továbbra is fut a háttérben azonban bezárható a Steam-mel ellentétben.
 
-### 5.36.9 Steam 
+### 5.35.9 Steam 
 
 - Bal fent ``Steam`` -> ``Settings`` -> ``Interface``, kapcsold ki az ``Enable smooth scrolling in web view`` és az ``Enable GPU Accelerated rendering in web views`` opciót.
 
@@ -1441,21 +1237,21 @@ Töltsd le a [NoSteamWebHelper](https://github.com/Aetopia/NoSteamWebHelper)-t.
 
 Így mostantól automatikusan bezáródik a CEF/Chromium Embedded Framework amikor elindítasz egy játékot azonban amikor bezárod újra elindul hogy maga a Steam applikáció elérhető legyen. Vedd figyelembe hogy a Steam overlay nem lesz elérhető játék közben.
 
-## 5.37 Interruptok és DPC-k
+## 5.36 Interruptok és DPC-k
 
 A Windows CPU 0-án ütemez számos interruptot és DPC-t ami elég terhelő lehet egyetlen-egy CPU számára. Ezért affinity-ket kell beállítani és elkülöníteni/eloszlatni a drivereket.
 
 - Használd a [GoInterruptPolicy](https://github.com/spddl/GoInterruptPolicy) programot az affinity-k beállítására: Dupla klikk az adott eszközre -> Device Policy -> ``IrqPolicySpecifiedProcessors`` és válaszd ki a használni kívánt CPU-t/kat. Ha több ugyanolyan nevű eszköz van jelen, úgy azonosíthatod, hogy összehasonlítod a ``Location``-t Device Managerben a ``Properties -> General`` résznél a GoInterruptPolicy-ban lévő ``Location Info``-val.
 
-### 5.37.1 GPU és DirectX Graphics Kernel
+### 5.36.1 GPU és DirectX Graphics Kernel
 
 Használhatod az [AutoGpuAffinity](https://github.com/valleyofdoom/AutoGpuAffinity)-t hogy benchmarkold az összes CPU-t. Ez segíthet eldönteni melyik CPU-n kerüljön feldolgozásra a GPU. Ha nem használsz Hyper-Threading/SMT-t és E-Core-okat akkor szinte azonosan fog teljesíteni az összes CPU.
 
-### 5.37.2 XHCI és Audio controller
+### 5.36.2 XHCI és Audio controller
 
 Ez a két modul nagy számban generál interruptokat ezért érdemes elkülöníteni a kettőt ha több XHCI controller-ed van vagy pedig alaplapi audio-t használsz.
 
-### 5.37.3 Network Interface Card (NIC)
+### 5.36.3 Network Interface Card (NIC)
 
 Támogatnia kell az MSI-X-et ahhoz hogy az ISR azon a CPU-n fusson amelyik végrehajtja a DPC-ket. Figyelj arra hogy az RSS beállítás szabja meg hogy pontosan hány CPU-n van ütemezve a NIC. Például, ha az RSSBaseCpu a CPU 2-re van állítva és 4 RSS Queue-t használsz akkor a 2/3/4/5-ön lesz ütemezve.
 
@@ -1487,54 +1283,22 @@ Amiután kész vagy az előbbi lépésekkel töltsd le az [XTW](https://github.c
 
   - Ellenőrizd hogy egy ISR-hez tartozó DPC ugyanazon a CPU-n kerül-e feldolgozásra. ([példa](/media/isr-dpc-same-core.png))
 
-## 5.38 Event Viewer ellenőrzése
+## 5.37 Event Viewer ellenőrzése
 
 Ez a lépés nem kötelező, azonban segíthet a megmagyarázhatatlan FPS drop-ok és többi probléma azonosításában.
 
-  - Ha még nem tetted, futtasd a ``Services-Disable.bat`` scriptet.
-  - Futtasd az ``ets-enable.reg`` fájlt mivel ez szükséges az event log működéséhez.
-  - Tedd a ``Wecsvc`` és ``EventLog`` szolgáltatás értékét "2"-re a registry editorban: ``HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services`` és indítsd újra a gépet.
+  - NSudo-val futtasd az ``ets-enable.reg`` fájlt mivel ez szükséges az event log működéséhez, majd indítsd újra a gépet.
+  
+Pár perc használat után ellenőrizd nincs-e teli hibaüzenettel az Event Viewer, majd futtasd az ``ets-disable.reg`` fájlt.
 
-Használd a gépet egy darabig, ellenőrizd nincs-e teli hibaüzenettel az Event Viewer és amiután végeztél állítsd vissza a fent említett két szolgáltatás értékét "4"-re.
+## 5.38 CPU Idle States
 
-## 5.39 CPU Idle States
-
-Ez kényszeríti a C-State 0-t. Érdemes játék előtt kikapcsolni, majd játék után bekapcsolni az idle statet, mivel az magasabb hőfokokkal (A CPU hőmérsékletének nem lenne szabad elérni a thermal throttling pontot, mivel a hűtéssel már foglalkoztál a [hűtés](#12-hűtés) részlegnél) és energiafogyasztással jár. Kerüld az idle kikapcsolását ha a Hyper-Threading/Simultaneous Multithreading bevan kapcsolva, vagy pedig ha valamilyenféle frequency boosting feature-t használsz, mint például AMD-n a PBO, Turbo Boost vagy hasonló. 
+Ez kényszeríti a C-State 0-t. Érdemes játék előtt kikapcsolni, majd játék után bekapcsolni az idle statet, mivel az magasabb hőfokokkal (A CPU hőmérsékletének nem lenne szabad elérni a thermal throttling pontot, mivel a hűtéssel már foglalkoztál a [hűtés](#12-hűtés) részlegnél) és energiafogyasztással jár. Kerüld az idle kikapcsolását ha a Hyper-Threading/Simultaneous Multithreading bevan kapcsolva, vagy pedig ha valamilyenféle dynamic boosting feature-t használsz, mint például AMD-n a PBO, Turbo Boost vagy hasonló. 
 
    - [Idle Enable](/bin/enable_idle.bat)
    - [Idle Disable](/bin/disable_idle.bat)
 
-## 5.40 Timer Resolution
-
-A clock interrupt frequency az a sebesség, amellyel a rendszer hardveres órája interruptokat generál, amelyek lehetővé teszik a scheduler számára különböző feladatok elvégzését. A legtöbb rendszeren alapértelmezés szerint a minimális frekvencia 64 Hz, ami azt jelenti, hogy 15,625 ms-onként generálódik egy clock interrupt. Az alacsonyabb frekvencia a kevesebb interruptoknak köszönhetően kisebb CPU-overheadet és energiafogyasztást eredményez, de csökkenti az időzítési pontosságot. A maximális frekvencia 2kHz, ami azt jelenti, hogy 0,5ms-enként generálódik egy clock-interrupt. A magasabb frekvencia nagyobb  pontosságot eredményez, de növeli a CPU-overheadet és az energiafogyasztást. A minimális, az aktuális és a maximális felbontás a [ClockRes](https://learn.microsoft.com/en-us/sysinternals/downloads/clockres) programban tekinthető meg.
-
-
-Az alapértelmezett 15,625ms-os felbontásnál nagyobb pontosságot igénylő alkalmazások (játékok, média lejátszás, stb) képesek megemelni az órajel interrupt frekvenciát olyan funkciókkal, mint a [timeBeginPeriod](https://learn.microsoft.com/en-us/windows/win32/api/timeapi/nf-timeapi-timebeginperiod) és az [NtSetTimerResolution](http://undocumented.ntinternals.net/index.html?page=UserMode%2FUndocumented%20Functions%2FTime%2FNtSetTimerResolution.html). A Sleep-el kapcsolatos funkciókra támaszkodó funkciók pontosságát az események ütemezésében közvetlenül befolyásolja a clock interruptok gyakorisága [(1)](https://randomascii.wordpress.com/wp-content/uploads/2020/10/image-5.png). A [Sleep](https://learn.microsoft.com/en-us/windows/win32/api/synchapi/nf-synchapi-sleep) példáján keresztül a Sleep(n) funkciónak valójában n milliszekundumot kell aludnia, és nem n plusz/mínusz egy tetszőleges értékig, különben váratlan event pacing-et eredményez ami nem ideális az olyan funkciók számára mint a sleep-based FPS limiterek. Megjegyzendő, hogy ez csak egy példa és a modern játékok 99%-a nem támaszkodik a Sleep funkcióra az event-pacinghez. Egy tipikus érték, amelyre a játékfejlesztők a felbontást látszólag emelik, az 1ms, ami azt jelenti, hogy az alkalmazás az eventek ütemét 1ms-os felbontáson belül tudja tartani. Nagyon ritka esetekben előfordul, hogy a fejlesztők egyáltalán nem emelik meg a felbontást, miközben az alkalmazásuk az event-pacing pontossága miatt erre támaszkodik, de ez nem gyakori, és csak néhány ismeretlen programra, például kevésbé ismert játékokra vonatkozhat.
-
-A timer resolution megvalósítása Windows 10 2004+ után úgy változott, hogy a hívó folyamat felbontásának emelése nem befolyásolja a rendszert globális szinten, vagyis "A" folyamat 1 ms-ra emelése nem befolyásolja a "B" folyamatot az alapértelmezett 15,625 ms-os felbontásnál, ellentétben a korábbiakkal. Ez önmagában nagyszerű változás, mert csökkenti az overheadet, mivel más folyamatok, például a tétlen háttérfolyamatok nem kapnak gyakran kiszolgálást az ütemezőtől, és a hívó folyamat szükség szerint nagyobb pontosságot kap. Azonban ez korlátokat eredményez, ha ki szeretnénk használni a 0,5ms-os felbontást. Tekintettel arra, hogy a játékok nem nyílt forráskódúak a kód módosításához, valamint a DLL-injection-t vagy binary patching-et megakadályozza az anticheat, az egyetlen lehetőség az, hogy globálisan állítod be, amely az alábbi registry key-el alkalmazható Windows Server és Windows 11+ rendszereken (Windows Server-en ez automatikusan jelen van és "1"-re van állítva).
-
-```bat
-reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\kernel" /v GlobalTimerResolutionRequests /t REG_DWORD /d "1" /f
-```
-
-Azonban amint korábban említettem a folyamatonkénti mód csökkenti a CPU-overheadet, ami a globális beállítás visszaállítása esetén már nem áll fenn, és a háttérfolyamatok is szükségtelenül gyakran kiszolgálásra kerülnek.
-
-A nagyobb felbontás nagyobb Sleep pontosságot eredményez, de bizonyos esetekben a maximálisan támogatott 0,5 ms felbontás pont hogy kisebb pontosságot biztosít, mint a valamivel alacsonyabb, például 0,507 ms. [MeasureSleep](https://github.com/valleyofdoom/TimerResolution) programban ellenőrizni tudod, hogy melyik felbontással a legkisebb a Sleep(1) (delta), miközben a [SetTimerResolution](https://github.com/valleyofdoom/TimerResolution/releases) programmal különböző felbontásokat állítunk be. Ezt terhelés alatt kell elvégezni, mivel az idle benchmarkok félrevezetőek lehetnek. A folyamat automatizálására a [micro-adjust-benchmark.ps1](/bin/micro-adjust-benchmark.ps1) script használható és az eredményt feltöltheted [chart-studio.plotly.com](https://chart-studio.plotly.com/create/#/)-ra az ``Import`` gombbal hogy könnyebben leolvasd.
-
-
-### 5.40.1 Maga a Timer Resolution beállítása
-
-- Töltsd le a [SetTimerResolution](https://github.com/valleyofdoom/TimerResolution/releases)-t a ``C:\`` meghajtóba majd pedig menj be ``shell:startup``-ba -> Jobb klikk -> Create a shortcut -> ``C:\SetTimerResolution.exe``
-
-- Használd az alábbi példát és add hozzá a Target-hez a paramétereket.
-
-  - ``5000 = 0.5ms``, ``5250 = 0.525ms`` stb.
-
-```bat
-C:\SetTimerResolution.exe --resolution 5000 --no-console
-```
-
-## 5.41 Paging File
+## 5.39 Paging File
 
 Legtöbb esetben ajánlott bekapcsolva hagyni, ami az alap beállítás. Van egy érv, hogy jobb ha kikapcsolod abban az esetben ha elég RAM-mal rendelkezel a játékhoz mivel csökkenti az I/O overheadet és a RAM gyorsabb mint a disk, azonban FPS drop-okat eredményezhet akkor is ha a memória kihasználtsága közel sem éri el a 100%-ot.
 
@@ -1543,7 +1307,7 @@ Legtöbb esetben ajánlott bekapcsolva hagyni, ami az alap beállítás. Van egy
     - ``Win+R -> sysdm.cpl -> Advanced`` -> A ``Performance`` szekciónál ``Settings`` -> ``Advanced`` -> A ``Virtual Memory`` alatt ``Change`` -> Pipáld ki az ``Automatically manage paging file size for all drives`` opciót -> Válaszd ki a ``No paging file``-t -> ``Set``
 
 
-## 5.42 Cleanup és karbantartás
+## 5.40 Cleanup és karbantartás
 
 - Használj programokat mint a [BulkCrapUninstaller](https://github.com/Klocman/Bulk-Crap-Uninstaller) mivel a control panel-ban történő uninstall során sok fájl letörlése kimaradhat.
 
