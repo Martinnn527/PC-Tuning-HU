@@ -6,7 +6,7 @@
 
 - [Bemutató](#bemutató)
 - [Követelmények](#követelmények)
-- [0. Benchmarkolás](#0-benchmarkolás)
+- [Benchmarkolás](#benchmarkolás)
 - [1. Fizikális beállítás](#1-physical-setup)
   - [1.1 Általános információ](#11-általános-információ)
   - [1.2 Hűtés](#12-hűtés)
@@ -126,7 +126,7 @@ Hardver > BIOS > Operációs rendszer
 > [!CAUTION]
 **NE** alkalmazz random, ismeretlen vagy nem dokumentált beállítást, programot vagy scriptet anélkül hogy megértenéd az adott beállítás hatását a biztonságra, adatvédelemre és a teljesítményre.
 
-# 0. Benchmarkolás
+# Benchmarkolás
 
 Ez az egyik legfontosabb része az útmutatónak. Benchmarkolás nélkül vakon állítasz be mindent és nem tudod az adott beállítás teljesítményre való hatását.
 
@@ -140,7 +140,6 @@ Ez az egyik legfontosabb része az útmutatónak. Benchmarkolás nélkül vakon 
 
 ---
 
-
 # 1. Fizikális beállítás
 
 ## 1.1 Általános információ
@@ -149,7 +148,7 @@ Ez az egyik legfontosabb része az útmutatónak. Benchmarkolás nélkül vakon 
 
 - Kerüld a csavarok túlfeszítését.
 
-- Győződj meg róla hogy a kábelek rendesen bevannak dugva és nem lazák (legfőképp tápkábelek)
+- Győződj meg róla hogy a kábelek rendesen bevannak dugva és nem lazák (legfőképp PCIe tápkábelek)
 
 - Érdemes vezetékes eszközöket használni, mivel a vezetéknélküli eszközök hajlamosak aggresszív energiatakarékosságot alkalmazni a hosszabb akkumulátor élettartam érdekében, a túlzott EMI hátrányaival együtt.
 
@@ -159,9 +158,9 @@ Ez az egyik legfontosabb része az útmutatónak. Benchmarkolás nélkül vakon 
 
 - 4 DIMM-es alaplap esetében a kézikönyvben leírtak alapján szereld be a RAM modulokat a megfelelő foglalatokba. Legtöbb esetben ez a 2. és 4. slot.
 
-- Használj PCIe portokat amelyek egyenesen a CPU-ba mennek a PCH helyett. Ez jellemzően a GPU-ra, M.2 és NVME SSD-re vonatkozik. [HWiNFO](https://www.hwinfo.com/)-ban a PCIe Bus kategóriánál, vagy az alaplapod oldalán lévő manual-ban a PCI részlegnél találod meg a kellő információt.
+- Használj PCIe portokat amelyek egyenesen a CPU-ba mennek a PCH helyett. Ez jellemzően a GPU-ra, M.2 és NVME SSD-re vonatkozik. [HWiNFO](https://www.hwinfo.com/)-ban a ``Bus`` kategóriánál, vagy az alaplapod oldalán lévő manual-ban a PCI részlegnél találod meg a kellő információt.
 
-- Győződj meg róla, hogy a PCIe Bus kategóriába tartozó PCIe eszközök sebessége megegyezik a maximálisan támogatott értékkel, mint például ``x16 3.0``.
+- Győződj meg róla, hogy a ``Bus`` kategóriába tartozó PCIe eszközök sebessége megegyezik a maximálisan támogatott értékkel.
 
   - [Példa](/media/hwinfo-pcie-width-speed.png)
 
@@ -184,9 +183,11 @@ Ez az egyik legfontosabb része az útmutatónak. Benchmarkolás nélkül vakon 
 
   - Lásd [Installation Remark for High Power Consumption Graphics Cards | Seasonic](https://knowledge.seasonic.com/article/8-installation-remark-for-high-power-consumption-graphics-cards)
 
-- Fektess be magas minőségű HDMI/DisplayPort, ethernet és tábkábelekbe.
+- Fektess be magas minőségű HDMI/DisplayPort, Ethernet és tábkábelekbe.
 
 ## 1.2 Hűtés
+
+- Vedd le a gép oldalát és a porszűrőket hogy segítsd a légáramlást.
 
 - Semmiképp se legyen a gép szőnyegen, vagy olyan helyen ahol nincs elegendő légáramlás.
 
@@ -194,11 +195,19 @@ Ez az egyik legfontosabb része az útmutatónak. Benchmarkolás nélkül vakon 
 
   - Lásd [Best Thermal Paste for CPUs | Tom’s Hardware](https://www.tomshardware.com/best-picks/best-thermal-paste)
 
+- Cseréld ki a gyári hővezető lapokat
+
+  - Gelid Ultimate
+  
+  - Fujipoly Ultra Extreme
+
+  - Olcsóbb de szintén jó megoldás: Arctic TP-3
+
 - Szereld be megfelelően az AIO-t.
 
   - Lásd [Stop Doing It Wrong: How to Kill Your CPU Cooler | Gamers Nexus](https://www.youtube.com/watch?v=BbGomv195sk)
 
-- Ha heatsink nélküli NVME/M.2 SSD-t szerelsz be ügyelj arra hogy az alaplapon lévő thermal pad-ekről levedd a fóliát.
+- Ha heatsink nélküli NVME/M.2 SSD-t szerelsz be ügyelj arra hogy az alaplapon lévő hővezető lapról levedd a fóliát.
 
 - Használj nem RGB-s ventilátorokat magas statikus nyomással.
 
@@ -208,14 +217,13 @@ Ez az egyik legfontosabb része az útmutatónak. Benchmarkolás nélkül vakon 
   
   - Az alaplapi ventilátorcsatlakozók általában 2A (24W) körüli áramerősséget bírnak, de ez alaplaponként eltérhet. Ha túl sok ventilátort csatlakoztatsz egyetlen headerre egy elosztóval, az túlterhelheti az áramkört, és akár meghibásodást is okozhat. Az RGB-s ventilátorok vagy egyes nagy teljesítményű ventilátorok még ennél is több áramot igényelhetnek. 
 
-- Pasztázd újra a GPU-t és cseréld ki a gyári ventilátorokat ha nem megfelelőek.
-
+- Pasztázd újra a GPU-t.
 
 ## 1.3 Perifériák konfigurálása
 
 - A legtöbb modern periféria támogatja az Onboard Memory Profile-t. Állítsd be őket mielőtt újratelepítenéd a Windowst, hogy ne kelljen a későbbi módosítások érdekében feltelepíteni a sok bloatware-t.
 
-- Magasabb DPI csökkenti a latency-t. Ügyelj arra hogy sensor smoothing ne lépjen életbe magasabb DPI használatakor. Windowsban az egér beállítások közt lejjebb viheted a pointer speedet tetszésed szerint ha a játék raw inputot használ.
+- Magasabb DPI csökkenti a latencyt. Ügyelj arra hogy sensor smoothing ne lépjen életbe magasabb DPI használatakor. Windowsban az egér beállítások közt lejjebb viheted a pointer speedet tetszésed szerint ha a játék raw inputot használ.
 
 - Magasabb polling rate csökkenti a jittert, azonban 1000Hz-nél (1ms) magasabb polling rate hardvertől függően negatívan befolyásolhatja a teljesítményt, ezért ennek megfelőlen kell beállítani. Ez nem akkora probléma a 2023 májusi Windows 11 Raw Input Stack update után ami limitálja a nem előtérben lévő programok polling frekvenciáját 125hz-re (8ms).
 
@@ -245,7 +253,7 @@ Ez az egyik legfontosabb része az útmutatónak. Benchmarkolás nélkül vakon 
 
      - [Példa](/media/ryzen-xhci-controller.png)      
 
-- Ha egynél több XHCI Controller-ed van, akkor az olyan eszközöket, mint például az egér, billentyűzet, és fejhallgató, egy másik controller-re különítheted el, hogy azok ne zavarják a polling konzisztenciáját.
+- Ha egynél több XHCI Controller-ed van, akkor az olyan eszközöket, mint például az egér, billentyűzet, és fejhallgató, elkülönítheted, hogy azok ne zavarják a polling konzisztenciáját.
 
 - Kerüld a Root Hub-on belüli USB Hub-ok használatát.
   
@@ -256,7 +264,7 @@ Ez az egyik legfontosabb része az útmutatónak. Benchmarkolás nélkül vakon 
 # 2. BIOS
 
 > [!CAUTION] 
-Fontos, hogy a módosított beállítások valóban pozítívan befolyásolják a teljesítményt (Lásd: [Benchmarkolás](#0-benchmarkolás)). Mielőtt belekezdesz, ajánlott alaphelyzetbe állítani a BIOS-t hogy tiszta lappal indulj ha esetleg valami rosszul volt beállítva.
+Fontos, hogy a módosított beállítások valóban pozítívan befolyásolják a teljesítményt (Lásd: [Benchmarkolás](#0-benchmarkolás)). Mielőtt belekezdesz, ajánlott alaphelyzetbe állítani/frissíteni a BIOS-t hogy tiszta lappal indulj ha esetleg valami rosszul volt beállítva.
 
 >[!CAUTION]
 Szintén fontos hogy a BIOS módosítása mindig kockázattal jár, ezért körültekintően folytasd.
@@ -290,6 +298,7 @@ Fontos megjegyezni hogy néhány játékban a ReBAR használata negatívan befol
   - [Töltsd le a SCEWIN-t](https://github.com/ab3lkaizen/SCEHUB/releases/download/1.2.0/DL_SCEWIN.exe)
   - Csomagold ki, majd futtasd az ``Export.bat`` fájlt
   - Exportálás után az ``NVRAM.txt`` megnyitásával láthatóvá válik az összes beállítás
+  - CTRL+F használatával keresd ki a módosítani kívánt beállítást
   - A változó típusától függően helyezd a ``*`` jelet a kívánt opcióhoz vagy írd át az értékét
   - Az ``Import.bat`` futtatásával elmented a beállításokat amelyek egy újraindítás után életbe lépnek
   - Hiba esetén lásd: [Solutions for various error messages](https://github.com/ab3lkaizen/SCEHUB?tab=readme-ov-file#solutions-for-various-error-messages)
@@ -1003,15 +1012,11 @@ Disable-MMAgent -MemoryCompression
 
 ## 5.25 NIC konfigurálása
 
-- ``Win+R`` -> ``ncpa.cpl``. 
+- ``Win+R`` -> ``ncpa.cpl``
 
-- Tilts le minden nem használt adaptert. Jobb klikk a fő adapterre és ``Properties``
+- Tilts le minden nem használt adaptert.
 
-- Kapcsold ki az összes funkciót kivéve a ``QoS Packet Scheduler``-t (Ha a router-ed támogatja és használni tervezed) és az ``Internet Protocol Version 4 (TCP/IPv4)``-et.
-
-- Állíts be egy Statikus IP-t. CMD-be írd be hogy ``ipconfig /all``. Jobb klikk a fő adapteredre, ``Properties``, majd pedig kattints rá az ``Internet Protocol Version 4 (TCP/IPv4)``-re és írd át manuálisan az összes beállítást a CMD-ben kiírtaknak megfelelően. 
-
-  - Lásd: [Recommended DNS Providers | Privacy Guides](https://www.privacyguides.org/en/dns/#recommended-providers)
+- Jobb klikk a fő adapteredre -> ``Properties`` -> Dupla klikk az ``Internet Protocol Version 4 (TCP/IPv4)``-re -> ``Advanced`` -> ``WINS`` -> Válaszd ki a ``Disable NetBIOS over TCP/IP`` opciót.
 
 ## 5.26 Audio eszközök beállítása
 
@@ -1053,14 +1058,11 @@ Használj Process Explorer-t mivel a stock Task Manager a CPU kihasználtságát
   - Green Ethernet
   - Power Saving Mode
 
-- ``View -> Devices by connection`` és tilts le minden PCIe, SATA, NVMe, XHCI Controllert és USB Hub-ot amihez nincs semmi csatlakoztatva. Tilts le minden nem használt eszközt ami ugyanahhoz a PCIe port-hoz van csatlakoztatva mint a GPU, pl. HD Audio. Ha valamiben nem vagy biztos inkább ne tiltsd le, vagy keress rá az interneten.
+- ``View -> Devices by connection`` és tilts le minden PCIe, SATA, NVMe, XHCI Controllert és USB Hub-ot amihez nincs semmi csatlakoztatva. Tilts le minden nem használt eszközt ami ugyanahhoz a PCIe Port-hoz van csatlakoztatva mint a GPU, pl. HD Audio. Ha valamiben nem vagy biztos inkább ne tiltsd le, vagy keress rá az interneten.
 
 - ``View -> Resources by connection`` és tilts le minden nem használt eszközt ami I/O-t vagy IRQ-t használ.
 
-- A HID eszközöket is letilthatod azonban lehetséges hogy az adott periféria szoftvere nem fogja felimserni az eszközt. Ha véletlen letiltod az egered, használd a billentyűzeted hogy visszakapcsold az Enter, Tab és nyilak használatával.
-
 - Opcionálisan használd a [DeviceCleanup](https://www.majorgeeks.com/mg/getmirror/device_cleanup_tool,1.html) programot hogy eltávolíts rejtett eszközöket.
-
 
 ## 5.29 Device Power Saving
 
