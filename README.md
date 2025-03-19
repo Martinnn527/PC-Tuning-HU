@@ -1020,7 +1020,7 @@ Disable-MMAgent -MemoryCompression
 
 ## 5.26 Audio eszközök beállítása
 
-- ``Win+R : mmsys.cpl``
+- ``Win+R`` -> ``mmsys.cpl``
 
 - Tiltsd le az összes nem használt Playback és Recording eszközt.
 
