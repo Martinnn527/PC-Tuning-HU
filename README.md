@@ -774,6 +774,12 @@ DISM /Online /Set-ReservedStorageState /State:Disabled
 reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SysMain" /v "Start" /t REG_DWORD /d "4" /f
 ```
 
+Windows 11-en az ``EnableLUA`` registry kulcsot 0-ra kell tenni hogy teljesen kikapcsold a User Account Control-t.
+
+```bat
+reg add HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System /t REG_DWORD /v EnableLUA /d 0 /f
+```
+
 - Konfiguráld a ``Win+R -> sysdm.cpl -> Advanced -> Performance -> Settings`` menüt. Ez modern rendszereken nem befolyásolja a teljesítményt azonban letisztultabb lesz a Windows.
 
 - Kapcsolj ki mindent a ``System`` -> ``Notifications and actions``-ben a ``Win+I`` megnyomásával.
@@ -1136,13 +1142,13 @@ Példa: egy 1000-es polling rate-ű egér minden 1ms-ban küld adatot. Ha csak a
 reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\CI\Config" /v "VulnerableDriverBlocklistEnable" /t REG_DWORD /d "0" /f
 ```
 
-- A ``bin`` mappában lévő [XHCI-IMOD-Interval.ps1](/bin/XHCI-IMOD-Interval.ps1) fájlt másold be a ``C:\``-be. Ha az RWEverything-et máshova telepítetted akkor a ps1 fájlban a ``$rwePath = "C:\Program Files\RW-Everything\Rw.exe"`` sort írd át. Csinálj egy shortcut-ot ``shell:startup``-ba hogy minden indításnál fusson.
+- A ``bin`` mappában lévő [XHCI-IMOD-Interval.ps1](/bin/XHCI-IMOD-Interval.ps1) fájlt másold be a ``C:\``-be. Ha az RWEverything-et nem az alapértelmezett telepítetted akkor a ps1 fájlban a ``$rwePath = "C:\Program Files\RW-Everything\Rw.exe"`` sort írd át. Csinálj egy shortcut-ot ``shell:startup``-ba hogy minden indításnál fusson.
 
 ## 5.34 Applikációk konfigurálása
 
 ### 5.34.1 FPS Limit
 
-- Ha limitálod az FPS-t akkor a monitorod refresh rate-jének a többszörése korlátozd le. Bizonyosodj meg róla hogy a GPU nincs teljesen kihasználva mivel minél kevesebb a kihasználtsága annál kevesebb a system latency.
+- Ha limitálod az FPS-t akkor a monitorod refresh rate-jének a többszörösére korlátozd le. Bizonyosodj meg róla, hogy magas/unlimited FPS használatokor a GPU nincs teljesen kihasználva mivel minél kevesebb a kihasználtsága, annál kevesebb a system latency.
 
   - Lásd: [How to properly cap your FPS | Calypto](https://youtu.be/_73gFgNrYVQ?si=VeCh5MXDgjHQdJ7h)
   - Lásd: [FPS Cap Calculator | BoringBoredom](https://boringboredom.github.io/tools/fpscapcalculator)
@@ -1151,8 +1157,7 @@ reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\CI\Config" /v "Vuln
 
 ### 5.34.2 Játék regisztrálása Game Bar-ban
 
-Győződj meg róla hogy a Game Bar felismeri a játékot. Nyisd meg a Game Bar-t ``Win+G`` megnyomásával amikor játékban vagy és kapcsold be a ``Remember this is a game`` opciót. 
-
+Győződj meg róla hogy a Game Bar felismeri a játékot. Nyisd meg a Game Bar-t ``Win+G`` megnyomásával amikor játékban vagy és kapcsold be a ``Remember this is a game`` opciót. Ez szükséges a Game Mode és néhány esetben a használni kívánt Presentation Mode helyes működéséhez.
 ### 5.34.3 Presentation Mode
 
 Ez nem egy ajánlás hogy melyik Presentation Mode-ot használd, inkább csak informatív okból írom le.
