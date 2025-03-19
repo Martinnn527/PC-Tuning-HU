@@ -18,15 +18,11 @@
 
 - Device Manager-ben tiltsd le a következőket:
 
-- High Definition Audio (Amelyik a GPU-hoz van csatlakoztatva: View -> Devices by connection)
-
-- AMD-Dynamic Audio Noise “Supression”
-
-- AMD Link Controller Emulation
-
-- AMD Streaming Audio Device
-
-- AMD UCM-UCSI Device
+  - High Definition Audio (Amelyik a GPU-hoz van csatlakoztatva: View -> Devices by connection)
+  - AMD-Dynamic Audio Noise “Supression”
+  - AMD Link Controller Emulation
+  - AMD Streaming Audio Device
+  - AMD UCM-UCSI Device
 
 ## 3. Radeon Software konfigurálása
 
