@@ -26,7 +26,7 @@
 
 ## 3. Radeon Software konfigurálása
 
-Grapics oldal:
+Graphics oldal:
 
 - Radeon Super Resolution: Off
 
