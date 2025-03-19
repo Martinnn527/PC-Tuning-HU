@@ -61,11 +61,11 @@
 
 - Az alábbi registry key-el minimalizálhatod a GPU órajel ingadozását azonban magasabb idle hőfokokkal és energiafogyasztással jár. Amikor nem játszol fontold meg a [limit-nvpstate](https://github.com/valleyofdoom/limit-nvpstate) használatát.
 
-  - A [Driver Key](/media/find-driver-key-example.png)-t cseréld ki a sajátodra majd másold be CMD-be az alábbi parancsot:
+- A [Driver Key](/media/find-driver-key-example.png)-t cseréld ki a sajátodra majd másold be CMD-be az alábbi parancsot:
 
-  ```bat
-  reg add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}\0000" /v "DisableDynamicPstate" /t REG_DWORD /d "1" /f
-  ```
+```bat
+reg add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}\0000" /v "DisableDynamicPstate" /t REG_DWORD /d "1" /f
+```
 
 ## 4. NVIDIA Profile Inspector konfigurálása
 
