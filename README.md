@@ -1049,7 +1049,7 @@ Használj Process Explorer-t mivel a stock Task Manager a CPU kihasználtságát
 
 - ``Win+R`` -> ``devmgmt.msc`` hogy megnyisd a Device Manager-t.
 
-- A ``Disk drives`` kategóriánál jobb klikk az SSD-re -> ``Polciies`` -> és pipáld be a ``Turn off Windows write-cache buffer flushing on the device`` opciót.
+- A ``Disk drives`` kategóriánál jobb klikk az SSD-re -> ``Properties`` -> ``Polciies`` -> és pipáld be a ``Turn off Windows write-cache buffer flushing on the device`` opciót.
 
 - A ``Network adapters`` kategóriánál ``Properties -> Advanced`` és kapcsolj ki minden power saving funkciót.
   
