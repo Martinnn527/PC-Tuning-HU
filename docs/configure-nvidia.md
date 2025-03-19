@@ -69,7 +69,7 @@ reg add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08
 
 ## 4. NVIDIA Profile Inspector konfigurálása
 
-- Töltsd le és csomgaold ki az [NVIDIA Profile Inspector](https://github.com/Orbmu2k/nvidiaProfileInspector)-t
+- Töltsd le és csomagold ki az [NVIDIA Profile Inspector](https://github.com/Orbmu2k/nvidiaProfileInspector)-t
 
 - Kapcsold ki az ``Enable Ansel``-t
 
