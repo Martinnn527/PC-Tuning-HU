@@ -13,7 +13,7 @@
   - [1.3 Perifériák konfigurálása](#13-perifériák-konfigurálása)
   - [1.4 EMI minimalizálása](#14-emi-minimalizálása)
   - [1.5 USB Portok elrendezésének konfigurálása](#15-usb-portok-elrendezésének-konfigurálása)
-- [2. BIOS](#2-bios) 
+- [2. BIOS/UEFI](#2-biosuefi) 
   - [2.1 BIOS frissítések](#21-bios-frissítések)
   - [2.2 CPU Microcode](#22-cpu-microcode-az-uefi-ben)
   - [2.3 BIOS Reset](#23-bios-reset)
@@ -51,8 +51,8 @@
   - [4.4 Szükséges fájlok integrálása](#44-szükséges-fájlok-integrálása)
   - [4.5 Telepítés Ventoy használatával](#45-telepítés-pendrive-ról-ventoy-használatával)
   - [4.6 ISO-ba való bootolás](#46-iso-ba-való-bootolás)
-  - [4.7 OOBE Setup](#47-oobe-setup)
-- [5. Telepítés utáni instrukciók](#5-telepítés-utáni-instrukciók)
+  - [4.7 OOBE](#47-oobe)
+- [5. Windows konfigurálása](#5-windows-konfigurálása)
   - [5.1 Unrestricted PowerShell Execution Policy](#51-unrestricted-powershell-execution-policy)
   - [5.2 Process Mitigations](#52-process-mitigations)
   - [5.3 Registry Script](#53-registry-script)
@@ -63,7 +63,7 @@
   - [5.8 Idő, nyelv és régió](#58-idő-nyelv-és-régió)
   - [5.9 Böngésző konfigurálása](#59-böngésző-konfigurálása)
   - [5.10 Ütemezett feladatok kikapcsolása](#510-ütemezett-feladatok-kikapcsolása)
-  - [5.11 Windows Aktiválása](#511-windows-aktiválása)
+  - [5.11 Windows aktiválása](#511-windows-aktiválása)
   - [5.12 Egyéb beállítások](#512-egyéb-beállítások)
   - [5.13 Runtime-ok feltelepítése](#513-runtime-ok-feltelepítése)
   - [5.14 Optional Features](#514-optional-features)
@@ -261,7 +261,7 @@ Ez az egyik legfontosabb része az útmutatónak. Benchmarkolás nélkül vakon 
 
 ---
 
-# 2. BIOS
+# 2. BIOS/UEFI
 
 > [!CAUTION] 
 Fontos, hogy a módosított beállítások valóban pozítívan befolyásolják a teljesítményt (Lásd: [Benchmarkolás](#0-benchmarkolás)). Mielőtt belekezdesz, ajánlott alaphelyzetbe állítani/frissíteni a BIOS-t hogy tiszta lappal indulj ha esetleg valami rosszul volt beállítva.
@@ -557,7 +557,7 @@ Húzd ki az ethernet kábeledet és ne legyél az internethez csatlakozva, ezál
 
 - Ha a Secure Boot bevan kapcsolva, ideiglenesen kapcsold ki a telepítési folyamathoz mivel problémákat okozhat. Bootolj be a pendrive-ra BIOS-on belül és válaszd ki az ISO-t.
 
-## 4.7 OOBE Setup
+## 4.7 OOBE
 
 - Windows Server telepítése során meg kell adnod egy komplex jelszót amit törölhetsz később.
 
@@ -565,7 +565,7 @@ Húzd ki az ethernet kábeledet és ne legyél az internethez csatlakozva, ezál
 
 ---
 
-# 5. Telepítés utáni instrukciók
+# 5. Windows konfigurálása
 
 > [!CAUTION] 
 Fontos, hogy a módosított beállítások valóban pozítívan befolyásolják a teljesítményt (Lásd: [Benchmarkolás](#0-benchmarkolás)).
@@ -744,7 +744,7 @@ Az alábbi PowerShell parancs kikapcsolja az ütemezett feladatokat amik rendsze
 ```powershell
 C:\bin\disable-scheduled-tasks.ps1
 ```
-## 5.11 Windows Aktiválása
+## 5.11 Windows aktiválása
 
 Ha nem vásároltál Windows kulcsot, használd PowerShell-ben az alábbi parancsot hogy aktiváld:
 
@@ -794,7 +794,7 @@ Windows Serveren az ``OptionalFeatures`` megfelelője a ``Server Manager -> Mana
 
 ### 5.14.1 NET 3.5
 
-Ha kihagytad az [ISO testreszabása](#43-iso-testreszabása-opcionális) pontot akkor a NET 3.5 nincs bekapcsolva és nem fogod tudni feltelepíteni mivel a Windows Update kivan kapcsolva. Ezért egy külön módszerrel kell telepíteni.
+Ha kihagytad az [ISO testreszabása](#43-iso-testreszabása-opcionális) pontot, akkor a NET 3.5 nincs bekapcsolva és nem fogod tudni feltelepíteni, mivel a Windows Update kivan kapcsolva. Ezért egy külön módszerrel kell telepíteni.
 
 - Tölts le egy Windows ISO-t és csomagold ki. Cseréld ki a ``C:\EXTRACTED_ISO\sources\sxs``-t a megfelelő elérési úttal, majd futtasd a parancsot.
 
