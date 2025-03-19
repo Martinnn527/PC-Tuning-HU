@@ -1119,6 +1119,12 @@ for %a in ("SleepStudy" "Kernel-Processor-Power" "UserModePowerService") do (wev
 
 - ``Win+R -> msinfo32 -> Hardware Resources -> Conflicts/Sharing`` és győződj meg róla hogy nincs IRQ Sharing a rendszeren.
 
+  - Ha ``System timer`` és ``High Precision Event Timer``eszköz IRQ-t oszt meg, le kell tiltani a ``System Timer`` szülőeszközét ami a ``PCI standard ISA bridge. CMD-be másold be az alábbi parancsot.
+
+  ```bat
+  reg add "HKLM\SYSTEM\CurrentControlSet\Services\msisadrv" /v "Start" /t REG_DWORD /d "4" /f
+  ```
+  
 ## 5.33 XHCI Interrupt Moderation (IMOD)
 
 Windows 7-en az IMOD Interval 1ms, viszont az újabb OS-eken 0.05ms (50us) kivéve ha az adott USB drivernél más van megadva. Ez azt jelenti hogy amiután egy Interrupt generálva lett, az XHCI (USB) controller vár (úgynevezett buffer period) hogy több adat érkezzen mielőtt újabb Interruptot generálna. Ez csökkenti a CPU terhelését de adatvesztéshez vezethet.
