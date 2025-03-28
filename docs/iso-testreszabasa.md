@@ -36,13 +36,13 @@
   set "EXTRACTED_ISO=C:\en_windows_7_professional_with_sp1_x64_dvd_u_676939"
   ```
 
-- Állítsd be hova lesz mount-olva az ISO.
+- Állítsd be hova lesz mountolva az ISO.
 
   ```bat
   set "MOUNT_DIR=%temp%\MOUNT_DIR"
   ```
 
--  Állítsd be az ``OSCDIMG`` változót az ``oscdimg.exe`` elérési útjára. Ha a Windows ADK-t az alapértelmezett helyre telepítetted nem kell a parancsot átírnod.
+-  Állítsd be az ``OSCDIMG`` változót az ``oscdimg.exe`` elérési útjára. Ha a Windows ADK-t az alapértelmezett helyre telepítetted, nem kell a parancsot átírnod.
 
    ```bat
    set "OSCDIMG=C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Deployment Tools\amd64\Oscdimg\oscdimg.exe"

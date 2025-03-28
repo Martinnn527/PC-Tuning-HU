@@ -42,8 +42,9 @@
   - [3.3 Hőmérsékletkezelés](#33-hőmérsékletkezelés)
   - [3.4 Load-Line Calibration](#34-load-line-calibration)
   - [3.5 GPU](#35-gpu)
-  - [3.6 CPU/RAM](#36-cpuram)
-  - [3.7 Stressz-tesztelő eszközök](#37-stressz-tesztelő-eszközök)
+  - [3.6 CPU](#36-cpu)
+  - [3.7 RAM](#37-ram)
+  - [3.8 Stressz-tesztelő eszközök](#38-stressz-tesztelő-eszközök)
 - [4. Telepítés előtti instrukciók](#4-telepítés-előtti-instrukciók)
   - [4.1 Windows verzió kiválasztása](#41-milyen-windows-verziót-használj)
   - [4.2 Eredeti ISO letöltése](#43-eredeti-iso-letöltése)
@@ -442,17 +443,21 @@ Ez nem egy ajánlás hogy milyen LLC mode-ot használj, inkább csak informatív
   - Lásd [A Slightly Better Way To Overclock and Tweak Your Nvidia GPU | Cancerogeno](https://docs.google.com/document/d/14ma-_Os3rNzio85yBemD-YSpF_1z75mZJz1UdzmW8GE/edit?tab=t.0)
   - Lásd [LunarPSD/NvidiaOverclocking](https://github.com/LunarPSD/NvidiaOverclocking/blob/main/Nvidia%20Overclocking.md)
 
-## 3.6 CPU/RAM
+## 3.6 CPU
 
 - Győződj meg róla hogy a CPU a megfelelő frekvencián fut mielőtt belekezdesz abban az esetben ha kikapcsoltad a SpeedStep és SpeedShift-hez hasonló beállításokat ami megakadályozhatja a CPU-t hogy túllépje az alapfrekvenciát.
 
-- Konfiguráld a RAM frekvenciát és timing-okat manuálisan jelentős teljesítménybeli javulásért [(1)](https://kingfaris.co.uk/blog/intel-ram-oc-impact). Az XMP nem hangol be nagyon sok timing-ot és nem is garantál stabilitást.
+## 3.7 RAM
 
-   - Lásd [Eden’s DDR4 guide](https://web.archive.org/web/20231211232729/https://cdn.discordapp.com/attachments/328891236918493184/1172922515962724444/DDR4_Guide_V1.2.1.pdf)
-   - Lásd [KoTbelowall/INTEL-DDR4-RAM-OC-GUIDE-by-KoT](https://github.com/KoTbelowall/INTEL-DDR4-RAM-OC-GUIDE-by-KoT)
-   - Lásd [integralfx/MemTestHelper](https://github.com/integralfx/MemTestHelper/blob/oc-guide/DDR4%20OC%20Guide.md)
+Konfiguráld a RAM frekvenciát és időzítéseket manuálisan jelentős teljesítménybeli javulásért [(1)](https://kingfaris.co.uk/blog/intel-ram-oc-impact). Az XMP nem hangol be nagyon sok időzítést és nem is garantál stabilitást.
 
-## 3.7 Stressz-tesztelő eszközök
+  - Lásd [Eden’s DDR4 guide](https://web.archive.org/web/20231211232729/https://cdn.discordapp.com/attachments/328891236918493184/1172922515962724444/DDR4_Guide_V1.2.1.pdf)
+  - Lásd [KoTbelowall/INTEL-DDR4-RAM-OC-GUIDE-by-KoT](https://github.com/KoTbelowall/INTEL-DDR4-RAM-OC-GUIDE-by-KoT)
+  - Lásd [integralfx/MemTestHelper](https://github.com/integralfx/MemTestHelper/blob/oc-guide/DDR4%20OC%20Guide.md)
+
+## 3.8 Stressz-tesztelő eszközök
+
+- [Karhu RAM Test](https://www.karhusoftware.com/)
 
 - [StresKit](https://github.com/valleyofdoom/StresKit) (bootolható)
 
@@ -478,7 +483,7 @@ Ez nem egy ajánlás hogy milyen LLC mode-ot használj, inkább csak informatív
 
 - [OCCT](https://www.ocbase.com)
 
-- [memtest_vulkan](https://github.com/GpuZelenograd/memtest_vulkan)  
+- [memtest_vulkan](https://github.com/GpuZelenograd/memtest_vulkan) 
 
 ---
 
@@ -1010,7 +1015,7 @@ powercfg /setactive scheme_current
 Get-MMAgent
 ```
 
-- Használd az alábbi példát hogy kikapcsolj egy adott beállítást. Ha a Superfetch/Prefetch-et bekapcsolva hagytad az [Egyéb](#511-egyéb-beállítások) szekcióban akkor nagy valószínűséggel a Prefetch-el kapcsolatos funkciókra szükséged van.
+- Használd az alábbi példát hogy kikapcsolj egy adott beállítást. Ha a Superfetch/Prefetch-et bekapcsolva hagytad az [Egyéb](#512-egyéb-beállítások) szekcióban akkor nagy valószínűséggel a Prefetch-el kapcsolatos funkciókra szükséged van.
 
 ```powershell
 Disable-MMAgent -MemoryCompression
@@ -1023,6 +1028,8 @@ Disable-MMAgent -MemoryCompression
 - Tilts le minden nem használt adaptert.
 
 - Jobb klikk a fő adapteredre -> ``Properties`` -> Dupla klikk az ``Internet Protocol Version 4 (TCP/IPv4)``-re -> ``Advanced`` -> ``WINS`` -> Válaszd ki a ``Disable NetBIOS over TCP/IP`` opciót.
+
+- Opcionálisan állíts be egy DNS-t a böngészési gyorsaság és biztonság javítása érdekében. Lásd [Best DNS resolvers of 2025 | techradar](https://www.techradar.com/news/best-dns-server)
 
 ## 5.26 Audio eszközök beállítása
 
@@ -1072,7 +1079,7 @@ Használj Process Explorer-t mivel a stock Task Manager a CPU kihasználtságát
 
 ## 5.29 Device Power Saving
 
-- Nyisd meg a PowerShell-t és másold be az alábbi parancsot hogy kikapcsold az ``Allow the computer to turn off this device to save power`` opciót a Device Manager-ben minden alkalmaz eszközön.
+- Nyisd meg a PowerShell-t és másold be az alábbi parancsot hogy kikapcsold az ``Allow the computer to turn off this device to save power`` opciót a Device Manager-ben minden alkalmas eszközön.
 
 ```powershell
 Get-WmiObject MSPower_DeviceEnable -Namespace root\wmi | ForEach-Object { $_.enable = $false; $_.psbase.put(); }
