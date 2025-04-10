@@ -7,7 +7,7 @@
 - [Bemutató](#bemutató)
 - [Követelmények](#követelmények)
 - [Benchmarkolás](#benchmarkolás)
-- [1. Fizikális beállítás](#1-physical-setup)
+- [1. Fizikális beállítás](#1-fizikális-beállítás)
   - [1.1 Általános információ](#11-általános-információ)
   - [1.2 Hűtés](#12-hűtés)
   - [1.3 Perifériák konfigurálása](#13-perifériák-konfigurálása)
@@ -151,15 +151,15 @@ Ez az egyik legfontosabb része az útmutatónak. Benchmarkolás nélkül vakon 
 
 - Győződj meg róla hogy a kábelek rendesen bevannak dugva és nem lazák (legfőképp PCIe tápkábelek)
 
-- Érdemes vezetékes eszközöket használni, mivel a vezetéknélküli eszközök hajlamosak aggresszív energiatakarékosságot alkalmazni a hosszabb akkumulátor élettartam érdekében, a túlzott EMI hátrányaival együtt.
+- Érdemes vezetékes eszközöket használni, mivel a vezetéknélküli eszközök hajlamosak aggresszív energiatakarékosságot alkalmazni a hosszabb akkumulátor élettartam érdekében, a túlzott [EMI](https://www.techtarget.com/searchmobilecomputing/definition/electromagnetic-interference) hátrányaival együtt.
 
-- A [CrystalDiskInfo](https://crystalmark.info/en/software/crystaldiskinfo/) és [CrystalDiskMark](https://crystalmark.info/en/software/crystaldiskmark/) programmal megtekinthető az SSD állapota. 
+- A [CrystalDiskInfo](https://crystalmark.info/en/software/crystaldiskinfo/) és [CrystalDiskMark](https://crystalmark.info/en/software/crystaldiskmark/) programmal megtekinthető az SSD állapota és sebessége. 
 
-- Frissítsd az SSD, NIC (Network Interface Controller), és a többi periféria firmware-ét.
+- Frissítsd az SSD és a többi periféria firmware-ét.
 
 - 4 DIMM-es alaplap esetében a kézikönyvben leírtak alapján szereld be a RAM modulokat a megfelelő foglalatokba. Legtöbb esetben ez a 2. és 4. slot.
 
-- Használj PCIe portokat amelyek egyenesen a CPU-ba mennek a PCH helyett. Ez jellemzően a GPU-ra, M.2 és NVME SSD-re vonatkozik. [HWiNFO](https://www.hwinfo.com/)-ban a ``Bus`` kategóriánál, vagy az alaplapod oldalán lévő manual-ban a PCI részlegnél találod meg a kellő információt.
+- Használj PCIe portokat amelyek egyenesen a CPU-ba mennek a PCH helyett. Ez jellemzően a GPU-ra, M.2 és NVME SSD-re vonatkozik. [HWiNFO](https://www.hwinfo.com/)-ban a ``Bus`` kategóriánál, vagy az alaplapod oldalán lévő manual-ban a PCI részlegnél találod meg a kellő információt. 
 
 - Győződj meg róla, hogy a ``Bus`` kategóriába tartozó PCIe eszközök sebessége megegyezik a maximálisan támogatott értékkel.
 
