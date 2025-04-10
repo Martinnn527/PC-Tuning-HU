@@ -1215,10 +1215,15 @@ Abban az esetben ha a routered támogatja a Quality of Service beállítást, ak
 
 - Game Overlay - OFF
 
-- Ha le szeretnéd tiltani az automikus frissítéseket, használd az alábbi parancsot hogy átnevezd az ``Update.exe`` fájlt.
+- Tiltsd le az automikus frissítéseket az alábbi paranccsal.
 
 ```bat
 ren "%LOCALAPPDATA%\Discord\Update.exe" "Update.exee"
+```
+- Töröld ki a **discord_desktop_overlay** modult:
+
+```bat
+rd /s /q "%LOCALAPPDATA%\Discord\app-*\modules\discord_desktop_overlay-*"
 ```
 
 - Opcionálisan használj [DiscordFixer](https://github.com/HerXayah/Discord-Fixer)-t. 
@@ -1232,7 +1237,7 @@ ren "%LOCALAPPDATA%\Discord\Update.exe" "Update.exee"
 ```bat
 ren "C:\Program Files (x86)\Epic Games\Launcher\Portal\Extras\Overlay\EOSOverlayRenderer-Win64-Shipping.exe" EOSOverlayRenderer-Win64-Shipping.exee
 ```
-- Amiután elindítasz egy játékot, az Epic Games Launcher továbbra is fut a háttérben azonban bezárható a Steam-mel ellentétben.
+- Amiután elindítasz egy játékot, az Epic Games Launcher továbbra is fut a háttérben azonban bezárható a Steammel ellentétben.
 
 ### 5.34.9 Steam 
 
@@ -1244,7 +1249,7 @@ Töltsd le a [NoSteamWebHelper](https://github.com/Aetopia/NoSteamWebHelper)-t.
 
 - Másold be az ``umpdc.dll``-t abba a mappába ahol a Steam.exe található.
 
-Így mostantól automatikusan bezáródik a CEF/Chromium Embedded Framework amikor elindítasz egy játékot azonban amikor bezárod újra elindul hogy maga a Steam applikáció elérhető legyen. Vedd figyelembe hogy a Steam overlay nem lesz elérhető játék közben.
+Így mostantól automatikusan bezáródik a SteamWebHelper amikor elindítasz egy játékot azonban amikor bezárod újra elindul hogy maga a Steam applikáció elérhető legyen. Vedd figyelembe hogy a Steam overlay nem lesz elérhető játék közben.
 
 ## 5.35 Interruptok és DPC-k
 
