@@ -461,8 +461,6 @@ Konfiguráld a RAM frekvenciát és időzítéseket manuálisan jelentős teljes
 
 - [Karhu RAM Test](https://www.karhusoftware.com/)
 
-- [StresKit](https://github.com/valleyofdoom/StresKit) (bootolható)
-
 - Linpack
 
   - [StresKit](https://github.com/valleyofdoom/StresKit)
