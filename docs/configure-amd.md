@@ -48,7 +48,7 @@ Graphics oldal:
 
 Display oldal:
 
-- AMD FreeSync: Te döntésed
+- AMD FreeSync: Off
 
 - Virtual Super Resolution: Off
 
