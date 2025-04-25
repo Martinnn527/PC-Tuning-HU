@@ -779,10 +779,22 @@ DISM /Online /Set-ReservedStorageState /State:Disabled
 reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SysMain" /v "Start" /t REG_DWORD /d "4" /f
 ```
 
+Kapcsold ki a web search funkciót:
+
+```bat
+reg add "HKEY_CURRENT_USER\Software\Policies\Microsoft\Windows\Explorer" /v "DisableSearchBoxSuggestions" /t REG_DWORD /d 1 /f
+```
+
 Windows 11-en az ``EnableLUA`` registry kulcsot 0-ra kell tenni hogy teljesen kikapcsold a User Account Control-t.
 
 ```bat
-reg add HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System /t REG_DWORD /v EnableLUA /d 0 /f
+reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "EnableLUA" /t REG_DWORD /d 0 /f
+```
+
+Kapcsold ki a Copilot AI-t:
+
+```bat
+reg add "HKCU\Software\Policies\Microsoft\Windows\WindowsCopilot" /v TurnOffWindowsCopilot /t REG_DWORD /d 1 /f
 ```
 
 - Konfiguráld a ``Win+R -> sysdm.cpl -> Advanced -> Performance -> Settings`` menüt. Ez modern rendszereken nem befolyásolja a teljesítményt azonban letisztultabb lesz a Windows.
@@ -1222,6 +1234,7 @@ Abban az esetben ha a routered támogatja a Quality of Service beállítást, ak
 ```bat
 ren "%LOCALAPPDATA%\Discord\Update.exe" "Update.exee"
 ```
+
 - Töröld ki a **discord_desktop_overlay** modult:
 
 ```bat
