@@ -797,7 +797,7 @@ Kapcsold ki a Copilot AI-t:
 reg add "HKCU\Software\Policies\Microsoft\Windows\WindowsCopilot" /v TurnOffWindowsCopilot /t REG_DWORD /d 1 /f
 ```
 
-- Konfiguráld a ``Win+R -> sysdm.cpl -> Advanced -> Performance -> Settings`` menüt. Ez modern rendszereken nem befolyásolja a teljesítményt azonban letisztultabb lesz a Windows.
+- Konfiguráld a ``Win+R -> sysdm.cpl -> Advanced -> Performance -> Settings`` menüt. Ez modern hardveren nem befolyásolja a teljesítményt azonban letisztultabbá teheti a rendszert.
 
 - Kapcsolj ki mindent a ``System`` -> ``Notifications and actions``-ben a ``Win+I`` megnyomásával.
     
