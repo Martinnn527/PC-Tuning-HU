@@ -457,6 +457,8 @@ Konfiguráld a RAM frekvenciát és időzítéseket manuálisan jelentős teljes
 
 ## 3.8 Stressz-tesztelő eszközök
 
+- [RAM Test Pro](https://pcstonks.ru/ram-test-pro/en)
+
 - [Karhu RAM Test](https://www.karhusoftware.com/)
 
 - [StresKit](https://github.com/valleyofdoom/StresKit) (bootolható)
