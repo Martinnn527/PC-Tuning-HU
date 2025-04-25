@@ -316,11 +316,11 @@ Fontos megjegyezni hogy néhány játékban a ReBAR használata negatívan befol
   
   - Ellenőrizd a C-State residency-t [HWiNFO](https://www.hwinfo.com/)-ban
   
-- Kapcsold ki az összes Power Saving funkciót, mint például: ASPM (Active State Power Management), ALPM (Aggressive Link Power Managemenet), DRAM Power Down, Hibernation, Clock Gating, Power Gating, PCIe Power Management Keresd a "power management", "power saving" kifejezéseket.  
+- Kapcsold ki az összes Power Saving funkciót, mint például: ASPM (Active State Power Management), ALPM (Aggressive Link Power Managemenet), DRAM Power Down, Hibernation, Clock Gating, Power Gating, PCIe Power Management. Keresd a "power management", "power saving", "D3",  kifejezéseket.  
 
 ## 2.8 Virtualization
 
-- Kapcsold ki a Virtualization/SVM Mode, Intel VT-d/AMD-Vi, IOMMU beállításokat mivel ezek a memória hozzáférés késeltetését növelhetik. A Virtualization szintén hatással lehet a BCLK-ra.
+- Kapcsold ki a Virtualization/SVM Mode, Intel VT-d/AMD-Vi, IOMMU beállításokat mivel ezek a memória hozzáférés késleltetését növelhetik. A Virtualization szintén hatással lehet a BCLK-ra.
    
   - Ellenőrizd a Virtualization-t Task Manager-ben.
 
@@ -422,7 +422,7 @@ Fontos megjegyezni hogy néhány játékban a ReBAR használata negatívan befol
 
 ## 3.3 Hőmérsékletkezelés
 
-- Kerüld a thermal trotthling-et minden áron. Underclock-olj ha a hűtőd nem megfelelő. Egy stabil hőmérsékléten futó alkatrész alacsonyabb frekvenciával sokkal előnyösebb mint egy magasabb frekvencián futó viszont túlmelegedő alkatrész. 
+- Kerüld a thermal trotthling-et minden áron. Underclockolj ha a hűtőd nem megfelelő. Egy stabil hőmérsékléten futó alkatrész alacsonyabb frekvenciával sokkal előnyösebb mint egy magasabb frekvencián futó viszont túlmelegedő alkatrész. 
 
   - Lásd [RAM Overclock Stability and Heat Management | buildzoid](https://www.youtube.com/watch?v=iCD0ih4qzHw)
 
@@ -1152,6 +1152,8 @@ reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\CI\Config" /v "Vuln
 - A ``bin`` mappában lévő [XHCI-IMOD-Interval.ps1](/bin/XHCI-IMOD-Interval.ps1) fájlt másold be a ``C:\``-be. Ha az RWEverything-et nem az alapértelmezett telepítetted akkor a ps1 fájlban a ``$rwePath = "C:\Program Files\RW-Everything\Rw.exe"`` sort írd át. Csinálj egy shortcut-ot ``shell:startup``-ba hogy minden indításnál fusson.
 
 ## 5.34 Applikációk konfigurálása
+
+Tölts le minden játékot, applikációt amit használni fogsz.
 
 ### 5.34.1 FPS Limit
 
