@@ -1179,6 +1179,7 @@ Tölts le minden játékot, applikációt amit használni fogsz.
 ### 5.34.2 Játék regisztrálása Game Bar-ban
 
 Győződj meg róla hogy a Game Bar felismeri a játékot. Nyisd meg a Game Bar-t ``Win+G`` megnyomásával amikor játékban vagy és kapcsold be a ``Remember this is a game`` opciót. Ez szükséges a Game Mode és néhány esetben a használni kívánt Presentation Mode helyes működéséhez.
+
 ### 5.34.3 Presentation Mode
 
 Ez nem egy ajánlás hogy melyik Presentation Mode-ot használd, inkább csak informatív okból írom le.
@@ -1205,9 +1206,9 @@ reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\Dwm" /v "OverlayTestMode"
 
 ### 5.34.4 Game Mode
 
-A Game Mode megakadályozza a Windows Update futását valamint bizonyos értesítések megjelenítését ([1](https://support.xbox.com/en-GB/help/games-apps/game-setup-and-play/use-game-mode-gaming-on-pc)). Fontos megjegyezni, hogy a Game Mode befolyásolhatja a folyamatok és thread-ek prioritását, attól függően, hogy a PsPrioritySeparation értéke hogyan van beállítva. Érdemes kísérletezni a Game Mode engedélyezésével és letiltásával, hogy meghatározd annak hatását a rendszer teljesítményére.
+A Game Mode megakadályozza a Windows Update futását valamint bizonyos értesítések megjelenítését ([1](https://support.xbox.com/en-GB/help/games-apps/game-setup-and-play/use-game-mode-gaming-on-pc)). Fontos megjegyezni, hogy a Game Mode befolyásolhatja a folyamatok és thread-ek prioritását, attól függően, hogy a Win32PrioritySeparation értéke hogyan van beállítva. Érdemes kísérletezni a Game Mode engedélyezésével és letiltásával, hogy meghatározd annak hatását a rendszer teljesítményére.
 
-### 5.34.5 Media lejátszó
+### 5.34.5 Média lejátszó
 
 - [mpv](https://mpv.io/)
 - [VLC](https://www.videolan.org/)
@@ -1219,21 +1220,15 @@ Abban az esetben ha a routered támogatja a Quality of Service beállítást, ak
 
 ### 5.34.7 Discord
 
-- Data & Privacy - Use data to improve Discord - OFF
+- Data & Privacy -> Use data to improve Discord - OFF
 
-- Voice & Video - Hardware Acceleration - OFF
+- Voice & Video -> Video -> Hardware Acceleration - OFF
 
-- Voice & Video - Enable Quality of Service High Packet Priority - OFF
+- Voice & Video -> Voice -> Enable Quality of Service High Packet Priority - OFF
 
-- Advanced - Hardware Acceleration - OFF
+- Advanced -> Hardware Acceleration - OFF
 
-- Game Overlay - OFF
-
-- Tiltsd le az automikus frissítéseket az alábbi paranccsal.
-
-```bat
-ren "%LOCALAPPDATA%\Discord\Update.exe" "Update.exee"
-```
+- Game Overlay -> OFF
 
 - Töröld ki a **discord_desktop_overlay** modult:
 
@@ -1322,7 +1317,7 @@ Pár perc használat után ellenőrizd nincs-e teli hibaüzenettel az Event View
 
 ## 5.37 CPU Idle States
 
-Ez kényszeríti a C-State 0-t. Érdemes játék előtt kikapcsolni, majd játék után bekapcsolni az idle statet, mivel az magasabb hőfokokkal (A CPU hőmérsékletének nem lenne szabad elérni a thermal throttling pontot, mivel a hűtéssel már foglalkoztál a [hűtés](#12-hűtés) részlegnél) és energiafogyasztással jár. Kerüld az idle kikapcsolását ha a Hyper-Threading/Simultaneous Multithreading bevan kapcsolva, vagy pedig ha valamilyenféle dynamic boosting feature-t használsz, mint például AMD-n a PBO, Turbo Boost vagy hasonló. 
+Ez kényszeríti a C-State 0-t, azonban magasabb hőfokokkal (A CPU hőmérsékletének nem lenne szabad elérni a thermal throttling pontot, mivel a hűtéssel már foglalkoztál a [hűtés](#12-hűtés) szekcióban) és energiafogyasztással jár. Kerüld az idle kikapcsolását ha a Hyper-Threading/Simultaneous Multithreading bevan kapcsolva, vagy pedig ha valamilyenféle dynamic boosting feature-t használsz, mint például AMD-n a PBO, Turbo Boost vagy hasonló. 
 
    - [Idle Enable](/bin/enable_idle.bat)
    - [Idle Disable](/bin/disable_idle.bat)
