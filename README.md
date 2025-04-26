@@ -250,7 +250,7 @@ Ez az egyik legfontosabb része az útmutatónak. Benchmarkolás nélkül vakon 
 
 - Használd a kívánt XHCI Controller első néhány portját. Előfordulhat, hogy némelyikük fizikailag nem megállapítható, amit az [USB Device Tree Viewer](https://www.uwe-sieber.de/usbtreeview_e.html) programban megnézhetsz.
 
-  - A Ryzen-es rendszerek rendelkeznek egy vagy több XHCI-controller-rel, amely közvetlenül a CPU-hoz csatlakozik. Ez [HWiNFO](https://www.hwinfo.com/)-ban a ``Bus`` kategóriában azonosítható. 
+  - A Ryzen-es rendszerek rendelkeznek egy vagy több XHCI-controller-rel, amely közvetlenül a CPU-hoz csatlakozik a Chipset helyett. Ez [HWiNFO](https://www.hwinfo.com/)-ban a ``Bus`` kategóriában azonosítható. 
 
      - [Példa](/media/ryzen-xhci-controller.png)      
 
