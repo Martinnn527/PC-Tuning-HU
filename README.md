@@ -1155,17 +1155,23 @@ for %a in ("SleepStudy" "Kernel-Processor-Power" "UserModePowerService") do (wev
 Windows 7-en az IMOD Interval 1ms, viszont az újabb OS-eken 0.05ms (50us) kivéve ha az adott USB drivernél más van megadva. Ez azt jelenti hogy amiután egy Interrupt generálva lett, az XHCI (USB) controller vár (úgynevezett buffer period) hogy több adat érkezzen mielőtt újabb Interruptot generálna. Ez csökkenti a CPU terhelését de adatvesztéshez vezethet.
 Példa: egy 1000-es polling rate-ű egér minden 1ms-ban küld adatot. Ha csak az egeret mozgatod egy 1ms-os intervallumban akkor nem történik Interrupt Moderation, mivel az interruptok generálási sebessége kisebb vagy egyenlő a meghatározott intervallummal. Azonban játék közben, ahol egyszerre mozgatod az egeret, nyomod a billentyűzetet stb, könnyen meghaladod az 1000 interrupt/másodpercet. Habár ez kevésbé valószínű 0,05 ms-os IMOD intervallum mellett, akkor is előfordulhat.
 
-- Töltsd le és telepítsd fel az [RWEverything](http://rweverything.com/download/)-et és másold be CMD-be az alábbi parancsot hogy letiltsd a ``Microsoft Vulnerable Driver Blocklist``-et. 
+- Töltsd le és telepítsd fel az [RWEverything](https://rweverything.com/downloads/RwX64V1.7.zip)-et.
+
+- Másold be CMD-be az alábbi parancsot hogy kikapcsold a ``Microsoft Vulnerable Driver Blocklist``-et.
 
 ```bat
 reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\CI\Config" /v "VulnerableDriverBlocklistEnable" /t REG_DWORD /d "0" /f
 ```
 
-- A ``bin`` mappában lévő [XHCI-IMOD-Interval.ps1](/bin/XHCI-IMOD-Interval.ps1) fájlt másold be a ``C:\``-be. Ha az RWEverything-et nem az alapértelmezett telepítetted akkor a ps1 fájlban a ``$rwePath = "C:\Program Files\RW-Everything\Rw.exe"`` sort írd át. Csinálj egy shortcut-ot ``shell:startup``-ba hogy minden indításnál fusson.
+- Ha az RWEverything-et nem az alapértelmezett helyre telepítetted akkor a ps1 fájlban az ``$rwePath = "C:\Program Files\RW-Everything\Rw.exe"`` sort írd át annak megfelelően. 
+
+- A ``bin`` mappában lévő ``XHCI-IMOD-Interval.ps1`` fájlnak csinálj egy shortcut-ot ``shell:startup``-ba hogy minden rendszerindításnál fusson.
+
+- A működését úgy tudod tesztelni, hogy a scriptben a ``$globalInterval = 0x0``-t átírod például ``0xFA00``-ra (62.5Hz) és futtatod. Ha láthatóan akadozik a kurzor, akkor működik.
 
 ## 5.34 Applikációk konfigurálása
 
-Tölts le minden játékot, applikációt amit használni fogsz.
+Tölts le minden játékot, applikációt amit használni fogsz mielőtt folytatod.
 
 ### 5.34.1 FPS Limit
 
@@ -1206,7 +1212,7 @@ reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\Dwm" /v "OverlayTestMode"
 
 ### 5.34.4 Game Mode
 
-A Game Mode megakadályozza a Windows Update futását valamint bizonyos értesítések megjelenítését ([1](https://support.xbox.com/en-GB/help/games-apps/game-setup-and-play/use-game-mode-gaming-on-pc)). Fontos megjegyezni, hogy a Game Mode befolyásolhatja a folyamatok és thread-ek prioritását, attól függően, hogy a Win32PrioritySeparation értéke hogyan van beállítva. Érdemes kísérletezni a Game Mode engedélyezésével és letiltásával, hogy meghatározd annak hatását a rendszer teljesítményére.
+A Game Mode megakadályozza a Windows Update futását valamint bizonyos értesítések megjelenítését ([1](https://support.xbox.com/en-GB/help/games-apps/game-setup-and-play/use-game-mode-gaming-on-pc)). Fontos megjegyezni, hogy a Game Mode befolyásolhatja a folyamatok és threadek prioritását, attól függően, hogy a Win32PrioritySeparation értéke hogyan van beállítva.
 
 ### 5.34.5 Média lejátszó
 
@@ -1230,11 +1236,11 @@ Abban az esetben ha a routered támogatja a Quality of Service beállítást, ak
 
 - Game Overlay -> OFF
 
-- Töröld ki a **discord_desktop_overlay** modult:
+- Töröld ki a nem használt modulokat:
 
-```bat
-rd /s /q "%LOCALAPPDATA%\Discord\app-*\modules\discord_desktop_overlay-*"
-```
+``C:\Users\%userprofile%\AppData\Local\Discord`` -> Menj be az **app-xxxxx** mappába -> **modules** és a példa alapján töröld le a különböző modulokat.
+
+  - [media/discord-modules-example.png](/media/discord-modules-example.png)
 
 - Opcionálisan használj [DiscordFixer](https://github.com/HerXayah/Discord-Fixer)-t. 
 
