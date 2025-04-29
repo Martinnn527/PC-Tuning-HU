@@ -11,7 +11,7 @@
 
 ## 1. Driver letöltése és feltelepítése
 
-- [Töltsd le a legújabb Game Ready drivert](https://www.nvidia.com/en-us/drivers/) és csomagold ki 7-Zip-el egy külön mappába.
+- [Töltsd le a legújabb Game Ready drivert](https://www.nvidia.com/en-us/drivers/) és csomagold ki 7-Zippel egy külön mappába.
 
 - Törölj le mindent kivéve a következőket:
 
@@ -71,6 +71,10 @@ reg add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08
 
 - Töltsd le és csomagold ki az [NVIDIA Profile Inspector](https://github.com/Orbmu2k/nvidiaProfileInspector)-t
 
+- Ha nem használsz GSYNC-et, kapcsold ki
+
+  - [media/g-sync-example.png](/media/g-sync-example.png)
+
 - Kapcsold ki az ``Enable Ansel``-t
 
 - Ha a Resizable BAR bevan kapcsolva, kísérletezhetsz a kényszerítésével nem támogatott játékokhoz. Fontos megjegyezni hogy számos játékban negatívan befolyásolhatja a teljesítményt ([1](https://www.techspot.com/review/2234-nvidia-resizable-bar)).
@@ -82,6 +86,10 @@ reg add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08
 - Kapcsold ki a ``CUDA - Force P2 State`` opciót. Ez megakadályozza hogy a memória órajel frekvenciája csökkenjen CUDA-terhelés során, mivel a GPU a [Force P-State 0](#34-gpu-órajel-lockolásap-state-0) ellenére is belép ``P-State 2`` állapotba.
 
    - [cuda-force-p2-state-analysis.png](/media/cuda-force-p2-state-analysis.png)
+
+- ``CUDA - Sysmem Fallback Policy``- Prefer no sysmem fallback   
+
+- Kapcsold ki a ``Variable Refresh Rate`` opciót (``Other`` részleg alján).   
 
 ## 5. NVIDIA Display Container
 

@@ -738,7 +738,7 @@ C:\bin\install-firefox.ps1
 
 - Telepítsd/konfiguráld a következő kiegészítőket:
 
-   - uBlock Origin - Állítsd be a filter list-et. Ajánlott mindent bepipálni
+   - uBlock Origin - Ajánlott alapon hagyni mivel ha túl sok filtert kapcsolsz be, az lelassíthatja vagy akár teljesen megakadályozhatja az oldalak betöltését. 
    - CleanURLs - Nem szükséges konfiguráció
    - FastForward - A ``Recommended: "XY"`` alapján állítsd be
 
@@ -785,13 +785,13 @@ Kapcsold ki a web search funkciót:
 reg add "HKEY_CURRENT_USER\Software\Policies\Microsoft\Windows\Explorer" /v "DisableSearchBoxSuggestions" /t REG_DWORD /d 1 /f
 ```
 
-Windows 11-en az ``EnableLUA`` registry kulcsot 0-ra kell tenni hogy teljesen kikapcsold a User Account Control-t.
+Az ``EnableLUA`` registry kulcsot 0-ra kell tenni hogy teljesen kikapcsold a User Account Control-t (Windows 11):
 
 ```bat
 reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "EnableLUA" /t REG_DWORD /d 0 /f
 ```
 
-Kapcsold ki a Copilot AI-t:
+Kapcsold ki a Copilot AI-t (Windows 11):
 
 ```bat
 reg add "HKCU\Software\Policies\Microsoft\Windows\WindowsCopilot" /v TurnOffWindowsCopilot /t REG_DWORD /d 1 /f
