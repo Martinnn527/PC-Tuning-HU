@@ -169,12 +169,10 @@ Ez az egyik legfontosabb része az útmutatónak. Benchmarkolás nélkül vakon 
 
     - Ellenőrizd a [GPU-Z](https://www.techpowerup.com/gpuz/) programban a beépített renderelési teszt segítségével.
 
-- Ha egynél több beépített NIC-ed van, érdemes azt használni amelyik támogatja az MSI-X-et, mivel ez szükséges az RSS ([Receive-Side-Scaling](https://learn.microsoft.com/en-us/windows-hardware/drivers/network/introduction-to-receive-side-scaling)) helyes működéséhez. Ezt a 
+- Ha egynél több beépített NIC-ed (Network Interface Controller) van, érdemes azt használni amelyik támogatja az MSI-X-et, mivel ez szükséges az RSS ([Receive-Side-Scaling](https://learn.microsoft.com/en-us/windows-hardware/drivers/network/introduction-to-receive-side-scaling)) helyes működéséhez. Ezt a 
 [GoInterruptPolicy](https://github.com/spddl/GoInterruptPolicy) programban ellenőrizni tudod.
 
 - Ragaszd le a laza kábelek végét, hogy csökkentsd az alkatrészek zárlatának kockázatát.
-
-- Kerüld a feleslegesen hosszú kábelek használatát.
 
 - Gyakran érdemes tisztítani az alkatrészeket és a hűtőbordákat, mivel ha porosak, csökkentik a légáramlást és zárlatot okozhatnak.
 
@@ -188,7 +186,7 @@ Ez az egyik legfontosabb része az útmutatónak. Benchmarkolás nélkül vakon 
 
 ## 1.2 Hűtés
 
-- Vedd le a gép oldalát és a porszűrőket hogy segítsd a légáramlást.
+- Vedd le a gép oldalát hogy segítsd a légáramlást, azonban figyelj oda mert gyorsabban fog porosodni.
 
 - Semmiképp se legyen a gép szőnyegen, vagy olyan helyen ahol nincs elegendő légáramlás.
 
@@ -196,13 +194,13 @@ Ez az egyik legfontosabb része az útmutatónak. Benchmarkolás nélkül vakon 
 
   - Lásd [Best Thermal Paste for CPUs | Tom’s Hardware](https://www.tomshardware.com/best-picks/best-thermal-paste)
 
-- Cseréld ki a gyári hővezető lapokat
+- Cseréld ki a gyári hővezető lapokat (SSD, GPU)
 
   - Gelid Ultimate
   
   - Fujipoly Ultra Extreme
 
-  - Olcsóbb de szintén jó megoldás: Arctic TP-3
+  - Arctic TP-3
 
 - Szereld be megfelelően az AIO-t.
 
@@ -224,11 +222,11 @@ Ez az egyik legfontosabb része az útmutatónak. Benchmarkolás nélkül vakon 
 
 - A legtöbb modern periféria támogatja az Onboard Memory Profile-t. Állítsd be őket mielőtt újratelepítenéd a Windowst, hogy ne kelljen a későbbi módosítások érdekében feltelepíteni a sok bloatware-t.
 
-- Magasabb DPI csökkenti a latencyt. Ügyelj arra hogy sensor smoothing ne lépjen életbe magasabb DPI használatakor. Windowsban az egér beállítások közt lejjebb viheted a pointer speedet tetszésed szerint ha a játék raw inputot használ.
+- Magasabb DPI csökkenti a latencyt. Ügyelj arra hogy sensor smoothing ne lépjen életbe magasabb DPI használatakor. Windowsban az egér beállítások közt lejjebb viheted a pointer speedet tetszésed szerint ha a játék raw inputot használ. 
 
 - Magasabb polling rate csökkenti a jittert, azonban 1000Hz-nél (1ms) magasabb polling rate hardvertől függően negatívan befolyásolhatja a teljesítményt, ezért ennek megfelőlen kell beállítani. Ez nem akkora probléma a 2023 májusi Windows 11 Raw Input Stack update után ami limitálja a nem előtérben lévő programok polling frekvenciáját 125hz-re (8ms).
 
-- Az USB kimenet ~7A-ra van korlátozva, és az RGB felesleges energiát igényel. Fontold meg az RGB kikapcsolását, mivel az effektek/animációk nagy terhet tesznek az MCU-ra (Micro Controller Unit), és késleltethetik a többi folyamatot.
+- Az USB kimenet ~7A-ra van korlátozva, és az RGB felesleges energiát igényel. Fontold meg a kikapcsolását, mivel az effektek/animációk nagy terhet tesznek az MCU-ra (Micro Controller Unit), és késleltethetik a többi folyamatot.
 
 - Sűrített levegővel tisztítsd az egér szenzorát.
 
