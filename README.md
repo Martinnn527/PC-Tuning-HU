@@ -52,6 +52,7 @@
   - [4.4 Szükséges fájlok integrálása](#44-szükséges-fájlok-integrálása)
   - [4.5 Telepítés Ventoy használatával](#45-telepítés-pendrive-ról-ventoy-használatával)
   - [4.6 ISO-ba való bootolás](#46-iso-ba-való-bootolás)
+    - [4.6.1 8.3 fájlnevek letiltása és törlése](#461-83-fájlnevek-letiltása-éstörlése)
   - [4.7 OOBE](#47-oobe)
 - [5. Windows konfigurálása](#5-windows-konfigurálása)
   - [5.1 Unrestricted PowerShell Execution Policy](#51-unrestricted-powershell-execution-policy)
@@ -559,6 +560,32 @@ Mielőtt még elkezdenéd a telepítést, fontold meg a Secure Erase használat�
 Húzd ki az ethernet kábeledet és ne legyél az internethez csatlakozva, ezáltal elkerülhetjük a Microsoftba való bejelentkezést OOBE közben és a Windows nem fog automatikusan feltelepíteni frissítéseket és drivereket.
 
 - Ha a Secure Boot bevan kapcsolva, ideiglenesen kapcsold ki a telepítési folyamathoz mivel problémákat okozhat. Bootolj be a pendrive-ra BIOS-on belül és válaszd ki az ISO-t.
+
+### 4.6.1 8.3 fájlnevek letiltása és törlése
+
+- Amint bebootolsz a [Legacy Windows Setup](/media/legacy-windows-setup.png)-ba, nyomj egy Shift+F10-et hogy megynyisd a CMD-t, majd írd be az alábbi parancsot:
+
+  ```bat
+  setup.exe /NoReboot
+  ```
+
+Folytasd a setup-ot, és a végén ne indítsd újra a gépet.
+
+- Nyisd meg újra a CMD-t Shift+F10-el és írd be hogy ``diskpart`` hogy megállapítsd a Windows partíciójának a betűjelét. Egy viszonylag nagy méretű partíció lesz. Írd be hogy ``exit``.
+
+- Titlsd le a további 8.3 fájlnevek létrehozását. Cseréld ki a ``<drive letter>``-t a megfelelő betűjellel. (pl. ``D:``)
+
+```bat
+fsutil 8dot3name set <drive letter> 1
+```
+
+- Töröld ki a már jelenlévő 8.3 fájlneveket. Cseréld ki a ``<drive letter>``-t a megfelelő betűjellel. (pl. ``D:``)
+
+```bat
+fsutil 8dot3name strip /s /f <drive letter>
+```
+
+- Írd be CMD-be hogy ``wpeutil reboot`` hogy kilépj a Windows setup-ból
 
 ## 4.7 OOBE
 
