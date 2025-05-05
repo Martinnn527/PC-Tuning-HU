@@ -1072,9 +1072,9 @@ Használj Process Explorer-t mivel a stock Task Manager a CPU kihasználtságát
 
 - ``Win+R`` -> ``devmgmt.msc`` hogy megnyisd a Device Manager-t.
 
-- A ``Disk drives`` kategóriánál jobb klikk az SSD-re -> ``Properties`` -> ``Polciies`` -> és pipáld be a ``Turn off Windows write-cache buffer flushing on the device`` opciót.
+- A ``Disk drives`` kategóriánál jobb klikk az SSD-re -> ``Properties`` -> ``Policies`` -> és pipáld be a ``Turn off Windows write-cache buffer flushing on the device`` opciót.
 
-- A ``Network adapters`` kategóriánál ``Properties -> Advanced`` és kapcsolj ki minden power saving funkciót.
+- A ``Network adapters`` kategóriánál ``Properties -> Advanced`` és kapcsolj ki minden power saving funkciót mint például:
   
   - Energy-Efficient Ethernet
   - Gigabit Lite
@@ -1095,7 +1095,7 @@ Használj Process Explorer-t mivel a stock Task Manager a CPU kihasználtságát
 Get-WmiObject MSPower_DeviceEnable -Namespace root\wmi | ForEach-Object { $_.enable = $false; $_.psbase.put(); }
 ```
 
-- Ha kihúzod és visszadugod az eszközt akkor ez a beállítás visszaállhat tehát vagy kerüld el vagy futtasd a parancsot minden alkalommal, vagy pedig használd a [DriverPowerSaving](/bin/DriverPowerSaving.ps1) scriptet hogy minden újraindításnál automatikusan fusson csinálj egy shortcut-ot ``shell:startup``-ba és használd a PowerShell paramétert hogy ne notepad-ként fusson. Ez ajánlatos, csak hogy biztosra menj.
+- Ha kihúzod és visszadugod az eszközt akkor ez a beállítás visszaállhat tehát vagy kerüld el vagy futtasd a parancsot minden alkalommal, vagy pedig használd a [DevicePowerSaving](/bin/DevicePowerSaving.ps1) scriptet hogy minden újraindításnál automatikusan fusson csinálj egy shortcut-ot ``shell:startup``-ba és használd a PowerShell paramétert hogy ne notepad-ként fusson. Ez ajánlatos, csak hogy biztosra menj.
 
 ## 5.30 Fájl rendszer
 
