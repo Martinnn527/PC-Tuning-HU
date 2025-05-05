@@ -783,7 +783,7 @@ Kapcsold ki a web search funkciót:
 reg add "HKEY_CURRENT_USER\Software\Policies\Microsoft\Windows\Explorer" /v "DisableSearchBoxSuggestions" /t REG_DWORD /d 1 /f
 ```
 
-Az ``EnableLUA`` registry kulcsot 0-ra kell tenni hogy teljesen kikapcsold a User Account Control-t (Windows 11):
+Az ``EnableLUA`` registry kulcsot 0-ra kell tenni hogy teljesen kikapcsold a User Account Control-t:
 
 ```bat
 reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "EnableLUA" /t REG_DWORD /d 0 /f
@@ -1239,10 +1239,6 @@ Abban az esetben ha a routered támogatja a Quality of Service beállítást, ak
 ``C:\Users\%userprofile%\AppData\Local\Discord`` -> Menj be az **app-xxxxx** mappába -> **modules** és a példa alapján töröld le a különböző modulokat.
 
   - [media/discord-modules-example.png](/media/discord-modules-example.png)
-
-- Opcionálisan használj [DiscordFixer](https://github.com/HerXayah/Discord-Fixer)-t. 
-
-  - Lásd [docs/research.md/discord-fixer](/docs/research.md#3-discordfixer)
 
 ### 5.34.8 Epic Games
 
