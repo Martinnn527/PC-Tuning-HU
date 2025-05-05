@@ -919,7 +919,7 @@ Lásd [docs/configure-amd.md](/docs/configure-amd.md)
 
 - Keress egy stabil OC-t a monitorodhoz. NVIDIA Control Panel-ben a ``Change resolution -> Customize -> Create Custom Resolution`` fülnél vidd feljebb a refresh rate-t ~3-asával amíg a monitor nem ír egy ``Out of Range`` üzenetet vagy pedig csak szimplán fekete a képernyő. Ha ez történik, csak várj 15 másodpercet és automatikusan visszaáll az előzőleg használt értékekre. Ezután egyesével vedd visszább a refresh ratet. Például ha 250 hz-ről ugrottál 253 hz-re és fekete volt a képernyő akkor 252-től indulva menj lejjebb amíg stabil nem lesz. Ezután teszteld [itt](https://www.testufo.com/) hogy nincs e screen tearing és hogy a monitor kábelének nincs e úgynevezett [coil whine](https://pcsupport.lenovo.com/ie/en/products/laptops-and-netbooks/solutions/ht511649)-ja.
 
-- Általában két lehetőséged van: Display, vagy GPU scaling. A monitorod natív felbontása nem igényel scalinget ezáltal identity scaling-et ([1](https://learn.microsoft.com/en-us/windows/win32/api/wingdi/ne-wingdi-displayconfig_scaling)), ([2](/docs/research.md#2-identity-scaling)) használhatsz. 
+- Általában két lehetőséged van: Display, vagy GPU scaling. A monitorod natív felbontása nem igényel scalinget ezáltal identity scaling-et ([1](https://learn.microsoft.com/en-us/windows/win32/api/wingdi/ne-wingdi-displayconfig_scaling)), használhatsz. 
 
 - Állíts be egy egész refresh ratet (a legmagasabbat amit az első pontnál eltudtál érni), például 60,00/240,00, nem 59,94/239,76. Ennek elérése érdekében használd az ``Exact`` vagy ``Exact reduced`` timing-ot [CRU](https://www.monitortests.com/forum/Thread-Custom-Resolution-Utility-CRU)-ban mivel a többi egy picit eltérő lehet.
 
@@ -1282,8 +1282,6 @@ Támogatnia kell az MSI-X-et ahhoz hogy az ISR azon a CPU-n fusson amelyik végr
   <details> 
   <summary>RSS beállítása</summary>
 
-  - Lásd [Hány RSS Queue-ra van szükséged](/docs/research.md#hány-rss-queue-ra-van-szükséged)
-  
   - Navigálj a következő registry key-hez: ``HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Class\{4d36e972-e325-11ce-bfc1-08002be10318}\0000``, használd a te driveredhez tartozó [Driver Key](/media/find-driver-key-example.png)-t.
 
   - Add hozzá/írd át a következő értékeket (mindegyik ``String``):
