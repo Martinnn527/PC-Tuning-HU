@@ -52,7 +52,7 @@
   - [4.4 Szükséges fájlok integrálása](#44-szükséges-fájlok-integrálása)
   - [4.5 Telepítés Ventoy használatával](#45-telepítés-pendrive-ról-ventoy-használatával)
   - [4.6 ISO-ba való bootolás](#46-iso-ba-való-bootolás)
-    - [4.6.1 8.3 fájlnevek letiltása és törlése](#461-83-fájlnevek-letiltása-éstörlése)
+    - [4.6.1 8.3 fájlnevek letiltása és törlése](#461-83-fájlnevek-letiltása-és-törlése)
   - [4.7 OOBE](#47-oobe)
 - [5. Windows konfigurálása](#5-windows-konfigurálása)
   - [5.1 Unrestricted PowerShell Execution Policy](#51-unrestricted-powershell-execution-policy)
