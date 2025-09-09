@@ -100,14 +100,14 @@
     - [5.33.6 Discord](#5336-discord)
     - [5.33.7 Epic Games](#5337-epic-games)
     - [5.33.8 Steam](#5338-steam)
-  - [5.35 Interruptok és DPC-k](#535-interruptok-és-dpc-k)
-    - [5.35.1 GPU és DirectX Graphics Kernel](#5351-gpu-és-directx-graphics-kernel)
-    - [5.35.2 XHCI és Audio Controller](#5352-xhci-és-audio-controller)
-    - [5.35.3 Network Interface Card](#5353-network-interface-card-nic)   
-  - [5.36 Event Viewer ellenőrzése](#536-event-viewer-ellenőrzése)
-  - [5.37 CPU Idle States](#537-cpu-idle-states)
-  - [5.38 Paging File](#538-paging-file)
-  - [5.39 Cleanup és karbantartás](#539-cleanup-és-karbantartás)
+  - [5.34 Interruptok és DPC-k](#534-interruptok-és-dpc-k)
+    - [5.34.1 GPU és DirectX Graphics Kernel](#5341-gpu-és-directx-graphics-kernel)
+    - [5.34.2 XHCI és Audio Controller](#5342-xhci-és-audio-controller)
+    - [5.34.3 Network Interface Card](#5343-network-interface-card-nic)   
+  - [5.35 Event Viewer ellenőrzése](#535-event-viewer-ellenőrzése)
+  - [5.36 CPU Idle States](#536-cpu-idle-states)
+  - [5.37 Paging File](#537-paging-file)
+  - [5.38 Cleanup és karbantartás](#538-cleanup-és-karbantartás)
 
 ## Bemutató
 
