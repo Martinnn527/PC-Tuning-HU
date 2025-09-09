@@ -633,7 +633,7 @@ C:\bin\disable-process-mitigations.bat
 
 - GPU driverek később lesznek feltelepítve.
 
-- NIC (Network Interface Controller) drivert telepítsd fel lehetőleg INF-ként Device Manager-ben, ahogy [itt](#48-szükséges-fájlok-integrálása) levan írva.
+- NIC (Network Interface Controller) drivert telepítsd fel lehetőleg INF-ként Device Manager-ben, ahogy [itt](#44-szükséges-fájlok-integrálása) levan írva.
 
 - Ha teheted [telepíts fel egy külön XHCI/USB driver-t](https://winraid.level1techs.com/t/outdated-usb-3-0-3-1-drivers-original-and-modded/30871) mivel a [Microsoftos jóval magasabb DPC latency-vel jár](/media/driver-example.png). Ez egy viszonylag kockázatos folyamat mivel a modern hardvereknek nincs külön, dedikált drivere ezért régebbieket kell feltelepíteni ami nem 100% hogy működik, és akár tönkre is teheti az operiációs rendszert. Vedd figyelembe hogy néhány driver nem WHQL-tanusított, azaz nem a Microsoft írta alá és a Secure Boot miatt ezáltal nem töltődik be boot-nál, tehát nem lesz egér, billentyűzet stb.
 
