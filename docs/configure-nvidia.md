@@ -39,6 +39,14 @@
 
 ### 2.1 Manage 3D Settings
 
+- Anisotropic Filtering - Off
+
+- Antialiasing - Gamma correction - Off
+
+- Antialiasing - Mode - Off
+
+- CUDA - Sysmem Fallback Policy - Prefer No Sysmem Fallback
+
 - Low Latency Mode - On
 
 - Power management mode - Prefer maximum performance
@@ -48,6 +56,8 @@
 - Texture filtering - High Performance
 
 - Threaded Optimization - Off ([1](https://tweakguides.pcgamingwiki.com/NVFORCE_8.html)).
+
+- Vertical Sync - Off
 
 ### 2.2 Change resolution
 
@@ -86,9 +96,7 @@ reg add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08
 - Kapcsold ki a ``CUDA - Force P2 State`` opciót. Ez megakadályozza hogy a memória órajel frekvenciája csökkenjen CUDA-terhelés során, mivel a GPU a [Force P-State 0](#34-gpu-órajel-lockolásap-state-0) ellenére is belép ``P-State 2`` állapotba.
 
    - [cuda-force-p2-state-analysis.png](/media/cuda-force-p2-state-analysis.png)
-
-- ``CUDA - Sysmem Fallback Policy``- Prefer no sysmem fallback   
-
+ 
 - Kapcsold ki a ``Variable Refresh Rate`` opciót (``Other`` részleg alján).   
 
 ## 5. NVIDIA Display Container

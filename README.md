@@ -5,7 +5,6 @@
 ## Tartalomjegyzék
 
 - [Bemutató](#bemutató)
-- [Követelmények](#követelmények)
 - [Benchmarkolás](#benchmarkolás)
 - [1. Fizikális beállítás](#1-fizikális-beállítás)
   - [1.1 Általános információ](#11-általános-információ)
@@ -61,7 +60,11 @@
   - [5.4 Driverek telepítése](#54-driverek-telepítése)
   - [5.5 Windows Server konfigurálása](#55-windows-server-konfigurálása)
   - [5.6 Privacy Options](#56-privacy-options)
-  - [5.7 Search Indexing](#57-search-indexing)
+  - [5.7 Szolgáltatások kikapcsolása](#57-search-indexing)
+    - [5.7.1 Search Indexing](#571-search-indexing)
+    - [5.7.2 Windows Update](#572-windows-update) 
+    - [5.7.3 Diagnostic Policy Service](#573-diagnostic-policy-service)
+    - [5.7.4 SysMain](#574-sysmain)
   - [5.8 Idő, nyelv és régió](#58-idő-nyelv-és-régió)
   - [5.9 Böngésző konfigurálása](#59-böngésző-konfigurálása)
   - [5.10 Ütemezett feladatok kikapcsolása](#510-ütemezett-feladatok-kikapcsolása)
@@ -86,19 +89,17 @@
   - [5.28 Device Manager beállítása](#528-device-manager-beállítása)
   - [5.29 Device Power Saving](#529-device-power-saving)
   - [5.30 Fájl rendszer](#530-fájl-rendszer)
-  - [5.31 Event Trace Sessions](#531-event-trace-sessions)
-  - [5.32 Message Signaled Interrupts](#532-message-signaled-interrupts)
-  - [5.33 XHCI Interrupt Moderation](#533-xhci-interrupt-moderation-imod)
-  - [5.34 Applikációk konfigurálása](#534-applikációk-konfigurálása)
-    - [5.34.1 FPS Limit](#5341-fps-limit)
-    - [5.34.2 Játék regisztrálása Game Bar-ban](#5452-játék-regisztrálása-game-bar-ban)
-    - [5.34.3 Presentation Mode](#5343-presentation-mode)
-    - [5.34.4 Game Mode](#5344-game-mode)
-    - [5.34.5 Média lejátszó](#5345-media-lejátszó)
-    - [5.34.6 QoS Policy](#5346-qos-policy)
-    - [5.34.7 Discord](#5347-discord)
-    - [5.34.8 Epic Games](#5348-epic-games)
-    - [5.34.9 Steam](#5349-steam)
+  - [5.31 Message Signaled Interrupts](#532-message-signaled-interrupts)
+  - [5.32 XHCI Interrupt Moderation](#533-xhci-interrupt-moderation-imod)
+  - [5.33 Applikációk konfigurálása](#534-applikációk-konfigurálása)
+    - [5.33.1 FPS Limit](#5331-fps-limit)
+    - [5.33.2 Játék regisztrálása Game Bar-ban](#5332-játék-regisztrálása-game-bar-ban)
+    - [5.33.3 Game Mode](#5333-game-mode)
+    - [5.33.4 Média lejátszó](#5334-media-lejátszó)
+    - [5.33.5 QoS Policy](#5335-qos-policy)
+    - [5.33.6 Discord](#5336-discord)
+    - [5.33.7 Epic Games](#5337-epic-games)
+    - [5.33.8 Steam](#5338-steam)
   - [5.35 Interruptok és DPC-k](#535-interruptok-és-dpc-k)
     - [5.35.1 GPU és DirectX Graphics Kernel](#5351-gpu-és-directx-graphics-kernel)
     - [5.35.2 XHCI és Audio Controller](#5352-xhci-és-audio-controller)
@@ -111,14 +112,6 @@
 ## Bemutató
 
 Ezen útmutató célja a Windows-alapú rendszerek finomhangolása, többek között a hardver-, operációs rendszer- és szoftverek konfigurálása. Az útmutatás széleskörű célok elérésére van kialakítva, beleértve a biztonság és adatvédelem javítása, azonban legfőképp a competitive játékokban való előny megszerzésére és valós idejű feladatok futtatására van kihegyezve. Hangsúlyt fektet arra, hogy a felhasználók saját maguk végezzék el a beállításokat, ellenőrizzék azok hatását, és minimalizálják a scriptek használatát annak érdekében hogy a folyamat átláthatóbb legyen, és elkerüljék a nem kívánt módosításokat. A szekciókat sorrendben kell követni mivel egyes lépések a korábbi lépések befejezésétől függnek, ezért minden szekció számozott.
-
-## Követelmények
-
-- Pendrive (Minimum 8 GB)
-- Olvasási készség, szövegértés
-- Directory-k navigálása CLI-ben
-- Tudj parancsokat kimásolni és beilleszteni
-- Internet használata segítségként
 
 ---
 
@@ -591,7 +584,9 @@ fsutil 8dot3name strip /s /f <drive letter>
 
 - Windows Server telepítése során meg kell adnod egy komplex jelszót amit törölhetsz később.
 
-- Ha Windows 11-et telepítesz nyomj egy ``Shift+F10``-et hogy megnyisd a CMD-t és írd be a következő parancsot: ``oobe\BypassNRO.cmd``. Ezáltal megjelenik a ``Continue with limited setup`` opció. Folytasd a setup-ot a megszokottak szerint. Amiután végzett a telepítés kapcsold ki a Secure Boot-ot ha előzőleg bevolt.
+- Ha Windows 11-et telepítesz nyomj egy ``Shift+F10``-et hogy megnyisd a CMD-t és írd be a következő parancsot: ``oobe\BypassNRO.cmd``. Ezáltal megjelenik a ``Continue with limited setup`` opció. Folytasd a setup-ot a megszokottak szerint. 
+
+- Amiután végzett a telepítés kapcsold ki a Secure Boot-ot ha előzőleg bevolt.
 
 ---
 
@@ -602,7 +597,7 @@ Fontos, hogy a módosított beállítások valóban pozítívan befolyásolják 
 
 ## 5.1 Unrestricted PowerShell Execution Policy
 
-- Ez szükséges a scriptek futtatásának engedélyezésére. Nyisd meg a PowerShell-t és másold be az alábbi parancsot. Válaszd ki a "Yes to all" opciót ("A" betű).
+- Ez szükséges a scriptek futtatásának engedélyezésére. Nyisd meg a PowerShell-t és másold be az alábbi parancsot. Válaszd ki a **Yes to all** opciót ("A" betű).
 
 ```powershell
 Set-ExecutionPolicy Unrestricted
@@ -664,12 +659,37 @@ C:\bin\disable-process-mitigations.bat
 
 ``Win+I`` -> ``Privacy`` és kapcsolj ki minden nem használt engedélyt.
 
-## 5.7 Search Indexing
+## 5.7 Szolgáltatások kikapcsolása
+
+### 5.7.1 Search Indexing
 
 Bizonyos könyvtárak a fájlrendszeren indexelve vannak a Windows keresési funkcióihoz, amelyeket ``Win+R`` -> ``control srchadmin.dll`` beírásával megtekinthetsz. Az indexelés időszakosan a háttérben fut, és gyakran észrevehető CPU terhelést okoz ezért ajánlott a keresési indexelést globálisan letiltani a Windows Search szolgáltatás kikapcsolásával, azonban ez korlátozhatja a keresési funkciókat. Másold be CMD-be az alábbi parancsot.
 
 ```bat
 reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WSearch" /v "Start" /t REG_DWORD /d "4" /f
+```
+
+### 5.7.2 Windows Update
+
+A Windows Update szolgáltatás kikapcsolását a Microsoft [How to set up a Device for Real-Time Performance](https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/soft-real-time/soft-real-time-device) dokumentumában említik meg.
+
+```bat
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\wuauserv" /v "Start" /t REG_DWORD /d "4" /f
+```
+### 5.7.3 Diagnostic Policy Service
+
+Szintúgy a Microsoft ajánlja a kikapcsolását.
+
+```bat
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\DPS" /v "Start" /t REG_DWORD /d "4" /f
+```
+
+### 5.7.4 SysMain
+
+- Ha nincs jelen HDD a rendszeren akkor a SysMain (Superfetch/Prefetch) szolgáltatás letiltható:
+
+```bat
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SysMain" /v "Start" /t REG_DWORD /d "4" /f
 ```
 
 ## 5.8 Idő, nyelv és régió
@@ -692,72 +712,7 @@ reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WSearch" /v "Start
 C:\bin\install-firefox.ps1
 ```
 
-<details>
-<summary>Mit csinál pontosan a script?</summary>
-
-- Feltelepíti a legfrissebb Firefox verziót
-
-- Letörli a felsorolt fájlokat:
-
-  - ``"crashreporter.exe"``
-
-  - ``"crashreporter.ini"``
-
-  - ``"defaultagent.ini"``
-
-  - ``"defaultagent_localized.ini"``
-
-  - ``"default-browser-agent.exe"``
-
-  - ``"maintenanceservice.exe"``
-
-  - ``"maintenanceservice_installer.exe"``
-
-  - ``"pingsender.exe"``
-
-  - ``"updater.exe"``
-
-  - ``"updater.ini"``
-
-  - ``"update-settings.ini"``
-  
-- Kikapcsolja a frissítéseket a ``DisableAppUpdate`` policy használatával
-
-- Hozzáadja a ``uBlock Origin``, ``FastForward`` és ``CleanURLs`` kiegészítőket
-
-- Konfigurálja a következőket:
-
-  - ``"datareporting.healthreport.uploadEnabled", false``
-
-  - ``"browser.newtabpage.activity-stream.feeds.section.topstories", false``
-
-  - ``"browser.newtabpage.activity-stream.feeds.topsites", false``
-
-  - ``"dom.security.https_only_mode", true``
-
-  - ``"browser.uidensity`", 1``
-
-  - ``"full-screen-api.transition-duration.enter", "0 0"``
-
-  - ``"full-screen-api.transition-duration.leave", "0 0"``
-
-  - ``"full-screen-api.warning.timeout", 0``
-
-  - ``"nglayout.enable_drag_images", false``
-
-  - ``"reader.parse-on-load.enabled", false``
-
-  - ``"browser.tabs.firefox-view", false``
-
-  - ``"browser.tabs.tabmanager.enabled", false``
-
-  - ``"browser.newtabpage.activity-stream.asrouter.userprefs.cfr.addons", false``
-
-  - ``"browser.newtabpage.activity-stream.asrouter.userprefs.cfr.features", false``
-  
-</details>
-
---- 
+---
 
 - Kapcsolj ki minden nyomkövetőt.
 
@@ -769,11 +724,12 @@ C:\bin\install-firefox.ps1
 
 ## 5.10 Ütemezett feladatok kikapcsolása
 
-Az alábbi PowerShell parancs kikapcsolja az ütemezett feladatokat amik rendszeresen futnak a háttérben. Ha nem szeretsz scripteket futtatni vagy csak ellenőrizni szeretnéd hogy mit változtatott a script, használd a [TaskSchedulerView](https://www.nirsoft.net/utils/task_scheduler_view.html) programot.
+Az alábbi PowerShell parancs kikapcsolja az ütemezett feladatokat amik rendszeresen futnak a háttérben. Ha a script kihagyott volna párat, a [TaskSchedulerView](https://www.nirsoft.net/utils/task_scheduler_view.html) programban tovább finomhangolhatod őket. Vedd figyelembe a **Last Run** és **Next Run** oszlopokat, hogy egyáltalán van e értelme kikapcsolni az adott feladatot.
 
 ```powershell
 C:\bin\disable-scheduled-tasks.ps1
 ```
+
 ## 5.11 Windows aktiválása
 
 Ha nem vásároltál Windows kulcsot, használd PowerShell-ben az alábbi parancsot hogy aktiváld:
@@ -796,12 +752,6 @@ net accounts /maxpwage:unlimited
 
 ```bat
 DISM /Online /Set-ReservedStorageState /State:Disabled
-```
-
-- Ha nincs jelen HDD a rendszeren akkor a Superfetch/Prefetch letiltható:
-
-```bat
-reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SysMain" /v "Start" /t REG_DWORD /d "4" /f
 ```
 
 Kapcsold ki a web search funkciót:
@@ -1052,7 +1002,7 @@ powercfg /setactive scheme_current
 Get-MMAgent
 ```
 
-- Használd az alábbi példát hogy kikapcsolj egy adott beállítást. Ha a Superfetch/Prefetch-et bekapcsolva hagytad az [Egyéb](#512-egyéb-beállítások) szekcióban akkor nagy valószínűséggel a Prefetch-el kapcsolatos funkciókra szükséged van.
+- Használd az alábbi példát hogy kikapcsolj egy adott beállítást. Ha a Superfetch/Prefetch-et bekapcsolva hagytad a [szolgáltatások kikapcsolása](#57-szolgáltatások-kikapcsolása) szekcióban akkor nagy valószínűséggel a Prefetch-el kapcsolatos funkciókra szükséged van.
 
 ```powershell
 Disable-MMAgent -MemoryCompression
@@ -1073,6 +1023,8 @@ Disable-MMAgent -MemoryCompression
 - ``Win+R`` -> ``mmsys.cpl``
 
 - Tiltsd le az összes nem használt Playback és Recording eszközt.
+
+- Pipáld be a ``Disable All Enhancements`` opciót az ``Enhancements`` fülnél.
 
 - A Communications fülnél állítsd be hogy ``Do nothing``
 
@@ -1110,7 +1062,7 @@ Használj Process Explorer-t mivel a stock Task Manager a CPU kihasználtságát
 
 - ``View -> Devices by connection`` és tilts le minden PCIe, SATA, NVMe, XHCI Controllert és USB Hub-ot amihez nincs semmi csatlakoztatva. Tilts le minden nem használt eszközt ami ugyanahhoz a PCIe Port-hoz van csatlakoztatva mint a GPU, pl. HD Audio. Ha valamiben nem vagy biztos inkább ne tiltsd le, vagy keress rá az interneten.
 
-- ``View -> Resources by connection`` és tilts le minden nem használt eszközt ami I/O-t vagy IRQ-t használ.
+- ``View -> Resources by connection`` és tilts le minden nem használt eszközt ami I/O-t vagy IRQ-t használ, kivéve a High Precision Event Timer-t.
 
 - Opcionálisan használd a [DeviceCleanup](https://www.majorgeeks.com/mg/getmirror/device_cleanup_tool,1.html) programot hogy eltávolíts rejtett eszközöket.
 
@@ -1140,26 +1092,7 @@ Tiltsd le a [Last Acces Time Stamp Update](https://www.tenforums.com/tutorials/1
 fsutil behavior set disablelastaccess 1
 ```
 
-## 5.31 Event Trace Sessions
-
-Ezekkel a fájlokkal automatikusan tudsz váltani ETS Enabled és Disabled között aminek a hatását meg tudod nézni itt: ``Win+R -> perfmon -> Data Collector Sets -> Event Trace Session``. Azok a programok amelyek Event Tracing-re támaszkodnak (pl. Event Viewer) nem fognak tudni adatot log-olni amíg kivan kapcsolva. CMD-be másold be az alábbi parancsokat hogy megépítsd a két registry fájlt a ``C:\`` meghajtón. Futtasd az ``ets-disable.reg``-et NSudo-val.
-
-- ets-enable.reg
-```bat
-reg export "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\WMI\Autologger" "C:\ets-enable.reg"
-```
-- ets-disable.reg
-
-```bat
->> "C:\ets-disable.reg" echo Windows Registry Editor Version 5.00 && >> "C:\ets-disable.reg" echo. && >> "C:\ets-disable.reg" echo [-HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\WMI\Autologger]
-```
-- Tiltsd le a SleepStudy-t (UserNonPresentSession)
-
-```bat
-for %a in ("SleepStudy" "Kernel-Processor-Power" "UserModePowerService") do (wevtutil sl Microsoft-Windows-%~a/Diagnostic /e:false)
-```
-
-## 5.32 Message Signaled Interrupts
+## 5.31 Message Signaled Interrupts
 
 - Az MSI-k gyorsabbak mint a hagyományos signal-based interruptok és az IRQ sharing problémát is megoldhatják.
 
@@ -1175,7 +1108,7 @@ for %a in ("SleepStudy" "Kernel-Processor-Power" "UserModePowerService") do (wev
   reg add "HKLM\SYSTEM\CurrentControlSet\Services\msisadrv" /v "Start" /t REG_DWORD /d "4" /f
   ```
   
-## 5.33 XHCI Interrupt Moderation (IMOD)
+## 5.32 XHCI Interrupt Moderation (IMOD)
 
 Windows 7-en az IMOD Interval 1ms, viszont az újabb OS-eken 0.05ms (50us) kivéve ha az adott USB drivernél más van megadva. Ez azt jelenti hogy amiután egy Interrupt generálva lett, az XHCI (USB) controller vár (úgynevezett buffer period) hogy több adat érkezzen mielőtt újabb Interruptot generálna. Ez csökkenti a CPU terhelését de adatvesztéshez vezethet.
 Példa: egy 1000-es polling rate-ű egér minden 1ms-ban küld adatot. Ha csak az egeret mozgatod egy 1ms-os intervallumban akkor nem történik Interrupt Moderation, mivel az interruptok generálási sebessége kisebb vagy egyenlő a meghatározott intervallummal. Azonban játék közben, ahol egyszerre mozgatod az egeret, nyomod a billentyűzetet stb, könnyen meghaladod az 1000 interrupt/másodpercet. Habár ez kevésbé valószínű 0,05 ms-os IMOD intervallum mellett, akkor is előfordulhat.
@@ -1194,11 +1127,11 @@ reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\CI\Config" /v "Vuln
 
 - A működését úgy tudod tesztelni, hogy a scriptben a ``$globalInterval = 0x0``-t átírod például ``0xFA00``-ra (62.5Hz) és futtatod. Ha láthatóan akadozik a kurzor, akkor működik.
 
-## 5.34 Applikációk konfigurálása
+## 5.33 Applikációk konfigurálása
 
 Tölts le minden játékot, applikációt amit használni fogsz mielőtt folytatod.
 
-### 5.34.1 FPS Limit
+### 5.33.1 FPS Limit
 
 - Ha limitálod az FPS-t akkor a monitorod refresh rate-jének a többszörösére korlátozd le. Bizonyosodj meg róla, hogy magas/unlimited FPS használatokor a GPU nincs teljesen kihasználva mivel minél kevesebb a kihasználtsága, annál kevesebb a system latency.
 
@@ -1207,49 +1140,29 @@ Tölts le minden játékot, applikációt amit használni fogsz mielőtt folytat
 
 - Ha RTSS-el limitálod az FPS-t sokkal konzisztensebb lesz a frame-pacing mivel busy-wait-et használ ami sokkal precízebb mint a passive-wait de cserébe nagyobb latency-vel és CPU overhead-el jár.
 
-### 5.34.2 Játék regisztrálása Game Bar-ban
+### 5.33.2 Játék regisztrálása Game Bar-ban
 
 Győződj meg róla hogy a Game Bar felismeri a játékot. Nyisd meg a Game Bar-t ``Win+G`` megnyomásával amikor játékban vagy és kapcsold be a ``Remember this is a game`` opciót. Ez szükséges a Game Mode és néhány esetben a használni kívánt Presentation Mode helyes működéséhez.
 
-### 5.34.3 Presentation Mode
 
-Ez nem egy ajánlás hogy melyik Presentation Mode-ot használd, inkább csak informatív okból írom le.
-
-- Lásd: [Presentation Models](https://wiki.special-k.info/en/Presentation_Model)
-
-- [PresentMon](https://github.com/GameTechDev/PresentMon)-al ellenőrizd hogy a kívánt Presentation Mode-ot használod-e.
-
-- Ha ``Hardware: Legacy Flip``-et szeretnél használni, pipáld ki a ``Disable fullscreen optimizations`` négyzetet. Ha nem működik, használd az alábbi parancsokat és indítsd újra a gépet. 
-
-```bat
-reg add "HKCU\SYSTEM\GameConfigStore" /v "GameDVR_DXGIHonorFSEWindowsCompatible" /t REG_DWORD /d "1" /f
-```
-
-```bat
-reg add "HKCU\SYSTEM\GameConfigStore" /v "GameDVR_FSEBehavior" /t REG_DWORD /d "2" /f
-```
-
-- Ha ``Hardware Composed: Independent Flip``-en ragadtál és másik presentation mode-ot szeretnél használni másold be CMD-be a következőt:
-
-```bat
-reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\Dwm" /v "OverlayTestMode" /t REG_DWORD /d "5" /f
-```
-
-### 5.34.4 Game Mode
+### 5.33.3 Game Mode
 
 A Game Mode megakadályozza a Windows Update futását valamint bizonyos értesítések megjelenítését ([1](https://support.xbox.com/en-GB/help/games-apps/game-setup-and-play/use-game-mode-gaming-on-pc)). Fontos megjegyezni, hogy a Game Mode befolyásolhatja a folyamatok és threadek prioritását, attól függően, hogy a Win32PrioritySeparation értéke hogyan van beállítva.
 
-### 5.34.5 Média lejátszó
+### 5.33.4 Média lejátszó
 
 - [mpv](https://mpv.io/)
 - [VLC](https://www.videolan.org/)
 - [mpc-hc](https://github.com/clsid2/mpc-hc)
 
-### 5.34.6 QoS Policy
+### 5.33.5 QoS Policy
 
 Abban az esetben ha a routered támogatja a Quality of Service beállítást, akkor [konfigurálható egy QoS Policy](/media/dscp-46-qos-policy.png) hogy egy megadott applikáció csomagjait helyezze előnybe a többi applikációval szemben. Ezt vagy a router oldalán, vagy pedig egy külön [applikációban](https://www.microsoft.com/en-us/download/details.aspx?id=4865) tudod ellenőrizni. [New Capture](/media/network-monitor-new-capture.png), nyisd meg a játékot, amelyre DSCP-értéket állítottál be, és reprodukálj egy olyan helyzetet, amelyben csomagok küldésére és fogadására kerül sor mint pl. egy online meccs. Nyomj egy F5-öt hogy elkezdd a logolást, 30 mp után pedig egy F7-et. A bal oldali ablakban kattints a játék nevére, majd kattints egy packet headerre. Bővítsd a packet info-t a frame details alatt, és végül bővítsd az Ipv4 alkategóriát. Ekkor láthatóvá válik az egyes folyamatok aktuális DSCP-értéke: ``"DifferentiatedServices Field: DSCP: 46, ECN: 0"``.
 
-### 5.34.7 Discord
+### 5.33.6 Discord
+
+Használj [Portable Discord](https://portapps.io/download/discord-portable-win64-1.0.9198-22-setup.exe)-ot. Ez egy eredeti Discord viszont nem kell feltelepítened.
+
 
 - Data & Privacy -> Use data to improve Discord - OFF
 
@@ -1257,17 +1170,25 @@ Abban az esetben ha a routered támogatja a Quality of Service beállítást, ak
 
 - Voice & Video -> Voice -> Enable Quality of Service High Packet Priority - OFF
 
+- Voice & Video -> Voice -> Echo Cancellation - OFF
+
+- Voice & Video -> Voice -> Advanced Voice Activity - OFF
+
+- Voice & Video -> Voice -> Automatic Gain Control - OFF
+
 - Advanced -> Hardware Acceleration - OFF
 
 - Game Overlay -> OFF
 
 - Töröld ki a nem használt modulokat:
 
-``C:\Users\%userprofile%\AppData\Local\Discord`` -> Menj be az **app-xxxxx** mappába -> **modules** és a példa alapján töröld le a különböző modulokat.
+Menje be a **modules** mappába és a példa alapján töröld le a különböző modulokat.
 
   - [media/discord-modules-example.png](/media/discord-modules-example.png)
 
-### 5.34.8 Epic Games
+- Process Explorer-ben opcionálisan állítsd le azokat a threadeket amelyek lekövetik az egérmozgást. Windows 11-en ez nem szükséges.
+
+### 5.33.7 Epic Games
 
 - Néhány Epic-es játéknál automatikusan fut az ``EOSOverlayRenderer-Win64-Shipping.exe`` ami általában a ``C:\Program Files (x86)\Epic Games\Launcher\Portal\Extras\Overlay`` directory-ban található. Használd az alábbi parancsot hogy átírd a nevét, abban az esetben ha az Epic Games-t az alapértelmezett helyre telepítetted. Játékbeli vásárlásokhoz (pl. VBucks feltöltés) kötelező futnia. Ebben az esetben csak írd vissza a nevét és indítsd újra a játékot. Fontos megjegyezni hogy az Epic Games frissítése automatikusan újra generálja a fájlt.
 
@@ -1276,7 +1197,7 @@ ren "C:\Program Files (x86)\Epic Games\Launcher\Portal\Extras\Overlay\EOSOverlay
 ```
 - Amiután elindítasz egy játékot, az Epic Games Launcher továbbra is fut a háttérben azonban bezárható a Steammel ellentétben.
 
-### 5.34.9 Steam 
+### 5.33.8 Steam 
 
 - Bal fent ``Steam`` -> ``Settings`` -> ``Interface``, kapcsold ki az ``Enable smooth scrolling in web view`` és az ``Enable GPU Accelerated rendering in web views`` opciót.
 
@@ -1288,23 +1209,23 @@ Töltsd le a [NoSteamWebHelper](https://github.com/Aetopia/NoSteamWebHelper)-t.
 
 Így mostantól automatikusan bezáródik a SteamWebHelper amikor elindítasz egy játékot azonban amikor bezárod újra elindul hogy maga a Steam applikáció elérhető legyen. Vedd figyelembe hogy a Steam overlay nem lesz elérhető játék közben.
 
-## 5.35 Interruptok és DPC-k
+## 5.34 Interruptok és DPC-k
 
 A Windows CPU 0-án ütemez számos interruptot és DPC-t ami elég terhelő lehet egyetlen-egy CPU számára. Ezért affinity-ket kell beállítani és elkülöníteni/eloszlatni a drivereket.
 
 - Használd a [GoInterruptPolicy](https://github.com/spddl/GoInterruptPolicy) programot az affinity-k beállítására: Dupla klikk az adott eszközre -> Device Policy -> ``IrqPolicySpecifiedProcessors`` és válaszd ki a használni kívánt CPU-t/kat. Ha több ugyanolyan nevű eszköz van jelen, úgy azonosíthatod, hogy összehasonlítod a ``Location``-t Device Managerben a ``Properties -> General`` résznél a GoInterruptPolicy-ban lévő ``Location Info``-val.
 
-### 5.35.1 GPU és DirectX Graphics Kernel
+### 5.34.1 GPU és DirectX Graphics Kernel
 
 Használhatod az [AutoGpuAffinity](https://github.com/valleyofdoom/AutoGpuAffinity)-t hogy benchmarkold az összes CPU-t. Ez segíthet eldönteni melyik CPU-n kerüljön feldolgozásra a GPU. Ha nem használsz Hyper-Threading/SMT-t és E-Core-okat akkor szinte azonosan fog teljesíteni az összes CPU.
 
-### 5.35.2 XHCI és Audio controller
+### 5.34.2 XHCI és Audio controller
 
 Ez a két modul nagy számban generál interruptokat ezért érdemes elkülöníteni a kettőt ha több XHCI controller-ed van vagy pedig alaplapi audio-t használsz.
 
-### 5.35.3 Network Interface Card (NIC)
+### 5.34.3 Network Interface Card (NIC)
 
-Támogatnia kell az MSI-X-et ahhoz hogy az ISR azon a CPU-n fusson amelyik végrehajtja a DPC-ket. Figyelj arra hogy az RSS beállítás szabja meg hogy pontosan hány CPU-n van ütemezve a NIC. Például, ha az RSSBaseCpu a CPU 2-re van állítva és 4 RSS Queue-t használsz akkor a 2/3/4/5-ön lesz ütemezve.
+Támogatnia kell az MSI-X-et ahhoz hogy az ISR azon a CPU-n fusson amelyik végrehajtja a DPC-ket. Figyelj arra hogy az RSS beállítás szabja meg hogy pontosan hány CPU-n van ütemezve a NIC. Például, ha az RSSBaseCpu a CPU 1-re van állítva és 2 RSS Queue-t használsz akkor az 1/2-őn lesz ütemezve. A játékok általában nem használnak 2 CPU-nál többet, ezáltal nem szükséges annál több RSS.
 
   <details> 
   <summary>RSS beállítása</summary>
@@ -1332,7 +1253,7 @@ Amiután kész vagy az előbbi lépésekkel töltsd le az [XTW](https://github.c
 
   - Ellenőrizd hogy egy ISR-hez tartozó DPC ugyanazon a CPU-n kerül-e feldolgozásra. ([példa](/media/isr-dpc-same-core.png))
 
-## 5.36 Event Viewer ellenőrzése
+## 5.35 Event Viewer ellenőrzése
 
 Ez a lépés nem kötelező, azonban segíthet a megmagyarázhatatlan FPS drop-ok és többi probléma azonosításában.
 
@@ -1340,27 +1261,27 @@ Ez a lépés nem kötelező, azonban segíthet a megmagyarázhatatlan FPS drop-o
   
 Pár perc használat után ellenőrizd nincs-e teli hibaüzenettel az Event Viewer, majd futtasd az ``ets-disable.reg`` fájlt.
 
-## 5.37 CPU Idle States
+## 5.36 CPU Idle States
 
-Ez kényszeríti a C-State 0-t, azonban magasabb hőfokokkal (A CPU hőmérsékletének nem lenne szabad elérni a thermal throttling pontot, mivel a hűtéssel már foglalkoztál a [hűtés](#12-hűtés) szekcióban) és energiafogyasztással jár. Kerüld az idle kikapcsolását ha a Hyper-Threading/Simultaneous Multithreading bevan kapcsolva, vagy pedig ha valamilyenféle dynamic boosting feature-t használsz, mint például AMD-n a PBO, Turbo Boost vagy hasonló. 
+Ez kényszeríti a C-State 0-t, azonban magasabb hőfokokkal (A CPU hőmérsékletének nem lenne szabad elérni a thermal throttling pontot, mivel a hűtéssel már foglalkoztál a [hűtés](#12-hűtés) szekcióban) és energiafogyasztással jár. Kerüld az idle kikapcsolását ha a Hyper-Threading/Simultaneous Multithreading bevan kapcsolva mivel a single-thread teljesítmény csökkenhet, vagy pedig ha valamilyenféle dynamic boosting feature-t használsz, mint például AMD-n a PBO, Turbo Boost vagy hasonló. 
 
    - [Idle Enable](/bin/enable_idle.bat)
    - [Idle Disable](/bin/disable_idle.bat)
 
-## 5.38 Paging File
+## 5.37 Paging File
 
-Legtöbb esetben ajánlott bekapcsolva hagyni, ami az alap beállítás. Van egy érv, hogy jobb ha kikapcsolod abban az esetben ha elég RAM-mal rendelkezel a játékhoz mivel csökkenti az I/O overheadet és a RAM gyorsabb mint a disk, azonban FPS drop-okat eredményezhet akkor is ha a memória kihasználtsága közel sem éri el a 100%-ot.
+Kapcsold ki a Paging File-t hogy elkerüld az I/O overheadet. Némelyik játékban FPS droppokat okozhat.
 
   - Hogy kikapcsold:
 
     - ``Win+R -> sysdm.cpl -> Advanced`` -> A ``Performance`` szekciónál ``Settings`` -> ``Advanced`` -> A ``Virtual Memory`` alatt ``Change`` -> Pipáld ki az ``Automatically manage paging file size for all drives`` opciót -> Válaszd ki a ``No paging file``-t -> ``Set``
 
 
-## 5.39 Cleanup és karbantartás
+## 5.38 Cleanup és karbantartás
 
 - Használj programokat mint a [BulkCrapUninstaller](https://github.com/Klocman/Bulk-Crap-Uninstaller) mivel a control panel-ban történő uninstall során sok fájl letörlése kimaradhat.
 
-- Használj [Autoruns](https://learn.microsoft.com/en-us/sysinternals/downloads/autoruns)-t hogy letiltsd a nem kívánt programok/szolgáltatások automatikus futtatását. Ellenőrizd gyakran, főleg egy program feltelepítése után. Töröld ki az összes sárgával jelölt elemet. Lehet hogy ``C:\bin\NSudoLG.exe``-n keresztül kell futtatnod az Autoruns-t az ``Enable All Priviliges`` bepipálásával.
+- Használj [Autoruns](https://learn.microsoft.com/en-us/sysinternals/downloads/autoruns)-t hogy letiltsd a nem kívánt programok/szolgáltatások automatikus futtatását. Ellenőrizd gyakran, főleg egy program feltelepítése után. Lehetséges hogy ``C:\bin\NSudoLG.exe``-n keresztül kell futtatnod az Autoruns-t az ``Enable All Priviliges`` bepipálásával.
 
 - Disk Cleanup
 
@@ -1376,7 +1297,7 @@ Legtöbb esetben ajánlott bekapcsolva hagyni, ami az alap beállítás. Van egy
     cleanmgr /sagerun:0
     ```
 
-- Helyek ahol érdemes ellenőrizni a nem kívánt fájlokat
+- Helyek ahol érdemes ellenőrizni a nem kívánt fájlokat:
 
   - ``C:\``
   - ``C:\Windows\Prefetch`` - prefetch fájlok (ennek a mappának üresnek kell lennie ha a superfetch kivan kapcsolva)
