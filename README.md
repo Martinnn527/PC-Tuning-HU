@@ -89,9 +89,9 @@
   - [5.28 Device Manager beállítása](#528-device-manager-beállítása)
   - [5.29 Device Power Saving](#529-device-power-saving)
   - [5.30 Fájl rendszer](#530-fájl-rendszer)
-  - [5.31 Message Signaled Interrupts](#532-message-signaled-interrupts)
-  - [5.32 XHCI Interrupt Moderation](#533-xhci-interrupt-moderation-imod)
-  - [5.33 Applikációk konfigurálása](#534-applikációk-konfigurálása)
+  - [5.31 Message Signaled Interrupts](#531-message-signaled-interrupts)
+  - [5.32 XHCI Interrupt Moderation](#532-xhci-interrupt-moderation-imod)
+  - [5.33 Applikációk konfigurálása](#533-applikációk-konfigurálása)
     - [5.33.1 FPS Limit](#5331-fps-limit)
     - [5.33.2 Játék regisztrálása Game Bar-ban](#5332-játék-regisztrálása-game-bar-ban)
     - [5.33.3 Game Mode](#5333-game-mode)
@@ -1256,10 +1256,6 @@ Amiután kész vagy az előbbi lépésekkel töltsd le az [XTW](https://github.c
 ## 5.35 Event Viewer ellenőrzése
 
 Ez a lépés nem kötelező, azonban segíthet a megmagyarázhatatlan FPS drop-ok és többi probléma azonosításában.
-
-  - NSudo-val futtasd az ``ets-enable.reg`` fájlt mivel ez szükséges az event log működéséhez, majd indítsd újra a gépet.
-  
-Pár perc használat után ellenőrizd nincs-e teli hibaüzenettel az Event Viewer, majd futtasd az ``ets-disable.reg`` fájlt.
 
 ## 5.36 CPU Idle States
 
