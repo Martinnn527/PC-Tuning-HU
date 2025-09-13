@@ -183,26 +183,26 @@ defaultPref(`"nglayout.enable_drag_images`", false)`
 defaultPref(`"reader.parse-on-load.enabled`", false)`
 defaultPref(`"browser.tabs.firefox-view`", false)`
 defaultPref(`"browser.tabs.tabmanager.enabled`", false)`
+defaultPref(`"network.http.max-connections`", 900)`
+defaultPref(`"network.http.max-persistent-connections-per-server`", 12)`
+defaultPref(`"network.http.max-persistent-connections-per-proxy`", 12)`
+defaultPref(`"network.http.pipelining`", true)`
+defaultPref(`"network.http.pipelining.maxrequests`", 8)`
+defaultPref(`"network.http.proxy.pipelining`", true)`
+defaultPref(`"network.dns.disableIPv6`", true)`
+defaultPref(`"network.dnsCacheExpiration`", 3600)`
+defaultPref(`"network.dnsCacheEntries`", 1024)`
+defaultPref(`"gfx.webrender.all`", true)`
+defaultPref(`"image.cache.size`", 104857600)`
+defaultPref(`"nglayout.initialpaint.delay`", 0)`
+defaultPref(`"content.notify.ontimer`", true)`
+defaultPref(`"content.notify.interval`", 100000)` 
+defaultPref(`"browser.cache.disk.enable`", false)`
+defaultPref(`"browser.cache.memory.enable`", true)`
+defaultPref(`"browser.cache.memory.capacity`", 262144)`
 lockPref(`"browser.newtabpage.activity-stream.asrouter.userprefs.cfr.addons`", false)`
-lockPref(`"browser.newtabpage.activity-stream.asrouter.userprefs.cfr.features`", false)"
-defaultPref("network.http.max-connections", 900)
-defaultPref("network.http.max-persistent-connections-per-server", 12)
-defaultPref("network.http.max-persistent-connections-per-proxy", 12)
-defaultPref("network.http.pipelining", true)
-defaultPref("network.http.pipelining.maxrequests", 8)
-defaultPref("network.http.proxy.pipelining", true)
-defaultPref("network.dns.disableIPv6", true)
-defaultPref("network.dnsCacheExpiration", 3600)
-defaultPref("network.dnsCacheEntries", 1024)
-defaultPref("layers.acceleration.force-enabled", true)
-defaultPref("gfx.webrender.all", true)
-defaultPref("image.cache.size", 104857600)
-defaultPref("nglayout.initialpaint.delay", 0)
-defaultPref("content.notify.ontimer", true)
-defaultPref("content.notify.interval", 100000) 
-defaultPref("browser.cache.disk.enable", false)
-defaultPref("browser.cache.memory.enable", true)
-defaultPref("browser.cache.memory.capacity", 262144)
+lockPref(`"browser.newtabpage.activity-stream.asrouter.userprefs.cfr.features`", false)`
+
 
     Set-Content -Path "$($install_dir)\distribution\policies.json" -Value $($policies)
     [System.IO.File]::WriteAllText("$($install_dir)\defaults\pref\autoconfig.js", $($autoconfig), [System.Text.Encoding]::ASCII)
