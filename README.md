@@ -216,7 +216,7 @@ Ez az egyik legfontosabb része az útmutatónak. Benchmarkolás nélkül vakon 
 
 - A legtöbb modern periféria támogatja az Onboard Memory Profile-t. Állítsd be őket mielőtt újratelepítenéd a Windowst, hogy ne kelljen a későbbi módosítások érdekében feltelepíteni a sok bloatware-t.
 
-- Magasabb DPI csökkenti a latencyt. Ügyelj arra hogy sensor smoothing ne lépjen életbe magasabb DPI használatakor. Windowsban az egér beállítások közt lejjebb viheted a pointer speedet tetszésed szerint ha a játék raw inputot használ. 
+- Magasabb DPI csökkenti a latencyt, és magasabb polling raten segít hogy az összes poll részletesebb mozgási adatot tartalmazzon. Ügyelj arra hogy sensor smoothing ne lépjen életbe magasabb DPI használatakor. Windowsban az egér beállítások közt lejjebb viheted a pointer speedet tetszésed szerint ha a játék raw inputot használ. 
 
 - Magasabb polling rate csökkenti a jittert, azonban 1000Hz-nél (1ms) magasabb polling rate hardvertől függően negatívan befolyásolhatja a teljesítményt, ezért ennek megfelőlen kell beállítani. Ez nem akkora probléma a 2023 májusi Windows 11 Raw Input Stack update után ami limitálja a nem előtérben lévő programok polling frekvenciáját 125hz-re (8ms).
 
@@ -318,7 +318,7 @@ Fontos megjegyezni hogy néhány játékban a ReBAR használata negatívan befol
 
 ## 2.9 Nem használt eszközök letiltása
 
-- Tiltsd le az összes nem használt eszközt, mint például nem használt NIC-ek, Bluetooth, WiFi, High Definition Audio (ha nem használsz alaplap audio-t), iGPU, SATA (és RAM slotok).
+- Tiltsd le az összes nem használt eszközt, mint például nem használt NIC-ek, Bluetooth, WiFi, High Definition Audio (ha nem használsz alaplap audio-t), integrált GPU, SATA és RAM slotok.
 
 ## 2.10 Trusted Platform Module
 
@@ -330,7 +330,7 @@ Fontos megjegyezni hogy néhány játékban a ReBAR használata negatívan befol
 
 ## 2.11 Secure Boot
 
-- Kapcsold ki a Secure Boot-ot. (Windows 11-en a Vanguard, FACEIT, igényli a bekapcsolva hagyását.)
+- Kapcsold ki a Secure Boot-ot. Windows 11-en néhány anti-cheat (Vanguard, FACEIT) működéséhez bekapcsolva kell hagyni.
 
   - ``Win+R`` -> ``msinfo32``-ben tudod ellenőrizni az állapotát.
 
@@ -356,7 +356,9 @@ Fontos megjegyezni hogy néhány játékban a ReBAR használata negatívan befol
 
 ## 2.15 Statikus CPU frekvencia
 
-- Ha statikus frekvenciát/feszültséget konfigurálsz a CPU-hoz, kapcsold ki a dynamic frequency funkciókat mint például a SpeedShift, SpeedStep. A Precision Boost Overdrive (PBO) a Ryzen CPU-k esetében a statikus frekvencia és feszültésg alternatívája.
+Ajánlott statikus frekvenciát és feszültséget beállítani a CPU-nak.
+
+- Kapcsold ki a dynamic frequency funkciókat mint például a SpeedShift, SpeedStep, Ryzen-en a PBO, Curve Optimizer.
 
   - Egyes esetekben a fent említett beállítások megakadályozhatják, hogy a processzor a BIOS-ban történő manuális beállítás ellenére is túllépje az alapfrekvenciát. Ennek megfelelően állítsd be, ha ez előfordul, és [HWiNFO](https://www.hwinfo.com/)-ban ellenőrizd az órajeleket.
 
@@ -430,7 +432,7 @@ Ez nem egy ajánlás hogy milyen LLC mode-ot használj, inkább csak informatív
 
 - GPU overclockolásnál előfordulhat hogy számos power limit-et fel kell oldanod.
 
-  - NVIDIA rendszereken kapcsold ki a ``CUDA - Force P2 State``-et [NVIDIA Profile Inspector](https://github.com/Orbmu2k/nvidiaProfileInspector)-ban hogy elkerüld a memory downclock-ot stressz teszt közben.
+  - NVIDIA GPU-n kapcsold ki a ``CUDA - Force P2 State``-et [NVIDIA Profile Inspector](https://github.com/Orbmu2k/nvidiaProfileInspector)-ban hogy elkerüld a memory downclock-ot stressz teszt közben.
   
   - Lásd [A Slightly Better Way To Overclock and Tweak Your Nvidia GPU | Cancerogeno](https://docs.google.com/document/d/14ma-_Os3rNzio85yBemD-YSpF_1z75mZJz1UdzmW8GE/edit?tab=t.0)
   - Lásd [LunarPSD/NvidiaOverclocking](https://github.com/LunarPSD/NvidiaOverclocking/blob/main/Nvidia%20Overclocking.md)
@@ -564,7 +566,7 @@ Húzd ki az ethernet kábeledet és ne legyél az internethez csatlakozva, ezál
 
 Folytasd a setup-ot, és a végén ne indítsd újra a gépet.
 
-- Nyisd meg újra a CMD-t Shift+F10-el és írd be hogy ``diskpart`` hogy megállapítsd a Windows partíciójának a betűjelét. Egy viszonylag nagy méretű partíció lesz. Írd be hogy ``exit``.
+- Nyisd meg újra a CMD-t Shift+F10-el és írd be hogy ``diskpart`` , majd ``list volume`` hogy megállapítsd a Windows partíciójának a betűjelét. Írd be hogy ``exit``.
 
 - Titlsd le a további 8.3 fájlnevek létrehozását. Cseréld ki a ``<drive letter>``-t a megfelelő betűjellel. (pl. ``D:``)
 
@@ -817,7 +819,7 @@ powercfg /h off
 
 Javasolt a debloat scriptek elkerülése és az olyan komponensek eltávolítása ami nem ténylegesen bloatware, mivel ez az operációs rendszer meghibásodásához vezethet.
 
-- Még nem ajánlott letörölni az Xbox Game Bar-t mivel a későbbi lépésekben problémába ütközhetsz ([Játék regisztrálása Game Bar-ban](#5352-játék-regisztálása-game-bar-ban)).
+- Még nem ajánlott letörölni az Xbox Game Bar-t mivel a későbbi lépésekben problémába ütközhetsz ([Játék regisztrálása Game Bar-ban](#5332-játék-regisztálása-game-bar-ban)).
 
 - [AppxPackagesManager](https://github.com/valleyofdoom/AppxPackagesManager) használatával távolítsd el a nem kívánt programokat.
 
