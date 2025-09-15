@@ -60,7 +60,7 @@
   - [5.4 Driverek telepítése](#54-driverek-telepítése)
   - [5.5 Windows Server konfigurálása](#55-windows-server-konfigurálása)
   - [5.6 Privacy Options](#56-privacy-options)
-  - [5.7 Szolgáltatások kikapcsolása](#57-search-indexing)
+  - [5.7 Szolgáltatások kikapcsolása](#57-szolgáltatások-kikapcsolása)
     - [5.7.1 Search Indexing](#571-search-indexing)
     - [5.7.2 Windows Update](#572-windows-update) 
     - [5.7.3 Diagnostic Policy Service](#573-diagnostic-policy-service)
@@ -650,12 +650,6 @@ C:\bin\disable-process-mitigations.bat
    - CMD-be írd be hogy: ``gpupdate /force``, így egyből életbe lépnek a változások.
 
 - ``Win+R`` -> ``control userpasswords`` -> ``Users`` majd jobb klikk az ``Administrator``profilra, ``Set Password`` és hagyd üresen hogy eltávolítsd a jelszót.
-
-- Windows Server-en globálisan kikapcsolható a Telemetry az alábbi CMD paranccsal azonban ha a ``registry-options.json``-ban ``true``-ra van állítva a ``disable telemetry`` ez a registry key már jelen van.
-
-  ```bat
-  reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\DataCollection" /v AllowTelemetry /t REG_DWORD /d "0" /f
-  ```
 
 ## 5.6 Privacy Options
 
