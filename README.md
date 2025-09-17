@@ -46,7 +46,7 @@
   - [3.8 Stressz-tesztelő eszközök](#38-stressz-tesztelő-eszközök)
 - [4. Telepítés előtti instrukciók](#4-telepítés-előtti-instrukciók)
   - [4.1 Windows verzió kiválasztása](#41-milyen-windows-verziót-használj)
-  - [4.2 Eredeti ISO letöltése](#43-eredeti-iso-letöltése)
+  - [4.2 Eredeti ISO letöltése](#42-eredeti-iso-letöltése)
   - [4.3 ISO testreszabása (Opcionális)](#43-iso-testreszabása-opcionális)
   - [4.4 Szükséges fájlok integrálása](#44-szükséges-fájlok-integrálása)
   - [4.5 Telepítés Ventoy használatával](#45-telepítés-pendrive-ról-ventoy-használatával)
