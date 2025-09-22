@@ -607,17 +607,12 @@ Set-ExecutionPolicy Unrestricted
 
 ## 5.2 Process Mitigations
 
-- Ha még nem tetted, másold be a Pendriveodon lévő ``bin`` mappát a C:\-be. A teljes elérési útnak ``C:\bin``-nek kell lennie.
+- Ez alapból bevan kapcsolva és negatívan befolyásolja a teljesítményt. Windows Defender-ben az ``Exploit Protection`` oldalon ki lehet ezeket kapcsolni. Vedd figyelembe hogy a következő lépésben a Defender ki lesz kapcsolva ezáltal nem lesz elérhető a GUI hogy visszakapcsold azonban a [Set-ProcessMitigation](https://learn.microsoft.com/en-us/powershell/module/processmitigations/set-processmitigation?view=windowsserver2025-ps) használható PowerShell-ben.
 
-- Ez alapból bevan kapcsolva és negatívan befolyásolja a teljesítményt. Ha nem szeretnél scripteket futtatni, akkor Windows Defender-ben az ``Exploit Protection`` oldalon ki lehet ezeket kapcsolni. Vedd figyelembe hogy a következő lépésben a Defender ki lesz kapcsolva ezáltal nem lesz elérhető a GUI hogy visszakapcsold azonban a [Set-ProcessMitigation](https://learn.microsoft.com/en-us/powershell/module/processmitigations/set-processmitigation?view=windowsserver2025-ps) használható PowerShell-ben.
-
-Az alábbi script-tel szintén kikapcsolható a Process Mitigation. Nyisd meg a CMD-t adminként majd pedig másold be az alábbi parancsot.
-
-```bat
-C:\bin\disable-process-mitigations.bat
-```
 
 ## 5.3 Registry Script
+
+- Ha még nem tetted, másold be a Pendriveodon lévő ``bin`` mappát a C:\-be. A teljes elérési útnak ``C:\bin``-nek kell lennie.
 
 - A beállítások módosíthatók a ``bin`` mappában lévő ``registry-options.json`` módosításával (az értékek ``true`` és ``false``). Ha kifejezetten játékra használod a rendszert ajánlott nem hozzá nyúlni mivel az alap configban minden ``true`` értékre van állítva.
 
@@ -864,13 +859,13 @@ taskkill /f /im smartscreen.exe > nul 2>&1 & ren C:\Windows\System32\smartscreen
 
 - [7-Zip](https://www.7-zip.org/a/7z2301-x64.exe)
 
-- Nyisd meg a ``C:\Program Files\7-Zip\7zFM.exe``-t -> ``Tools -> Options`` és add hozzá a 7-Zip-et az összes fájl típushoz a ``+`` gombra kattintva. Lehetséges hogy kétszer kell megnyomnod hogy felülírd a már hozzáadott fájl típusokat. A 7-Zip részleget a letisztultság kedvéért érdemes beállítani: ([1](/media/7-zip-settings-example.png)).
+- Nyisd meg a ``C:\Program Files\7-Zip\7zFM.exe``-t -> ``Tools -> Options`` és add hozzá a 7-Zip-et az összes fájl típushoz a ``+`` gombra kattintva. Lehetséges hogy kétszer kell megnyomnod hogy felülírd a már hozzáadott fájl típusokat.
 
 ## 5.19 GPU Driver
 
-Lásd [docs/configure-nvidia.md](/docs/configure-nvidia.md)
+[NVIDIA](/docs/configure-nvidia.md)
 
-Lásd [docs/configure-amd.md](/docs/configure-amd.md)
+[AMD](/docs/configure-amd.md)
 
 ## 5.20 MSI Afterburner
 
@@ -890,17 +885,15 @@ Lásd [docs/configure-amd.md](/docs/configure-amd.md)
 
 ## 5.21 Felbontások és Scaling Mode
 
-- Keress egy stabil OC-t a monitorodhoz. NVIDIA Control Panel-ben a ``Change resolution -> Customize -> Create Custom Resolution`` fülnél vidd feljebb a refresh rate-t ~3-asával amíg a monitor nem ír egy ``Out of Range`` üzenetet vagy pedig csak szimplán fekete a képernyő. Ha ez történik, csak várj 15 másodpercet és automatikusan visszaáll az előzőleg használt értékekre. Ezután egyesével vedd visszább a refresh ratet. Például ha 250 hz-ről ugrottál 253 hz-re és fekete volt a képernyő akkor 252-től indulva menj lejjebb amíg stabil nem lesz. Ezután teszteld [itt](https://www.testufo.com/) hogy nincs e screen tearing és hogy a monitor kábelének nincs e úgynevezett [coil whine](https://pcsupport.lenovo.com/ie/en/products/laptops-and-netbooks/solutions/ht511649)-ja.
+- Opcionálisan keress egy stabil OC-t a monitorodhoz. NVIDIA Control Panel-ben a ``Change resolution -> Customize -> Create Custom Resolution`` fülnél vidd feljebb a refresh rate-t ~3-asával amíg a monitor nem ír egy ``Out of Range`` üzenetet vagy pedig csak szimplán fekete a képernyő. Ha ez történik, csak várj 15 másodpercet és automatikusan visszaáll az előzőleg használt értékekre. Ezután egyesével vedd visszább a refresh ratet. Például ha 250 hz-ről ugrottál 253 hz-re és fekete volt a képernyő akkor 252-től indulva menj lejjebb amíg stabil nem lesz. Ezután teszteld [itt](https://www.testufo.com/) hogy nincs e screen tearing és hogy a monitor kábelének nincs e úgynevezett [coil whine](https://pcsupport.lenovo.com/ie/en/products/laptops-and-netbooks/solutions/ht511649)-ja.
 
 - Általában két lehetőséged van: Display, vagy GPU scaling. A monitorod natív felbontása nem igényel scalinget ezáltal identity scaling-et ([1](https://learn.microsoft.com/en-us/windows/win32/api/wingdi/ne-wingdi-displayconfig_scaling)), használhatsz. 
 
-- Állíts be egy egész refresh ratet (a legmagasabbat amit az első pontnál eltudtál érni), például 60,00/240,00, nem 59,94/239,76. Ennek elérése érdekében használd az ``Exact`` vagy ``Exact reduced`` timing-ot [CRU](https://www.monitortests.com/forum/Thread-Custom-Resolution-Utility-CRU)-ban mivel a többi egy picit eltérő lehet.
+- Állíts be egy egész refresh ratet, például 60,00/240,00, nem 59,94/239,76. Ennek elérése érdekében használd az ``Exact`` timing-ot [CRU](https://www.monitortests.com/forum/Thread-Custom-Resolution-Utility-CRU)-ban mivel a többi egy picit eltérő lehet.
 
   - 280hz vagy magasabb frekvencia esetén a ``DisplayID 2.0`` extension block-on belül add hozzá a használni kívánt felbontást.
 
-- Töröld az összes nem használt felbontást és egyéb bloatwaret. Az alábbi példa szimplán egy kiinduló pont és lehetséges hogy neked máshogy kell beállítanod.
- 
-  - [Példa](/media/cru-example.png)  
+- Töröld az összes nem használt felbontást és egyéb bloatwaret.
 
 - Ha NVIDIA GPU-d van, győzödj meg róla hogy a ``Display`` opció a ``Perform scaling on`` beállításnál még mindig elérhető. Ha nem, futtasd a CRU mappájában lévő reset.exe-t hogy visszaállítsd a beállításokat alapra és konfiguráld újra a CRU-t. Minden változtatás után futtasd a restart64.exe-t hogy megtudd mi volt az ami a problémát okozta.
 
@@ -1070,7 +1063,7 @@ Használj Process Explorer-t mivel a stock Task Manager a CPU kihasználtságát
 Get-WmiObject MSPower_DeviceEnable -Namespace root\wmi | ForEach-Object { $_.enable = $false; $_.psbase.put(); }
 ```
 
-- Ha kihúzod és visszadugod az eszközt akkor ez a beállítás visszaállhat tehát vagy kerüld el vagy futtasd a parancsot minden alkalommal, vagy pedig használd a [DevicePowerSaving](/bin/DevicePowerSaving.ps1) scriptet hogy minden újraindításnál automatikusan fusson csinálj egy shortcut-ot ``shell:startup``-ba és használd a PowerShell paramétert hogy ne notepad-ként fusson. Ez ajánlatos, csak hogy biztosra menj.
+- Ha kihúzod és visszadugod az eszközt akkor ez a beállítás visszaállhat tehát vagy kerüld el vagy futtasd a parancsot minden alkalommal, vagy pedig használd a [DriverPowerSaving](/bin/DriverPowerSaving.ps1) scriptet. Hogy minden újraindításnál automatikusan fusson, csinálj egy shortcut-ot ``shell:startup``-ba és használd a PowerShell paramétert hogy ne notepad-ként fusson.
 
 ## 5.30 Fájl rendszer
 
@@ -1094,11 +1087,11 @@ fsutil behavior set disablelastaccess 1
 
 - Töltsd le a [GoInterruptPolicy](https://github.com/spddl/GoInterruptPolicy)-t.
 
-- Nyisd meg és sorold fel az eszközöket MSI Mode alapján. Kapcsold be az MSI-ket az összes támogatott eszközön. Vedd figyelembe hogy néhány driver fejlesztő alapból kikapcsolva hagyja az MSI-ket, tehát ha újratelepítesz egy drivert utána mindig érdemes ellenőrizni. Kerüld az eszközök újraindítását miután alkalmaztad a policy-ket, helyette indítsd újra a gépet.
+- Nyisd meg és sorold az eszközöket MSI Mode alapján. Kapcsold be az MSI-ket az összes támogatott eszközön. Vedd figyelembe hogy néhány driver fejlesztő alapból kikapcsolva hagyja az MSI-ket, tehát ha újratelepítesz egy drivert utána mindig érdemes ellenőrizni. Kerüld az eszközök újraindítását miután alkalmaztad a policy-ket, helyette indítsd újra a gépet.
 
 - ``Win+R -> msinfo32 -> Hardware Resources -> Conflicts/Sharing`` és győződj meg róla hogy nincs IRQ Sharing a rendszeren.
 
-  - Ha ``System timer`` és ``High Precision Event Timer``eszköz IRQ-t oszt meg, le kell tiltani a ``System Timer`` szülőeszközét ami a ``PCI standard ISA bridge. CMD-be másold be az alábbi parancsot.
+  - Ha ``System timer`` és ``High Precision Event Timer``eszköz IRQ-t oszt meg, le kell tiltani a ``System Timer`` szülőeszközét ami a ``PCI standard ISA bridge``. CMD-be másold be az alábbi parancsot.
 
   ```bat
   reg add "HKLM\SYSTEM\CurrentControlSet\Services\msisadrv" /v "Start" /t REG_DWORD /d "4" /f

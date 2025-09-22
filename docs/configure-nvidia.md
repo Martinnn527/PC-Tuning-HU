@@ -81,9 +81,7 @@ reg add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08
 
 - Töltsd le és csomagold ki az [NVIDIA Profile Inspector](https://github.com/Orbmu2k/nvidiaProfileInspector)-t
 
-- Ha nem használsz GSYNC-et, kapcsold ki
-
-  - [media/g-sync-example.png](/media/g-sync-example.png)
+- Ha nem használsz GSYNC-et, kapcsold ki.
 
 - Kapcsold ki az ``Enable Ansel``-t
 
