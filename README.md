@@ -104,10 +104,9 @@
     - [5.34.1 GPU és DirectX Graphics Kernel](#5341-gpu-és-directx-graphics-kernel)
     - [5.34.2 XHCI és Audio Controller](#5342-xhci-és-audio-controller)
     - [5.34.3 Network Interface Card](#5343-network-interface-card-nic)   
-  - [5.35 Event Viewer ellenőrzése](#535-event-viewer-ellenőrzése)
-  - [5.36 CPU Idle States](#536-cpu-idle-states)
-  - [5.37 Paging File](#537-paging-file)
-  - [5.38 Cleanup és karbantartás](#538-cleanup-és-karbantartás)
+  - [5.35 CPU Idle States](#535-cpu-idle-states)
+  - [5.36 Paging File](#537-paging-file)
+  - [5.37 Cleanup és karbantartás](#537-cleanup-és-karbantartás)
 
 ## Bemutató
 
@@ -1242,18 +1241,15 @@ Amiután kész vagy az előbbi lépésekkel töltsd le az [XTW](https://github.c
 
   - Ellenőrizd hogy egy ISR-hez tartozó DPC ugyanazon a CPU-n kerül-e feldolgozásra. ([példa](/media/isr-dpc-same-core.png))
 
-## 5.35 Event Viewer ellenőrzése
 
-Ez a lépés nem kötelező, azonban segíthet a megmagyarázhatatlan FPS drop-ok és többi probléma azonosításában.
-
-## 5.36 CPU Idle States
+## 5.35 CPU Idle States
 
 Ez kényszeríti a C-State 0-t, azonban magasabb hőfokokkal (A CPU hőmérsékletének nem lenne szabad elérni a thermal throttling pontot, mivel a hűtéssel már foglalkoztál a [hűtés](#12-hűtés) szekcióban) és energiafogyasztással jár. Kerüld az idle kikapcsolását ha a Hyper-Threading/Simultaneous Multithreading bevan kapcsolva mivel a single-thread teljesítmény csökkenhet, vagy pedig ha valamilyenféle dynamic boosting feature-t használsz, mint például AMD-n a PBO, Turbo Boost vagy hasonló. 
 
    - [Idle Enable](/bin/enable_idle.bat)
    - [Idle Disable](/bin/disable_idle.bat)
 
-## 5.37 Paging File
+## 5.36 Paging File
 
 Kapcsold ki a Paging File-t hogy elkerüld az I/O overheadet. Némelyik játékban FPS droppokat okozhat.
 
@@ -1262,7 +1258,9 @@ Kapcsold ki a Paging File-t hogy elkerüld az I/O overheadet. Némelyik játékb
     - ``Win+R -> sysdm.cpl -> Advanced`` -> A ``Performance`` szekciónál ``Settings`` -> ``Advanced`` -> A ``Virtual Memory`` alatt ``Change`` -> Pipáld ki az ``Automatically manage paging file size for all drives`` opciót -> Válaszd ki a ``No paging file``-t -> ``Set``
 
 
-## 5.38 Cleanup és karbantartás
+## 5.37 Cleanup és karbantartás
+
+- Ellenőrizd az Event Viewer-t, mivel segíthet a megmagyarázhatatlan FPS drop-ok és többi probléma azonosításában.
 
 - Használj programokat mint a [BulkCrapUninstaller](https://github.com/Klocman/Bulk-Crap-Uninstaller) mivel a control panel-ban történő uninstall során sok fájl letörlése kimaradhat.
 
