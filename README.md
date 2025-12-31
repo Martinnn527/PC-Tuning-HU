@@ -725,7 +725,7 @@ C:\bin\disable-scheduled-tasks.ps1
 Ha nem vásároltál Windows kulcsot, használd PowerShell-ben az alábbi parancsot hogy aktiváld:
 
 ```powershell
-irm https://massgrave.dev/get | iex
+irm https://get.activated.win | iex
 ```
 
 ## 5.12 Egyéb beállítások
