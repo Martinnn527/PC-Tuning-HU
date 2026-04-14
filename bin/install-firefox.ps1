@@ -131,6 +131,7 @@ function main() {
     }
 
     $remove_files = @(
+        "crashhelper.exe",
         "crashreporter.exe",
         "crashreporter.ini",
         "defaultagent.ini",
