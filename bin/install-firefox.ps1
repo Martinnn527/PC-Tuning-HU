@@ -197,19 +197,19 @@ defaultPref(`"gfx.webrender.all`", true)`
 defaultPref(`"image.cache.size`", 104857600)`
 defaultPref(`"nglayout.initialpaint.delay`", 0)`
 defaultPref(`"content.notify.ontimer`", true)`
-defaultPref(`"content.notify.interval`", 100000)` 
+defaultPref(`"content.notify.interval`", 100000)`
 defaultPref(`"browser.cache.disk.enable`", false)`
 defaultPref(`"browser.cache.memory.enable`", true)`
 defaultPref(`"browser.cache.memory.capacity`", 262144)`
 lockPref(`"browser.newtabpage.activity-stream.asrouter.userprefs.cfr.addons`", false)`
 lockPref(`"browser.newtabpage.activity-stream.asrouter.userprefs.cfr.features`", false)`
+"
 
+    Set-Content -Path "$($install_dir)\distribution\policies.json" -Value $policies
+    [System.IO.File]::WriteAllText("$($install_dir)\defaults\pref\autoconfig.js", $autoconfig, [System.Text.Encoding]::ASCII)
+    Set-Content -Path "$install_dir\firefox.cfg" -Value $firefox_config
 
-    Set-Content -Path "$($install_dir)\distribution\policies.json" -Value $($policies)
-    [System.IO.File]::WriteAllText("$($install_dir)\defaults\pref\autoconfig.js", $($autoconfig), [System.Text.Encoding]::ASCII)
-    Set-Content -Path "$install_dir\firefox.cfg" -Value $($firefox_config)
-
-    Write-Host "info: release notes: https:/www.mozilla.org/en-US/firefox/$($remote_version)/releasenotes"
+    Write-Host "info: release notes: https://www.mozilla.org/en-US/firefox/$($remote_version)/releasenotes"
 
     return 0
 }
